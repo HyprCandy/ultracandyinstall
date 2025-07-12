@@ -10,5 +10,5 @@ git clone https://github.com/HyprCandy/hyprcandyinstall.git && cd hyprcandyinsta
 ```
 followed by:
 ```shell
-bash Hyprcandy_installer.sh
+bash UltraCandy_installer.sh
 ```
