@@ -6,7 +6,7 @@ Needed packages: git, hyprland, kitty
 
 Then from base Hyprland or Gnome which is the only recommended secondary DE for this setup run:
 ```shell
-git clone https://github.com/HyprCandy/hyprcandyinstall.git && cd hyprcandyinstall
+git clone https://github.com/HyprCandy/UltraCandy.git && cd ultracandyinstall
 ```
 followed by:
 ```shell
