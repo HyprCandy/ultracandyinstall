@@ -3703,10 +3703,14 @@ decoration {
     new_optimizations = on
     ignore_opacity = true
     xray = true
-    vibrancy = 0.1696
+        vibrancy = 0.24999999999999933
     noise = 0.01
     popups = true
     popups_ignorealpha = 0.8
+        brightness = 1.0000000000000002
+        contrast = 0.9999999999999997
+        special = false
+        vibrancy_darkness = 0.5000000000000002
     }
 
     shadow {
@@ -4404,10 +4408,14 @@ decoration {
     new_optimizations = on
     ignore_opacity = true
     xray = true
-    vibrancy = 0.1696
+        vibrancy = 0.24999999999999933
     noise = 0.01
     popups = true
     popups_ignorealpha = 0.8
+        brightness = 1.0000000000000002
+        contrast = 0.9999999999999997
+        special = false
+        vibrancy_darkness = 0.5000000000000002
     }
 
     shadow {
