@@ -3646,7 +3646,7 @@ general {
     gaps_workspaces = 50    # Gaps between workspaces
     border_size = 2
     col.active_border = $inverse_primary
-    col.inactive_border = $scrim
+    col.inactive_border = $source_color
     layout = dwindle
     resize_on_border = true
     allow_tearing = true
@@ -3721,7 +3721,7 @@ decoration {
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-windowrule = bordercolor $inverse_primary,class:^(.*)
+windowrule = bordercolor $source_color,class:^(.*)
 windowrule = move 73% 75,class:(Candy.SystemMonitor)
 windowrule = move 32% 75,class:(Candy.Media)
 windowrule = move 1% 75,class:(Candy.Weather)
@@ -3858,7 +3858,7 @@ windowrule = animation slide right, class:^(kitty|Alacritty)$
 windowrule = noblur, class:^(org.mozilla.firefox)$
 # Decorations related to floating windows on workspaces 1 to 10
 ##windowrule = bordersize 2, floating:1, onworkspace:w[fv1-10]
-windowrule = bordercolor $inverse_primary, floating:1, onworkspace:w[fv1-10] #$on_primary_fixed_variant 90deg
+windowrule = bordercolor $source_color, floating:1, onworkspace:w[fv1-10] #$on_primary_fixed_variant 90deg
 ##windowrule = rounding 8, floating:1, onworkspace:w[fv1-10]
 # Decorations related to tiling windows on workspaces 1 to 10
 ##windowrule = bordersize 3, floating:0, onworkspace:f[1-10]
@@ -4104,7 +4104,7 @@ plugin {
     
     hyprbars {
         bar_height = 25
-        bar_color = $inverse_primary
+        bar_color = $source_color
         bar_blur =true
         
         bar_title_enabled = false
@@ -4121,7 +4121,7 @@ plugin {
         
         hyprbars-button = $on_secondary, 15, , hyprctl dispatch killactive
         hyprbars-button = $primary_container, 15, , bash "$HOME/.config/hypr/scripts/hyprbars-minimize.sh"
-        hyprbars-button = $secondary_container, 15, 󰺖, hyprctl dispatch fullscreen 1
+        hyprbars-button = $surface_tint, 15, 󰺖, hyprctl dispatch fullscreen 1
         
         on_double_click = hyprctl dispatch fullscreen 1
     }
@@ -4347,7 +4347,7 @@ general {
     gaps_workspaces = 50    # Gaps between workspaces
     border_size = 2
     col.active_border = $inverse_primary
-    col.inactive_border = $scrim
+    col.inactive_border = $source_color
     layout = dwindle
     resize_on_border = true
     allow_tearing = true
@@ -4422,7 +4422,7 @@ decoration {
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-windowrule = bordercolor $inverse_primary,class:^(.*)
+windowrule = bordercolor $source_color,class:^(.*)
 windowrule = move 73% 75,class:(Candy.SystemMonitor)
 windowrule = move 32% 75,class:(Candy.Media)
 windowrule = move 1% 75,class:(Candy.Weather)
@@ -4559,7 +4559,7 @@ windowrule = animation slide right, class:^(kitty|Alacritty)$
 windowrule = noblur, class:^(org.mozilla.firefox)$
 # Decorations related to floating windows on workspaces 1 to 10
 ##windowrule = bordersize 2, floating:1, onworkspace:w[fv1-10]
-windowrule = bordercolor $inverse_primary, floating:1, onworkspace:w[fv1-10] #$on_primary_fixed_variant 90deg
+windowrule = bordercolor $source_color, floating:1, onworkspace:w[fv1-10] #$on_primary_fixed_variant 90deg
 ##windowrule = rounding 8, floating:1, onworkspace:w[fv1-10]
 # Decorations related to tiling windows on workspaces 1 to 10
 ##windowrule = bordersize 3, floating:0, onworkspace:f[1-10]
@@ -4804,7 +4804,7 @@ plugin {
     
     hyprbars {
         bar_height = 25
-        bar_color = $inverse_primary
+        bar_color = $source_color
         bar_blur =true
         
         bar_title_enabled = false
@@ -4821,7 +4821,7 @@ plugin {
         
         hyprbars-button = $on_secondary, 15, , hyprctl dispatch killactive
         hyprbars-button = $primary_container, 15, , bash "$HOME/.config/hypr/scripts/hyprbars-minimize.sh"
-        hyprbars-button = $secondary_container, 15, 󰺖, hyprctl dispatch fullscreen 1
+        hyprbars-button = $surface_tint, 15, 󰺖, hyprctl dispatch fullscreen 1
         
         on_double_click = hyprctl dispatch fullscreen 1
     }
