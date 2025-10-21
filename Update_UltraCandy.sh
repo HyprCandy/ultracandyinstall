@@ -559,14 +559,16 @@ setup_fish() {
         print_status "Installing Fisher and essential Fish plugins..."
         
         # Install Fisher
-        fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-        
-        # Install essential plugins
-        fish -c "fisher install jorgebucaran/autopair.fish"
-        fish -c "fisher install franciscolourenco/done"
-        fish -c "fisher install jethrokuan/z"
-        fish -c "fisher install jorgebucaran/nvm.fish"
-        fish -c "fisher install PatrickF1/fzf.fish"
+        fish -c '
+    echo "Installing Fisher and plugins in single Fish shell session..."
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+    fisher install \
+        jorgebucaran/autopair.fish \
+        franciscolourenco/done \
+        jethrokuan/z \
+        jorgebucaran/nvm.fish \
+        PatrickF1/fzf.fish
+'
         
         print_success "Fisher and plugins installed"
     fi
