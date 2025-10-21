@@ -108,38 +108,32 @@ choose_display_manager() {
 }
 
 choose_panel() {
-        echo -e "${CYAN}Choose your panel (you can rerun the script to switch or regenerate UltraCandy's default panel setup):${NC}"
-        echo -e "${GREEN}1) Waybar${NC}"
-        echo "   • Light with fast startup/reload for a 'taskbar' like experience"
-        echo "   • Highly customizable manually"
-        echo "   • Waypaper integration: loads colors through waypaper backgrounds"
-        echo "   • Fast live wallpaper application through caching and easier background setup"
-        echo ""
-        echo -e "${GREEN}2) Hyprpanel${NC}"
-        echo "   • Easy to theme through its interface"
-        echo "   • Has an autohide feature when only one window is open"
-        echo "   • Much slower to relaunch after manually killing (when multiple windows are open)"
-        echo "   • Recommended for users who don't mind an always-on panel"
-        echo "   • Longer process to set backgrounds and slower for live backgrounds"
-        echo ""
-        
-        while true; do
-            read -rp "Enter 1 or 2: " panel_choice
-            case $panel_choice in
-                1) 
-                    PANEL_CHOICE="waybar"
-                    break
-                    ;;
-                2) 
-                    PANEL_CHOICE="hyprpanel"
-                    break
-                    ;;
-                *) 
-                    print_error "Invalid choice. Please enter 1 or 2."
-                    ;;
-            esac
-        done
-        echo -e "${GREEN}Panel selected: $PANEL_CHOICE${NC}"
+        echo -e "${CYAN}Choose your panel: you can also rerun the script to switch from either or regenerate UltraCandy's default panel setup:${NC}"
+    echo -e "${GREEN}1) Waybar${NC}"
+    echo "   • Light with fast startup/reload for a 'taskbar' like experience"
+    echo "   • Highly customizable manually"
+    echo "   • Waypaper integration: loads colors through waypaper backgrounds"
+    echo "   • Fast live wallpaper application through caching and easier background setup"
+    echo ""
+    echo -e "${GREEN}2) Hyprpanel${NC}"
+    echo "   • Easy to theme through its interface"
+    echo "   • Has an autohide feature when only one window is open"
+    echo "   • Much slower to relaunch after manually killing (when multiple windows are open)"
+    echo "   • Recommended for users who don't mind an always-on panel"
+    echo "   • Longer process to set backgrounds and slower for live backgrounds"
+    echo ""
+    
+    read -rp "Enter 1 or 2: " panel_choice
+    case $panel_choice in
+        1) PANEL_CHOICE="waybar" ;;
+        2) PANEL_CHOICE="hyprpanel" ;;
+        *) 
+            print_error "Invalid choice. Please enter 1 or 2."
+            echo ""
+            choose_panel  # Recursively ask again
+            ;;
+    esac
+    echo -e "${GREEN}Panel selected: $PANEL_CHOICE${NC}"
 }
 
 choose_browser() {
