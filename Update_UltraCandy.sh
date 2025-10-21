@@ -108,7 +108,6 @@ choose_display_manager() {
 }
 
 choose_panel() {
-    if [ "$DISTRO_FAMILY" = "arch" ]; then
         echo -e "${CYAN}Choose your panel (you can rerun the script to switch or regenerate UltraCandy's default panel setup):${NC}"
         echo -e "${GREEN}1) Waybar${NC}"
         echo "   • Light with fast startup/reload for a 'taskbar' like experience"
@@ -141,12 +140,6 @@ choose_panel() {
             esac
         done
         echo -e "${GREEN}Panel selected: $PANEL_CHOICE${NC}"
-    else
-        # Non-Arch distributions use Waybar only
-        PANEL_CHOICE="waybar"
-        print_status "Using Waybar panel - optimized for $DISTRO_FAMILY compatibility"
-        print_warning "Hyprpanel is currently only available for Arch-based distributions"
-    fi
 }
 
 choose_browser() {
@@ -2952,7 +2945,7 @@ update_config_background() {
 trigger_matugen() {
     if [ -f "$MATUGEN_CONFIG" ]; then
         echo "🎨 Triggering matugen color generation..."
-        matugen image "$CONFIG_BG" --type scheme-content --contrast 0.75 &
+        matugen image "$CONFIG_BG" --type scheme-neutral --contrast 0.75 &
         echo "✅ Matugen color generation started"
     else
         echo "⚠️  Matugen config not found at: $MATUGEN_CONFIG"
@@ -12688,7 +12681,7 @@ main() {
     #echo
 
     # Choose a panel
-    choose_panel
+    choose-panel
     echo
     
     # Choose shell
