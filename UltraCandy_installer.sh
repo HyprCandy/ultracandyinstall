@@ -538,25 +538,20 @@ setup_fish() {
         return 1
     fi
     
-    # Create Fish config directory
-    mkdir -p "$HOME/.config/fish"
-    
-    # Install Fisher (Fish plugin manager) and popular plugins
-    if command -v fish &> /dev/null; then
-        print_status "Installing Fisher and essential Fish plugins..."
-        
-        # Install Fisher
-        fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-        
-        # Install essential plugins
-        fish -c "fisher install jorgebucaran/autopair.fish"
-        fish -c "fisher install franciscolourenco/done"
-        fish -c "fisher install jethrokuan/z"
-        fish -c "fisher install jorgebucaran/nvm.fish"
-        fish -c "fisher install PatrickF1/fzf.fish"
-        
-        print_success "Fisher and plugins installed"
-    fi
+    # Ensure Fisher function exists
+mkdir -p ~/.config/fish/functions
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o ~/.config/fish/functions/fisher.fish
+
+# Now install plugins using fisher (must be in a proper Fish shell)
+fish -c '
+    fisher install jorgebucaran/fisher
+    fisher install \
+        jorgebucaran/nvm.fish \
+        jorgebucaran/autopair.fish \
+        jethrokuan/z \
+        patrickf1/fzf.fish \
+        franciscolourenco/done
+'
     
     # Configure Starship prompt
     if command -v starship &> /dev/null; then
