@@ -5002,8 +5002,8 @@ input-field {
     monitor =
     size = 200, 50
     outline_thickness = 3
-    dots_size = 0.33 # Scale of input-field height, 0.2 - 0.8
-    dots_spacing = 0.15 # Scale of dots' absolute size, 0.0 - 1.0
+    dots_size = 0.25 # Scale of input-field height, 0.2 - 0.8
+    dots_spacing = 0.2 # Scale of dots' absolute size, 0.0 - 1.0
     dots_center = true
     dots_rounding = -1 # -1 default circle, -2 follow input-field rounding
     outer_color = $primary_fixed_dim $source_color 90deg
@@ -5014,7 +5014,7 @@ input-field {
     fade_timeout = 1000 # Milliseconds before fade_on_empty is triggered.
     placeholder_text = <i><span>       $USER       </span></i># Text rendered in the input box when it's empty. # foreground="$inverse_primary ##ffffff99
     hide_input = false
-    rounding = 40 # -1 means complete rounding (circle/oval)
+    rounding = 20 # -1 means complete rounding (circle/oval)
     check_color = $rimary
     fail_color = $error # if authentication failed, changes outer_color and fail message color
     fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i> # can be set to empty
@@ -5143,18 +5143,11 @@ bind = ALT, 2, exec, ~/.config/hyprcandy/hooks/restart_waybar.sh #Restart or rel
 #### Dock keybinds ####
 
 bind = ALT, 3, exec, ~/.config/hyprcandy/hooks/nwg_dock_presets.sh hidden #Hide/kill dock
-bind = ALT, 4, exec, ~/.config/nwg-dock-hyprland/launch.sh #Bottom dock and quick-reload dock
-bind = ALT, 5, exec, pkill -f nwg-dock-hyprland
-bind = ALT, 5, exec, sleep 0.3 && nwg-dock-hyprland -p top -lp start -i 32 -w 10 -mt 6 -ml 10 -mr 10 -x -r -s "style.css" -c "rofi -show drun" #Top dock
-bind = ALT, 6, exec, pkill -f nwg-dock-hyprland
-bind = ALT, 6, exec, sleep 0.3 && nwg-dock-hyprland -p left -lp start -i 32 -w 10 -ml 6 -mt 10 -mb 10 -x -r -s "style.css" -c "rofi -show drun" #Left dock
-bind = ALT, 7, exec, pkill -f nwg-dock-hyprland
-bind = ALT, 7, exec, sleep 0.3 && nwg-dock-hyprland -p right -lp start -i 32 -w 10 -mr 6 -mt 10 -mb 10 -x -r -s "style.css" -c "rofi -show drun" #Right dock
-bind = ALT, 8, exec, ~/.config/hyprcandy/hooks/nwg_dock_status_display.sh #Dock status display
+bind = ALT, 4, exec, ~/.config/hyprcandy/hooks/nwg_dock_status_display.sh #Dock status display
 
 #### Status display ####
 
-bind = ALT, 9, exec, ~/.config/hyprcandy/hooks/hyprland_status_display.sh #Hyprland status display
+bind = ALT, 5, exec, ~/.config/hyprcandy/hooks/hyprland_status_display.sh #Hyprland status display
 
 #### Recorder ####
 
@@ -5171,6 +5164,7 @@ bind = Alt, H, exec, hyprctl hyprsunset gamma -10 #Reduce gamma by 10%
 
 #### Actions ####
 
+bind = CTRL, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
 bind = $mainMod, M, exec, ~/.config/hypr/scripts/power.sh exit 				  #Logout
 bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
 bind = $mainMod SHIFT, R, exec, $HYPRSCRIPTS/loadconfig.sh                                 #Reload Hyprland configuration
@@ -5371,18 +5365,11 @@ bind = ALT, 2, exec, ~/.config/hyprcandy/hooks/restart_hyprpanel.sh #Restart or 
 #### Dock keybinds ####
 
 bind = ALT, 3, exec, ~/.config/hyprcandy/hooks/nwg_dock_presets.sh hidden #Hide/kill dock
-bind = ALT, 4, exec, ~/.config/nwg-dock-hyprland/launch.sh #Bottom dock and quick-reload dock
-bind = ALT, 5, exec, pkill -f nwg-dock-hyprland
-bind = ALT, 5, exec, sleep 0.3 && nwg-dock-hyprland -p top -lp start -i 32 -w 10 -mt 6 -ml 10 -mr 10 -x -r -s "style.css" -c "rofi -show drun" #Top dock
-bind = ALT, 6, exec, pkill -f nwg-dock-hyprland
-bind = ALT, 6, exec, sleep 0.3 && nwg-dock-hyprland -p left -lp start -i 32 -w 10 -ml 6 -mt 10 -mb 10 -x -r -s "style.css" -c "rofi -show drun" #Left dock
-bind = ALT, 7, exec, pkill -f nwg-dock-hyprland
-bind = ALT, 7, exec, sleep 0.3 && nwg-dock-hyprland -p right -lp start -i 32 -w 10 -mr 6 -mt 10 -mb 10 -x -r -s "style.css" -c "rofi -show drun" #Right dock
-bind = ALT, 8, exec, ~/.config/hyprcandy/hooks/nwg_dock_status_display.sh #Dock status display
+bind = ALT, 4, exec, ~/.config/hyprcandy/hooks/nwg_dock_status_display.sh #Dock status display
 
 #### Status display ####
 
-bind = ALT, 9, exec, ~/.config/hyprcandy/hooks/hyprland_status_display.sh #Hyprland status display
+bind = ALT, 5, exec, ~/.config/hyprcandy/hooks/hyprland_status_display.sh #Hyprland status display
 
 #### Recorder ####
 
@@ -5399,6 +5386,7 @@ bind = Alt, H, exec, hyprctl hyprsunset gamma -10 #Reduce gamma by 10%
 
 #### Actions ####
 
+bind = CTRL, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
 bind = $mainMod, M, exec, ~/.config/hypr/scripts/power.sh exit 				  #Logout
 bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
 bind = $mainMod SHIFT, R, exec, $HYPRSCRIPTS/loadconfig.sh                                 #Reload Hyprland configuration
