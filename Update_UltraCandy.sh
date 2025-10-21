@@ -12686,13 +12686,13 @@ main() {
     #detect distro
     #detect_distro
     #echo
+
+    # Choose a panel
+    choose_panel
+    echo
     
     # Choose shell
     choose_shell
-    echo
-    
-    # Choose a panel
-    choose_panel
     echo
     
     print_status "Setting up shell configuration..."
