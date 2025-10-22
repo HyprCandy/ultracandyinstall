@@ -6627,7 +6627,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -6663,7 +6663,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $inverse_primary/col.active_border = $primary_fixed_dim/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $inverse_primary,class:/bordercolor $primary_fixed_dim,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2378s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2382s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@inverse_primary;/@primary_fixed_dim;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@inverse_primary;/@primary_fixed_dim;/g' '${swayncFile}'`);
@@ -6699,7 +6699,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -6735,7 +6735,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -6771,7 +6771,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GGLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -6807,7 +6807,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -6843,7 +6843,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -6879,7 +6879,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -7207,7 +7207,9 @@ function createCandyUtilsBox() {
         
         // File paths (from hook script)
         const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
-        const keybindsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcustom', 'custom_keybinds.conf']);
+        const leftScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'left-dock.sh']);
+        const rightScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'right-dock.sh']);
+        const topScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'top-dock.sh']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
         
         // Create settings file if it doesn't exist (from hook script logic)
@@ -7255,7 +7257,9 @@ function createCandyUtilsBox() {
                 
                 // Update launch script and keybinds (sed commands from hook script)  
                 GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${launchScript}'`);
-                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${keybindsFile}'`);
+                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${leftScript}'`);
+                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${rightScript}'`);
+                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${topScript}'`);
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
@@ -9287,7 +9291,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -9323,7 +9327,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $inverse_primary/col.active_border = $primary_fixed_dim/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $inverse_primary,class:/bordercolor $primary_fixed_dim,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2378s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2382s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@inverse_primary;/@primary_fixed_dim;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@inverse_primary;/@primary_fixed_dim;/g' '${swayncFile}'`);
@@ -9359,7 +9363,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -9395,7 +9399,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -9431,7 +9435,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GGLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -9467,7 +9471,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -9503,7 +9507,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -9539,7 +9543,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
             //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
             //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2378s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
@@ -9867,7 +9871,9 @@ function createCandyUtilsBox() {
         
         // File paths (from hook script)
         const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
-        const keybindsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcustom', 'custom_keybinds.conf']);
+        const leftScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'left-dock.sh']);
+        const rightScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'right-dock.sh']);
+        const topScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'top-dock.sh']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
         
         // Create settings file if it doesn't exist (from hook script logic)
@@ -9915,7 +9921,9 @@ function createCandyUtilsBox() {
                 
                 // Update launch script and keybinds (sed commands from hook script)  
                 GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${launchScript}'`);
-                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${keybindsFile}'`);
+                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${leftScript}'`);
+                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${rightScript}'`);
+                GLib.spawn_command_line_async(`sed -i 's/-i [0-9]\\+/-i ${numValue}/g' '${topScript}'`);
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
