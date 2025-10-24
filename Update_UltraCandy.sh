@@ -3376,6 +3376,8 @@ else
 fi
 EOF
 chmod +x "$HOME/.config/hyprcandy/hooks/change_start_button_icon.sh"
+chmod +x "$HOME/.config/waybar/scripts/waybar-weather.sh"
+chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
 
     # 🛠️ GNOME Window Button Layout Adjustment
     echo
