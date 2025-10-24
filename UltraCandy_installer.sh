@@ -631,7 +631,7 @@ symbol = "⚙️ 󰁍"
 style = "bold red"
 
 [time]
-format = ' \[ $time \] ($style) '#🕙
+format = '[](green) [\[ $time \]](blue) [](green)($style) '#🕙
 time_format = "%T"
 disabled = false
 style = "bright-white"
@@ -821,7 +821,7 @@ symbol = "⚙️ 󰁍"
 style = "bold red"
 
 [time]
-format = ' \[ $time \] ($style) '#🕙
+format = '[](green) [\[ $time \]](blue) [](green)($style) '#🕙
 time_format = "%T"
 disabled = false
 style = "bright-white"
