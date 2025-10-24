@@ -5488,7 +5488,8 @@ fi
     fi
         fi
 
-    print_status "Setting up hyprexpo-plus and hyprbars plugins: Note the plugins' setup will request your permission a few times here..."
+    print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
+    print_status "Note the plugins' setup will request your permission a few times here..."
     
     hyprpm update
     hyprpm add https://github.com/hyprwm/hyprland-plugins
@@ -5498,7 +5499,6 @@ fi
     hyprpm enable hyprexpo-plus
     hyprpm disable hyprexpo
     hyprpm reload
-    hyprctl reload
 }
 
 update_keybinds() {
