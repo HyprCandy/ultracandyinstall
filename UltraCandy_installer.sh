@@ -925,17 +925,6 @@ EOF
 # Function to automatically setup Hyprcandy configuration
 setup_ultracandy() {
     
-    print_status "Setting up hyprexpo-plus for workspace overview..."
-    
-    hyprpm update
-    hyprpm add https://github.com/hyprwm/hyprland-plugins
-    hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
-    hyprpm update
-    hyprpm enable hyprbars
-    hyprpm enable hyprexpo-plus
-    hyprpm disable hyprexpo
-    hyprpm reload
-    
     print_status "Setting up UltraCandy configuration..."
     
     # Check if stow is available
@@ -3346,6 +3335,17 @@ EOF
 chmod +x "$HOME/.config/hyprcandy/hooks/change_start_button_icon.sh"
 chmod +x "$HOME/.config/waybar/scripts/waybar-weather.sh"
 chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
+
+    print_status "Setting up hyprexpo-plus for workspace overview..."
+    
+    hyprpm update
+    hyprpm add https://github.com/hyprwm/hyprland-plugins
+    hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
+    hyprpm update
+    hyprpm enable hyprbars
+    hyprpm enable hyprexpo-plus
+    hyprpm disable hyprexpo
+    hyprpm reload
 
     # 🛠️ GNOME Window Button Layout Adjustment
     echo
