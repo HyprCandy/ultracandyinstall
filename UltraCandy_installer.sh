@@ -349,9 +349,6 @@ build_package_list() {
         "inotify-tools"
         "bc"
         "libnotify"
-
-        # Fallback notification daemon (when hyprpanel isn't running)
-        "mako"
         
         # Fonts and emojis
         "ttf-dejavu-sans-code"
@@ -370,10 +367,8 @@ build_package_list() {
         
         # Clipboard
         "cliphist"
-        "python-pywalfox"
         
         # Browser and themes
-        "firefox"
         "adw-gtk-theme"
         "adwaita-qt6"
         "adwaita-qt-git"
