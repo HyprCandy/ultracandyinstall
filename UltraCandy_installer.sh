@@ -517,6 +517,16 @@ install_packages() {
         print_status "You can try installing failed packages manually:"
         echo "$AUR_HELPER -S ${failed[*]}"
     fi
+
+    print_status "Setting up UltraCandy configuration..."
+    # Prevent notification daemon conflicts
+    if [ "$PANEL_CHOICE" = "waybar" ]; then
+        print_status "Attempting to remove mako since you chose waybar to avoid conflicts with swaync incase mako was installed before..."
+        $AUR_HELPER -R mako
+    else
+        print_status "Attempting to remove swaync since you chose hyprpanel to avoid conflicts with mako incase swaync was installed before..."
+        $AUR_HELPER -R swaync
+    fi
 }
 
 # Function to setup Fish shell configuration
