@@ -5498,6 +5498,7 @@ fi
     hyprpm enable hyprexpo-plus
     hyprpm disable hyprexpo
     hyprpm reload
+    hyprctl reload
 }
 
 update_keybinds() {
