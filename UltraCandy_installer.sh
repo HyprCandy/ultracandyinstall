@@ -316,9 +316,9 @@ build_package_list() {
         
         # Audio system
         "pipewire"
+        "pipewire-jack"
         "pipewire-pulse"
         "pipewire-alsa"
-        "pipewire-jack"
         "alsa-utils"
         
         # System monitoring
@@ -328,8 +328,6 @@ build_package_list() {
         
         # Customization and theming
         "matugen-bin"
-        "python-pywal16"
-        "quickshell"
         
         # Editors
         "gedit"
