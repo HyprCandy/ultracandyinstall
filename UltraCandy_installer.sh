@@ -3339,17 +3339,6 @@ chmod +x "$HOME/.config/hyprcandy/hooks/change_start_button_icon.sh"
 chmod +x "$HOME/.config/waybar/scripts/waybar-weather.sh"
 chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
 
-    print_status "Setting up hyprexpo-plus for workspace overview..."
-    
-    hyprpm update
-    hyprpm add https://github.com/hyprwm/hyprland-plugins
-    hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
-    hyprpm update
-    hyprpm enable hyprbars
-    hyprpm enable hyprexpo-plus
-    hyprpm disable hyprexpo
-    hyprpm reload
-
     # 🛠️ GNOME Window Button Layout Adjustment
     echo
     echo "🛠️ Disabling GNOME titlebar buttons..."
@@ -5498,6 +5487,17 @@ fi
         echo "⚠️  File not found: $HYPRLAND_CUSTOM"
     fi
         fi
+
+    print_status "Setting up hyprexpo-plus and hyprbars plugins: Note the plugins' setup will request your permission a few times here..."
+    
+    hyprpm update
+    hyprpm add https://github.com/hyprwm/hyprland-plugins
+    hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
+    hyprpm update
+    hyprpm enable hyprbars
+    hyprpm enable hyprexpo-plus
+    hyprpm disable hyprexpo
+    hyprpm reload
 }
 
 update_keybinds() {
