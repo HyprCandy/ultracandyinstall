@@ -492,14 +492,14 @@ install_packages() {
         local batch=("${packages[@]:i:batch_size}")
         print_status "Installing batch $((i/batch_size + 1)): ${batch[*]}"
         
-        if $AUR_HELPER -S --noconfirm --needed "${batch[@]}"; then
+        if $AUR_HELPER -S --needed "${batch[@]}"; then
             installed=$((installed + ${#batch[@]}))
             print_success "Batch $((i/batch_size + 1)) installed successfully"
         else
             print_warning "Some packages in batch $((i/batch_size + 1)) failed to install"
             # Try installing packages individually to identify failures
             for pkg in "${batch[@]}"; do
-                if ! $AUR_HELPER -S --noconfirm --needed "$pkg"; then
+                if ! $AUR_HELPER -S --needed "$pkg"; then
                     failed+=("$pkg")
                     print_error "Failed to install: $pkg"
                 else
