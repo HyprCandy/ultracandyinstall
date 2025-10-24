@@ -2,7 +2,7 @@
 
 ➡ ❣️ If you like my project, your [support](https://ko-fi.com/ianmking) will mean a lot ⬅
 
-I recommend running the script from Hyprland but it will also work from other DEs or the TTY.
+I recommend running the script from directly from base Hyprland in kitty ;
 
 Needed packages: git, hyprland, kitty
 
