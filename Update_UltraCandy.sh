@@ -3546,7 +3546,7 @@ setup_custom_config() {
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = hyprpm reload & #Reload plugin
+exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = waybar & #Launch bar/panel
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
@@ -3793,7 +3793,7 @@ windowrule = center,class:(org.gnome.Calendar)
 windowrule = pin,class:(org.gnome.Calendar)
 # System Monitor
 windowrule = float,class:(org.gnome.SystemMonitor)
-windowrule = size 820 660,class:(org.gnome.SystemMonitor)
+windowrule = size 820 625,class:(org.gnome.SystemMonitor)
 windowrule = center,class:(org.gnome.SystemMonitor)
 windowrule = pin,class:(org.gnome.SystemMonitor)
 # Files
@@ -4256,7 +4256,7 @@ else
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = hyprpm reload & #Reload plugins
+exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugins
 exec-once = systemctl --user start hyprpanel #Launch bar/panel
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
@@ -4503,7 +4503,7 @@ windowrule = center,class:(org.gnome.Calendar)
 windowrule = pin,class:(org.gnome.Calendar)
 # System Monitor
 windowrule = float,class:(org.gnome.SystemMonitor)
-windowrule = size 820 660,class:(org.gnome.SystemMonitor)
+windowrule = size 820 625,class:(org.gnome.SystemMonitor)
 windowrule = center,class:(org.gnome.SystemMonitor)
 windowrule = pin,class:(org.gnome.SystemMonitor)
 # Files
