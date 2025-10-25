@@ -549,7 +549,6 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fish -c '
     fisher install jorgebucaran/fisher
     fisher install \
-        jorgebucaran/nvm.fish \
         jorgebucaran/autopair.fish \
         jethrokuan/z \
         patrickf1/fzf.fish \
@@ -5494,10 +5493,8 @@ fi
     hyprpm update
     hyprpm add https://github.com/hyprwm/hyprland-plugins
     hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
-    hyprpm update
     hyprpm enable hyprbars
     hyprpm enable hyprexpo-plus
-    hyprpm disable hyprexpo
     hyprpm reload
 }
 
