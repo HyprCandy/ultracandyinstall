@@ -957,15 +957,14 @@ setup_ultracandy() {
         $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako hyprviz-bin meson cpio cmake
     fi
 
-    print_status "Setting up hyprexpo-plus for wrokspace overview..."
-
+    print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
+    print_status "Note the plugins' setup will request your permission a few times here..."
+    
     hyprpm update
     hyprpm add https://github.com/hyprwm/hyprland-plugins
     hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
-    hyprpm update
     hyprpm enable hyprbars
     hyprpm enable hyprexpo-plus
-    hyprpm disable hyprexpo
     hyprpm reload
 
     print_status "Setting up UltraCandy configuration..."
