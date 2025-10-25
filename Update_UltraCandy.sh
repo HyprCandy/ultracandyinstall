@@ -3416,11 +3416,10 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         sudo rm -f grid.svg && echo "🗑️  Removed old grid.svg"
     else
         echo "❌ Failed to access /usr/share/nwg-dock-hyprland/images"
-        exit 1
     fi
 
     # 🏠 Step 2: Return to home
-    cd "$HOME" || exit 1
+    cd "$HOME"
 
     # 📂 Step 3: Copy new grid.svg from custom SVG folder
     SVG_SOURCE="$HOME/Pictures/Candy/Dock-SVGs/grid.svg"
@@ -3432,7 +3431,6 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         sudo cp "$SVG_SOURCE" "$SVG_DEST" && echo "✅ grid.svg copied successfully."
     else
         echo "❌ grid.svg not found at $SVG_SOURCE"
-        exit 1
     fi
 
     # 🔐 Add sudoers entry for background script
