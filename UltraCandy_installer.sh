@@ -3753,7 +3753,7 @@ windowrule = center,class:(org.gnome.Calendar)
 windowrule = pin,class:(org.gnome.Calendar)
 # System Monitor
 windowrule = float,class:(org.gnome.SystemMonitor)
-windowrule = size 820 660,class:(org.gnome.SystemMonitor)
+windowrule = size 820 625,class:(org.gnome.SystemMonitor)
 windowrule = center,class:(org.gnome.SystemMonitor)
 windowrule = pin,class:(org.gnome.SystemMonitor)
 # Files
@@ -4463,7 +4463,7 @@ windowrule = center,class:(org.gnome.Calendar)
 windowrule = pin,class:(org.gnome.Calendar)
 # System Monitor
 windowrule = float,class:(org.gnome.SystemMonitor)
-windowrule = size 820 660,class:(org.gnome.SystemMonitor)
+windowrule = size 820 625,class:(org.gnome.SystemMonitor)
 windowrule = center,class:(org.gnome.SystemMonitor)
 windowrule = pin,class:(org.gnome.SystemMonitor)
 # Files
