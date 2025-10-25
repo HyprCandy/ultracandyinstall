@@ -3506,7 +3506,7 @@ setup_custom_config() {
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = hyprpm reload & #Reload plugin
+exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = waybar & #Launch bar/panel
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
@@ -4216,7 +4216,7 @@ else
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = hyprpm reload & #Reload plugin
+exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = systemctl --user start hyprpanel #Launch bar/panel
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
