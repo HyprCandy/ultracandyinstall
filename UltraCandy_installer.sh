@@ -2242,11 +2242,19 @@ set +e
 COLORS_FILE="$HOME/.config/hyprcandy/nwg_dock_colors.conf"
 
 restart_swaync() {
-    pkill -f swaync
-    sleep 0.1
     swaync &
+    sleep 1
+    swaync-client -rs
 }
 restart_swaync
+
+# Update ROFI background 
+ROFI_RASI="$HOME/.config/rofi/colors.rasi"
+
+if command -v sed >/dev/null; then
+    sed -i "2s/, 1)/, 0.7)/" "$ROFI_RASI"
+    echo "Rofi color updated"
+fi
 
 # Update local background.png
 if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
@@ -2413,6 +2421,14 @@ cat > "$HOME/.config/hyprcandy/hooks/update_background.sh" << 'EOF'
 set +e
 # Define colors file path
 COLORS_FILE="$HOME/.config/hyprcandy/nwg_dock_colors.conf"
+
+# Update ROFI background 
+ROFI_RASI="$HOME/.config/rofi/colors.rasi"
+
+if command -v sed >/dev/null; then
+    sed -i "2s/, 1)/, 0.7)/" "$ROFI_RASI"
+    echo "Rofi color updated"
+fi
 
 # Update local background.png
 if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
