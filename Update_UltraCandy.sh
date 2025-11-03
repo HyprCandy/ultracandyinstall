@@ -3581,7 +3581,7 @@ exec-once = ~/.config/hyprcandy/hooks/startup_services.sh &
 # Start Polkit
 exec-once = systemctl --user start hyprpolkitagent &
 # Dock
-exec-once = ~/.config/nwg-dock-hyprland/launch.sh &
+exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh &
 # Using hypridle to start hyprlock
 exec-once = hypridle &
 # Load cliphist history
@@ -4291,7 +4291,7 @@ exec-once = ~/.config/hyprcandy/hooks/startup_services.sh &
 # Start polkit agent
 exec-once = systemctl --user start hyprpolkitagent &
 # Dock
-exec-once = ~/.config/nwg-dock-hyprland/launch.sh &
+exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh &
 # Using hypridle to start hyprlock
 exec-once = hypridle &
 # Load cliphist history
