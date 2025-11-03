@@ -5099,7 +5099,7 @@ bind = ALT, 2, exec, ~/.config/hyprcandy/hooks/restart_waybar.sh #Restart or rel
 
 #### Dock keybinds ####
 
-bind = ALT, 3, exec, ~/.config/hyprcandy/hooks/nwg_dock_presets.sh hidden #Hide/kill dock
+bind = ALT, 3, exec, $SCRIPTS/toggle-dock.sh #Hide/kill or launch dock
 bind = ALT, 4, exec, ~/.config/hyprcandy/hooks/nwg_dock_status_display.sh #Dock status display
 
 #### Status display ####
@@ -5320,7 +5320,7 @@ bind = ALT, 2, exec, ~/.config/hyprcandy/hooks/restart_hyprpanel.sh #Restart or 
 
 #### Dock keybinds ####
 
-bind = ALT, 3, exec, ~/.config/hyprcandy/hooks/nwg_dock_presets.sh hidden #Hide/kill dock
+bind = ALT, 3, exec, $SCRIPTS/toggle-dock.sh #Hide/kill or launch dock
 bind = ALT, 4, exec, ~/.config/hyprcandy/hooks/nwg_dock_status_display.sh #Dock status display
 
 #### Status display ####
