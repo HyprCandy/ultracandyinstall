@@ -3401,7 +3401,7 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     # Check if 'gsettings' is available on the system
     if command -v gsettings >/dev/null 2>&1; then
         # Run the command to change the window button layout (e.g., remove minimize/maximize buttons)
-        gsettings set org.gnome.desktop.wm.preferences button-layout "" \
+        gsettings set org.gnome.desktop.wm.preferences button-layout ":close" \
             && echo "✅ GNOME button layout updated." \
             || echo "❌ Failed to update GNOME button layout."
     else
@@ -4010,8 +4010,8 @@ windowrulev2 = size 622 652,class:(clipse) # set the size of the window as neces
 #windowrulev2 = noborder, fullscreen:1
 
 # common modals
-windowrule = float,initialtitle:^(Open File)$
-windowrule = float,initialTitle:^(Open File)$
+#windowrule = float,initialtitle:^(Open File)$
+#windowrule = float,initialTitle:^(Open File)$
 windowrule = float,title:^(Choose Files)$
 windowrule = float,title:^(Save As)$
 windowrule = float,title:^(Confirm to replace files)$
@@ -4079,8 +4079,8 @@ layerrule = blur,gtk-layer-shell
 layerrule = ignorezero,gtk-layer-shell
 layerrule = blur,waybar
 layerrule = ignorezero,waybar
-layerrule = blur,bar-0
-layerrule = ignorezero,bar-0
+layerrule = blur,waybar
+layerrule = ignorezero,waybar
 layerrule = blur,dashboardmenu
 layerrule = ignorezero,dashboardmenu
 layerrule = blur,calendarmenu
@@ -4116,132 +4116,132 @@ misc {
 # ┃                            Plugins                          ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-plugin {
-    hyprexpo {
-        #general 
-        columns = 3
-        gaps_in = 8
-        gaps_out = 10
-        bg_col = $inverse_primary
-        workspace = first 1
-        
-        #borders
-        border_style = hyprland
-        border_grad_current = $scrim
-        border_grad_focus   = $inverse_primary
-
-        #labels
-        label_enable = 1
-        label_bg_shape = circle
-        label_position = center-center
-        label_offset_x = 10
-        label_offset_y = 10
-        label_color_default = $inverse_primary
-        label_color_hover   = $primary_fixed_dim
-        label_scale_hover = 1.0
-        label_scale_focus = 1.0
-        label_bg_enable = 1
-        label_bg_color = rgba(00000088)
-        label_bg_rounding = 15
-        # label_padding = 1
-
-        label_font_size = 25
-        label_font_family = FantasqueSansM Nerd Font Propo Regular
-        label_font_bold = 1
-        label_font_italic = 0
-        label_text_underline = 0
-        label_text_strikethrough = 0
-    }
-    
-    hyprbars {
-        bar_height = 25
-        bar_color = $source_color
-        bar_blur = true
-        
-        bar_title_enabled = false
-        bar_text_size = 10
-        bar_text_font = FantasqueSansM Nerd Font Propo Regular
-        
-        bar_text_align = center
-        bar_buttons_alignment = left
-        
-        bar_padding = 15
-        bar_button_padding = 6
-        
-        color_text = white
-        
-        hyprbars-button = $on_secondary, 15, , hyprctl dispatch killactive
-        hyprbars-button = $primary_container, 15, , bash "$HOME/.config/hypr/scripts/hyprbars-minimize.sh"
-        hyprbars-button = $surface_tint, 15, 󰺖, hyprctl dispatch fullscreen 1
-        
-        on_double_click = hyprctl dispatch fullscreen 1
-    }
-}
-
-submap = hyprexpo
-bind = CTRL ALT, down, hyprexpo:expo, close
-
-bind = , left,  hyprexpo:kb_focus, left
-bind = , right, hyprexpo:kb_focus, right
-bind = , up,    hyprexpo:kb_focus, up
-bind = , down,  hyprexpo:kb_focus, down
-bind = , return, hyprexpo:kb_confirm
-
-# tokens 1..10: digits
-
-bind = , 1, hyprexpo:kb_selecti, 1
-bind = , 2, hyprexpo:kb_selecti, 2
-bind = , 3, hyprexpo:kb_selecti, 3
-bind = , 4, hyprexpo:kb_selecti, 4
-bind = , 5, hyprexpo:kb_selecti, 5
-bind = , 6, hyprexpo:kb_selecti, 6
-bind = , 7, hyprexpo:kb_selecti, 7
-bind = , 8, hyprexpo:kb_selecti, 8
-bind = , 9, hyprexpo:kb_selecti, 9
-bind = , 0, hyprexpo:kb_selecti, 0
-
-# tokens 11..20: SHIFT+digits (update args to match your layout symbols)
-
-bind = SHIFT, 1, hyprexpo:kb_selecti, 11
-bind = SHIFT, 2, hyprexpo:kb_selecti, 12
-bind = SHIFT, 3, hyprexpo:kb_selecti, 13
-bind = SHIFT, 4, hyprexpo:kb_selecti, 14
-bind = SHIFT, 5, hyprexpo:kb_selecti, 15
-bind = SHIFT, 6, hyprexpo:kb_selecti, 16
-bind = SHIFT, 7, hyprexpo:kb_selecti, 17
-bind = SHIFT, 8, hyprexpo:kb_selecti, 18
-bind = SHIFT, 9, hyprexpo:kb_selecti, 19
-bind = SHIFT, 0, hyprexpo:kb_selecti, 20
-
-# tokens 21..46: alpha
-
-bind = , a, hyprexpo:kb_selecti, 21
-bind = , b, hyprexpo:kb_selecti, 22
-bind = , c, hyprexpo:kb_selecti, 23
-bind = , d, hyprexpo:kb_selecti, 24
-bind = , e, hyprexpo:kb_selecti, 25
-bind = , f, hyprexpo:kb_selecti, 26
-bind = , g, hyprexpo:kb_selecti, 27
-bind = , h, hyprexpo:kb_selecti, 28
-bind = , i, hyprexpo:kb_selecti, 29
-bind = , j, hyprexpo:kb_selecti, 30
-bind = , k, hyprexpo:kb_selecti, 31
-bind = , l, hyprexpo:kb_selecti, 32
-bind = , m, hyprexpo:kb_selecti, 33
-bind = , n, hyprexpo:kb_selecti, 34
-bind = , o, hyprexpo:kb_selecti, 35
-bind = , p, hyprexpo:kb_selecti, 36
-bind = , q, hyprexpo:kb_selecti, 37
-bind = , r, hyprexpo:kb_selecti, 38
-bind = , s, hyprexpo:kb_selecti, 39
-bind = , t, hyprexpo:kb_selecti, 40
-bind = , u, hyprexpo:kb_selecti, 41
-bind = , v, hyprexpo:kb_selecti, 42
-bind = , w, hyprexpo:kb_selecti, 43
-bind = , x, hyprexpo:kb_selecti, 44
-bind = , y, hyprexpo:kb_selecti, 45
-bind = , z, hyprexpo:kb_selecti, 46
-submap = reset
+#plugin {
+#    hyprexpo {
+#        #general 
+#        columns = 3
+#        gaps_in = 8
+#        gaps_out = 10
+#        bg_col = $inverse_primary
+#        workspace = first 1
+#        
+#        #borders
+#        border_style = hyprland
+#        border_grad_current = $scrim
+#        border_grad_focus   = $inverse_primary
+#
+#        #labels
+#        label_enable = 1
+#        label_bg_shape = circle
+#        label_position = center-center
+#        label_offset_x = 10
+#        label_offset_y = 10
+#        label_color_default = $inverse_primary
+#        label_color_hover   = $primary_fixed_dim
+#        label_scale_hover = 1.0
+#        label_scale_focus = 1.0
+#        label_bg_enable = 1
+#        label_bg_color = rgba(00000088)
+#        label_bg_rounding = 15
+#        # label_padding = 1
+#
+#        label_font_size = 25
+#        label_font_family = FantasqueSansM Nerd Font Propo Regular
+#        label_font_bold = 1
+#        label_font_italic = 0
+#        label_text_underline = 0
+#        label_text_strikethrough = 0
+#    }
+#    
+#    hyprbars {
+#        bar_height = 25
+#        bar_color = $source_color
+#        bar_blur = true
+#        
+#        bar_title_enabled = false
+#        bar_text_size = 10
+#        bar_text_font = FantasqueSansM Nerd Font Propo Regular
+#        
+#        bar_text_align = center
+#        bar_buttons_alignment = left
+#        
+#        bar_padding = 15
+#        bar_button_padding = 6
+#        
+#        color_text = white
+#        
+#        hyprbars-button = $on_secondary, 15, , hyprctl dispatch killactive
+#        hyprbars-button = $primary_container, 15, , bash "$HOME/.config/hypr/scripts/hyprbars-minimize.sh"
+#        hyprbars-button = $surface_tint, 15, 󰺖, hyprctl dispatch fullscreen 1
+#        
+#        on_double_click = hyprctl dispatch fullscreen 1
+#    }
+#}
+#
+#submap = hyprexpo
+#bind = CTRL ALT, down, hyprexpo:expo, close
+#
+#bind = , left,  hyprexpo:kb_focus, left
+#bind = , right, hyprexpo:kb_focus, right
+#bind = , up,    hyprexpo:kb_focus, up
+#bind = , down,  hyprexpo:kb_focus, down
+#bind = , return, hyprexpo:kb_confirm
+#
+## tokens 1..10: digits
+#
+#bind = , 1, hyprexpo:kb_selecti, 1
+#bind = , 2, hyprexpo:kb_selecti, 2
+#bind = , 3, hyprexpo:kb_selecti, 3
+#bind = , 4, hyprexpo:kb_selecti, 4
+#bind = , 5, hyprexpo:kb_selecti, 5
+#bind = , 6, hyprexpo:kb_selecti, 6
+#bind = , 7, hyprexpo:kb_selecti, 7
+#bind = , 8, hyprexpo:kb_selecti, 8
+#bind = , 9, hyprexpo:kb_selecti, 9
+#bind = , 0, hyprexpo:kb_selecti, 0
+#
+## tokens 11..20: SHIFT+digits (update args to match your layout symbols)
+#
+#bind = SHIFT, 1, hyprexpo:kb_selecti, 11
+#bind = SHIFT, 2, hyprexpo:kb_selecti, 12
+#bind = SHIFT, 3, hyprexpo:kb_selecti, 13
+#bind = SHIFT, 4, hyprexpo:kb_selecti, 14
+#bind = SHIFT, 5, hyprexpo:kb_selecti, 15
+#bind = SHIFT, 6, hyprexpo:kb_selecti, 16
+#bind = SHIFT, 7, hyprexpo:kb_selecti, 17
+#bind = SHIFT, 8, hyprexpo:kb_selecti, 18
+#bind = SHIFT, 9, hyprexpo:kb_selecti, 19
+#bind = SHIFT, 0, hyprexpo:kb_selecti, 20
+#
+## tokens 21..46: alpha
+#
+#bind = , a, hyprexpo:kb_selecti, 21
+#bind = , b, hyprexpo:kb_selecti, 22
+#bind = , c, hyprexpo:kb_selecti, 23
+#bind = , d, hyprexpo:kb_selecti, 24
+#bind = , e, hyprexpo:kb_selecti, 25
+#bind = , f, hyprexpo:kb_selecti, 26
+#bind = , g, hyprexpo:kb_selecti, 27
+#bind = , h, hyprexpo:kb_selecti, 28
+#bind = , i, hyprexpo:kb_selecti, 29
+#bind = , j, hyprexpo:kb_selecti, 30
+#bind = , k, hyprexpo:kb_selecti, 31
+#bind = , l, hyprexpo:kb_selecti, 32
+#bind = , m, hyprexpo:kb_selecti, 33
+#bind = , n, hyprexpo:kb_selecti, 34
+#bind = , o, hyprexpo:kb_selecti, 35
+#bind = , p, hyprexpo:kb_selecti, 36
+#bind = , q, hyprexpo:kb_selecti, 37
+#bind = , r, hyprexpo:kb_selecti, 38
+#bind = , s, hyprexpo:kb_selecti, 39
+#bind = , t, hyprexpo:kb_selecti, 40
+#bind = , u, hyprexpo:kb_selecti, 41
+#bind = , v, hyprexpo:kb_selecti, 42
+#bind = , w, hyprexpo:kb_selecti, 43
+#bind = , x, hyprexpo:kb_selecti, 44
+#bind = , y, hyprexpo:kb_selecti, 45
+#bind = , z, hyprexpo:kb_selecti, 46
+#submap = reset
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Userprefs                         ┃
@@ -4720,8 +4720,8 @@ windowrulev2 = size 622 652,class:(clipse) # set the size of the window as neces
 #windowrulev2 = noborder, fullscreen:1
 
 # common modals
-windowrule = float,initialtitle:^(Open File)$
-windowrule = float,initialTitle:^(Open File)$
+#windowrule = float,initialtitle:^(Open File)$
+#windowrule = float,initialTitle:^(Open File)$
 windowrule = float,title:^(Choose Files)$
 windowrule = float,title:^(Save As)$
 windowrule = float,title:^(Confirm to replace files)$
@@ -4789,8 +4789,8 @@ layerrule = blur,gtk-layer-shell
 layerrule = ignorezero,gtk-layer-shell
 layerrule = blur,waybar
 layerrule = ignorezero,waybar
-layerrule = blur,bar-0
-layerrule = ignorezero,bar-0
+layerrule = blur,waybar
+layerrule = ignorezero,waybar
 layerrule = blur,dashboardmenu
 layerrule = ignorezero,dashboardmenu
 layerrule = blur,calendarmenu
@@ -4826,132 +4826,132 @@ misc {
 # ┃                            Plugins                          ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-plugin {
-    hyprexpo {
-        #general 
-        columns = 3
-        gaps_in = 8
-        gaps_out = 10
-        bg_col = $inverse_primary
-        workspace = first 1
-        
-        #borders
-        border_style = hyprland
-        border_grad_current = $scrim
-        border_grad_focus   = $inverse_primary
-
-        #labels
-        label_enable = 1
-        label_bg_shape = circle
-        label_position = center-center
-        label_offset_x = 10
-        label_offset_y = 10
-        label_color_default = $inverse_primary
-        label_color_hover   = $primary_fixed_dim
-        label_scale_hover = 1.0
-        label_scale_focus = 1.0
-        label_bg_enable = 1
-        label_bg_color = rgba(00000088)
-        label_bg_rounding = 15
-        # label_padding = 1
-
-        label_font_size = 25
-        label_font_family = FantasqueSansM Nerd Font Propo Regular
-        label_font_bold = 1
-        label_font_italic = 0
-        label_text_underline = 0
-        label_text_strikethrough = 0
-    }
-    
-    hyprbars {
-        bar_height = 25
-        bar_color = $source_color
-        bar_blur = true
-        
-        bar_title_enabled = false
-        bar_text_size = 10
-        bar_text_font = FantasqueSansM Nerd Font Propo Regular
-        
-        bar_text_align = center
-        bar_buttons_alignment = left
-        
-        bar_padding = 15
-        bar_button_padding = 6
-        
-        color_text = white
-        
-        hyprbars-button = $on_secondary, 15, , hyprctl dispatch killactive
-        hyprbars-button = $primary_container, 15, , bash "$HOME/.config/hypr/scripts/hyprbars-minimize.sh"
-        hyprbars-button = $surface_tint, 15, 󰺖, hyprctl dispatch fullscreen 1
-        
-        on_double_click = hyprctl dispatch fullscreen 1
-    }
-}
-
-submap = hyprexpo
-bind = CTRL ALT, down, hyprexpo:expo, close
-
-bind = , left,  hyprexpo:kb_focus, left
-bind = , right, hyprexpo:kb_focus, right
-bind = , up,    hyprexpo:kb_focus, up
-bind = , down,  hyprexpo:kb_focus, down
-bind = , return, hyprexpo:kb_confirm
-
-# tokens 1..10: digits
-
-bind = , 1, hyprexpo:kb_selecti, 1
-bind = , 2, hyprexpo:kb_selecti, 2
-bind = , 3, hyprexpo:kb_selecti, 3
-bind = , 4, hyprexpo:kb_selecti, 4
-bind = , 5, hyprexpo:kb_selecti, 5
-bind = , 6, hyprexpo:kb_selecti, 6
-bind = , 7, hyprexpo:kb_selecti, 7
-bind = , 8, hyprexpo:kb_selecti, 8
-bind = , 9, hyprexpo:kb_selecti, 9
-bind = , 0, hyprexpo:kb_selecti, 0
-
-# tokens 11..20: SHIFT+digits (update args to match your layout symbols)
-
-bind = SHIFT, 1, hyprexpo:kb_selecti, 11
-bind = SHIFT, 2, hyprexpo:kb_selecti, 12
-bind = SHIFT, 3, hyprexpo:kb_selecti, 13
-bind = SHIFT, 4, hyprexpo:kb_selecti, 14
-bind = SHIFT, 5, hyprexpo:kb_selecti, 15
-bind = SHIFT, 6, hyprexpo:kb_selecti, 16
-bind = SHIFT, 7, hyprexpo:kb_selecti, 17
-bind = SHIFT, 8, hyprexpo:kb_selecti, 18
-bind = SHIFT, 9, hyprexpo:kb_selecti, 19
-bind = SHIFT, 0, hyprexpo:kb_selecti, 20
-
-# tokens 21..46: alpha
-
-bind = , a, hyprexpo:kb_selecti, 21
-bind = , b, hyprexpo:kb_selecti, 22
-bind = , c, hyprexpo:kb_selecti, 23
-bind = , d, hyprexpo:kb_selecti, 24
-bind = , e, hyprexpo:kb_selecti, 25
-bind = , f, hyprexpo:kb_selecti, 26
-bind = , g, hyprexpo:kb_selecti, 27
-bind = , h, hyprexpo:kb_selecti, 28
-bind = , i, hyprexpo:kb_selecti, 29
-bind = , j, hyprexpo:kb_selecti, 30
-bind = , k, hyprexpo:kb_selecti, 31
-bind = , l, hyprexpo:kb_selecti, 32
-bind = , m, hyprexpo:kb_selecti, 33
-bind = , n, hyprexpo:kb_selecti, 34
-bind = , o, hyprexpo:kb_selecti, 35
-bind = , p, hyprexpo:kb_selecti, 36
-bind = , q, hyprexpo:kb_selecti, 37
-bind = , r, hyprexpo:kb_selecti, 38
-bind = , s, hyprexpo:kb_selecti, 39
-bind = , t, hyprexpo:kb_selecti, 40
-bind = , u, hyprexpo:kb_selecti, 41
-bind = , v, hyprexpo:kb_selecti, 42
-bind = , w, hyprexpo:kb_selecti, 43
-bind = , x, hyprexpo:kb_selecti, 44
-bind = , y, hyprexpo:kb_selecti, 45
-bind = , z, hyprexpo:kb_selecti, 46
-submap = reset
+#plugin {
+#    hyprexpo {
+#        #general 
+#        columns = 3
+#        gaps_in = 8
+#        gaps_out = 10
+#        bg_col = $inverse_primary
+#        workspace = first 1
+#        
+#        #borders
+#        border_style = hyprland
+#        border_grad_current = $scrim
+#        border_grad_focus   = $inverse_primary
+#
+#        #labels
+#        label_enable = 1
+#        label_bg_shape = circle
+#        label_position = center-center
+#        label_offset_x = 10
+#        label_offset_y = 10
+#        label_color_default = $inverse_primary
+#        label_color_hover   = $primary_fixed_dim
+#        label_scale_hover = 1.0
+#        label_scale_focus = 1.0
+#        label_bg_enable = 1
+#        label_bg_color = rgba(00000088)
+#        label_bg_rounding = 15
+#        # label_padding = 1
+#
+#        label_font_size = 25
+#        label_font_family = FantasqueSansM Nerd Font Propo Regular
+#        label_font_bold = 1
+#        label_font_italic = 0
+#        label_text_underline = 0
+#        label_text_strikethrough = 0
+#    }
+#    
+#    hyprbars {
+#        bar_height = 25
+#        bar_color = $source_color
+#        bar_blur = true
+#        
+#        bar_title_enabled = false
+#        bar_text_size = 10
+#        bar_text_font = FantasqueSansM Nerd Font Propo Regular
+#        
+#        bar_text_align = center
+#        bar_buttons_alignment = left
+#        
+#        bar_padding = 15
+#        bar_button_padding = 6
+#        
+#        color_text = white
+#        
+#        hyprbars-button = $on_secondary, 15, , hyprctl dispatch killactive
+#        hyprbars-button = $primary_container, 15, , bash "$HOME/.config/hypr/scripts/hyprbars-minimize.sh"
+#        hyprbars-button = $surface_tint, 15, 󰺖, hyprctl dispatch fullscreen 1
+#        
+#        on_double_click = hyprctl dispatch fullscreen 1
+#    }
+#}
+#
+#submap = hyprexpo
+#bind = CTRL ALT, down, hyprexpo:expo, close
+#
+#bind = , left,  hyprexpo:kb_focus, left
+#bind = , right, hyprexpo:kb_focus, right
+#bind = , up,    hyprexpo:kb_focus, up
+#bind = , down,  hyprexpo:kb_focus, down
+#bind = , return, hyprexpo:kb_confirm
+#
+## tokens 1..10: digits
+#
+#bind = , 1, hyprexpo:kb_selecti, 1
+#bind = , 2, hyprexpo:kb_selecti, 2
+#bind = , 3, hyprexpo:kb_selecti, 3
+#bind = , 4, hyprexpo:kb_selecti, 4
+#bind = , 5, hyprexpo:kb_selecti, 5
+#bind = , 6, hyprexpo:kb_selecti, 6
+#bind = , 7, hyprexpo:kb_selecti, 7
+#bind = , 8, hyprexpo:kb_selecti, 8
+#bind = , 9, hyprexpo:kb_selecti, 9
+#bind = , 0, hyprexpo:kb_selecti, 0
+#
+## tokens 11..20: SHIFT+digits (update args to match your layout symbols)
+#
+#bind = SHIFT, 1, hyprexpo:kb_selecti, 11
+#bind = SHIFT, 2, hyprexpo:kb_selecti, 12
+#bind = SHIFT, 3, hyprexpo:kb_selecti, 13
+#bind = SHIFT, 4, hyprexpo:kb_selecti, 14
+#bind = SHIFT, 5, hyprexpo:kb_selecti, 15
+#bind = SHIFT, 6, hyprexpo:kb_selecti, 16
+#bind = SHIFT, 7, hyprexpo:kb_selecti, 17
+#bind = SHIFT, 8, hyprexpo:kb_selecti, 18
+#bind = SHIFT, 9, hyprexpo:kb_selecti, 19
+#bind = SHIFT, 0, hyprexpo:kb_selecti, 20
+#
+## tokens 21..46: alpha
+#
+#bind = , a, hyprexpo:kb_selecti, 21
+#bind = , b, hyprexpo:kb_selecti, 22
+#bind = , c, hyprexpo:kb_selecti, 23
+#bind = , d, hyprexpo:kb_selecti, 24
+#bind = , e, hyprexpo:kb_selecti, 25
+#bind = , f, hyprexpo:kb_selecti, 26
+#bind = , g, hyprexpo:kb_selecti, 27
+#bind = , h, hyprexpo:kb_selecti, 28
+#bind = , i, hyprexpo:kb_selecti, 29
+#bind = , j, hyprexpo:kb_selecti, 30
+#bind = , k, hyprexpo:kb_selecti, 31
+#bind = , l, hyprexpo:kb_selecti, 32
+#bind = , m, hyprexpo:kb_selecti, 33
+#bind = , n, hyprexpo:kb_selecti, 34
+#bind = , o, hyprexpo:kb_selecti, 35
+#bind = , p, hyprexpo:kb_selecti, 36
+#bind = , q, hyprexpo:kb_selecti, 37
+#bind = , r, hyprexpo:kb_selecti, 38
+#bind = , s, hyprexpo:kb_selecti, 39
+#bind = , t, hyprexpo:kb_selecti, 40
+#bind = , u, hyprexpo:kb_selecti, 41
+#bind = , v, hyprexpo:kb_selecti, 42
+#bind = , w, hyprexpo:kb_selecti, 43
+#bind = , x, hyprexpo:kb_selecti, 44
+#bind = , y, hyprexpo:kb_selecti, 45
+#bind = , z, hyprexpo:kb_selecti, 46
+#submap = reset
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Userprefs                         ┃
@@ -5163,7 +5163,7 @@ bind = Alt, H, exec, hyprctl hyprsunset gamma -10 #Reduce gamma by 10%
 
 bind = CTRL, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
 bind = $mainMod, M, exec, ~/.config/hypr/scripts/power.sh exit 				  #Logout
-bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
+#bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
 bind = $mainMod SHIFT, R, exec, $HYPRSCRIPTS/loadconfig.sh                                 #Reload Hyprland configuration
 bind = $mainMod SHIFT, A, exec, $HYPRSCRIPTS/toggle-animations.sh                         #Toggle animations
 bind = $mainMod, PRINT, exec, $HYPRSCRIPTS/screenshot.sh                                  #Take a screenshot
@@ -5385,7 +5385,7 @@ bind = Alt, H, exec, hyprctl hyprsunset gamma -10 #Reduce gamma by 10%
 
 bind = CTRL, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
 bind = $mainMod, M, exec, ~/.config/hypr/scripts/power.sh exit 				  #Logout
-bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
+#bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
 bind = $mainMod SHIFT, R, exec, $HYPRSCRIPTS/loadconfig.sh                                 #Reload Hyprland configuration
 bind = $mainMod SHIFT, A, exec, $HYPRSCRIPTS/toggle-animations.sh                         #Toggle animations
 bind = $mainMod, PRINT, exec, $HYPRSCRIPTS/screenshot.sh                                  #Take a screenshot
