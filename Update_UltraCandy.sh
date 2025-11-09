@@ -963,8 +963,8 @@ setup_ultracandy() {
     hyprpm update
     hyprpm add https://github.com/hyprwm/hyprland-plugins
     hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
-    hyprpm enable hyprbars
-    hyprpm enable hyprexpo-plus
+    hyprpm disable hyprbars
+    hyprpm disable hyprexpo-plus
     hyprpm reload
 
     print_status "Setting up UltraCandy configuration..."
