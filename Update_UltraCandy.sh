@@ -960,6 +960,7 @@ setup_ultracandy() {
     print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
     print_status "Note the plugins' setup will request your permission a few times here..."
     
+    hyprpm purge-cache
     hyprpm update
     hyprpm add https://github.com/hyprwm/hyprland-plugins
     #hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
