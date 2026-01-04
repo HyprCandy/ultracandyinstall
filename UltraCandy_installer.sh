@@ -3851,10 +3851,15 @@ windowrule = float on,match:class (nwg-look)
 windowrule = size 700 600,match:class (nwg-look)
 windowrule = center on,match:class (nwg-look)
 windowrule = pin on,match:class (nwg-look)
+# CachyOS Hello
+windowrule = float on,match:class (CachyOSHello)
+windowrule = size 700 600,match:class (CachyOSHello)
+windowrule = center on,match:class (CachyOSHello)
+windowrule = pin on,match:class (CachyOSHello)
 # nwg-displays
 windowrule = float on,match:class (nwg-displays)
 windowrule = size 990 600,match:class (nwg-displays)
-windowrule = move 15% 10%-,match:class (nwg-displays)
+windowrule = center on,match:class (nwg-displays)
 windowrule = pin on,match:class (nwg-displays)
 # System Mission Center
 windowrule = float on, match:class (io.missioncenter.MissionCenter)
