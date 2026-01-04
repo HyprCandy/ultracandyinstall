@@ -3727,264 +3727,301 @@ decoration {
 }
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃                          Decorations                        ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+decoration {
+    rounding = 15
+    rounding_power = 2
+    active_opacity = 0.8499999999999999
+    inactive_opacity = 0.8499999999999999
+    fullscreen_opacity = 1.0
+
+    blur {
+    enabled = true
+    size = 2
+    passes = 4
+    new_optimizations = on
+    ignore_opacity = true
+        xray = true
+        vibrancy = 0.24999999999999933
+        noise = 0
+    popups = true
+    popups_ignorealpha = 0.8
+        brightness = 1.0000000000000002
+        contrast = 0.9999999999999997
+        special = false
+        vibrancy_darkness = 0.5000000000000002
+    }
+
+    shadow {
+        enabled = true
+        range = 12
+        render_power = 4
+        color = $scrim
+    }
+    dim_strength = 0.19999999999999973
+    dim_inactive = false
+}
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-windowrule = bordercolor $source_color,class:^(.*)
-windowrule = move 73% 75,class:(Candy.SystemMonitor)
-windowrule = move 32% 75,class:(Candy.Media)
-windowrule = move 1% 75,class:(Candy.Weather)
-windowrulev2 = opacity 0.85 0.85,class:^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
-windowrule = suppressevent maximize, class:.* #nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+windowrule = move 73% 75,match:class (Candy.SystemMonitor)
+windowrule = move 32% 75,match:class (Candy.Media)
+windowrule = move 1% 75,match:class (Candy.Weather)
+windowrulev2 = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 # Pavucontrol floating
-windowrule = float,class:(.*org.pulseaudio.pavucontrol.*)
-windowrule = size 700 600,class:(.*org.pulseaudio.pavucontrol.*)
-windowrule = center,class:(.*org.pulseaudio.pavucontrol.*)
-windowrule = pin,class:(.*org.pulseaudio.pavucontrol.*)
+windowrule = float on,match:class (.*org.pulseaudio.pavucontrol.*)
+windowrule = size 700 600,match:class (.*org.pulseaudio.pavucontrol.*)
+windowrule = center on,match:class (.*org.pulseaudio.pavucontrol.*)
+windowrule = pin on,match:class (.*org.pulseaudio.pavucontrol.*)
 # Browser Picture in Picture
-windowrule = float, title:^(Picture-in-Picture)$
-windowrule = pin, title:^(Picture-in-Picture)$
-windowrule = move 69.5% 4%, title:^(Picture-in-Picture)$
+windowrule = float on, match:title ^(Picture-in-Picture)$
+windowrule = pin on, match:title ^(Picture-in-Picture)$
+windowrule = move 69.5% 4%, match:title ^(Picture-in-Picture)$
 # Waypaper
-windowrule = float,class:(.*waypaper.*)
-windowrule = size 800 600,class:(.*waypaper.*)
-windowrule = center,class:(.*waypaper.*)
-windowrule = pin,class:(.*waypaper.*)w
+windowrule = float on,match:class (.*waypaper.*)
+windowrule = size 800 600,match:class (.*waypaper.*)
+windowrule = center on,match:class (.*waypaper.*)
+windowrule = pin on,match:class (.*waypaper.*)w
 # Blueman Manager
-windowrule = float,class:(blueman-manager)
-windowrule = size 800 600,class:(blueman-manager)
-windowrule = center,class:(blueman-manager)
+windowrule = float on,match:class (blueman-manager)
+windowrule = size 800 600,match:class (blueman-manager)
+windowrule = center on,match:class (blueman-manager)
 # Weather
-windowrule = float,class:(org.gnome.Weather)
-windowrule = size 700 600,class:(org.gnome.Weather)
-windowrule = move 25% 10%-,class:(org.gnome.Weather)
-windowrule = pin,class:(org.gnome.Weather)
+windowrule = float on,match:class (org.gnome.Weather)
+windowrule = size 700 600,match:class (org.gnome.Weather)
+windowrule = move 25% 10%-,match:class (org.gnome.Weather)
+windowrule = pin on,match:class (org.gnome.Weather)
 # Calendar
-windowrule = float,class:(org.gnome.Calendar)
-windowrule = size 820 600,class:(org.gnome.Calendar)
-windowrule = center,class:(org.gnome.Calendar)
-windowrule = pin,class:(org.gnome.Calendar)
+windowrule = float on,match:class (org.gnome.Calendar)
+windowrule = size 820 600,match:class (org.gnome.Calendar)
+windowrule = center on,match:class (org.gnome.Calendar)
+windowrule = pin on,match:class (org.gnome.Calendar)
 # System Monitor
-windowrule = float,class:(org.gnome.SystemMonitor)
-windowrule = size 820 625,class:(org.gnome.SystemMonitor)
-windowrule = center,class:(org.gnome.SystemMonitor)
-windowrule = pin,class:(org.gnome.SystemMonitor)
+windowrule = float on,match:class (org.gnome.SystemMonitor)
+windowrule = size 820 625,match:class (org.gnome.SystemMonitor)
+windowrule = center on,match:class (org.gnome.SystemMonitor)
+windowrule = pin on,match:class (org.gnome.SystemMonitor)
 # Files
-windowrule = float,title:(Open Files)
-windowrule = size 700 600,title:(Open Files)
-windowrule = move 25% 10%-,title:(Open Files)
-windowrule = pin,title:(Open Files)
+windowrule = float on,match:title (Open Files)
+windowrule = size 700 600,match:title (Open Files)
+windowrule = move 25% 10%-,match:title (Open Files)
+windowrule = pin on,match:title (Open Files)
 
-windowrule = float,title:(Select Copy Destination)
-windowrule = size 700 600,title:(Select Copy Destination)
-windowrule = move 25% 10%-,title:(Select Copy Destination)
-windowrule = pin,title:(Select Copy Destination)
+windowrule = float on,match:title (Select Copy Destination)
+windowrule = size 700 600,match:title (Select Copy Destination)
+windowrule = move 25% 10%-,match:title (Select Copy Destination)
+windowrule = pin on,match:title (Select Copy Destination)
 
-windowrule = float,title:(Select Move Destination)
-windowrule = size 700 600,title:(Select Move Destination)
-windowrule = move 25% 10%-,title:(Select Move Destination)
-windowrule = pin,title:(Select Move Destination)
+windowrule = float on,match:title (Select Move Destination)
+windowrule = size 700 600,match:title (Select Move Destination)
+windowrule = move 25% 10%-,match:title (Select Move Destination)
+windowrule = pin on,match:title (Select Move Destination)
 
-windowrule = float,title:(Save As)
-windowrule = size 700 600,title:(Save As)
-windowrule = move 25% 10%-,title:(Save As)
-windowrule = pin,title:(Save As)
+windowrule = float on,match:title (Save As)
+windowrule = size 700 600,match:title (Save As)
+windowrule = move 25% 10%-,match:title (Save As)
+windowrule = pin on,match:title (Save As)
 
-windowrule = float,title:(Select files to send)
-windowrule = size 700 600,title:(Select files to send)
-windowrule = move 25% 10%-,title:(Select files to send)
-windowrule = pin,title:(Select files to send)
+windowrule = float on,match:title (Select files to send)
+windowrule = size 700 600,match:title (Select files to send)
+windowrule = move 25% 10%-,match:title (Select files to send)
+windowrule = pin on,match:title (Select files to send)
 
-windowrule = float,title:(Bluetooth File Transfer)
-windowrule = pin,title:(Bluetooth File Transfer)
+windowrule = float on,match:title (Bluetooth File Transfer)
+windowrule = pin on,match:title (Bluetooth File Transfer)
 # nwg-look
-windowrule = float,class:(nwg-look)
-windowrule = size 700 600,class:(nwg-look)
-windowrule = move 25% 10%-,class:(nwg-look)
-windowrule = pin,class:(nwg-look)
+windowrule = float on,match:class (nwg-look)
+windowrule = size 700 600,match:class (nwg-look)
+windowrule = move 25% 10%-,match:class (nwg-look)
+windowrule = pin on,match:class (nwg-look)
 # nwg-displays
-windowrule = float,class:(nwg-displays)
-windowrule = size 990 600,class:(nwg-displays)
-windowrule = move 15% 10%-,class:(nwg-displays)
-windowrule = pin,class:(nwg-displays)
+windowrule = float on,match:class (nwg-displays)
+windowrule = size 990 600,match:class (nwg-displays)
+windowrule = move 15% 10%-,match:class (nwg-displays)
+windowrule = pin on,match:class (nwg-displays)
 # System Mission Center
-windowrule = float, class:(io.missioncenter.MissionCenter)
-windowrule = pin, class:(io.missioncenter.MissionCenter)
-windowrule = center, class:(io.missioncenter.MissionCenter)
-windowrule = size 900 600, class:(io.missioncenter.MissionCenter)
+windowrule = float on, match:class (io.missioncenter.MissionCenter)
+windowrule = pin on, match:class (io.missioncenter.MissionCenter)
+windowrule = center on, match:class (io.missioncenter.MissionCenter)
+windowrule = size 900 600, match:class (io.missioncenter.MissionCenter)
 # System Mission Center Preference Window
-windowrule = float, class:(missioncenter), title:^(Preferences)$
-windowrule = pin, class:(missioncenter), title:^(Preferences)$
-windowrule = center, class:(missioncenter), title:^(Preferences)$
+windowrule = float on, match:class (missioncenter), match:title ^(Preferences)$
+windowrule = pin on, match:class (missioncenter), match:title ^(Preferences)$
+windowrule = center on, match:class (missioncenter), match:title ^(Preferences)$
 # Gnome Calculator
-windowrule = float,class:(org.gnome.Calculator)
-windowrule = size 700 600,class:(org.gnome.Calculator)
-windowrule = center,class:(org.gnome.Calculator)
+windowrule = float on,match:class (org.gnome.Calculator)
+windowrule = size 700 600,match:class (org.gnome.Calculator)
+windowrule = center on,match:class (org.gnome.Calculator)
 # Emoji Picker Smile
-windowrule = float,class:(it.mijorus.smile)
-windowrule = pin, class:(it.mijorus.smile)
-windowrule = move 100%-w-40 90,class:(it.mijorus.smile)
+windowrule = float on,match:class (it.mijorus.smile)
+windowrule = pin on, match:class (it.mijorus.smile)
+windowrule = move 100%-w-40 90,match:class (it.mijorus.smile)
 # Hyprland Share Picker
-windowrule = float, class:(hyprland-share-picker)
-windowrule = pin, class:(hyprland-share-picker)
-windowrule = center, title:class:(hyprland-share-picker)
-windowrule = size 600 400,class:(hyprland-share-picker)
+windowrule = float on, match:class (hyprland-share-picker)
+windowrule = pin on, match:class (hyprland-share-picker)
+windowrule = center on, match:title match:class (hyprland-share-picker)
+windowrule = size 600 400,match:class (hyprland-share-picker)
 # Hyprland Settings App
-windowrule = float,title:(hyprviz)
-windowrule = size 1000 625,title:(hyprviz)
-windowrule = center,title:(hyprviz)
+windowrule = float on,match:title (hyprviz)
+windowrule = size 1000 625,match:title (hyprviz)
+windowrule = center on,match:title (hyprviz)
 # General floating
-windowrule = float,class:(dotfiles-floating)
-windowrule = size 1000 700,class:(dotfiles-floating)
-windowrule = center,class:(dotfiles-floating)
+windowrule = float on,match:class (dotfiles-floating)
+windowrule = size 1000 700,match:class (dotfiles-floating)
+windowrule = center on,match:class (dotfiles-floating)
 # Float Necessary Windows
-windowrule = float, class:^(org.pulseaudio.pavucontrol)
-windowrule = float, class:^()$,title:^(Picture in picture)$
-windowrule = float, class:^()$,title:^(Save File)$
-windowrule = float, class:^()$,title:^(Open File)$
-windowrule = float, class:^(LibreWolf)$,title:^(Picture-in-Picture)$
-##windowrule = float, class:^(blueman-manager)$
-windowrule = float, class:^(xdg-desktop-portal-hyprland|xdg-desktop-portal-gtk|xdg-desktop-portal-kde)(.*)$
-windowrule = float, class:^(hyprpolkitagent|polkit-gnome-authentication-agent-1|org.org.kde.polkit-kde-authentication-agent-1)(.*)$
-windowrule = float, class:^(CachyOSHello)$
-windowrule = float, class:^(zenity)$
-windowrule = float, class:^()$,title:^(Steam - Self Updater)$
+windowrule = float on, match:class ^(org.pulseaudio.pavucontrol)
+windowrule = float on, match:class ^()$,match:title ^(Picture in picture)$
+windowrule = float on, match:class ^()$,match:title ^(Save File)$
+windowrule = float on, match:class ^()$,match:title ^(Open File)$
+windowrule = float on, match:class ^(LibreWolf)$,match:title ^(Picture-in-Picture)$
+##windowrule = float on, match:class ^(blueman-manager)$
+windowrule = float on, match:class ^(xdg-desktop-portal-hyprland|xdg-desktop-portal-gtk|xdg-desktop-portal-kde)(.*)$
+windowrule = float on, match:class ^(hyprpolkitagent|polkit-gnome-authentication-agent-1|org.org.kde.polkit-kde-authentication-agent-1)(.*)$
+windowrule = float on, match:class ^(CachyOSHello)$
+windowrule = float on, match:class ^(zenity)$
+windowrule = float on, match:class ^()$,match:title ^(Steam - Self Updater)$
 # Increase the opacity
-windowrule = opacity 1.0, class:^(zen)$
-# # windowrule = opacity 1.0, class:^(discord|armcord|webcord)$
-# # windowrule = opacity 1.0, title:^(QQ|Telegram)$
-# # windowrule = opacity 1.0, title:^(NetEase Cloud Music Gtk4)$
+windowrule = opacity 1.0, match:class ^(zen)$
+# # windowrule = opacity 1.0, match:class ^(discord|armcord|webcord)$
+# # windowrule = opacity 1.0, match:title ^(QQ|Telegram)$
+# # windowrule = opacity 1.0, match:title ^(NetEase Cloud Music Gtk4)$
 # General window rules
-windowrule = float, title:^(Picture-in-Picture)$
-windowrule = size 460 260, title:^(Picture-in-Picture)$
-windowrule = move 65%- 10%-, title:^(Picture-in-Picture)$
-windowrule = float, title:^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = move 25%-, title:^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = size 960 540, title:^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = pin, title:^(danmufloat)$
-windowrule = rounding 5, title:^(danmufloat|termfloat)$
-windowrule = animation slide right, class:^(kitty|Alacritty)$
-windowrule = noblur, class:^(org.mozilla.firefox)$
+windowrule = float on, match:title ^(Picture-in-Picture)$
+windowrule = size 460 260, match:title ^(Picture-in-Picture)$
+windowrule = move 65%- 10%-, match:title ^(Picture-in-Picture)$
+windowrule = float on, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
+windowrule = move 25%-, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
+windowrule = size 960 540, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
+windowrule = pin on, match:title ^(danmufloat)$
+windowrule = rounding 5, match:title ^(danmufloat|termfloat)$
+windowrule = animation slide right, match:class ^(kitty|Alacritty)$
+#windowrule = no_blur on, match:class ^(org.mozilla.firefox)$
 # Decorations related to floating windows on workspaces 1 to 10
 ##windowrule = bordersize 2, floating:1, onworkspace:w[fv1-10]
-windowrule = bordercolor $source_color, floating:1, onworkspace:w[fv1-10] #$on_primary_fixed_variant 90deg
+workspace = w[fv1-10], border_color c $source_color, float on #$on_primary_fixed_variant 90deg
 ##windowrule = rounding 8, floating:1, onworkspace:w[fv1-10]
 # Decorations related to tiling windows on workspaces 1 to 10
 ##windowrule = bordersize 3, floating:0, onworkspace:f[1-10]
 ##windowrule = rounding 4, floating:0, onworkspace:f[1-10]
-windowrule = tile, title:^(Microsoft-edge)$
-windowrule = tile, title:^(Brave-browser)$
-windowrule = tile, title:^(Chromium)$
-windowrule = float, title:^(pavucontrol)$
-windowrule = float, title:^(blueman-manager)$
-windowrule = float, title:^(nm-connection-editor)$
-windowrule = float, title:^(qalculate-gtk)$
+#windowrule = tile, match:title ^(Microsoft-edge)$
+vwindowrule = tile, match:title ^(Brave-browser)$
+#windowrule = tile, match:title ^(Chromium)$
+windowrule = float on, match:title ^(pavucontrol)$
+windowrule = float on, match:title ^(blueman-manager)$
+windowrule = float on, match:title ^(nm-connection-editor)$
+windowrule = float on, match:title ^(qalculate-gtk)$
 # idleinhibit
-windowrule = idleinhibit fullscreen,class:([window]) # Available modes: none, always, focus, fullscreen
+windowrule = idle_inhibit fullscreen,match:class ([window]) # Available modes: none, always, focus, fullscreen
 ### no blur for specific classes
-##windowrulev2 = noblur,class:^(?!(nautilus|nwg-look|nwg-displays|zen))
+##windowrulev2 = noblur,match:class ^(?!(nautilus|nwg-look|nwg-displays|zen))
 ## Windows Rules End #
 
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nautilus)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(zen)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(Brave-browser)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(code-oss)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^([Cc]ode)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(code-url-handler)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(code-insiders-url-handler)$
-windowrulev2 = opacity 0.85 $& 0.85 $& 0.85,class:^(kitty|kitty-scratchpad|Alacritty)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.kde.dolphin)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.kde.ark)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nwg-look)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(qt5ct)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(qt6ct)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(kvantummanager)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.pulseaudio.pavucontrol)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(blueman-manager)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nm-applet)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nm-connection-editor)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.kde.polkit-kde-authentication-agent-1)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(polkit-gnome-authentication-agent-1)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.freedesktop.impl.portal.desktop.gtk)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.freedesktop.impl.portal.desktop.hyprland)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^([Ss]team)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(steamwebhelper)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^([Ss]potify)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialTitle:^(Spotify Free)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialTitle:^(Spotify Premium)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nautilus)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(zen)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(Brave-browser)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-oss)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Cc]ode)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-url-handler)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-insiders-url-handler)$
+windowrulev2 = opacity 0.85 $& 0.85 $& 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.dolphin)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.ark)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nwg-look)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(qt5ct)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(qt6ct)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(kvantummanager)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.pulseaudio.pavucontrol)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(blueman-manager)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nm-applet)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nm-connection-editor)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.polkit-kde-authentication-agent-1)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(polkit-gnome-authentication-agent-1)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.freedesktop.impl.portal.desktop.gtk)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.freedesktop.impl.portal.desktop.hyprland)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Ss]team)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(steamwebhelper)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Ss]potify)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialmatch:title ^(Spotify Free)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialmatch:title ^(Spotify Premium)$
 # # 
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.github.rafostar.Clapper)$ # Clapper-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.github.tchx84.Flatseal)$ # Flatseal-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(hu.kramo.Cartridges)$ # Cartridges-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.obsproject.Studio)$ # Obs-Qt
-# # windowrulev2 = opacity 1.0 1.0,class:^(gnome-boxes)$ # Boxes-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(vesktop)$ # Vesktop
-# # windowrulev2 = opacity 1.0 1.0,class:^(discord)$ # Discord-Electron
-# # windowrulev2 = opacity 1.0 1.0,class:^(WebCord)$ # WebCord-Electron
-# # windowrulev2 = opacity 1.0 1.0,class:^(ArmCord)$ # ArmCord-Electron
-# # windowrulev2 = opacity 1.0 1.0,class:^(app.drey.Warp)$ # Warp-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(net.davidotek.pupgui2)$ # ProtonUp-Qt
-# # windowrulev2 = opacity 1.0 1.0,class:^(yad)$ # Protontricks-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(Signal)$ # Signal-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.github.alainm23.planify)$ # planify-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.github.flattool.Warehouse)$ # Warehouse-Gtk
-windowrulev2 = float,class:^(org.kde.dolphin)$,title:^(Progress Dialog — Dolphin)$
-windowrulev2 = float,class:^(org.kde.dolphin)$,title:^(Copying — Dolphin)$
-windowrulev2 = float,title:^(About Mozilla Firefox)$
-windowrulev2 = float,class:^(firefox)$,title:^(Picture-in-Picture)$
-windowrulev2 = float,class:^(firefox)$,title:^(Library)$
-windowrulev2 = float,class:^(kitty)$,title:^(top)$
-windowrulev2 = float,class:^(kitty)$,title:^(btop)$
-windowrulev2 = float,class:^(kitty)$,title:^(htop)$
-windowrulev2 = float,class:^(vlc)$
-windowrulev2 = float,class:^(eww-main-window)$
-windowrulev2 = float,class:^(eww-notifications)$
-windowrulev2 = float,class:^(kvantummanager)$
-windowrulev2 = float,class:^(qt5ct)$
-windowrulev2 = float,class:^(qt6ct)$
-windowrulev2 = float,class:^(nwg-look)$
-windowrulev2 = float,class:^(org.kde.ark)$
-windowrulev2 = float,class:^(org.pulseaudio.pavucontrol)$
-windowrulev2 = float,class:^(blueman-manager)$
-windowrulev2 = float,class:^(nm-applet)$
-windowrulev2 = float,class:^(nm-connection-editor)$
-windowrulev2 = float,class:^(org.kde.polkit-kde-authentication-agent-1)$
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.github.rafostar.Clapper)$ # Clapper-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.github.tchx84.Flatseal)$ # Flatseal-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(hu.kramo.Cartridges)$ # Cartridges-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.obsproject.Studio)$ # Obs-Qt
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(gnome-boxes)$ # Boxes-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(vesktop)$ # Vesktop
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(discord)$ # Discord-Electron
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(WebCord)$ # WebCord-Electron
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(ArmCord)$ # ArmCord-Electron
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(app.drey.Warp)$ # Warp-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(net.davidotek.pupgui2)$ # ProtonUp-Qt
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(yad)$ # Protontricks-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(Signal)$ # Signal-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.github.alainm23.planify)$ # planify-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.github.flattool.Warehouse)$ # Warehouse-Gtk
+windowrulev2 = float on,match:class ^(org.kde.dolphin)$,match:title ^(Progress Dialog — Dolphin)$
+windowrulev2 = float on,match:class ^(org.kde.dolphin)$,match:title ^(Copying — Dolphin)$
+windowrulev2 = float on,match:title ^(About Mozilla Firefox)$
+windowrulev2 = float on,match:class ^(firefox)$,match:title ^(Picture-in-Picture)$
+windowrulev2 = float on,match:class ^(firefox)$,match:title ^(Library)$
+windowrulev2 = float on,match:class ^(kitty)$,match:title ^(top)$
+windowrulev2 = float on,match:class ^(kitty)$,match:title ^(btop)$
+windowrulev2 = float on,match:class ^(kitty)$,match:title ^(htop)$
+windowrulev2 = float on,match:class ^(vlc)$
+windowrulev2 = float on,match:class ^(eww-main-window)$
+windowrulev2 = float on,match:class ^(eww-notifications)$
+windowrulev2 = float on,match:class ^(kvantummanager)$
+windowrulev2 = float on,match:class ^(qt5ct)$
+windowrulev2 = float on,match:class ^(qt6ct)$
+windowrulev2 = float on,match:class ^(nwg-look)$
+windowrulev2 = float on,match:class ^(org.kde.ark)$
+windowrulev2 = float on,match:class ^(org.pulseaudio.pavucontrol)$
+windowrulev2 = float on,match:class ^(blueman-manager)$
+windowrulev2 = float on,match:class ^(nm-applet)$
+windowrulev2 = float on,match:class ^(nm-connection-editor)$
+windowrulev2 = float on,match:class ^(org.kde.polkit-kde-authentication-agent-1)$
 
-windowrulev2 = float,class:^(Signal)$ # Signal-Gtk
-windowrulev2 = float,class:^(com.github.rafostar.Clapper)$ # Clapper-Gtk
-windowrulev2 = float,class:^(app.drey.Warp)$ # Warp-Gtk
-windowrulev2 = float,class:^(net.davidotek.pupgui2)$ # ProtonUp-Qt
-windowrulev2 = float,class:^(yad)$ # Protontricks-Gtk
-windowrulev2 = float,class:^(eog)$ # Imageviewer-Gtk
-windowrulev2 = float,class:^(io.github.alainm23.planify)$ # planify-Gtk
-windowrulev2 = float,class:^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
-windowrulev2 = float,class:^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gkk
-windowrulev2 = float,class:^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
-windowrulev2 = float,class:^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
-windowrulev2 = float,class:(clipse) # ensure you have a floating window class set if you want this behavior
-windowrulev2 = size 622 652,class:(clipse) # set the size of the window as necessary
+windowrulev2 = float on,match:class ^(Signal)$ # Signal-Gtk
+windowrulev2 = float on,match:class ^(com.github.rafostar.Clapper)$ # Clapper-Gtk
+windowrulev2 = float on,match:class ^(app.drey.Warp)$ # Warp-Gtk
+windowrulev2 = float on,match:class ^(net.davidotek.pupgui2)$ # ProtonUp-Qt
+windowrulev2 = float on,match:class ^(yad)$ # Protontricks-Gtk
+windowrulev2 = float on,match:class ^(eog)$ # Imageviewer-Gtk
+windowrulev2 = float on,match:class ^(io.github.alainm23.planify)$ # planify-Gtk
+windowrulev2 = float on,match:class ^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
+windowrulev2 = float on,match:class ^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gkk
+windowrulev2 = float on,match:class ^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
+windowrulev2 = float on,match:class ^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
+windowrulev2 = float on,match:class (clipse) # ensure you have a floating window class set if you want this behavior
+windowrulev2 = size 622 652,match:class (clipse) # set the size of the window as necessary
 #windowrulev2 = noborder, fullscreen:1
 
 # common modals
-#windowrule = float,initialtitle:^(Open File)$
-#windowrule = float,initialTitle:^(Open File)$
-windowrule = float,title:^(Choose Files)$
-windowrule = float,title:^(Save As)$
-windowrule = float,title:^(Confirm to replace files)$
-windowrule = float,title:^(File Operation Progress)$
-windowrulev2 = float,class:^(xdg-desktop-portal-gtk)$
+#windowrule = float on,initialmatch:title ^(Open File)$
+#windowrule = float on,initialmatch:title ^(Open File)$
+windowrule = float on,match:title ^(Choose Files)$
+windowrule = float on,match:title ^(Save As)$
+windowrule = float on,match:title ^(Confirm to replace files)$
+windowrule = float on,match:title ^(File Operation Progress)$
+windowrulev2 = float on,match:class ^(xdg-desktop-portal-gtk)$
 
 # installer
-windowrule = float, class:(floating-installer)
-windowrule = center, class:(floating-installer)
+windowrule = float on, match:class (floating-installer)
+windowrule = center on, match:class (floating-installer)
 
 # clock
-windowrule = float, class:(clock)
-windowrule = center, class:(clock)
+windowrule = float on, match:class (clock)
+windowrule = center on, match:class (clock)
 
 # Workspaces Rules https://wiki.hyprland.org/0.45.0/Configuring/Workspace-Rules/ #
 # workspace = 1, default:true, monitor:$priMon
@@ -4022,43 +4059,41 @@ workspace = 10, layoutopt:orientation:right
 # Workspaces Rules End #
 
 # Layers Rules #
-layerrule = animation slide top, logout_dialog
-layerrule = blur,rofi
-layerrule = ignorezero,rofi
-layerrule = blur,notifications
-layerrule = ignorezero,notifications
-layerrule = blur,swaync-notification-window
-layerrule = ignorezero,swaync-notification-window
-layerrule = blur,swaync-control-center
-layerrule = ignorezero,swaync-control-center
-layerrule = blur,nwg-dock
-layerrule = ignorezero,nwg-dock
-layerrule = blur,logout_dialog
-layerrule = ignorezero,logout_dialog
-layerrule = blur,gtk-layer-shell
-layerrule = ignorezero,gtk-layer-shell
-layerrule = blur,waybar
-layerrule = ignorezero,waybar
-layerrule = blur,waybar
-layerrule = ignorezero,waybar
-layerrule = blur,dashboardmenu
-layerrule = ignorezero,dashboardmenu
-layerrule = blur,calendarmenu
-layerrule = ignorezero,calendarmenu
-layerrule = blur,notificationsmenu
-layerrule = ignorezero,notificationsmenu
-layerrule = blur,networkmenu
-layerrule = ignorezero,networkmenu
-layerrule = blur,mediamenu
-layerrule = ignorezero,mediamenu
-layerrule = blur,energymenu
-layerrule = ignorezero,energymenu
-layerrule = blur,bluetoothmenu
-layerrule = ignorezero,bluetoothmenu
-layerrule = blur,audiomenu
-layerrule = ignorezero,audiomenu
-layerrule = blur,hyprmenu
-layerrule = ignorezero,hyprmenu
+layerrule = animation slide top, match:class logout_dialog
+layerrule = blur on,match:class rofi
+layerrule = ignore_alpha 0.01,match:class rofi
+layerrule = blur on,match:class notifications
+layerrule = ignore_alpha 0.01,match:class notifications
+layerrule = blur on,match:class swaync-notification-window
+layerrule = ignore_alpha 0.01,match:class swaync-notification-window
+layerrule = blur on,match:class swaync-control-center
+layerrule = ignore_alpha 0.01,match:class swaync-control-center
+layerrule = blur on,match:class nwg-dock
+layerrule = ignore_alpha 0.01,match:class nwg-dock
+layerrule = blur on,match:class logout_dialog
+layerrule = ignore_alpha 0.01,match:class logout_dialog
+layerrule = blur on,match:class gtk-layer-shell
+layerrule = ignore_alpha 0.01,match:class gtk-layer-shell
+layerrule = blur on,match:class waybar
+layerrule = ignore_alpha 0.01,match:class waybar
+layerrule = blur on,match:class dashboardmenu
+layerrule = ignore_alpha 0.01,match:class dashboardmenu
+layerrule = blur on,match:class calendarmenu
+layerrule = ignore_alpha 0.01,match:class calendarmenu
+layerrule = blur on,match:class notificationsmenu
+layerrule = ignore_alpha 0.01,match:class notificationsmenu
+layerrule = blur on,match:class networkmenu
+layerrule = ignore_alpha 0.01,match:class networkmenu
+layerrule = blur on,match:class mediamenu
+layerrule = ignore_alpha 0.01,match:class mediamenu
+layerrule = blur on,match:class energymenu
+layerrule = ignore_alpha 0.01,match:class energymenu
+layerrule = blur on,match:class bluetoothmenu
+layerrule = ignore_alpha 0.01,match:class bluetoothmenu
+layerrule = blur on,match:class audiomenu
+layerrule = ignore_alpha 0.01,match:class audiomenu
+layerrule = blur on,match:class hyprmenu
+layerrule = ignore_alpha 0.01,match:class hyprmenu
 # layerrule = animation popin 50%, waybar
 # Layers Rules End #
 
@@ -4437,264 +4472,301 @@ decoration {
 }
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃                          Decorations                        ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+decoration {
+    rounding = 15
+    rounding_power = 2
+    active_opacity = 0.8499999999999999
+    inactive_opacity = 0.8499999999999999
+    fullscreen_opacity = 1.0
+
+    blur {
+    enabled = true
+    size = 2
+    passes = 4
+    new_optimizations = on
+    ignore_opacity = true
+        xray = true
+        vibrancy = 0.24999999999999933
+        noise = 0
+    popups = true
+    popups_ignorealpha = 0.8
+        brightness = 1.0000000000000002
+        contrast = 0.9999999999999997
+        special = false
+        vibrancy_darkness = 0.5000000000000002
+    }
+
+    shadow {
+        enabled = true
+        range = 12
+        render_power = 4
+        color = $scrim
+    }
+    dim_strength = 0.19999999999999973
+    dim_inactive = false
+}
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-windowrule = bordercolor $source_color,class:^(.*)
-windowrule = move 73% 75,class:(Candy.SystemMonitor)
-windowrule = move 32% 75,class:(Candy.Media)
-windowrule = move 1% 75,class:(Candy.Weather)
-windowrulev2 = opacity 0.85 0.85,class:^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
-windowrule = suppressevent maximize, class:.* #nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+windowrule = move 73% 75,match:class (Candy.SystemMonitor)
+windowrule = move 32% 75,match:class (Candy.Media)
+windowrule = move 1% 75,match:class (Candy.Weather)
+windowrulev2 = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 # Pavucontrol floating
-windowrule = float,class:(.*org.pulseaudio.pavucontrol.*)
-windowrule = size 700 600,class:(.*org.pulseaudio.pavucontrol.*)
-windowrule = center,class:(.*org.pulseaudio.pavucontrol.*)
-windowrule = pin,class:(.*org.pulseaudio.pavucontrol.*)
+windowrule = float on,match:class (.*org.pulseaudio.pavucontrol.*)
+windowrule = size 700 600,match:class (.*org.pulseaudio.pavucontrol.*)
+windowrule = center on,match:class (.*org.pulseaudio.pavucontrol.*)
+windowrule = pin on,match:class (.*org.pulseaudio.pavucontrol.*)
 # Browser Picture in Picture
-windowrule = float, title:^(Picture-in-Picture)$
-windowrule = pin, title:^(Picture-in-Picture)$
-windowrule = move 69.5% 4%, title:^(Picture-in-Picture)$
+windowrule = float on, match:title ^(Picture-in-Picture)$
+windowrule = pin on, match:title ^(Picture-in-Picture)$
+windowrule = move 69.5% 4%, match:title ^(Picture-in-Picture)$
 # Waypaper
-windowrule = float,class:(.*waypaper.*)
-windowrule = size 800 600,class:(.*waypaper.*)
-windowrule = center,class:(.*waypaper.*)
-windowrule = pin,class:(.*waypaper.*)w
+windowrule = float on,match:class (.*waypaper.*)
+windowrule = size 800 600,match:class (.*waypaper.*)
+windowrule = center on,match:class (.*waypaper.*)
+windowrule = pin on,match:class (.*waypaper.*)w
 # Blueman Manager
-windowrule = float,class:(blueman-manager)
-windowrule = size 800 600,class:(blueman-manager)
-windowrule = center,class:(blueman-manager)
+windowrule = float on,match:class (blueman-manager)
+windowrule = size 800 600,match:class (blueman-manager)
+windowrule = center on,match:class (blueman-manager)
 # Weather
-windowrule = float,class:(org.gnome.Weather)
-windowrule = size 700 600,class:(org.gnome.Weather)
-windowrule = move 25% 10%-,class:(org.gnome.Weather)
-windowrule = pin,class:(org.gnome.Weather)
+windowrule = float on,match:class (org.gnome.Weather)
+windowrule = size 700 600,match:class (org.gnome.Weather)
+windowrule = move 25% 10%-,match:class (org.gnome.Weather)
+windowrule = pin on,match:class (org.gnome.Weather)
 # Calendar
-windowrule = float,class:(org.gnome.Calendar)
-windowrule = size 820 600,class:(org.gnome.Calendar)
-windowrule = center,class:(org.gnome.Calendar)
-windowrule = pin,class:(org.gnome.Calendar)
+windowrule = float on,match:class (org.gnome.Calendar)
+windowrule = size 820 600,match:class (org.gnome.Calendar)
+windowrule = center on,match:class (org.gnome.Calendar)
+windowrule = pin on,match:class (org.gnome.Calendar)
 # System Monitor
-windowrule = float,class:(org.gnome.SystemMonitor)
-windowrule = size 820 625,class:(org.gnome.SystemMonitor)
-windowrule = center,class:(org.gnome.SystemMonitor)
-windowrule = pin,class:(org.gnome.SystemMonitor)
+windowrule = float on,match:class (org.gnome.SystemMonitor)
+windowrule = size 820 625,match:class (org.gnome.SystemMonitor)
+windowrule = center on,match:class (org.gnome.SystemMonitor)
+windowrule = pin on,match:class (org.gnome.SystemMonitor)
 # Files
-windowrule = float,title:(Open Files)
-windowrule = size 700 600,title:(Open Files)
-windowrule = move 25% 10%-,title:(Open Files)
-windowrule = pin,title:(Open Files)
+windowrule = float on,match:title (Open Files)
+windowrule = size 700 600,match:title (Open Files)
+windowrule = move 25% 10%-,match:title (Open Files)
+windowrule = pin on,match:title (Open Files)
 
-windowrule = float,title:(Select Copy Destination)
-windowrule = size 700 600,title:(Select Copy Destination)
-windowrule = move 25% 10%-,title:(Select Copy Destination)
-windowrule = pin,title:(Select Copy Destination)
+windowrule = float on,match:title (Select Copy Destination)
+windowrule = size 700 600,match:title (Select Copy Destination)
+windowrule = move 25% 10%-,match:title (Select Copy Destination)
+windowrule = pin on,match:title (Select Copy Destination)
 
-windowrule = float,title:(Select Move Destination)
-windowrule = size 700 600,title:(Select Move Destination)
-windowrule = move 25% 10%-,title:(Select Move Destination)
-windowrule = pin,title:(Select Move Destination)
+windowrule = float on,match:title (Select Move Destination)
+windowrule = size 700 600,match:title (Select Move Destination)
+windowrule = move 25% 10%-,match:title (Select Move Destination)
+windowrule = pin on,match:title (Select Move Destination)
 
-windowrule = float,title:(Save As)
-windowrule = size 700 600,title:(Save As)
-windowrule = move 25% 10%-,title:(Save As)
-windowrule = pin,title:(Save As)
+windowrule = float on,match:title (Save As)
+windowrule = size 700 600,match:title (Save As)
+windowrule = move 25% 10%-,match:title (Save As)
+windowrule = pin on,match:title (Save As)
 
-windowrule = float,title:(Select files to send)
-windowrule = size 700 600,title:(Select files to send)
-windowrule = move 25% 10%-,title:(Select files to send)
-windowrule = pin,title:(Select files to send)
+windowrule = float on,match:title (Select files to send)
+windowrule = size 700 600,match:title (Select files to send)
+windowrule = move 25% 10%-,match:title (Select files to send)
+windowrule = pin on,match:title (Select files to send)
 
-windowrule = float,title:(Bluetooth File Transfer)
-windowrule = pin,title:(Bluetooth File Transfer)
+windowrule = float on,match:title (Bluetooth File Transfer)
+windowrule = pin on,match:title (Bluetooth File Transfer)
 # nwg-look
-windowrule = float,class:(nwg-look)
-windowrule = size 700 600,class:(nwg-look)
-windowrule = move 25% 10%-,class:(nwg-look)
-windowrule = pin,class:(nwg-look)
+windowrule = float on,match:class (nwg-look)
+windowrule = size 700 600,match:class (nwg-look)
+windowrule = move 25% 10%-,match:class (nwg-look)
+windowrule = pin on,match:class (nwg-look)
 # nwg-displays
-windowrule = float,class:(nwg-displays)
-windowrule = size 990 600,class:(nwg-displays)
-windowrule = move 15% 10%-,class:(nwg-displays)
-windowrule = pin,class:(nwg-displays)
+windowrule = float on,match:class (nwg-displays)
+windowrule = size 990 600,match:class (nwg-displays)
+windowrule = move 15% 10%-,match:class (nwg-displays)
+windowrule = pin on,match:class (nwg-displays)
 # System Mission Center
-windowrule = float, class:(io.missioncenter.MissionCenter)
-windowrule = pin, class:(io.missioncenter.MissionCenter)
-windowrule = center, class:(io.missioncenter.MissionCenter)
-windowrule = size 900 600, class:(io.missioncenter.MissionCenter)
+windowrule = float on, match:class (io.missioncenter.MissionCenter)
+windowrule = pin on, match:class (io.missioncenter.MissionCenter)
+windowrule = center on, match:class (io.missioncenter.MissionCenter)
+windowrule = size 900 600, match:class (io.missioncenter.MissionCenter)
 # System Mission Center Preference Window
-windowrule = float, class:(missioncenter), title:^(Preferences)$
-windowrule = pin, class:(missioncenter), title:^(Preferences)$
-windowrule = center, class:(missioncenter), title:^(Preferences)$
+windowrule = float on, match:class (missioncenter), match:title ^(Preferences)$
+windowrule = pin on, match:class (missioncenter), match:title ^(Preferences)$
+windowrule = center on, match:class (missioncenter), match:title ^(Preferences)$
 # Gnome Calculator
-windowrule = float,class:(org.gnome.Calculator)
-windowrule = size 700 600,class:(org.gnome.Calculator)
-windowrule = center,class:(org.gnome.Calculator)
+windowrule = float on,match:class (org.gnome.Calculator)
+windowrule = size 700 600,match:class (org.gnome.Calculator)
+windowrule = center on,match:class (org.gnome.Calculator)
 # Emoji Picker Smile
-windowrule = float,class:(it.mijorus.smile)
-windowrule = pin, class:(it.mijorus.smile)
-windowrule = move 100%-w-40 90,class:(it.mijorus.smile)
+windowrule = float on,match:class (it.mijorus.smile)
+windowrule = pin on, match:class (it.mijorus.smile)
+windowrule = move 100%-w-40 90,match:class (it.mijorus.smile)
 # Hyprland Share Picker
-windowrule = float, class:(hyprland-share-picker)
-windowrule = pin, class:(hyprland-share-picker)
-windowrule = center, title:class:(hyprland-share-picker)
-windowrule = size 600 400,class:(hyprland-share-picker)
+windowrule = float on, match:class (hyprland-share-picker)
+windowrule = pin on, match:class (hyprland-share-picker)
+windowrule = center on, match:title match:class (hyprland-share-picker)
+windowrule = size 600 400,match:class (hyprland-share-picker)
 # Hyprland Settings App
-windowrule = float,title:(hyprviz)
-windowrule = size 1000 625,title:(hyprviz)
-windowrule = center,title:(hyprviz)
+windowrule = float on,match:title (hyprviz)
+windowrule = size 1000 625,match:title (hyprviz)
+windowrule = center on,match:title (hyprviz)
 # General floating
-windowrule = float,class:(dotfiles-floating)
-windowrule = size 1000 700,class:(dotfiles-floating)
-windowrule = center,class:(dotfiles-floating)
+windowrule = float on,match:class (dotfiles-floating)
+windowrule = size 1000 700,match:class (dotfiles-floating)
+windowrule = center on,match:class (dotfiles-floating)
 # Float Necessary Windows
-windowrule = float, class:^(org.pulseaudio.pavucontrol)
-windowrule = float, class:^()$,title:^(Picture in picture)$
-windowrule = float, class:^()$,title:^(Save File)$
-windowrule = float, class:^()$,title:^(Open File)$
-windowrule = float, class:^(LibreWolf)$,title:^(Picture-in-Picture)$
-##windowrule = float, class:^(blueman-manager)$
-windowrule = float, class:^(xdg-desktop-portal-hyprland|xdg-desktop-portal-gtk|xdg-desktop-portal-kde)(.*)$
-windowrule = float, class:^(hyprpolkitagent|polkit-gnome-authentication-agent-1|org.org.kde.polkit-kde-authentication-agent-1)(.*)$
-windowrule = float, class:^(CachyOSHello)$
-windowrule = float, class:^(zenity)$
-windowrule = float, class:^()$,title:^(Steam - Self Updater)$
+windowrule = float on, match:class ^(org.pulseaudio.pavucontrol)
+windowrule = float on, match:class ^()$,match:title ^(Picture in picture)$
+windowrule = float on, match:class ^()$,match:title ^(Save File)$
+windowrule = float on, match:class ^()$,match:title ^(Open File)$
+windowrule = float on, match:class ^(LibreWolf)$,match:title ^(Picture-in-Picture)$
+##windowrule = float on, match:class ^(blueman-manager)$
+windowrule = float on, match:class ^(xdg-desktop-portal-hyprland|xdg-desktop-portal-gtk|xdg-desktop-portal-kde)(.*)$
+windowrule = float on, match:class ^(hyprpolkitagent|polkit-gnome-authentication-agent-1|org.org.kde.polkit-kde-authentication-agent-1)(.*)$
+windowrule = float on, match:class ^(CachyOSHello)$
+windowrule = float on, match:class ^(zenity)$
+windowrule = float on, match:class ^()$,match:title ^(Steam - Self Updater)$
 # Increase the opacity
-windowrule = opacity 1.0, class:^(zen)$
-# # windowrule = opacity 1.0, class:^(discord|armcord|webcord)$
-# # windowrule = opacity 1.0, title:^(QQ|Telegram)$
-# # windowrule = opacity 1.0, title:^(NetEase Cloud Music Gtk4)$
+windowrule = opacity 1.0, match:class ^(zen)$
+# # windowrule = opacity 1.0, match:class ^(discord|armcord|webcord)$
+# # windowrule = opacity 1.0, match:title ^(QQ|Telegram)$
+# # windowrule = opacity 1.0, match:title ^(NetEase Cloud Music Gtk4)$
 # General window rules
-windowrule = float, title:^(Picture-in-Picture)$
-windowrule = size 460 260, title:^(Picture-in-Picture)$
-windowrule = move 65%- 10%-, title:^(Picture-in-Picture)$
-windowrule = float, title:^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = move 25%-, title:^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = size 960 540, title:^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = pin, title:^(danmufloat)$
-windowrule = rounding 5, title:^(danmufloat|termfloat)$
-windowrule = animation slide right, class:^(kitty|Alacritty)$
-windowrule = noblur, class:^(org.mozilla.firefox)$
+windowrule = float on, match:title ^(Picture-in-Picture)$
+windowrule = size 460 260, match:title ^(Picture-in-Picture)$
+windowrule = move 65%- 10%-, match:title ^(Picture-in-Picture)$
+windowrule = float on, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
+windowrule = move 25%-, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
+windowrule = size 960 540, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
+windowrule = pin on, match:title ^(danmufloat)$
+windowrule = rounding 5, match:title ^(danmufloat|termfloat)$
+windowrule = animation slide right, match:class ^(kitty|Alacritty)$
+#windowrule = no_blur on, match:class ^(org.mozilla.firefox)$
 # Decorations related to floating windows on workspaces 1 to 10
 ##windowrule = bordersize 2, floating:1, onworkspace:w[fv1-10]
-windowrule = bordercolor $source_color, floating:1, onworkspace:w[fv1-10] #$on_primary_fixed_variant 90deg
+workspace = w[fv1-10], border_color c $source_color, float on #$on_primary_fixed_variant 90deg
 ##windowrule = rounding 8, floating:1, onworkspace:w[fv1-10]
 # Decorations related to tiling windows on workspaces 1 to 10
 ##windowrule = bordersize 3, floating:0, onworkspace:f[1-10]
 ##windowrule = rounding 4, floating:0, onworkspace:f[1-10]
-windowrule = tile, title:^(Microsoft-edge)$
-windowrule = tile, title:^(Brave-browser)$
-windowrule = tile, title:^(Chromium)$
-windowrule = float, title:^(pavucontrol)$
-windowrule = float, title:^(blueman-manager)$
-windowrule = float, title:^(nm-connection-editor)$
-windowrule = float, title:^(qalculate-gtk)$
+#windowrule = tile, match:title ^(Microsoft-edge)$
+vwindowrule = tile, match:title ^(Brave-browser)$
+#windowrule = tile, match:title ^(Chromium)$
+windowrule = float on, match:title ^(pavucontrol)$
+windowrule = float on, match:title ^(blueman-manager)$
+windowrule = float on, match:title ^(nm-connection-editor)$
+windowrule = float on, match:title ^(qalculate-gtk)$
 # idleinhibit
-windowrule = idleinhibit fullscreen,class:([window]) # Available modes: none, always, focus, fullscreen
+windowrule = idle_inhibit fullscreen,match:class ([window]) # Available modes: none, always, focus, fullscreen
 ### no blur for specific classes
-##windowrulev2 = noblur,class:^(?!(nautilus|nwg-look|nwg-displays|zen))
+##windowrulev2 = noblur,match:class ^(?!(nautilus|nwg-look|nwg-displays|zen))
 ## Windows Rules End #
 
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nautilus)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(zen)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(Brave-browser)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(code-oss)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^([Cc]ode)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(code-url-handler)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(code-insiders-url-handler)$
-windowrulev2 = opacity 0.85 $& 0.85 $& 0.85,class:^(kitty|kitty-scratchpad|Alacritty)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.kde.dolphin)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.kde.ark)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nwg-look)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(qt5ct)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(qt6ct)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(kvantummanager)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.pulseaudio.pavucontrol)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(blueman-manager)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nm-applet)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(nm-connection-editor)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.kde.polkit-kde-authentication-agent-1)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(polkit-gnome-authentication-agent-1)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.freedesktop.impl.portal.desktop.gtk)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(org.freedesktop.impl.portal.desktop.hyprland)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^([Ss]team)$
-# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^(steamwebhelper)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,class:^([Ss]potify)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialTitle:^(Spotify Free)$
-windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialTitle:^(Spotify Premium)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nautilus)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(zen)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(Brave-browser)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-oss)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Cc]ode)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-url-handler)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-insiders-url-handler)$
+windowrulev2 = opacity 0.85 $& 0.85 $& 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.dolphin)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.ark)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nwg-look)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(qt5ct)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(qt6ct)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(kvantummanager)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.pulseaudio.pavucontrol)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(blueman-manager)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nm-applet)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nm-connection-editor)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.polkit-kde-authentication-agent-1)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(polkit-gnome-authentication-agent-1)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.freedesktop.impl.portal.desktop.gtk)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.freedesktop.impl.portal.desktop.hyprland)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Ss]team)$
+# # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(steamwebhelper)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Ss]potify)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialmatch:title ^(Spotify Free)$
+windowrulev2 = opacity 1.0 $& 1.0 $& 1,initialmatch:title ^(Spotify Premium)$
 # # 
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.github.rafostar.Clapper)$ # Clapper-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.github.tchx84.Flatseal)$ # Flatseal-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(hu.kramo.Cartridges)$ # Cartridges-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.obsproject.Studio)$ # Obs-Qt
-# # windowrulev2 = opacity 1.0 1.0,class:^(gnome-boxes)$ # Boxes-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(vesktop)$ # Vesktop
-# # windowrulev2 = opacity 1.0 1.0,class:^(discord)$ # Discord-Electron
-# # windowrulev2 = opacity 1.0 1.0,class:^(WebCord)$ # WebCord-Electron
-# # windowrulev2 = opacity 1.0 1.0,class:^(ArmCord)$ # ArmCord-Electron
-# # windowrulev2 = opacity 1.0 1.0,class:^(app.drey.Warp)$ # Warp-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(net.davidotek.pupgui2)$ # ProtonUp-Qt
-# # windowrulev2 = opacity 1.0 1.0,class:^(yad)$ # Protontricks-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(Signal)$ # Signal-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.github.alainm23.planify)$ # planify-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
-# # windowrulev2 = opacity 1.0 1.0,class:^(io.github.flattool.Warehouse)$ # Warehouse-Gtk
-windowrulev2 = float,class:^(org.kde.dolphin)$,title:^(Progress Dialog — Dolphin)$
-windowrulev2 = float,class:^(org.kde.dolphin)$,title:^(Copying — Dolphin)$
-windowrulev2 = float,title:^(About Mozilla Firefox)$
-windowrulev2 = float,class:^(firefox)$,title:^(Picture-in-Picture)$
-windowrulev2 = float,class:^(firefox)$,title:^(Library)$
-windowrulev2 = float,class:^(kitty)$,title:^(top)$
-windowrulev2 = float,class:^(kitty)$,title:^(btop)$
-windowrulev2 = float,class:^(kitty)$,title:^(htop)$
-windowrulev2 = float,class:^(vlc)$
-windowrulev2 = float,class:^(eww-main-window)$
-windowrulev2 = float,class:^(eww-notifications)$
-windowrulev2 = float,class:^(kvantummanager)$
-windowrulev2 = float,class:^(qt5ct)$
-windowrulev2 = float,class:^(qt6ct)$
-windowrulev2 = float,class:^(nwg-look)$
-windowrulev2 = float,class:^(org.kde.ark)$
-windowrulev2 = float,class:^(org.pulseaudio.pavucontrol)$
-windowrulev2 = float,class:^(blueman-manager)$
-windowrulev2 = float,class:^(nm-applet)$
-windowrulev2 = float,class:^(nm-connection-editor)$
-windowrulev2 = float,class:^(org.kde.polkit-kde-authentication-agent-1)$
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.github.rafostar.Clapper)$ # Clapper-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.github.tchx84.Flatseal)$ # Flatseal-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(hu.kramo.Cartridges)$ # Cartridges-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.obsproject.Studio)$ # Obs-Qt
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(gnome-boxes)$ # Boxes-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(vesktop)$ # Vesktop
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(discord)$ # Discord-Electron
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(WebCord)$ # WebCord-Electron
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(ArmCord)$ # ArmCord-Electron
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(app.drey.Warp)$ # Warp-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(net.davidotek.pupgui2)$ # ProtonUp-Qt
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(yad)$ # Protontricks-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(Signal)$ # Signal-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.github.alainm23.planify)$ # planify-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
+# # windowrulev2 = opacity 1.0 1.0,match:class ^(io.github.flattool.Warehouse)$ # Warehouse-Gtk
+windowrulev2 = float on,match:class ^(org.kde.dolphin)$,match:title ^(Progress Dialog — Dolphin)$
+windowrulev2 = float on,match:class ^(org.kde.dolphin)$,match:title ^(Copying — Dolphin)$
+windowrulev2 = float on,match:title ^(About Mozilla Firefox)$
+windowrulev2 = float on,match:class ^(firefox)$,match:title ^(Picture-in-Picture)$
+windowrulev2 = float on,match:class ^(firefox)$,match:title ^(Library)$
+windowrulev2 = float on,match:class ^(kitty)$,match:title ^(top)$
+windowrulev2 = float on,match:class ^(kitty)$,match:title ^(btop)$
+windowrulev2 = float on,match:class ^(kitty)$,match:title ^(htop)$
+windowrulev2 = float on,match:class ^(vlc)$
+windowrulev2 = float on,match:class ^(eww-main-window)$
+windowrulev2 = float on,match:class ^(eww-notifications)$
+windowrulev2 = float on,match:class ^(kvantummanager)$
+windowrulev2 = float on,match:class ^(qt5ct)$
+windowrulev2 = float on,match:class ^(qt6ct)$
+windowrulev2 = float on,match:class ^(nwg-look)$
+windowrulev2 = float on,match:class ^(org.kde.ark)$
+windowrulev2 = float on,match:class ^(org.pulseaudio.pavucontrol)$
+windowrulev2 = float on,match:class ^(blueman-manager)$
+windowrulev2 = float on,match:class ^(nm-applet)$
+windowrulev2 = float on,match:class ^(nm-connection-editor)$
+windowrulev2 = float on,match:class ^(org.kde.polkit-kde-authentication-agent-1)$
 
-windowrulev2 = float,class:^(Signal)$ # Signal-Gtk
-windowrulev2 = float,class:^(com.github.rafostar.Clapper)$ # Clapper-Gtk
-windowrulev2 = float,class:^(app.drey.Warp)$ # Warp-Gtk
-windowrulev2 = float,class:^(net.davidotek.pupgui2)$ # ProtonUp-Qt
-windowrulev2 = float,class:^(yad)$ # Protontricks-Gtk
-windowrulev2 = float,class:^(eog)$ # Imageviewer-Gtk
-windowrulev2 = float,class:^(io.github.alainm23.planify)$ # planify-Gtk
-windowrulev2 = float,class:^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
-windowrulev2 = float,class:^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gkk
-windowrulev2 = float,class:^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
-windowrulev2 = float,class:^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
-windowrulev2 = float,class:(clipse) # ensure you have a floating window class set if you want this behavior
-windowrulev2 = size 622 652,class:(clipse) # set the size of the window as necessary
+windowrulev2 = float on,match:class ^(Signal)$ # Signal-Gtk
+windowrulev2 = float on,match:class ^(com.github.rafostar.Clapper)$ # Clapper-Gtk
+windowrulev2 = float on,match:class ^(app.drey.Warp)$ # Warp-Gtk
+windowrulev2 = float on,match:class ^(net.davidotek.pupgui2)$ # ProtonUp-Qt
+windowrulev2 = float on,match:class ^(yad)$ # Protontricks-Gtk
+windowrulev2 = float on,match:class ^(eog)$ # Imageviewer-Gtk
+windowrulev2 = float on,match:class ^(io.github.alainm23.planify)$ # planify-Gtk
+windowrulev2 = float on,match:class ^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
+windowrulev2 = float on,match:class ^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gkk
+windowrulev2 = float on,match:class ^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
+windowrulev2 = float on,match:class ^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
+windowrulev2 = float on,match:class (clipse) # ensure you have a floating window class set if you want this behavior
+windowrulev2 = size 622 652,match:class (clipse) # set the size of the window as necessary
 #windowrulev2 = noborder, fullscreen:1
 
 # common modals
-#windowrule = float,initialtitle:^(Open File)$
-#windowrule = float,initialTitle:^(Open File)$
-windowrule = float,title:^(Choose Files)$
-windowrule = float,title:^(Save As)$
-windowrule = float,title:^(Confirm to replace files)$
-windowrule = float,title:^(File Operation Progress)$
-windowrulev2 = float,class:^(xdg-desktop-portal-gtk)$
+#windowrule = float on,initialmatch:title ^(Open File)$
+#windowrule = float on,initialmatch:title ^(Open File)$
+windowrule = float on,match:title ^(Choose Files)$
+windowrule = float on,match:title ^(Save As)$
+windowrule = float on,match:title ^(Confirm to replace files)$
+windowrule = float on,match:title ^(File Operation Progress)$
+windowrulev2 = float on,match:class ^(xdg-desktop-portal-gtk)$
 
 # installer
-windowrule = float, class:(floating-installer)
-windowrule = center, class:(floating-installer)
+windowrule = float on, match:class (floating-installer)
+windowrule = center on, match:class (floating-installer)
 
 # clock
-windowrule = float, class:(clock)
-windowrule = center, class:(clock)
+windowrule = float on, match:class (clock)
+windowrule = center on, match:class (clock)
 
 # Workspaces Rules https://wiki.hyprland.org/0.45.0/Configuring/Workspace-Rules/ #
 # workspace = 1, default:true, monitor:$priMon
@@ -4732,43 +4804,41 @@ workspace = 10, layoutopt:orientation:right
 # Workspaces Rules End #
 
 # Layers Rules #
-layerrule = animation slide top, logout_dialog
-layerrule = blur,rofi
-layerrule = ignorezero,rofi
-layerrule = blur,notifications
-layerrule = ignorezero,notifications
-layerrule = blur,swaync-notification-window
-layerrule = ignorezero,swaync-notification-window
-layerrule = blur,swaync-control-center
-layerrule = ignorezero,swaync-control-center
-layerrule = blur,nwg-dock
-layerrule = ignorezero,nwg-dock
-layerrule = blur,logout_dialog
-layerrule = ignorezero,logout_dialog
-layerrule = blur,gtk-layer-shell
-layerrule = ignorezero,gtk-layer-shell
-layerrule = blur,waybar
-layerrule = ignorezero,waybar
-layerrule = blur,waybar
-layerrule = ignorezero,waybar
-layerrule = blur,dashboardmenu
-layerrule = ignorezero,dashboardmenu
-layerrule = blur,calendarmenu
-layerrule = ignorezero,calendarmenu
-layerrule = blur,notificationsmenu
-layerrule = ignorezero,notificationsmenu
-layerrule = blur,networkmenu
-layerrule = ignorezero,networkmenu
-layerrule = blur,mediamenu
-layerrule = ignorezero,mediamenu
-layerrule = blur,energymenu
-layerrule = ignorezero,energymenu
-layerrule = blur,bluetoothmenu
-layerrule = ignorezero,bluetoothmenu
-layerrule = blur,audiomenu
-layerrule = ignorezero,audiomenu
-layerrule = blur,hyprmenu
-layerrule = ignorezero,hyprmenu
+layerrule = animation slide top, match:class logout_dialog
+layerrule = blur on,match:class rofi
+layerrule = ignore_alpha 0.01,match:class rofi
+layerrule = blur on,match:class notifications
+layerrule = ignore_alpha 0.01,match:class notifications
+layerrule = blur on,match:class swaync-notification-window
+layerrule = ignore_alpha 0.01,match:class swaync-notification-window
+layerrule = blur on,match:class swaync-control-center
+layerrule = ignore_alpha 0.01,match:class swaync-control-center
+layerrule = blur on,match:class nwg-dock
+layerrule = ignore_alpha 0.01,match:class nwg-dock
+layerrule = blur on,match:class logout_dialog
+layerrule = ignore_alpha 0.01,match:class logout_dialog
+layerrule = blur on,match:class gtk-layer-shell
+layerrule = ignore_alpha 0.01,match:class gtk-layer-shell
+layerrule = blur on,match:class bar-0
+layerrule = ignore_alpha 0.01,match:class bar-0
+layerrule = blur on,match:class dashboardmenu
+layerrule = ignore_alpha 0.01,match:class dashboardmenu
+layerrule = blur on,match:class calendarmenu
+layerrule = ignore_alpha 0.01,match:class calendarmenu
+layerrule = blur on,match:class notificationsmenu
+layerrule = ignore_alpha 0.01,match:class notificationsmenu
+layerrule = blur on,match:class networkmenu
+layerrule = ignore_alpha 0.01,match:class networkmenu
+layerrule = blur on,match:class mediamenu
+layerrule = ignore_alpha 0.01,match:class mediamenu
+layerrule = blur on,match:class energymenu
+layerrule = ignore_alpha 0.01,match:class energymenu
+layerrule = blur on,match:class bluetoothmenu
+layerrule = ignore_alpha 0.01,match:class bluetoothmenu
+layerrule = blur on,match:class audiomenu
+layerrule = ignore_alpha 0.01,match:class audiomenu
+layerrule = blur on,match:class hyprmenu
+layerrule = ignore_alpha 0.01,match:class hyprmenu
 # layerrule = animation popin 50%, waybar
 # Layers Rules End #
 
