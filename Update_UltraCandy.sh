@@ -3689,16 +3689,27 @@ general {
     gaps_out = 8	
     gaps_workspaces = 50    # Gaps between workspaces
     border_size = 3
-    col.active_border = $inverse_primary
-    col.inactive_border = $source_color #scrim
+    col.active_border = $source_color
+    col.inactive_border = $background
     layout = dwindle
     resize_on_border = true
     allow_tearing = true
-    no_border_on_floating = false
 }
 
-group:groupbar:col.active =  $primary_fixed_dim
-group:groupbar:col.inactive = $background
+group {
+    col.border_active =  $source_color
+    col.border_inactive = $background
+    col.border_locked_active =  $primary_fixed_dim
+    col.border_locked_inactive = $background
+    
+    groupbar {
+    font_size= 8
+    col.active =  $source_color
+    col.inactive = $background
+    col.locked_active =  $primary_fixed_dim
+    col.locked_inactive = $background
+    }
+}
 
 dwindle {
     pseudotile = true
@@ -4434,16 +4445,27 @@ general {
     gaps_out = 8	
     gaps_workspaces = 50    # Gaps between workspaces
     border_size = 3
-    col.active_border = $inverse_primary
-    col.inactive_border = $source_color #scrim
+    col.active_border = $source_color
+    col.inactive_border = $background
     layout = dwindle
     resize_on_border = true
     allow_tearing = true
-    no_border_on_floating = false
 }
 
-group:groupbar:col.active =  $primary_fixed_dim
-group:groupbar:col.inactive = $background
+group {
+    col.border_active =  $source_color
+    col.border_inactive = $background
+    col.border_locked_active =  $primary_fixed_dim
+    col.border_locked_inactive = $background
+    
+    groupbar {
+    font_size= 8
+    col.active =  $source_color
+    col.inactive = $background
+    col.locked_active =  $primary_fixed_dim
+    col.locked_inactive = $background
+    }
+}
 
 dwindle {
     pseudotile = true
