@@ -3824,7 +3824,7 @@ decoration {
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
-windowrulev2 = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = float on, center on, opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 # Pavucontrol floating
 windowrule = float on,match:class (.*org.pulseaudio.pavucontrol.*)
@@ -3982,7 +3982,7 @@ windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-oss)$
 windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Cc]ode)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-url-handler)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-insiders-url-handler)$
-windowrulev2 = opacity 0.85 $& 0.85 $& 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty)$
+windowrule = float on, center on, opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.dolphin)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.ark)$
 windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nwg-look)$
