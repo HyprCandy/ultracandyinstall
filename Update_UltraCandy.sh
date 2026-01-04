@@ -3847,7 +3847,7 @@ windowrule = center on,match:class (blueman-manager)
 # Weather
 windowrule = float on,match:class (org.gnome.Weather)
 windowrule = size 700 600,match:class (org.gnome.Weather)
-windowrule = move 25% 10%-,match:class (org.gnome.Weather)
+windowrule = center on,match:class (org.gnome.Weather)
 windowrule = pin on,match:class (org.gnome.Weather)
 # Calendar
 windowrule = float on,match:class (org.gnome.Calendar)
@@ -4603,7 +4603,7 @@ windowrule = center on,match:class (blueman-manager)
 # Weather
 windowrule = float on,match:class (org.gnome.Weather)
 windowrule = size 700 600,match:class (org.gnome.Weather)
-windowrule = move 25% 10%-,match:class (org.gnome.Weather)
+windowrule = center on,match:class (org.gnome.Weather)
 windowrule = pin on,match:class (org.gnome.Weather)
 # Calendar
 windowrule = float on,match:class (org.gnome.Calendar)
