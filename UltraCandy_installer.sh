@@ -3782,7 +3782,8 @@ decoration {
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
-windowrule = float on, center on, opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 # Pavucontrol floating
 windowrule = float on,match:class (.*org.pulseaudio.pavucontrol.*)
@@ -3820,27 +3821,27 @@ windowrule = pin on,match:class (org.gnome.SystemMonitor)
 # Files
 windowrule = float on,match:title (Open Files)
 windowrule = size 700 600,match:title (Open Files)
-windowrule = move 25% 10%-,match:title (Open Files)
+windowrule = center on,match:title (Open Files)
 windowrule = pin on,match:title (Open Files)
 
 windowrule = float on,match:title (Select Copy Destination)
 windowrule = size 700 600,match:title (Select Copy Destination)
-windowrule = move 25% 10%-,match:title (Select Copy Destination)
+windowrule = center on,match:title (Select Copy Destination)
 windowrule = pin on,match:title (Select Copy Destination)
 
 windowrule = float on,match:title (Select Move Destination)
 windowrule = size 700 600,match:title (Select Move Destination)
-windowrule = move 25% 10%-,match:title (Select Move Destination)
+windowrule = center on,match:title (Select Move Destination)
 windowrule = pin on,match:title (Select Move Destination)
 
 windowrule = float on,match:title (Save As)
 windowrule = size 700 600,match:title (Save As)
-windowrule = move 25% 10%-,match:title (Save As)
+windowrule = center on,match:title (Save As)
 windowrule = pin on,match:title (Save As)
 
 windowrule = float on,match:title (Select files to send)
 windowrule = size 700 600,match:title (Select files to send)
-windowrule = move 25% 10%-,match:title (Select files to send)
+windowrule = center on,match:title (Select files to send)
 windowrule = pin on,match:title (Select files to send)
 
 windowrule = float on,match:title (Bluetooth File Transfer)
@@ -3848,7 +3849,7 @@ windowrule = pin on,match:title (Bluetooth File Transfer)
 # nwg-look
 windowrule = float on,match:class (nwg-look)
 windowrule = size 700 600,match:class (nwg-look)
-windowrule = move 25% 10%-,match:class (nwg-look)
+windowrule = center on,match:class (nwg-look)
 windowrule = pin on,match:class (nwg-look)
 # nwg-displays
 windowrule = float on,match:class (nwg-displays)
@@ -3940,7 +3941,6 @@ windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-oss)$
 windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Cc]ode)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-url-handler)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-insiders-url-handler)$
-windowrule = float on, center on, opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.dolphin)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.ark)$
 windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nwg-look)$
@@ -4537,7 +4537,8 @@ decoration {
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
-windowrulev2 = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 # Pavucontrol floating
 windowrule = float on,match:class (.*org.pulseaudio.pavucontrol.*)
@@ -4575,27 +4576,27 @@ windowrule = pin on,match:class (org.gnome.SystemMonitor)
 # Files
 windowrule = float on,match:title (Open Files)
 windowrule = size 700 600,match:title (Open Files)
-windowrule = move 25% 10%-,match:title (Open Files)
+windowrule = center on,match:title (Open Files)
 windowrule = pin on,match:title (Open Files)
 
 windowrule = float on,match:title (Select Copy Destination)
 windowrule = size 700 600,match:title (Select Copy Destination)
-windowrule = move 25% 10%-,match:title (Select Copy Destination)
+windowrule = center on,match:title (Select Copy Destination)
 windowrule = pin on,match:title (Select Copy Destination)
 
 windowrule = float on,match:title (Select Move Destination)
 windowrule = size 700 600,match:title (Select Move Destination)
-windowrule = move 25% 10%-,match:title (Select Move Destination)
+windowrule = center on,match:title (Select Move Destination)
 windowrule = pin on,match:title (Select Move Destination)
 
 windowrule = float on,match:title (Save As)
 windowrule = size 700 600,match:title (Save As)
-windowrule = move 25% 10%-,match:title (Save As)
+windowrule = center on,match:title (Save As)
 windowrule = pin on,match:title (Save As)
 
 windowrule = float on,match:title (Select files to send)
 windowrule = size 700 600,match:title (Select files to send)
-windowrule = move 25% 10%-,match:title (Select files to send)
+windowrule = center on,match:title (Select files to send)
 windowrule = pin on,match:title (Select files to send)
 
 windowrule = float on,match:title (Bluetooth File Transfer)
@@ -4603,7 +4604,7 @@ windowrule = pin on,match:title (Bluetooth File Transfer)
 # nwg-look
 windowrule = float on,match:class (nwg-look)
 windowrule = size 700 600,match:class (nwg-look)
-windowrule = move 25% 10%-,match:class (nwg-look)
+windowrule = center on,match:class (nwg-look)
 windowrule = pin on,match:class (nwg-look)
 # nwg-displays
 windowrule = float on,match:class (nwg-displays)
@@ -4695,7 +4696,6 @@ windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-oss)$
 windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^([Cc]ode)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-url-handler)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(code-insiders-url-handler)$
-windowrulev2 = opacity 0.85 $& 0.85 $& 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.dolphin)$
 # # windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(org.kde.ark)$
 windowrulev2 = opacity 1.0 $& 1.0 $& 1,match:class ^(nwg-look)$
