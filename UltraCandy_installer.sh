@@ -4031,8 +4031,7 @@ windowrule = float on, match:class (floating-installer)
 windowrule = center on, match:class (floating-installer)
 
 # clock
-windowrule = float on, match:class (clock)
-windowrule = center on, match:class (clock)
+windowrule = float on, center on, size 400 200, match:class (clock)
 
 # Workspaces Rules https://wiki.hyprland.org/0.45.0/Configuring/Workspace-Rules/ #
 # workspace = 1, default:true, monitor:$priMon
@@ -4787,8 +4786,7 @@ windowrule = float on, match:class (floating-installer)
 windowrule = center on, match:class (floating-installer)
 
 # clock
-windowrule = float on, match:class (clock)
-windowrule = center on, match:class (clock)
+windowrule = float on, center on, size 400 200, match:class (clock)
 
 # Workspaces Rules https://wiki.hyprland.org/0.45.0/Configuring/Workspace-Rules/ #
 # workspace = 1, default:true, monitor:$priMon
