@@ -8574,6 +8574,169 @@ function createCandyUtilsBox() {
     addWaybarSideMarginsRow('Waybar Sides');
     addWaybarBottomMarginRow('Waybar Bottom');
     addWaybarTopMarginRow('Waybar Top');
+
+    // --- Swaync Border Size Control (Converted to Input Box) ---
+    function addSwayncBorderSizeRow(label) {
+        const row = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 8, halign: Gtk.Align.CENTER, valign: Gtk.Align.CENTER });
+        const lbl = new Gtk.Label({ label, halign: Gtk.Align.END, xalign: 1 });
+        lbl.set_size_request(110, -1);
+
+        const entry = new Gtk.Entry({
+            placeholder_text: '0-10',
+            width_chars: 8,
+            halign: Gtk.Align.CENTER
+        });
+
+        // File paths (from existing logic)
+        const swayncStyleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'swaync', 'style.css']);
+        const swayncBorderSizeStateFile = GLib.build_filenamev([hyprsunsetStateDir, 'swaync_border_size.state']);
+
+        // Load current swaync border size value
+        function loadCurrentSwayncBorderSize() {
+            try {
+                // Try to read from state file first
+                let [ok, contents] = GLib.file_get_contents(swayncBorderSizeStateFile);
+                if (ok && contents) {
+                    let value = imports.byteArray.toString(contents).trim();
+                    if (value && !isNaN(parseInt(value))) {
+                        return value;
+                    }
+                }
+
+                // Fallback: read from CSS file
+                let [cssOk, cssContents] = GLib.file_get_contents(swayncStyleFile);
+                if (cssOk && cssContents) {
+                    let content = imports.byteArray.toString(cssContents);
+                    // Look for border with @bordercolor (exact logic from existing function)
+                    let borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@bordercolor;/);
+                    if (borderMatch) {
+                        return borderMatch[1];
+                    }
+                }
+            } catch (e) {
+                print('Error reading swaync border size: ' + e.message);
+            }
+            return '2'; // Default value
+        }
+
+        // Set initial value
+        entry.set_text(loadCurrentSwayncBorderSize());
+
+        function updateSwayncBorderSize(newBorderSize) {
+            try {
+                let numValue = parseInt(newBorderSize);
+                if (isNaN(numValue) || numValue < 0 || numValue > 10) {
+                    GLib.spawn_command_line_async(`notify-send "Swaync" "Invalid value: ${newBorderSize}. Use 0-10" -t 2000`);
+                    return;
+                }
+
+                // Read current value and update (exact logic from existing function)
+                let [ok, contents] = GLib.file_get_contents(swayncStyleFile);
+                if (ok && contents) {
+                    let content = imports.byteArray.toString(contents);
+
+                    // Look specifically for the border in the .control-center section (exact logic)
+                    let borderMatch = content.match(/.control-center \s*\{[\s\S]*?border:\s*([0-9]+)px\s*solid\s*@bordercolor;[\s\S]*?\}/);
+
+                    if (!borderMatch) {
+                        // Fallback: try to find any border with @bordercolor
+                        borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@bordercolor;/);
+                    }
+
+                    if (borderMatch) {
+                        let currentValue = parseInt(borderMatch[1]);
+
+                        // Update CSS file using the exact current value (exact sed command from existing logic)
+                        GLib.spawn_command_line_async(`sed -i '18s/border: ${currentValue}px solid @bordercolor;/border: ${numValue}px solid @bordercolor;/' '${swayncStyleFile}'`);
+
+                        // Update state file
+                        GLib.file_set_contents(swayncBorderSizeStateFile, numValue.toString());
+
+                        // Send notification and refresh
+                        GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
+                        GLib.spawn_command_line_async(`notify-send "Swaync" "Border Size: ${numValue}px" -t 2000`);
+                    } else {
+                        print('Could not find border pattern in CSS file');
+                    }
+                }
+            } catch (e) {
+                print('Error updating swaync border size: ' + e.message);
+            }
+        }
+
+        entry.connect('activate', () => {
+            updateSwayncBorderSize(entry.get_text());
+        });
+
+        row.append(lbl);
+        row.append(entry);
+        rightTogglesBox.append(row);
+    }
+
+    addSwayncBorderSizeRow('Swaync Border');
+
+    // --- Swaync Outer Radius Control ---
+    function addSwayncOuterRadiusRow(label) {
+        const row = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 8, halign: Gtk.Align.CENTER, valign: Gtk.Align.CENTER });
+        const lbl = new Gtk.Label({ label, halign: Gtk.Align.END, xalign: 1 });
+        lbl.set_size_request(110, -1);
+
+        const entry = new Gtk.Entry({
+            placeholder_text: '0-20',
+            width_chars: 8,
+            halign: Gtk.Align.CENTER
+        });
+
+        // Load current value
+        const swayncOuterRadiusStateFile = GLib.build_filenamev([hyprsunsetStateDir, 'swaync_outer_radius.state']);
+        try {
+            let [ok, contents] = GLib.file_get_contents(swayncOuterRadiusStateFile);
+            if (ok && contents) {
+                let value = imports.byteArray.toString(contents).trim();
+                entry.set_text(value);
+            }
+        } catch (e) {
+            // Use default value from CSS if state file doesn't exist
+            entry.set_text('10.0');
+        }
+
+        function updateSwayncOuterRadius(value) {
+            const swayncStyleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'swaync', 'style.css']);
+
+            try {
+                let numValue = parseFloat(value);
+                if (isNaN(numValue) || numValue < 0 || numValue > 20) {
+                    GLib.spawn_command_line_async(`notify-send "Swaync" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    return;
+                }
+
+                let valueStr = numValue.toFixed(1);
+
+                // Update CSS file - border-radius
+                //GLib.spawn_command_line_async(`sed -i '19s/border-radius: [0-9.]*px;/border-radius: ${valueStr}px;/' '${swayncStyleFile}'`);
+                GLib.spawn_command_line_async(`sed -i '19s/border-radius: [0-9.]*px;/border-radius: ${valueStr}px;/' '${swayncStyleFile}'`);
+
+                // Update state file
+                GLib.file_set_contents(swayncOuterRadiusStateFile, valueStr);
+
+                // Send notification and refresh
+                GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
+                GLib.spawn_command_line_async(`notify-send "Swaync" "Radius: ${valueStr}px" -t 2000`);
+            } catch (e) {
+                print('Error updating swaync outer radius: ' + e.message);
+            }
+        }
+
+        entry.connect('activate', () => {
+            updateSwayncOuterRadius(entry.get_text());
+        });
+
+        row.append(lbl);
+        row.append(entry);
+        rightTogglesBox.append(row);
+    }
+
+    addSwayncOuterRadiusRow('Swaync Radius');
     
     rightBox.append(rightTogglesBox);
     mainRow.append(rightBox);
