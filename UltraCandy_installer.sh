@@ -254,7 +254,6 @@ build_package_list() {
         "hypridle"
         "hyprland-protocols"
         "hyprland-qt-support"
-        "hyprland-qtutils"
         "hyprlang"
         "hyprlock"
         "hyprpaper"
