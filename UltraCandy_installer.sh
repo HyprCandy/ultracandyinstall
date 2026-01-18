@@ -268,6 +268,7 @@ build_package_list() {
         # Packages
         "pacman-contrib"
         "octopi"
+        "rebuild-detector"
         
         # Dependacies
         "meson" 
