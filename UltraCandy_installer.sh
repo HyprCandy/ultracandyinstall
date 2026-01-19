@@ -4075,13 +4075,13 @@ workspace = 10, layoutopt:orientation:right
 
 # Layers Rules #
 layerrule = animation slide top, match:class logout_dialog
-layerrule = blur on,match:class rofi
+layerrule = blur on,xray on,match:class rofi
 layerrule = ignore_alpha 0.01,match:class rofi
 layerrule = blur on,match:class notifications
 layerrule = ignore_alpha 0.01,match:class notifications
 layerrule = blur on,match:class swaync-notification-window
 layerrule = ignore_alpha 0.01,match:class swaync-notification-window
-layerrule = blur on,match:class swaync-control-center
+layerrule = blur on,xray on,match:class swaync-control-center
 layerrule = ignore_alpha 0.01,match:class swaync-control-center
 layerrule = blur on,match:class nwg-dock
 layerrule = ignore_alpha 0.01,match:class nwg-dock
@@ -4835,13 +4835,13 @@ workspace = 10, layoutopt:orientation:right
 
 # Layers Rules #
 layerrule = animation slide top, match:class logout_dialog
-layerrule = blur on,match:class rofi
+layerrule = blur on,xray on,match:class rofi
 layerrule = ignore_alpha 0.01,match:class rofi
 layerrule = blur on,match:class notifications
 layerrule = ignore_alpha 0.01,match:class notifications
 layerrule = blur on,match:class swaync-notification-window
 layerrule = ignore_alpha 0.01,match:class swaync-notification-window
-layerrule = blur on,match:class swaync-control-center
+layerrule = blur on,xray on,match:class swaync-control-center
 layerrule = ignore_alpha 0.01,match:class swaync-control-center
 layerrule = blur on,match:class nwg-dock
 layerrule = ignore_alpha 0.01,match:class nwg-dock
