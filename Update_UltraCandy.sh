@@ -3831,7 +3831,7 @@ windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,mat
 windowrule = float on,match:class (.*org.pulseaudio.pavucontrol.*)
 windowrule = size 700 600,match:class (.*org.pulseaudio.pavucontrol.*)
 windowrule = center on,match:class (.*org.pulseaudio.pavucontrol.*)
-windowrule = pin on,match:class (.*org.pulseaudio.pavucontrol.*)
+#windowrule = pin on,match:class (.*org.pulseaudio.pavucontrol.*)
 # Browser Picture in Picture
 windowrule = float on, match:title ^(Picture-in-Picture)$
 windowrule = pin on, match:title ^(Picture-in-Picture)$
@@ -3840,7 +3840,7 @@ windowrule = move 69.5% 4%, match:title ^(Picture-in-Picture)$
 windowrule = float on,match:class (.*waypaper.*)
 windowrule = size 800 600,match:class (.*waypaper.*)
 windowrule = center on,match:class (.*waypaper.*)
-windowrule = pin on,match:class (.*waypaper.*)w
+#windowrule = pin on,match:class (.*waypaper.*)
 # Blueman Manager
 windowrule = float on,match:class (blueman-manager)
 windowrule = size 800 600,match:class (blueman-manager)
@@ -3849,68 +3849,68 @@ windowrule = center on,match:class (blueman-manager)
 windowrule = float on,match:class (org.gnome.Weather)
 windowrule = size 700 600,match:class (org.gnome.Weather)
 windowrule = center on,match:class (org.gnome.Weather)
-windowrule = pin on,match:class (org.gnome.Weather)
+#windowrule = pin on,match:class (org.gnome.Weather)
 # Calendar
 windowrule = float on,match:class (org.gnome.Calendar)
 windowrule = size 820 600,match:class (org.gnome.Calendar)
 windowrule = center on,match:class (org.gnome.Calendar)
-windowrule = pin on,match:class (org.gnome.Calendar)
+#windowrule = pin on,match:class (org.gnome.Calendar)
 # System Monitor
 windowrule = float on,match:class (org.gnome.SystemMonitor)
 windowrule = size 820 625,match:class (org.gnome.SystemMonitor)
 windowrule = center on,match:class (org.gnome.SystemMonitor)
-windowrule = pin on,match:class (org.gnome.SystemMonitor)
+#windowrule = pin on,match:class (org.gnome.SystemMonitor)
 # Files
 windowrule = float on,match:title (Open Files)
 windowrule = size 700 600,match:title (Open Files)
 windowrule = center on,match:title (Open Files)
-windowrule = pin on,match:title (Open Files)
+#windowrule = pin on,match:title (Open Files)
 
 windowrule = float on,match:title (Select Copy Destination)
 windowrule = size 700 600,match:title (Select Copy Destination)
 windowrule = center on,match:title (Select Copy Destination)
-windowrule = pin on,match:title (Select Copy Destination)
+#windowrule = pin on,match:title (Select Copy Destination)
 
 windowrule = float on,match:title (Select Move Destination)
 windowrule = size 700 600,match:title (Select Move Destination)
 windowrule = center on,match:title (Select Move Destination)
-windowrule = pin on,match:title (Select Move Destination)
+#windowrule = pin on,match:title (Select Move Destination)
 
 windowrule = float on,match:title (Save As)
 windowrule = size 700 600,match:title (Save As)
 windowrule = center on,match:title (Save As)
-windowrule = pin on,match:title (Save As)
+#windowrule = pin on,match:title (Save As)
 
 windowrule = float on,match:title (Select files to send)
 windowrule = size 700 600,match:title (Select files to send)
 windowrule = center on,match:title (Select files to send)
-windowrule = pin on,match:title (Select files to send)
+#windowrule = pin on,match:title (Select files to send)
 
 windowrule = float on,match:title (Bluetooth File Transfer)
-windowrule = pin on,match:title (Bluetooth File Transfer)
+#windowrule = pin on,match:title (Bluetooth File Transfer)
 # nwg-look
 windowrule = float on,match:class (nwg-look)
 windowrule = size 700 600,match:class (nwg-look)
 windowrule = center on,match:class (nwg-look)
-windowrule = pin on,match:class (nwg-look)
+#windowrule = pin on,match:class (nwg-look)
 # CachyOS Hello
 windowrule = float on,match:class (CachyOSHello)
 windowrule = size 700 600,match:class (CachyOSHello)
 windowrule = center on,match:class (CachyOSHello)
-windowrule = pin on,match:class (CachyOSHello)
+#windowrule = pin on,match:class (CachyOSHello)
 # nwg-displays
 windowrule = float on,match:class (nwg-displays)
 windowrule = size 990 600,match:class (nwg-displays)
 windowrule = center on,match:class (nwg-displays)
-windowrule = pin on,match:class (nwg-displays)
+#windowrule = pin on,match:class (nwg-displays)
 # System Mission Center
 windowrule = float on, match:class (io.missioncenter.MissionCenter)
-windowrule = pin on, match:class (io.missioncenter.MissionCenter)
+#windowrule = pin on, match:class (io.missioncenter.MissionCenter)
 windowrule = center on, match:class (io.missioncenter.MissionCenter)
 windowrule = size 900 600, match:class (io.missioncenter.MissionCenter)
 # System Mission Center Preference Window
 windowrule = float on, match:class (missioncenter), match:title ^(Preferences)$
-windowrule = pin on, match:class (missioncenter), match:title ^(Preferences)$
+#windowrule = pin on, match:class (missioncenter), match:title ^(Preferences)$
 windowrule = center on, match:class (missioncenter), match:title ^(Preferences)$
 # Gnome Calculator
 windowrule = float on,match:class (org.gnome.Calculator)
@@ -3918,11 +3918,11 @@ windowrule = size 700 600,match:class (org.gnome.Calculator)
 windowrule = center on,match:class (org.gnome.Calculator)
 # Emoji Picker Smile
 windowrule = float on,match:class (it.mijorus.smile)
-windowrule = pin on, match:class (it.mijorus.smile)
+#windowrule = pin on, match:class (it.mijorus.smile)
 windowrule = move 100%-w-40 90,match:class (it.mijorus.smile)
 # Hyprland Share Picker
 windowrule = float on, match:class (hyprland-share-picker)
-windowrule = pin on, match:class (hyprland-share-picker)
+#windowrule = pin on, match:class (hyprland-share-picker)
 windowrule = center on, match:title match:class (hyprland-share-picker)
 windowrule = size 600 400,match:class (hyprland-share-picker)
 # Hyprland Settings App
@@ -3957,7 +3957,7 @@ windowrule = move 65%- 10%-, match:title ^(Picture-in-Picture)$
 windowrule = float on, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
 windowrule = move 25%-, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
 windowrule = size 960 540, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = pin on, match:title ^(danmufloat)$
+#windowrule = pin on, match:title ^(danmufloat)$
 windowrule = rounding 5, match:title ^(danmufloat|termfloat)$
 windowrule = animation slide right, match:class ^(kitty|Alacritty)$
 #windowrule = no_blur on, match:class ^(org.mozilla.firefox)$
@@ -4066,7 +4066,7 @@ windowrulev2 = size 622 652,match:class (clipse) # set the size of the window as
 
 # common modals
 #windowrule = float on,initialmatch:title ^(Open File)$
-#windowrule = float on,initialmatch:title ^(Open File)$
+#windowrulev2 = layer:top,match:class hyprpolkitagent
 windowrule = float on,match:title ^(Choose Files)$
 windowrule = float on,match:title ^(Save As)$
 windowrule = float on,match:title ^(Confirm to replace files)$
@@ -4584,14 +4584,14 @@ decoration {
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
-windowrulev2 = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
+windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 # Pavucontrol floating
 windowrule = float on,match:class (.*org.pulseaudio.pavucontrol.*)
 windowrule = size 700 600,match:class (.*org.pulseaudio.pavucontrol.*)
 windowrule = center on,match:class (.*org.pulseaudio.pavucontrol.*)
-windowrule = pin on,match:class (.*org.pulseaudio.pavucontrol.*)
+#windowrule = pin on,match:class (.*org.pulseaudio.pavucontrol.*)
 # Browser Picture in Picture
 windowrule = float on, match:title ^(Picture-in-Picture)$
 windowrule = pin on, match:title ^(Picture-in-Picture)$
@@ -4600,7 +4600,7 @@ windowrule = move 69.5% 4%, match:title ^(Picture-in-Picture)$
 windowrule = float on,match:class (.*waypaper.*)
 windowrule = size 800 600,match:class (.*waypaper.*)
 windowrule = center on,match:class (.*waypaper.*)
-windowrule = pin on,match:class (.*waypaper.*)w
+#windowrule = pin on,match:class (.*waypaper.*)
 # Blueman Manager
 windowrule = float on,match:class (blueman-manager)
 windowrule = size 800 600,match:class (blueman-manager)
@@ -4609,68 +4609,68 @@ windowrule = center on,match:class (blueman-manager)
 windowrule = float on,match:class (org.gnome.Weather)
 windowrule = size 700 600,match:class (org.gnome.Weather)
 windowrule = center on,match:class (org.gnome.Weather)
-windowrule = pin on,match:class (org.gnome.Weather)
+#windowrule = pin on,match:class (org.gnome.Weather)
 # Calendar
 windowrule = float on,match:class (org.gnome.Calendar)
 windowrule = size 820 600,match:class (org.gnome.Calendar)
 windowrule = center on,match:class (org.gnome.Calendar)
-windowrule = pin on,match:class (org.gnome.Calendar)
+#windowrule = pin on,match:class (org.gnome.Calendar)
 # System Monitor
 windowrule = float on,match:class (org.gnome.SystemMonitor)
 windowrule = size 820 625,match:class (org.gnome.SystemMonitor)
 windowrule = center on,match:class (org.gnome.SystemMonitor)
-windowrule = pin on,match:class (org.gnome.SystemMonitor)
+#windowrule = pin on,match:class (org.gnome.SystemMonitor)
 # Files
 windowrule = float on,match:title (Open Files)
 windowrule = size 700 600,match:title (Open Files)
 windowrule = center on,match:title (Open Files)
-windowrule = pin on,match:title (Open Files)
+#windowrule = pin on,match:title (Open Files)
 
 windowrule = float on,match:title (Select Copy Destination)
 windowrule = size 700 600,match:title (Select Copy Destination)
 windowrule = center on,match:title (Select Copy Destination)
-windowrule = pin on,match:title (Select Copy Destination)
+#windowrule = pin on,match:title (Select Copy Destination)
 
 windowrule = float on,match:title (Select Move Destination)
 windowrule = size 700 600,match:title (Select Move Destination)
 windowrule = center on,match:title (Select Move Destination)
-windowrule = pin on,match:title (Select Move Destination)
+#windowrule = pin on,match:title (Select Move Destination)
 
 windowrule = float on,match:title (Save As)
 windowrule = size 700 600,match:title (Save As)
 windowrule = center on,match:title (Save As)
-windowrule = pin on,match:title (Save As)
+#windowrule = pin on,match:title (Save As)
 
 windowrule = float on,match:title (Select files to send)
 windowrule = size 700 600,match:title (Select files to send)
 windowrule = center on,match:title (Select files to send)
-windowrule = pin on,match:title (Select files to send)
+#windowrule = pin on,match:title (Select files to send)
 
 windowrule = float on,match:title (Bluetooth File Transfer)
-windowrule = pin on,match:title (Bluetooth File Transfer)
+#windowrule = pin on,match:title (Bluetooth File Transfer)
 # nwg-look
 windowrule = float on,match:class (nwg-look)
 windowrule = size 700 600,match:class (nwg-look)
 windowrule = center on,match:class (nwg-look)
-windowrule = pin on,match:class (nwg-look)
+#windowrule = pin on,match:class (nwg-look)
 # CachyOS Hello
 windowrule = float on,match:class (CachyOSHello)
 windowrule = size 700 600,match:class (CachyOSHello)
 windowrule = center on,match:class (CachyOSHello)
-windowrule = pin on,match:class (CachyOSHello)
+#windowrule = pin on,match:class (CachyOSHello)
 # nwg-displays
 windowrule = float on,match:class (nwg-displays)
 windowrule = size 990 600,match:class (nwg-displays)
 windowrule = center on,match:class (nwg-displays)
-windowrule = pin on,match:class (nwg-displays)
+#windowrule = pin on,match:class (nwg-displays)
 # System Mission Center
 windowrule = float on, match:class (io.missioncenter.MissionCenter)
-windowrule = pin on, match:class (io.missioncenter.MissionCenter)
+#windowrule = pin on, match:class (io.missioncenter.MissionCenter)
 windowrule = center on, match:class (io.missioncenter.MissionCenter)
 windowrule = size 900 600, match:class (io.missioncenter.MissionCenter)
 # System Mission Center Preference Window
 windowrule = float on, match:class (missioncenter), match:title ^(Preferences)$
-windowrule = pin on, match:class (missioncenter), match:title ^(Preferences)$
+#windowrule = pin on, match:class (missioncenter), match:title ^(Preferences)$
 windowrule = center on, match:class (missioncenter), match:title ^(Preferences)$
 # Gnome Calculator
 windowrule = float on,match:class (org.gnome.Calculator)
@@ -4678,11 +4678,11 @@ windowrule = size 700 600,match:class (org.gnome.Calculator)
 windowrule = center on,match:class (org.gnome.Calculator)
 # Emoji Picker Smile
 windowrule = float on,match:class (it.mijorus.smile)
-windowrule = pin on, match:class (it.mijorus.smile)
+#windowrule = pin on, match:class (it.mijorus.smile)
 windowrule = move 100%-w-40 90,match:class (it.mijorus.smile)
 # Hyprland Share Picker
 windowrule = float on, match:class (hyprland-share-picker)
-windowrule = pin on, match:class (hyprland-share-picker)
+#windowrule = pin on, match:class (hyprland-share-picker)
 windowrule = center on, match:title match:class (hyprland-share-picker)
 windowrule = size 600 400,match:class (hyprland-share-picker)
 # Hyprland Settings App
@@ -4717,7 +4717,7 @@ windowrule = move 65%- 10%-, match:title ^(Picture-in-Picture)$
 windowrule = float on, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
 windowrule = move 25%-, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
 windowrule = size 960 540, match:title ^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$
-windowrule = pin on, match:title ^(danmufloat)$
+#windowrule = pin on, match:title ^(danmufloat)$
 windowrule = rounding 5, match:title ^(danmufloat|termfloat)$
 windowrule = animation slide right, match:class ^(kitty|Alacritty)$
 #windowrule = no_blur on, match:class ^(org.mozilla.firefox)$
@@ -4826,7 +4826,7 @@ windowrulev2 = size 622 652,match:class (clipse) # set the size of the window as
 
 # common modals
 #windowrule = float on,initialmatch:title ^(Open File)$
-#windowrule = float on,initialmatch:title ^(Open File)$
+#windowrulev2 = layer:top,match:class hyprpolkitagent
 windowrule = float on,match:title ^(Choose Files)$
 windowrule = float on,match:title ^(Save As)$
 windowrule = float on,match:title ^(Confirm to replace files)$
