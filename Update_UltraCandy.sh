@@ -409,7 +409,7 @@ build_package_list() {
         "stow"
         
         # Extra
-        "spotify"
+        "spotify-launcher"
         "equibop-bin"
     )
     
@@ -5224,7 +5224,7 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 #### Applications ####
 
 bind = $mainMod, W, exec, waypaper #Waypaper
-bind = $mainMod, S, exec, spotify #Spotify
+bind = $mainMod, S, exec, spotify-launcher #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
 bind = $mainMod, B, exec, DRI_PRIME=1 xdg-open "http://" #Launch your default browser
@@ -5446,7 +5446,7 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 #### Applications ####
 
 bind = $mainMod, W, exec, waypaper #Waypaper
-bind = $mainMod, S, exec, spotify #Spotify
+bind = $mainMod, S, exec, spotify-launcher #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
 bind = $mainMod, B, exec, DRI_PRIME=1 xdg-open "http://" #Launch your default browser
