@@ -12861,6 +12861,8 @@ if [ "$PANEL_CHOICE" = "waybar" ]; then
 else
     systemctl --user restart hyprpanel.service hyprpanel-idle-monitor.service background-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null
 fi
+
+systemctl enable --now bluetooth
 echo "✅ Services set..."
 
 # Update SDDM background with sudo
