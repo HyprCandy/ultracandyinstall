@@ -2238,8 +2238,6 @@ if [ "$PANEL_CHOICE" = "waybar" ]; then
 cat > "$HOME/.config/hyprcandy/hooks/update_background.sh" << 'EOF'
 #!/bin/bash
 set +e
-# Define colors file path
-COLORS_FILE="$HOME/.config/hyprcandy/nwg_dock_colors.conf"
 
 restart_swaync() {
     swaync &
@@ -2259,46 +2257,6 @@ fi
 # Update local background.png
 if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
     magick "$HOME/.config/background[0]" "$HOME/.config/background.png"
-    
-    # Check if colors have changed and launch dock if different
-    colors_file="$HOME/.config/nwg-dock-hyprland/colors.css"
-    
-    # Get current colors from CSS file
-    get_current_colors() {
-        if [ -f "$colors_file" ]; then
-            grep -E "@define-color (blur_background8|primary)" "$colors_file"
-        fi
-    }
-    
-    # Get stored colors from our tracking file
-    get_stored_colors() {
-        if [ -f "$COLORS_FILE" ]; then
-            cat "$COLORS_FILE"
-        fi
-    }
-    
-    # Compare colors and launch dock if different
-    if [ -f "$colors_file" ]; then
-        current_colors=$(get_current_colors)
-        stored_colors=$(get_stored_colors)
-        
-        if [ "$current_colors" != "$stored_colors" ]; then
-            # Colors have changed, reload dock
-            #pkill -f mwg-dock-hyprland
-            #sleep 0.3
-            #"$HOME/.config/nwg-dock-hyprland/launch.sh" >/dev/null 2>&1 &
-            # Update stored colors file with new colors
-            mkdir -p "$(dirname "$COLORS_FILE")"
-            echo "$current_colors" > "$COLORS_FILE"
-            echo "🎨 Updated dock colors and launched dock"
-        else
-            echo "🎨 Colors unchanged, skipping dock launch"
-        fi
-    else
-        # Fallback if colors.css doesn't exist
-        #"$HOME/.config/nwg-dock-hyprland/launch.sh" >/dev/null 2>&1 &
-        echo "🎨 Colors file not found"
-    fi
 fi
 
 sleep 1
@@ -2419,8 +2377,6 @@ else
 cat > "$HOME/.config/hyprcandy/hooks/update_background.sh" << 'EOF'
 #!/bin/bash
 set +e
-# Define colors file path
-COLORS_FILE="$HOME/.config/hyprcandy/nwg_dock_colors.conf"
 
 # Update ROFI background 
 ROFI_RASI="$HOME/.config/rofi/colors.rasi"
@@ -2433,46 +2389,6 @@ fi
 # Update local background.png
 if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
     magick "$HOME/.config/background[0]" "$HOME/.config/background.png"
-   
-    # Check if colors have changed and launch dock if different
-    colors_file="$HOME/.config/nwg-dock-hyprland/colors.css"
-    
-    # Get current colors from CSS file
-    get_current_colors() {
-        if [ -f "$colors_file" ]; then
-            grep -E "@define-color (blur_background8|primary)" "$colors_file"
-        fi
-    }
-    
-    # Get stored colors from our tracking file
-    get_stored_colors() {
-        if [ -f "$COLORS_FILE" ]; then
-            cat "$COLORS_FILE"
-        fi
-    }
-    
-    # Compare colors and launch dock if different
-    if [ -f "$colors_file" ]; then
-        current_colors=$(get_current_colors)
-        stored_colors=$(get_stored_colors)
-        
-        if [ "$current_colors" != "$stored_colors" ]; then
-            # Colors have changed, reload dock
-            #pkill -f mwg-dock-hyprland
-            #sleep 0.3
-            #"$HOME/.config/nwg-dock-hyprland/launch.sh" >/dev/null 2>&1 &
-            # Update stored colors file with new colors
-            mkdir -p "$(dirname "$COLORS_FILE")"
-            echo "$current_colors" > "$COLORS_FILE"
-            echo "🎨 Updated dock colors and launched dock"
-        else
-            echo "🎨 Colors unchanged, skipping dock launch"
-        fi
-    else
-        # Fallback if colors.css doesn't exist
-        #"$HOME/.config/nwg-dock-hyprland/launch.sh" >/dev/null 2>&1 &
-        echo "🎨 Colors file not found"
-    fi
 fi
 
 sleep 1
@@ -2620,7 +2536,7 @@ cat > "$HOME/.config/hyprcandy/hooks/watch_background.sh" << 'EOF'
 #!/bin/bash
 CONFIG_BG="$HOME/.config/background"
 HOOKS_DIR="$HOME/.config/hyprcandy/hooks"
-COLORS_CSS="$HOME/.config/nwg-dock-hyprland/colors.css"
+COLORS_FILE="$HOME/.config/hyprcandy/nwg_dock_colors.conf"
 
 while [ -z "$HYPRLAND_INSTANCE_SIGNATURE" ]; do
     echo "Waiting for Hyprland to start..."
@@ -2630,7 +2546,45 @@ echo "Hyprland started"
 
 # Function to execute hooks
 execute_hooks() {
-    echo "🎯 Executing hooks..."
+    echo "🎯 Executing hooks & reloading dock..."
+    # Check if colors have changed and launch dock if different
+    colors_file="$HOME/.config/nwg-dock-hyprland/colors.css"
+    
+    # Get current colors from CSS file
+    get_current_colors() {
+        if [ -f "$colors_file" ]; then
+            grep -E "@define-color (blur_background8|primary)" "$colors_file"
+        fi
+    }
+    
+    # Get stored colors from our tracking file
+    get_stored_colors() {
+        if [ -f "$COLORS_FILE" ]; then
+            cat "$COLORS_FILE"
+        fi
+    }
+    
+    # Compare colors and launch dock if different
+    if [ -f "$colors_file" ]; then
+        current_colors=$(get_current_colors)
+        stored_colors=$(get_stored_colors)
+        
+        if [ "$current_colors" != "$stored_colors" ]; then
+            # Colors have changed, reload dock
+            pkill -f nwg-dock-hyprland
+            sleep 0.5
+            nohup bash -c "$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch" >/dev/null 2>&1 &
+            mkdir -p "$(dirname "$COLORS_FILE")"
+            echo "$current_colors" > "$COLORS_FILE"
+            echo "🎨 Updated dock colors and launched dock"
+        else
+            echo "🎨 Colors unchanged, skipping dock launch"
+        fi
+    else
+        # Fallback if colors.css doesn't exist
+        #"$HOME/.config/nwg-dock-hyprland/launch.sh" >/dev/null 2>&1 &
+        echo "🎨 Colors file not found"
+    fi
     "$HOOKS_DIR/clear_swww.sh"
     "$HOOKS_DIR/update_background.sh"
 }
@@ -2641,13 +2595,10 @@ monitor_matugen() {
     
     # Wait for matugen to finish
     while pgrep -x "matugen" > /dev/null 2>&1; do
-        sleep 0.1
+        sleep 1
     done
     
-    # Additional 3-second wait for file writes to complete
-    sleep 3
-    
-    echo "✅ Matugen finished, executing hooks"
+    echo "✅ Matugen finished, reloading dock & executing hooks"
     execute_hooks
 }
 
