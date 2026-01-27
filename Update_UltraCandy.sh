@@ -605,7 +605,7 @@ symbol = " "
 [username]
 style_user = "bold blue"
 style_root = "bold red"
-format = "[󱞬](blue) [](green) [$user](blue) [](green) ($style)"
+format = "[󱞬](grey) [](green) [$user](grey) [](green) ($style)"
 show_always = true
 
 [directory]
@@ -615,9 +615,9 @@ truncation_length = 4
 truncate_to_repo = false
 
 [character]
-success_symbol = "[󱞪](blue) [](green)"
-error_symbol = "[󱞪](blue) [x](red)"
-vimcmd_symbol = "[󱞪](blue) [❮](green)"
+success_symbol = "[󱞪](grey) [](green)"
+error_symbol = "[󱞪](grey) [x](red)"
+vimcmd_symbol = "[󱞪](grey) [❮](green)"
 
 [git_branch]
 symbol = "🌱 "
@@ -644,7 +644,7 @@ symbol = "⚙️ 󰁍"
 style = "bold red"
 
 [time]
-format = '[](green) [\[ $time \]](blue) [](green)($style) '#🕙
+format = '[](green) [\[ $time \]](grey) [](green)($style) '#🕙
 time_format = "%T"
 disabled = false
 style = "bright-white"
@@ -795,7 +795,7 @@ symbol = " "
 [username]
 style_user = "bold blue"
 style_root = "bold red"
-format = "[󱞬](blue) [](green) [$user](blue) [](green) ($style)"
+format = "[󱞬](grey) [](green) [$user](grey) [](green) ($style)"
 show_always = true
 
 [directory]
@@ -805,9 +805,9 @@ truncation_length = 4
 truncate_to_repo = false
 
 [character]
-success_symbol = "[󱞪](blue) [](green)"
-error_symbol = "[󱞪](blue) [x](red)"
-vimcmd_symbol = "[󱞪](blue) [❮](green)"
+success_symbol = "[󱞪](grey) [](green)"
+error_symbol = "[󱞪](grey) [x](red)"
+vimcmd_symbol = "[󱞪](grey) [❮](green)"
 
 [git_branch]
 symbol = "🌱 "
@@ -834,7 +834,7 @@ symbol = "⚙️ 󰁍"
 style = "bold red"
 
 [time]
-format = '[](green) [\[ $time \]](blue) [](green)($style) '#🕙
+format = '[](green) [\[ $time \]](grey) [](green)($style) '#🕙
 time_format = "%T"
 disabled = false
 style = "bright-white"
