@@ -375,8 +375,8 @@ build_package_list() {
         # Cursor themes
         "bibata-cursor-theme"
         
-        # Package management
-        "octopi"
+        # Entertainment
+        "spotify-launcher"
         
         # System info
         "fastfetch"
@@ -5182,7 +5182,7 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 #### Applications ####
 
 bind = $mainMod, W, exec, waypaper #Waypaper
-bind = $mainMod, S, exec, spotify #Spotify
+bind = $mainMod, S, exec, spotify-launcher #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
 bind = $mainMod, B, exec, DRI_PRIME=1 xdg-open "http://" #Launch your default browser
@@ -5404,7 +5404,7 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 #### Applications ####
 
 bind = $mainMod, W, exec, waypaper #Waypaper
-bind = $mainMod, S, exec, spotify #Spotify
+bind = $mainMod, S, exec, spotify-launcher #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
 bind = $mainMod, B, exec, DRI_PRIME=1 xdg-open "http://" #Launch your default browser
