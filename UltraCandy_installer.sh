@@ -3517,7 +3517,7 @@ exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh
 # Restart wallaper service
 exec-once = systemctl --user restart background-watcher
 # Pyprland
-#exec-once = /usr/bin/pypr &
+exec-once = /usr/bin/pypr &
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Animations                        ┃
@@ -4277,7 +4277,7 @@ exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh
 # Restart wallaper service
 exec-once = systemctl --user restart background-watcher
 # Pyprland
-#exec-once = /usr/bin/pypr &
+exec-once = /usr/bin/pypr &
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Animations                        ┃
