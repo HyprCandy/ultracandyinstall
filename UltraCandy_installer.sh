@@ -2537,6 +2537,7 @@ cat > "$HOME/.config/hyprcandy/hooks/watch_background.sh" << 'EOF'
 CONFIG_BG="$HOME/.config/background"
 HOOKS_DIR="$HOME/.config/hyprcandy/hooks"
 COLORS_FILE="$HOME/.config/hyprcandy/nwg_dock_colors.conf"
+AUTO_RELAUNCH_PREF="$HOME/.config/hyprcandy/scripts/.dock-auto-relaunch"
 
 while [ -z "$HYPRLAND_INSTANCE_SIGNATURE" ]; do
     echo "Waiting for Hyprland to start..."
@@ -2546,45 +2547,57 @@ echo "Hyprland started"
 
 # Function to execute hooks
 execute_hooks() {
-    echo "🎯 Executing hooks & reloading dock..."
-    # Check if colors have changed and launch dock if different
-    colors_file="$HOME/.config/nwg-dock-hyprland/colors.css"
+    echo "🎯 Executing hooks & checking dock relaunch..."
     
-    # Get current colors from CSS file
-    get_current_colors() {
-        if [ -f "$colors_file" ]; then
-            grep -E "@define-color (blur_background8|primary)" "$colors_file"
-        fi
-    }
+    # Check auto-relaunch preference
+    AUTO_RELAUNCH_STATE="enabled"
+    if [ -f "$AUTO_RELAUNCH_PREF" ]; then
+        AUTO_RELAUNCH_STATE=$(<"$AUTO_RELAUNCH_PREF")
+    fi
     
-    # Get stored colors from our tracking file
-    get_stored_colors() {
-        if [ -f "$COLORS_FILE" ]; then
-            cat "$COLORS_FILE"
-        fi
-    }
-    
-    # Compare colors and launch dock if different
-    if [ -f "$colors_file" ]; then
-        current_colors=$(get_current_colors)
-        stored_colors=$(get_stored_colors)
+    # Only proceed with dock relaunch if auto-relaunch is enabled
+    if [[ "$AUTO_RELAUNCH_STATE" == "enabled" ]]; then
+        # Check if colors have changed and launch dock if different
+        colors_file="$HOME/.config/nwg-dock-hyprland/colors.css"
         
-        if [ "$current_colors" != "$stored_colors" ]; then
-            # Colors have changed, reload dock
-            pkill -f nwg-dock-hyprland
-            sleep 0.5
-            nohup bash -c "$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch" >/dev/null 2>&1 &
-            mkdir -p "$(dirname "$COLORS_FILE")"
-            echo "$current_colors" > "$COLORS_FILE"
-            echo "🎨 Updated dock colors and launched dock"
+        # Get current colors from CSS file
+        get_current_colors() {
+            if [ -f "$colors_file" ]; then
+                grep -E "@define-color (blur_background8|primary)" "$colors_file"
+            fi
+        }
+        
+        # Get stored colors from our tracking file
+        get_stored_colors() {
+            if [ -f "$COLORS_FILE" ]; then
+                cat "$COLORS_FILE"
+            fi
+        }
+        
+        # Compare colors and launch dock if different
+        if [ -f "$colors_file" ]; then
+            current_colors=$(get_current_colors)
+            stored_colors=$(get_stored_colors)
+            
+            if [ "$current_colors" != "$stored_colors" ]; then
+                # Colors have changed, reload dock
+                pkill -f nwg-dock-hyprland
+                sleep 0.5
+                nohup bash -c "$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch" >/dev/null 2>&1 &
+                mkdir -p "$(dirname "$COLORS_FILE")"
+                echo "$current_colors" > "$COLORS_FILE"
+                echo "🎨 Updated dock colors and launched dock"
+            else
+                echo "🎨 Colors unchanged, skipping dock launch"
+            fi
         else
-            echo "🎨 Colors unchanged, skipping dock launch"
+            # Fallback if colors.css doesn't exist
+            echo "🎨 Colors file not found"
         fi
     else
-        # Fallback if colors.css doesn't exist
-        #"$HOME/.config/nwg-dock-hyprland/launch.sh" >/dev/null 2>&1 &
-        echo "🎨 Colors file not found"
+        echo "🚫 Auto-relaunch disabled by user, skipping dock relaunch"
     fi
+    
     "$HOOKS_DIR/clear_swww.sh"
     "$HOOKS_DIR/update_background.sh"
 }
@@ -3492,7 +3505,7 @@ exec-once = ~/.config/hyprcandy/hooks/startup_services.sh &
 # Start Polkit
 exec-once = systemctl --user start hyprpolkitagent &
 # Dock
-exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --restore &
+exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login &
 # Using hypridle to start hyprlock
 exec-once = hypridle &
 # Load cliphist history
@@ -4252,7 +4265,7 @@ exec-once = ~/.config/hyprcandy/hooks/startup_services.sh &
 # Start polkit agent
 exec-once = systemctl --user start hyprpolkitagent &
 # Dock
-exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --restore &
+exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login &
 # Using hypridle to start hyprlock
 exec-once = hypridle &
 # Load cliphist history
