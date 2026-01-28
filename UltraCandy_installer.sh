@@ -5244,7 +5244,7 @@ bind = $mainMod CTRL, down, workspace, empty #Open the next empty workspace
 
 #### Minimize windows using special workspaces ####
 
-bind = CTRL, 1, togglespecialworkspace, magic #Togle window from special workspace
+bind = CTRL SHIFT, 1, togglespecialworkspace, magic #Togle window from special workspace
 bind = CTRL SHIFT, 2, movetoworkspace, +0 #Move window to special workspace 2 (Can be toggled with "$mainMod,1")
 bind = CTRL SHIFT, 3, togglespecialworkspace, magic #Togle window to and from special workspace
 bind = CTRL SHIFT, 4, movetoworkspace, special:magic #Move window to special workspace 4 (Can be toggled with "$mainMod,1")
@@ -5466,7 +5466,7 @@ bind = $mainMod CTRL, down, workspace, empty #Open the next empty workspace
 
 #### Minimize windows using special workspaces ####
 
-bind = CTRL, 1, togglespecialworkspace, magic #Togle window from special workspace
+bind = CTRL SHIFT, 1, togglespecialworkspace, magic #Togle window from special workspace
 bind = CTRL SHIFT, 2, movetoworkspace, +0 #Move window to special workspace 2 (Can be toggled with "$mainMod,1")
 bind = CTRL SHIFT, 3, togglespecialworkspace, magic #Togle window to and from special workspace
 bind = CTRL SHIFT, 4, movetoworkspace, special:magic #Move window to special workspace 4 (Can be toggled with "$mainMod,1")
