@@ -6595,7 +6595,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -6631,7 +6631,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@inverse_primary;/@primary_fixed_dim;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@inverse_primary;/@primary_fixed_dim;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -6667,7 +6667,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -6703,7 +6703,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -6739,7 +6739,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -6775,7 +6775,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -6811,7 +6811,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -6847,7 +6847,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
         
@@ -9422,7 +9422,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -9458,7 +9458,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@inverse_primary;/@primary_fixed_dim;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@inverse_primary;/@primary_fixed_dim;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -9494,7 +9494,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -9530,7 +9530,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -9566,7 +9566,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -9602,7 +9602,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -9638,7 +9638,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -9674,7 +9674,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/nwg-dock-hyprland/launch.sh'`);
+            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
         
