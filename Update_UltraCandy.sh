@@ -7202,11 +7202,11 @@ function createCandyUtilsBox() {
             halign: Gtk.Align.CENTER
         });
         
-        // File paths (from hook script)
         const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
         const leftScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'left-dock.sh']);
         const rightScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'right-dock.sh']);
         const topScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'top-dock.sh']);
+        const toggleScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'toggle-dock.sh']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
         
         // Create settings file if it doesn't exist (from hook script logic)
@@ -7260,8 +7260,8 @@ function createCandyUtilsBox() {
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
-                    chmod +x "${launchScript}"
-                    bash "${launchScript}" > /dev/null 2>&1 &
+                    chmod +x "${toggleScript}"
+                    bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
                 GLib.spawn_command_line_async(`notify-send "Dock" "Icon Size: ${numValue}px" -t 2000`);
@@ -7297,7 +7297,7 @@ function createCandyUtilsBox() {
         // File paths (from hook script)
         const styleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'style.css']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
-        const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
+        const toggleScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'toggle-dock.sh']);
         
         // Create settings file if it doesn't exist (from hook script logic)
         function ensureSettingsFile() {
@@ -7362,8 +7362,8 @@ function createCandyUtilsBox() {
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
-                    chmod +x "${launchScript}"
-                    bash "${launchScript}" > /dev/null 2>&1 &
+                    chmod +x "${toggleScript}"
+                    bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
                 GLib.spawn_command_line_async(`notify-send "Dock" "Border Radius: ${numValue}px" -t 2000`);
@@ -7399,7 +7399,7 @@ function createCandyUtilsBox() {
         // File paths (from hook script)
         const styleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'style.css']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
-        const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
+        const toggleScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'toggle-dock.sh']);
         
         // Create settings file if it doesn't exist (from hook script logic)
         function ensureSettingsFile() {
@@ -7464,8 +7464,8 @@ function createCandyUtilsBox() {
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
-                    chmod +x "${launchScript}"
-                    bash "${launchScript}" > /dev/null 2>&1 &
+                    chmod +x "${toggleScript}"
+                    bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
                 GLib.spawn_command_line_async(`notify-send "Dock" "Border Width: ${numValue}px" -t 2000`);
@@ -10029,11 +10029,11 @@ function createCandyUtilsBox() {
             halign: Gtk.Align.CENTER
         });
         
-        // File paths (from hook script)
         const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
         const leftScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'left-dock.sh']);
         const rightScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'right-dock.sh']);
         const topScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'top-dock.sh']);
+        const toggleScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'toggle-dock.sh']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
         
         // Create settings file if it doesn't exist (from hook script logic)
@@ -10087,8 +10087,8 @@ function createCandyUtilsBox() {
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
-                    chmod +x "${launchScript}"
-                    bash "${launchScript}" > /dev/null 2>&1 &
+                    chmod +x "${toggleScript}"
+                    bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
                 GLib.spawn_command_line_async(`notify-send "Dock" "Icon Size: ${numValue}px" -t 2000`);
@@ -10124,7 +10124,7 @@ function createCandyUtilsBox() {
         // File paths (from hook script)
         const styleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'style.css']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
-        const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
+        const toggleScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'toggle-dock.sh']);
         
         // Create settings file if it doesn't exist (from hook script logic)
         function ensureSettingsFile() {
@@ -10189,8 +10189,8 @@ function createCandyUtilsBox() {
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
-                    chmod +x "${launchScript}"
-                    bash "${launchScript}" > /dev/null 2>&1 &
+                    chmod +x "${toggleScript}"
+                    bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
                 GLib.spawn_command_line_async(`notify-send "Dock" "Border Radius: ${numValue}px" -t 2000`);
@@ -10226,7 +10226,7 @@ function createCandyUtilsBox() {
         // File paths (from hook script)
         const styleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'style.css']);
         const settingsFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'nwg_dock_settings.conf']);
-        const launchScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'nwg-dock-hyprland', 'launch.sh']);
+        const toggleScript = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'scripts', 'toggle-dock.sh']);
         
         // Create settings file if it doesn't exist (from hook script logic)
         function ensureSettingsFile() {
@@ -10291,8 +10291,8 @@ function createCandyUtilsBox() {
                 
                 // Improved dock relaunch: let the launch script handle everything
                 GLib.spawn_command_line_async(`bash -c '
-                    chmod +x "${launchScript}"
-                    bash "${launchScript}" > /dev/null 2>&1 &
+                    chmod +x "${toggleScript}"
+                    bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
                 GLib.spawn_command_line_async(`notify-send "Dock" "Border Width: ${numValue}px" -t 2000`);
