@@ -950,11 +950,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync hyprviz-bin meson cpio cmake
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako hyprviz-bin meson cpio cmake
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako
     fi
 
     print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
