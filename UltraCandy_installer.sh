@@ -367,13 +367,13 @@ build_package_list() {
         "cliphist"
         
         # Browser and themes
-        "adw-gtk-theme"
-        "adwaita-qt6"
-        "adwaita-qt-git"
+        #"adw-gtk-theme"
+        #"adwaita-qt6"   Keeping the libadwaita default which is themed by my matugen setup
+        #"adwaita-qt-git"
         "tela-circle-icon-theme-all"
         
         # Cursor themes
-        "bibata-cursor-theme"
+        "bibata-cursor-theme-bin"
         
         # Entertainment
         "spotify"
