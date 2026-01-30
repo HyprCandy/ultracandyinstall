@@ -2257,7 +2257,29 @@ EOF
 
 if [ "$PANEL_CHOICE" = "waybar" ]; then
 
-echo
+# ═══════════════════════════════════════════════════════════════
+#                         Waybar Service
+# ═══════════════════════════════════════════════════════════════
+
+cat > "$HOME/.config/systemd/user/waybar.service" << 'EOF'
+[Unit]
+Description=Waybar - Highly customizable Wayland bar
+Documentation=https://github.com/Alexays/Waybar/wiki
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/waybar
+Restart=on-failure
+RestartSec=1
+TimeoutStopSec=10
+
+[Install]
+WantedBy=graphical-session.target
+EOF
+# Just waybar service. No swww cache clearing needed
 
 else
 
@@ -3527,7 +3549,7 @@ setup_custom_config() {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
-exec-once = waybar && sleep 0.5 && systemctl restart waybar.service #Launch bar/panel
+exec-once = systemctl --user start waybar.service #Launch bar/panel
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
@@ -12855,7 +12877,7 @@ echo "🔄 Setting up services..."
 systemctl --user daemon-reload
 
 if [ "$PANEL_CHOICE" = "waybar" ]; then
-    systemctl --user restart waybar-idle-monitor.service waypaper-watcher.service background-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null
+    systemctl --user restart waybar.service waybar-idle-monitor.service waypaper-watcher.service background-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null
 else
     systemctl --user restart hyprpanel.service hyprpanel-idle-monitor.service background-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null
 fi
