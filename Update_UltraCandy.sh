@@ -941,20 +941,20 @@ setup_ultracandy() {
     print_status "Setting up UltraCandy configuration..."
     # Prevent notification daemon conflicts
     if [ "$PANEL_CHOICE" = "waybar" ]; then
-        $AUR_HELPER -R mako
+        $AUR_HELPER -R mako bibata-cursor-theme
     else
-        $AUR_HELPER -R swaync
+        $AUR_HELPER -R swaync bibata-cursor-theme
     fi
     
     #Add panel censtric apps
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync bibata-cursor-theme-bin
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako bibata-cursor-theme-bin
     fi
 
     print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
