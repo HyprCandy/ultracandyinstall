@@ -6438,7 +6438,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i '31s/location:                 southeast;/location:                 northeast;/' '${RofiFile3}'`);
         }
         // Reload waybar
-        GLib.spawn_command_line_async('killall waybar && sleep 1');
+        //GLib.spawn_command_line_async('killall waybar && sleep 1');
         GLib.spawn_command_line_async('systemctl --user restart waybar.service');
     }
     
@@ -9265,7 +9265,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i '31s/location:                 southeast;/location:                 northeast;/' '${RofiFile3}'`);
         }
         // Reload waybar
-        GLib.spawn_command_line_async('killall waybar && sleep 1');
+        //GLib.spawn_command_line_async('killall waybar && sleep 1');
         GLib.spawn_command_line_async('systemctl --user restart waybar.service');
     }
     
