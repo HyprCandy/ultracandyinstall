@@ -941,9 +941,11 @@ setup_ultracandy() {
     print_status "Setting up UltraCandy configuration..."
     # Prevent notification daemon conflicts
     if [ "$PANEL_CHOICE" = "waybar" ]; then
-        $AUR_HELPER -R mako bibata-cursor-theme
+        $AUR_HELPER -R bibata-cursor-theme
+        $AUR_HELPER -R mako
     else
-        $AUR_HELPER -R swaync bibata-cursor-theme
+        $AUR_HELPER -R bibata-cursor-theme
+        $AUR_HELPER -R swaync
     fi
     
     #Add panel censtric apps
