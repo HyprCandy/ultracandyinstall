@@ -291,6 +291,7 @@ build_package_list() {
         
         # System utilities
         "blueman"
+        "r-quick-share"
         "nwg-displays"
         "wlogout"
         "uwsm"
