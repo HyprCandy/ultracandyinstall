@@ -12891,7 +12891,6 @@ swww img "$HOME/.ultracandy/.config/background"
 # Start the correct services
 
 echo "🔄 Setting up services..."
-systemctl enable --now bluetooth
 systemctl --user daemon-reload
 
 if [ "$PANEL_CHOICE" = "waybar" ]; then
