@@ -3566,7 +3566,7 @@ setup_custom_config() {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
-exec-once = systemctl --user start waybar 2>/dev/null & #Launch bar/panel
+exec-once = ~/.config/hyprcandy/hooks/restart_waybar.sh #Launch bar/panel
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
