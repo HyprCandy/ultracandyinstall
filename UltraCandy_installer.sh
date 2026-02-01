@@ -2214,6 +2214,21 @@ ExecStartPre=/bin/bash -c 'systemctl --user import-environment HYPRLAND_INSTANCE
 WantedBy=hyprland-session.target
 EOF
 
+# ═══════════════════════════════════════════════════════════════
+#                        Pyprland Config
+# ═══════════════════════════════════════════════════════════════
+
+cat > "$HOME/.config/pypr/config.toml" << 'EOF'
+[pyprland]
+plugins = [
+    "scratchpads"
+]
+[scratchpads.term]
+animation = "fromTop"
+command = "kitty --class=kitty-scratchpad"
+class = "kitty-scratchpad"
+EOF
+
 if [ "$PANEL_CHOICE" = "waybar" ]; then
 
 # ═══════════════════════════════════════════════════════════════
