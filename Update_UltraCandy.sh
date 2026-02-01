@@ -964,7 +964,6 @@ setup_ultracandy() {
     
     hyprpm update
     hyprpm reload
-    hyprctl reload
 
     print_status "Setting up UltraCandy configuration..."
     
