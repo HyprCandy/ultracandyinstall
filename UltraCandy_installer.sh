@@ -3757,7 +3757,7 @@ group {
     groupbar {
     font_size = 12
     text_color = $inverse_primary
-    col.active =  $source_color
+    col.active =  $primary_fixed_dim
     col.inactive = $background
     col.locked_active =  $primary_fixed_dim
     col.locked_inactive = $background
@@ -4518,7 +4518,7 @@ group {
     groupbar {
     font_size = 12
     text_color = $inverse_primary
-    col.active =  $source_color
+    col.active =  $primary_fixed_dim
     col.inactive = $background
     col.locked_active =  $primary_fixed_dim
     col.locked_inactive = $background
