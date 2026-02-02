@@ -3755,7 +3755,7 @@ group {
     col.border_locked_inactive = $background
     
     groupbar {
-    font_size= 11
+    font_size = 11
     col.active =  $source_color
     col.inactive = $background
     col.locked_active =  $primary_fixed_dim
@@ -4515,7 +4515,7 @@ group {
     col.border_locked_inactive = $background
     
     groupbar {
-    font_size= 11
+    font_size = 11
     col.active =  $source_color
     col.inactive = $background
     col.locked_active =  $primary_fixed_dim
@@ -12951,7 +12951,7 @@ echo "🔄 Setting up services..."
 systemctl --user daemon-reload
 
 if [ "$PANEL_CHOICE" = "waybar" ]; then
-    systemctl --user restart waybar.service waybar-idle-monitor.service waypaper-watcher.service background-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null
+    systemctl --user restart waybar.service waybar-idle-monitor.service waypaper-watcher.service background-watcher.service hyprlock-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null
 else
     systemctl --user restart hyprpanel.service hyprpanel-idle-monitor.service background-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null
 fi
