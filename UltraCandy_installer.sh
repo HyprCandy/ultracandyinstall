@@ -2236,19 +2236,25 @@ if [ "$PANEL_CHOICE" = "waybar" ]; then
 # ═══════════════════════════════════════════════════════════════
 
 cat > "$HOME/.config/systemd/user/waybar.service" << 'EOF'
-[Unit]
+Unit]
 Description=Waybar - Highly customizable Wayland bar
 Documentation=https://github.com/Alexays/Waybar/wiki
+After=graphical-session.target hyprland-session.target
+Wants=graphical-session.target
 PartOf=graphical-session.target
-After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/waybar
 Restart=on-failure
-RestartSec=1
+RestartSec=6
+KillMode=mixed
+KillSignal=SIGTERM
 TimeoutStopSec=10
+
+# Don't restart if manually stopped (allows keybind control)
+RestartPreventExitStatus=143
 
 [Install]
 WantedBy=graphical-session.target
