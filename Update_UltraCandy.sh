@@ -5437,7 +5437,7 @@ bindm = $mainMod, Z, movewindow #Hold to move selected window
 bindm = $mainMod, X, resizewindow #Hold to resize selected window
 
 bind = $mainMod, F, fullscreen, 0                                                           #Set active window to fullscreen
-bind = $mainMod, M, fullscreen, 1                                                           #Maximize Window
+bind = $mainMod SHIFT, M, fullscreen, 1                                                           #Maximize Window
 bind = $mainMod CTRL, F, togglefloating                                                     #Toggle active windows into floating mode
 bind = $mainMod CTRL, T, exec, $HYPRSCRIPTS/toggleallfloat.sh                               #Toggle all windows into floating mode
 bind = $mainMod, J, togglesplit                                                             #Toggle split
@@ -5659,7 +5659,7 @@ bindm = $mainMod, Z, movewindow #Hold to move selected window
 bindm = $mainMod, X, resizewindow #Hold to resize selected window
 
 bind = $mainMod, F, fullscreen, 0                                                           #Set active window to fullscreen
-bind = $mainMod, M, fullscreen, 1                                                           #Maximize Window
+bind = $mainMod SHIFT, M, fullscreen, 1                                                           #Maximize Window
 bind = $mainMod CTRL, F, togglefloating                                                     #Toggle active windows into floating mode
 bind = $mainMod CTRL, T, exec, $HYPRSCRIPTS/toggleallfloat.sh                               #Toggle all windows into floating mode
 bind = $mainMod, J, togglesplit                                                             #Toggle split
