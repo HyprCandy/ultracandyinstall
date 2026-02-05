@@ -3755,12 +3755,24 @@ group {
     col.border_locked_inactive = $background
     
     groupbar {
-    font_size = 12
-    text_color = $inverse_primary
-    col.active =  $primary_fixed_dim
-    col.inactive = $background
-    col.locked_active =  $primary_fixed_dim
-    col.locked_inactive = $background
+        font_size = 14
+        font_weight_active = heavy
+        font_weight_inactive = heavy
+        text_color = $secondary
+        col.active =  $primary_fixed_dim
+        col.inactive = $background
+        col.locked_active =  $primary_fixed_dim
+        col.locked_inactive = $background
+        indicator_height = 4
+        indicator_gap = 6
+    
+        # Additional styling options
+        height = 10          # Height of the groupbar
+        render_titles = true           # Show window titles
+        scrolling = true              # Enable scrolling through titles
+        
+        # Gradients work too (like hyprbars)
+        # col.active = $source_color $primary_fixed_dim 45deg
     }
 }
 
@@ -4516,12 +4528,24 @@ group {
     col.border_locked_inactive = $background
     
     groupbar {
-    font_size = 12
-    text_color = $inverse_primary
-    col.active =  $primary_fixed_dim
-    col.inactive = $background
-    col.locked_active =  $primary_fixed_dim
-    col.locked_inactive = $background
+        font_size = 14
+        font_weight_active = heavy
+        font_weight_inactive = heavy
+        text_color = $secondary
+        col.active =  $primary_fixed_dim
+        col.inactive = $background
+        col.locked_active =  $primary_fixed_dim
+        col.locked_inactive = $background
+        indicator_height = 4
+        indicator_gap = 6
+    
+        # Additional styling options
+        height = 10          # Height of the groupbar
+        render_titles = true           # Show window titles
+        scrolling = true              # Enable scrolling through titles
+        
+        # Gradients work too (like hyprbars)
+        # col.active = $source_color $primary_fixed_dim 45deg
     }
 }
 
