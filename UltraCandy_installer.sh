@@ -2254,6 +2254,8 @@ watch_gtk_file() {
         theme=$(extract_cursor_theme "$file")
         size=$(extract_cursor_size "$file")
         update_hypr_cursor_env "$theme" "$size"
+        sleep 1
+        systemctl --user restart cursor-theme-watcher.service
     done
 }
 
