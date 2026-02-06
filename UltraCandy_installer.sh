@@ -3615,12 +3615,12 @@ setup_custom_config() {
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
-exec-once = ~/.config/hyprcandy/hooks/restart_waybar.sh #Launch bar/panel
-exec-once = systemctl --user start hyprlock-watcher.service #Hyprlock watcher to re-initialize waybar on session resume
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
+exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
+exec-once = ~/.config/hyprcandy/hooks/restart_waybar.sh #Launch bar/panel
 exec-once = systemctl --user start waybar-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
+exec-once = systemctl --user start hyprlock-watcher.service #Hyprlock watcher to re-initialize waybar on session resume
 exec-once = systemctl --user start waypaper-watcher #Watches for system waypaper changes to trigger color generation
 exec-once = systemctl --user start rofi-font-watcher #Watches for system font changes to update rofi-font.rasi
 exec-once = systemctl --user start cursor-theme-watcher #Watches for cursor theme changes
@@ -4388,10 +4388,9 @@ else
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
 exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = systemctl --user start hyprpanel #Launch bar/panel
-
-exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
 exec-once = systemctl --user start hyprpanel-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
 #exec-once = systemctl --user start waypaper-watcher #Watches for system waypaper changes to trigger color generation
