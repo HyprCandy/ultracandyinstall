@@ -7020,7 +7020,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
-        
+        GLib.spawn_command_line_async(`systemctl --user restart waypaper-watcher.service`);
         // Save the new state
         saveMatugenState(matugenScheme);
         currentMatugenScheme = matugenScheme;
@@ -9847,7 +9847,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
-        
+        GLib.spawn_command_line_async(`systemctl --user restart waypaper-watcher.service`);
         // Save the new state
         saveMatugenState(matugenScheme);
         currentMatugenScheme = matugenScheme;
