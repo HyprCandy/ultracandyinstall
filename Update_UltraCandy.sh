@@ -13177,28 +13177,18 @@ prompt_reboot() {
     read -r reboot_choice
     case "$reboot_choice" in
         [nN][oO]|[nN])
-            print_status "Reboot skipped. Please reboot manually when convenient and note that some processes won't function properly until you reboot."
-            print_status "Run: sudo reboot"
+            echo "✅ Starting chosen bar..."
             if [ "$PANEL_CHOICE" = "waybar" ]; then
-                systemctl --user stop hyprpanel.service &>/dev/null
-                systemctl --user restart waybar.service &>/dev/null
+                systemctl --user stop hyprpanel.service
+                sleep 1
+                systemctl --user restart waybar.service && rm -rf "$HOME/ultracandyinstall"
             else
                 systemctl --user stop waybar.service &>/dev/null
-                systemctl --user restart hyprpanel.service &>/dev/null
+                sleep 1
+                systemctl --user restart hyprpanel.service && rm -rf "$HOME/ultracandyinstall"
             fi
-            echo "✅ Starting chosen bar..."
-            rm -rf "$HOME/ultracandyinstall"
             ;;
         *)
-            if [ "$PANEL_CHOICE" = "waybar" ]; then
-                systemctl --user stop hyprpanel.service &>/dev/null
-                systemctl --user restart waybar.service &>/dev/null
-            else
-                systemctl --user stop waybar.service &>/dev/null
-                systemctl --user restart hyprpanel.service &>/dev/null
-            fi
-            sleep 2
-            echo "✅ Starting chosen bar..."
             print_status "Rebooting system..."
             sudo reboot && rm -rf "$HOME/ultracandyinstall"
             ;;
