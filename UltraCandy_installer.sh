@@ -6695,7 +6695,7 @@ function createCandyUtilsBox() {
         // Matugen scheme buttons
     const matugenSchemes = [
         'Light',
-        'Graphite',
+        'Dark',
         'Content',
         'Expressive',
         'Neutral',
@@ -6716,8 +6716,8 @@ function createCandyUtilsBox() {
         
         // Convert scheme name to matugen format
         const schemeMap = {
-            'Graphite': 'scheme-monochrome',
             'Light': 'scheme-fidelity',
+            'Dark': 'scheme-monochrome',
             'Content': 'scheme-content',
             'Expressive': 'scheme-expressive',
             'Fruit-salad': 'scheme-fruit-salad',
@@ -6733,8 +6733,8 @@ function createCandyUtilsBox() {
         GLib.spawn_command_line_async(`sed -i 's/--type scheme-[^ ]*/--type ${matugenScheme}/' '${waypaperIntegrationFile}'`);
         
         // Handle monochrome vs other schemes for GTK CSS
-        if (schemeName === 'Graphite') {
-            // Replace @on_secondary with @on_primary_fixed_variant for graphite/monochrome
+        if (schemeName === 'Dark') {
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_primary_fixed_variant/g' '${gtk3File}'`);
@@ -6745,68 +6745,72 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Light') {
-            // Replace @on_secondary and @on_primary_fixed_variant with primary_fixed_dim for light/fidelity
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary_fixed_dim/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary_fixed_dim/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/dark/light/g' '${waypaperIntegrationFile}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk4File}'`);*/
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color white/window_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color white/view_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color white/headerbar_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color white/sidebar_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color white/card_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color white/dialog_fg_color black/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: white;/color: black;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: white;/color: black;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color white;/fg_color black;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color white/window_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color white/view_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color white/headerbar_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color white/sidebar_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color white/card_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color white/dialog_fg_color black/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: white;/color: black;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: white;/color: black;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color white;/fg_color black;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $inverse_primary/col.active_border = $primary_fixed_dim/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $inverse_primary,class:/bordercolor $primary_fixed_dim,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2382s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${waybarFile}'`);
-            GLib.spawn_command_line_async(`sed -i '8s/@inverse_primary;/@primary_fixed_dim;/g' '${dockFile}'`);
-            GLib.spawn_command_line_async(`sed -i '7s/@inverse_primary;/@primary_fixed_dim;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @main-fg;/color: @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary_fixed_dim;/color: @primary;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2382s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @scrim/@inverse_primary, @primary_fixed_dim/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
+            GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Content') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6817,32 +6821,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Expressive') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6853,32 +6859,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Fruit-salad') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6889,32 +6897,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GGLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Neutral') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6925,32 +6935,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Rainbow') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6961,32 +6973,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Tonal-spot') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6997,27 +7011,29 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
         GLib.spawn_command_line_async(`systemctl --user restart waypaper-watcher.service`);
@@ -7035,8 +7051,8 @@ function createCandyUtilsBox() {
             const btn = matugenButtons[i];
             const schemeName = matugenSchemes[i];
             const schemeMap = {
-                'Graphite': 'scheme-monochrome',
                 'Light': 'scheme-fidelity',
+                'Dark': 'scheme-monochrome',
                 'Content': 'scheme-content',
                 'Expressive': 'scheme-expressive',
                 'Fruit-salad': 'scheme-fruit-salad',
@@ -9522,7 +9538,7 @@ function createCandyUtilsBox() {
         // Matugen scheme buttons
     const matugenSchemes = [
         'Light',
-        'Graphite',
+        'Dark',
         'Content',
         'Expressive',
         'Neutral',
@@ -9543,8 +9559,8 @@ function createCandyUtilsBox() {
         
         // Convert scheme name to matugen format
         const schemeMap = {
-            'Graphite': 'scheme-monochrome',
             'Light': 'scheme-fidelity',
+            'Dark': 'scheme-monochrome',
             'Content': 'scheme-content',
             'Expressive': 'scheme-expressive',
             'Fruit-salad': 'scheme-fruit-salad',
@@ -9560,8 +9576,8 @@ function createCandyUtilsBox() {
         GLib.spawn_command_line_async(`sed -i 's/--type scheme-[^ ]*/--type ${matugenScheme}/' '${waypaperIntegrationFile}'`);
         
         // Handle monochrome vs other schemes for GTK CSS
-        if (schemeName === 'Graphite') {
-            // Replace @on_secondary with @on_primary_fixed_variant for graphite/monochrome
+        if (schemeName === 'Dark') {
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_primary_fixed_variant/g' '${gtk3File}'`);
@@ -9572,68 +9588,72 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Light') {
-            // Replace @on_secondary and @on_primary_fixed_variant with primary_fixed_dim for light/fidelity
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary_fixed_dim/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary_fixed_dim/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/dark/light/g' '${waypaperIntegrationFile}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk4File}'`);*/
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color white/window_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color white/view_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color white/headerbar_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color white/sidebar_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color white/card_fg_color black/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color white/dialog_fg_color black/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: white;/color: black;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: white;/color: black;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color white;/fg_color black;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color white/window_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color white/view_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color white/headerbar_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color white/sidebar_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color white/card_fg_color black/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color white/dialog_fg_color black/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: white;/color: black;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: white;/color: black;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color white;/fg_color black;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $inverse_primary/col.active_border = $primary_fixed_dim/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $inverse_primary,class:/bordercolor $primary_fixed_dim,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2382s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${waybarFile}'`);
-            GLib.spawn_command_line_async(`sed -i '8s/@inverse_primary;/@primary_fixed_dim;/g' '${dockFile}'`);
-            GLib.spawn_command_line_async(`sed -i '7s/@inverse_primary;/@primary_fixed_dim;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @main-fg;/color: @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary_fixed_dim;/color: @primary;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 487s/solid @inverse_primary;/solid @primary_fixed_dim;/g; 2382s/solid @inverse_primary;/solid @primary_fixed_dim;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @scrim/@inverse_primary, @primary_fixed_dim/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
+            GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Content') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9644,32 +9664,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Expressive') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9680,32 +9702,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Fruit-salad') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9716,32 +9740,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GGLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Neutral') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9752,32 +9778,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Rainbow') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9788,32 +9816,34 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
         if (schemeName === 'Tonal-spot') {
-            // Replace @on_primary_fixed_variant with @on_secondary for other schemes
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9824,27 +9854,29 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i '78s/color: black;/color: white;/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_color @on_primary/accent_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @on_primary/accent_bg_color @primary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @primary/accent_fg_color @on_primary/g' '${gtk3File}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/col.active_border = $primary_fixed_dim/col.active_border = $inverse_primary/g' '${hyprFile}'`);
-            //GLib.spawn_command_line_async(`sed -i 's/bordercolor $primary_fixed_dim,class:/bordercolor $inverse_primary,class:/g' '${hyprFile}'`);
-            GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
-            GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --reaunch'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
         GLib.spawn_command_line_async(`systemctl --user restart waypaper-watcher.service`);
@@ -9862,8 +9894,8 @@ function createCandyUtilsBox() {
             const btn = matugenButtons[i];
             const schemeName = matugenSchemes[i];
             const schemeMap = {
-                'Graphite': 'scheme-monochrome',
                 'Light': 'scheme-fidelity',
+                'Dark': 'scheme-monochrome',
                 'Content': 'scheme-content',
                 'Expressive': 'scheme-expressive',
                 'Fruit-salad': 'scheme-fruit-salad',
