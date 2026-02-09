@@ -2719,7 +2719,8 @@ execute_hooks() {
             stored_colors=$(get_stored_colors)
             
             if [ "$current_colors" != "$stored_colors" ]; then
-                # Colors have changed, reload dock
+                pkill -x gnome-software
+                pkill -x nautilus
                 pkill -f nwg-dock-hyprland
                 sleep 0.5
                 nohup bash -c "$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch" >/dev/null 2>&1 &
