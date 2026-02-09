@@ -1253,7 +1253,7 @@ SETTINGS_FILE="$HOME/.config/hyprcandy/nwg_dock_settings.conf"
 
 # Create settings file if it doesn't exist
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "ICON_SIZE=28" > "$SETTINGS_FILE"
+    echo "ICON_SIZE=26" > "$SETTINGS_FILE"
     echo "BORDER_RADIUS=16" >> "$SETTINGS_FILE"
     echo "BORDER_WIDTH=2" >> "$SETTINGS_FILE"
 fi
@@ -1303,7 +1303,7 @@ SETTINGS_FILE="$HOME/.config/hyprcandy/nwg_dock_settings.conf"
 
 # Create settings file if it doesn't exist
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "ICON_SIZE=28" > "$SETTINGS_FILE"
+    echo "ICON_SIZE=26" > "$SETTINGS_FILE"
     echo "BORDER_RADIUS=16" >> "$SETTINGS_FILE"
     echo "BORDER_WIDTH=2" >> "$SETTINGS_FILE"
 fi
@@ -1352,7 +1352,7 @@ SETTINGS_FILE="$HOME/.config/hyprcandy/nwg_dock_settings.conf"
 
 # Create settings file if it doesn't exist
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "ICON_SIZE=28" > "$SETTINGS_FILE"
+    echo "ICON_SIZE=26" > "$SETTINGS_FILE"
     echo "BORDER_RADIUS=16" >> "$SETTINGS_FILE"
     echo "BORDER_WIDTH=2" >> "$SETTINGS_FILE"
 fi
@@ -1406,7 +1406,7 @@ SETTINGS_FILE="$HOME/.config/hyprcandy/nwg_dock_settings.conf"
 
 # Create settings file if it doesn't exist
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "ICON_SIZE=28" > "$SETTINGS_FILE"
+    echo "ICON_SIZE=26" > "$SETTINGS_FILE"
     echo "BORDER_RADIUS=16" >> "$SETTINGS_FILE"
     echo "BORDER_WIDTH=2" >> "$SETTINGS_FILE"
 fi
@@ -1459,7 +1459,7 @@ SETTINGS_FILE="$HOME/.config/hyprcandy/nwg_dock_settings.conf"
 
 # Create settings file if it doesn't exist
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "ICON_SIZE=28" > "$SETTINGS_FILE"
+    echo "ICON_SIZE=26" > "$SETTINGS_FILE"
     echo "BORDER_RADIUS=16" >> "$SETTINGS_FILE"
     echo "BORDER_WIDTH=2" >> "$SETTINGS_FILE"
 fi
@@ -1513,7 +1513,7 @@ SETTINGS_FILE="$HOME/.config/hyprcandy/nwg_dock_settings.conf"
 
 # Create settings file if it doesn't exist
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "ICON_SIZE=28" > "$SETTINGS_FILE"
+    echo "ICON_SIZE=26" > "$SETTINGS_FILE"
     echo "BORDER_RADIUS=16" >> "$SETTINGS_FILE"
     echo "BORDER_WIDTH=2" >> "$SETTINGS_FILE"
 fi
@@ -1645,7 +1645,7 @@ SETTINGS_FILE="$HOME/.config/hyprcandy/nwg_dock_settings.conf"
 
 # Default fallback settings
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "ICON_SIZE=28" > "$SETTINGS_FILE"
+    echo "ICON_SIZE=26" > "$SETTINGS_FILE"
     echo "BORDER_RADIUS=16" >> "$SETTINGS_FILE"
     echo "BORDER_WIDTH=2" >> "$SETTINGS_FILE"
 fi
@@ -7451,7 +7451,7 @@ function createCandyUtilsBox() {
         function ensureSettingsFile() {
             if (!GLib.file_test(settingsFile, GLib.FileTest.EXISTS)) {
                 try {
-                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=28\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
+                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=26\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
                 } catch (e) {
                     print('Error creating settings file: ' + e.message);
                 }
@@ -7541,7 +7541,7 @@ function createCandyUtilsBox() {
         function ensureSettingsFile() {
             if (!GLib.file_test(settingsFile, GLib.FileTest.EXISTS)) {
                 try {
-                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=28\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
+                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=26\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
                 } catch (e) {
                     print('Error creating settings file: ' + e.message);
                 }
@@ -7643,7 +7643,7 @@ function createCandyUtilsBox() {
         function ensureSettingsFile() {
             if (!GLib.file_test(settingsFile, GLib.FileTest.EXISTS)) {
                 try {
-                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=28\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
+                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=26\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
                 } catch (e) {
                     print('Error creating settings file: ' + e.message);
                 }
@@ -10335,7 +10335,7 @@ function createCandyUtilsBox() {
         function ensureSettingsFile() {
             if (!GLib.file_test(settingsFile, GLib.FileTest.EXISTS)) {
                 try {
-                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=28\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
+                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=26\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
                 } catch (e) {
                     print('Error creating settings file: ' + e.message);
                 }
@@ -10425,7 +10425,7 @@ function createCandyUtilsBox() {
         function ensureSettingsFile() {
             if (!GLib.file_test(settingsFile, GLib.FileTest.EXISTS)) {
                 try {
-                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=28\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
+                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=26\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
                 } catch (e) {
                     print('Error creating settings file: ' + e.message);
                 }
@@ -10527,7 +10527,7 @@ function createCandyUtilsBox() {
         function ensureSettingsFile() {
             if (!GLib.file_test(settingsFile, GLib.FileTest.EXISTS)) {
                 try {
-                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=28\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
+                    GLib.file_set_contents(settingsFile, 'ICON_SIZE=26\nBORDER_RADIUS=16\nBORDER_WIDTH=2\n');
                 } catch (e) {
                     print('Error creating settings file: ' + e.message);
                 }
