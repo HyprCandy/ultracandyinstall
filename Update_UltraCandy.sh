@@ -952,11 +952,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync bibata-cursor-theme-bin
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync bibata-cursor-theme-bin quickshell
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako bibata-cursor-theme-bin
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako bibata-cursor-theme-bin quickshell
     fi
 
     print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
@@ -1015,6 +1015,14 @@ setup_ultracandy() {
     git clone https://github.com/HyprCandy/UltraCandy.git "$ultracandy_dir"
     echo "✅ Cloning complete"
     
+    # Clone overview repository
+    #overview_dir="$HOME/.config/quickshell/overview"
+    #if [ ! -d "$overview_dir" ]; then
+        #echo "🌐 Cloning overview repository ..."
+        #git clone https://github.com/Shanu-Kumawat/quickshell-overview "$overview_dir"
+        #echo "✅ Cloning complete"
+    #fi
+    
     # Go to the home directory
     cd "$HOME"
 
@@ -1025,7 +1033,7 @@ setup_ultracandy() {
     # Ensure ~/.config exists, then remove specified subdirectories
     [ -d "$HOME/.config" ] || mkdir -p "$HOME/.config"
     cd "$HOME/.config" || exit 1
-    rm -rf background background.png btop cava fastfetch gtk-3.0 gtk-4.0 htop hypr hyprcustom hyprcandy hyprpanel kitty matugen micro nvtop nwg-dock-hyprland nwg-look qt5ct qt6ct rofi swaync wallust waybar waypaper wlogout xsettingsd
+    rm -rf background background.png btop cava fastfetch gtk-3.0 gtk-4.0 htop hypr hyprcustom hyprcandy hyprpanel kitty matugen micro nvtop nwg-dock-hyprland nwg-look qt5ct qt6ct quickshell rofi swaync wallust waybar waypaper wlogout xsettingsd
 
     # Go to the home directory
     cd "$HOME"
@@ -2068,7 +2076,7 @@ while true; do
         
         # Remove cached weather file
         rm -f "$WEATHER_CACHE_FILE"
-        rm -f "${WEATHER_CACHE_FILE}.tmp"
+        #rm -f "${WEATHER_CACHE_FILE}.tmp"
         
         # Wait a moment for system to fully resume
         sleep 3
@@ -2291,8 +2299,6 @@ watch_gtk_file() {
         theme=$(extract_cursor_theme "$file")
         size=$(extract_cursor_size "$file")
         update_hypr_cursor_env "$theme" "$size"
-        sleep 1
-        systemctl --user restart cursor-theme-watcher.service
     done
 }
 
@@ -3042,7 +3048,7 @@ update_config_background() {
 trigger_matugen() {
     if [ -f "$MATUGEN_CONFIG" ]; then
         echo "🎨 Triggering matugen color generation..."
-        matugen image "$CONFIG_BG" --type scheme-content --contrast 0.65 &
+        matugen image "$CONFIG_BG" --type scheme-content --contrast 0.65 -m dark -r nearest &
         echo "✅ Matugen color generation started"
     else
         echo "⚠️  Matugen config not found at: $MATUGEN_CONFIG"
@@ -3687,6 +3693,9 @@ exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh
 exec-once = systemctl --user restart background-watcher
 # Pyprland
 exec-once = /usr/bin/pypr &
+# Overview env rule and startup
+env = QS_NO_RELOAD_POPUP,1
+exec-once = qs -c overview &
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Animations                        ┃
@@ -3797,7 +3806,7 @@ group {
         font_size = 14
         font_weight_active = heavy
         font_weight_inactive = heavy
-        text_color = $secondary
+        text_color = $surface_variant
         col.active =  $primary_fixed_dim
         col.inactive = $background
         col.locked_active =  $primary_fixed_dim
@@ -4426,7 +4435,7 @@ else
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
-exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugins
+exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = systemctl --user start hyprpanel #Launch bar/panel
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
 exec-once = systemctl --user start hyprpanel-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
@@ -4459,6 +4468,9 @@ exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh
 exec-once = systemctl --user restart background-watcher
 # Pyprland
 exec-once = /usr/bin/pypr &
+# Overview env rule and startup
+env = QS_NO_RELOAD_POPUP,1
+exec-once = qs -c overview &
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Animations                        ┃
@@ -4569,7 +4581,7 @@ group {
         font_size = 14
         font_weight_active = heavy
         font_weight_inactive = heavy
-        text_color = $secondary
+        text_color = $surface_variant
         col.active =  $primary_fixed_dim
         col.inactive = $background
         col.locked_active =  $primary_fixed_dim
@@ -5396,6 +5408,8 @@ bind = $mainMod, L, exec, ~/.config/hypr/scripts/power.sh lock 				  #Lock
 
 #### Workspaces ####
 
+bind = SHIFT, TAB, exec, qs ipc -c overview call overview toggle #Workspace overview
+
 bind = $mainMod, 1, workspace, 1  #Open workspace 1
 bind = $mainMod, 2, workspace, 2  #Open workspace 2
 bind = $mainMod, 3, workspace, 3  #Open workspace 3
@@ -5510,19 +5524,19 @@ bind = , code:236, exec, brightnessctl -d smc::kbd_backlight s +10 && notify-sen
 bind = , code:237, exec, brightnessctl -d smc::kbd_backlight s 10- && notify-send "Keyboard Backlight" "$(brightnessctl -d smc::kbd_backlight | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Screen brightness controls with notifications
-bind = SHIFT, F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = SHIFT, F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Volume mute toggle with notification
 bind = Shift, F9, exec, amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob && if amixer sget Master | grep -q '\[off\]'; then notify-send "Volume" "Muted" -t 1000; else notify-send "Volume" "$(amixer sget Master | grep -o '[0-9]*%' | head -1)" -t 1000; fi
 
 # Volume controls with notifications
-bind = SHIFT, F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = SHIFT, F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
 
-bind = SHIFT, F4, exec, playerctl play-pause #Toggle play/pause
-bind = SHIFT, F6, exec, playerctl next #Play next video/song
-bind = SHIFT, F5, exec, playerctl previous #Play previous video/song
+bind = , F4, exec, playerctl play-pause #Toggle play/pause
+bind = , F6, exec, playerctl next #Play next video/song
+bind = , F5, exec, playerctl previous #Play previous video/song
 EOF
 
 else
@@ -5618,6 +5632,8 @@ bind = $mainMod, L, exec, ~/.config/hypr/scripts/power.sh lock 				  #Lock
 
 #### Workspaces ####
 
+bind = SHIFT, TAB, exec, qs ipc -c overview call overview toggle #Workspace overview
+
 bind = $mainMod, 1, workspace, 1  #Open workspace 1
 bind = $mainMod, 2, workspace, 2  #Open workspace 2
 bind = $mainMod, 3, workspace, 3  #Open workspace 3
@@ -5732,19 +5748,19 @@ bind = , code:236, exec, brightnessctl -d smc::kbd_backlight s +10 && notify-sen
 bind = , code:237, exec, brightnessctl -d smc::kbd_backlight s 10- && notify-send "Keyboard Backlight" "$(brightnessctl -d smc::kbd_backlight | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Screen brightness controls with notifications
-bind = SHIFT, F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = SHIFT, F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Volume mute toggle with notification
 bind = Shift, F9, exec, amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob && if amixer sget Master | grep -q '\[off\]'; then notify-send "Volume" "Muted" -t 1000; else notify-send "Volume" "$(amixer sget Master | grep -o '[0-9]*%' | head -1)" -t 1000; fi
 
 # Volume controls with notifications
-bind = SHIFT, F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = SHIFT, F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = , F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
 
-bind = SHIFT, F4, exec, playerctl play-pause #Toggle play/pause
-bind = SHIFT, F6, exec, playerctl next #Play next video/song
-bind = SHIFT, F5, exec, playerctl previous #Play previous video/song
+bind = , F4, exec, playerctl play-pause #Toggle play/pause
+bind = , F6, exec, playerctl next #Play next video/song
+bind = , F5, exec, playerctl previous #Play previous video/song
 EOF
 fi
 
@@ -6730,6 +6746,7 @@ function createCandyUtilsBox() {
         'Rainbow',
         'Tonal-spot',
         'Fruit-salad',
+        'Vibrant'
     ];
     
     function updateMatugenScheme(schemeName) {
@@ -6751,7 +6768,8 @@ function createCandyUtilsBox() {
             'Fruit-salad': 'scheme-fruit-salad',
             'Neutral': 'scheme-neutral',
             'Rainbow': 'scheme-rainbow',
-            'Tonal-spot': 'scheme-tonal-spot'
+            'Tonal-spot': 'scheme-tonal-spot',
+            'Vibrant': 'scheme-vibrant'
         };
         
         const matugenScheme = schemeMap[schemeName];
@@ -7064,6 +7082,44 @@ function createCandyUtilsBox() {
             //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
+        
+        if (schemeName === 'Vibrant') {
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
+            GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
+        }
         GLib.spawn_command_line_async(`systemctl --user restart waypaper-watcher.service`);
         // Save the new state
         saveMatugenState(matugenScheme);
@@ -7086,7 +7142,8 @@ function createCandyUtilsBox() {
                 'Fruit-salad': 'scheme-fruit-salad',
                 'Neutral': 'scheme-neutral',
                 'Rainbow': 'scheme-rainbow',
-                'Tonal-spot': 'scheme-tonal-spot'
+                'Tonal-spot': 'scheme-tonal-spot',
+                'Vibrant': 'scheme-vibrant'
             };
             
             if (currentMatugenScheme === schemeMap[schemeName]) {
@@ -9573,6 +9630,7 @@ function createCandyUtilsBox() {
         'Rainbow',
         'Tonal-spot',
         'Fruit-salad',
+        'Vibrant'
     ];
     
     function updateMatugenScheme(schemeName) {
@@ -9594,7 +9652,8 @@ function createCandyUtilsBox() {
             'Fruit-salad': 'scheme-fruit-salad',
             'Neutral': 'scheme-neutral',
             'Rainbow': 'scheme-rainbow',
-            'Tonal-spot': 'scheme-tonal-spot'
+            'Tonal-spot': 'scheme-tonal-spot',
+            'Vibrant': 'scheme-vibrant'
         };
         
         const matugenScheme = schemeMap[schemeName];
@@ -9907,6 +9966,44 @@ function createCandyUtilsBox() {
             //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
+        
+        if (schemeName === 'Vibrant') {
+            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/window_fg_color black/window_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/view_fg_color black/view_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/headerbar_fg_color black/headerbar_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/sidebar_fg_color black/sidebar_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/card_fg_color black/card_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/dialog_fg_color black/dialog_fg_color white/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: black;/color: white;/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/fg_color black;/fg_color white;/g' '${gtk3File}'`);
+            /*GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk4File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_color @primary/accent_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_bg_color @primary/accent_bg_color @on_primary/g' '${gtk3File}'`);
+            GLib.spawn_command_line_async(`sed -i 's/accent_fg_color @on_primary/accent_fg_color @primary/g' '${gtk3File}'`);*/
+            GLib.spawn_command_line_async(`sed -i 's/color: @inverse_primary;/color: @main-fg;/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            //GLib.spawn_command_line_async(`sed -i '483s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 487s/solid @primary_fixed_dim;/solid @inverse_primary;/g; 2382s/solid @primary_fixed_dim;/solid @inverse_primary;/g' '${utilsFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
+            GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
+            GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g' '${swayncFile}'`);
+            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
+        }
         GLib.spawn_command_line_async(`systemctl --user restart waypaper-watcher.service`);
         // Save the new state
         saveMatugenState(matugenScheme);
@@ -9929,7 +10026,8 @@ function createCandyUtilsBox() {
                 'Fruit-salad': 'scheme-fruit-salad',
                 'Neutral': 'scheme-neutral',
                 'Rainbow': 'scheme-rainbow',
-                'Tonal-spot': 'scheme-tonal-spot'
+                'Tonal-spot': 'scheme-tonal-spot',
+                'Vibrant': 'scheme-vibrant'
             };
             
             if (currentMatugenScheme === schemeMap[schemeName]) {
