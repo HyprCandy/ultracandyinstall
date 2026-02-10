@@ -13178,15 +13178,14 @@ prompt_reboot() {
     read -r reboot_choice
     case "$reboot_choice" in
         [nN][oO]|[nN])
-            echo "✅ Starting chosen bar..."
+            echo "✅ Starting chosen bar (system reboot advised)..."
+            sleep 5
             if [ "$PANEL_CHOICE" = "waybar" ]; then
-                systemctl --user stop hyprpanel.service
-                sleep 1
-                systemctl --user restart waybar.service && rm -rf "$HOME/ultracandyinstall"
+                systemctl --user stop hyprpanel.service &>/dev/null
+                systemctl --user restart waybar.service &>/dev/null && rm -rf "$HOME/ultracandyinstall"
             else
                 systemctl --user stop waybar.service &>/dev/null
-                sleep 1
-                systemctl --user restart hyprpanel.service && rm -rf "$HOME/ultracandyinstall"
+                systemctl --user restart hyprpanel.service &>/dev/null && rm -rf "$HOME/ultracandyinstall"
             fi
             ;;
         *)
