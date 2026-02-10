@@ -976,7 +976,7 @@ setup_ultracandy() {
     # Clone UltraCandy repository
     ultracandy_dir="$HOME/.ultracandy"
     echo "🌐 Cloning UltraCandy repository ..." #into $ultracandy_dir
-    git clone https://github.com/HyprCandy/UltraCandy.git "$ultracandy_dir"
+    git clone --depth 1 https://github.com/HyprCandy/UltraCandy.git "$ultracandy_dir"
     echo "✅ Cloninig complete"
     
     # Clone overview repository
