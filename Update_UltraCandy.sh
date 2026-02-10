@@ -13309,7 +13309,7 @@ main() {
     echo
     echo -e "${CYAN}════════════════════════════════════════════════════════════════════════════════════════════════════════════${NC}"
     
-    # Prompt for reboot
+    # Prompt for session restart
     prompt_logout
 }
 
