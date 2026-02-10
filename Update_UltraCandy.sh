@@ -7475,7 +7475,7 @@ function createCandyUtilsBox() {
             } catch (e) {
                 print('Error reading settings file: ' + e.message);
             }
-            return '28'; // Default value
+            return '24'; // Default value
         }
         
         // Set initial value
@@ -7597,7 +7597,7 @@ function createCandyUtilsBox() {
                             }
                         }
                     } catch (e) {}
-                    return '28'; // Default
+                    return '24'; // Default
                 }
                 
                 // Improved dock relaunch: let the launch script handle everything
@@ -7699,7 +7699,7 @@ function createCandyUtilsBox() {
                             }
                         }
                     } catch (e) {}
-                    return '28'; // Default
+                    return '24'; // Default
                 }
                 
                 // Improved dock relaunch: let the launch script handle everything
@@ -10358,7 +10358,7 @@ function createCandyUtilsBox() {
             } catch (e) {
                 print('Error reading settings file: ' + e.message);
             }
-            return '28'; // Default value
+            return '24'; // Default value
         }
         
         // Set initial value
@@ -10480,7 +10480,7 @@ function createCandyUtilsBox() {
                             }
                         }
                     } catch (e) {}
-                    return '28'; // Default
+                    return '24'; // Default
                 }
                 
                 // Improved dock relaunch: let the launch script handle everything
@@ -10582,7 +10582,7 @@ function createCandyUtilsBox() {
                             }
                         }
                     } catch (e) {}
-                    return '28'; // Default
+                    return '24'; // Default
                 }
                 
                 // Improved dock relaunch: let the launch script handle everything
