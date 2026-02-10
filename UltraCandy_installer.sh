@@ -13156,11 +13156,9 @@ prompt_logout() {
             echo "✅ Starting chosen bar (re-login post update is advised)..."
             sleep 5
             if [ "$PANEL_CHOICE" = "waybar" ]; then
-                systemctl --user stop hyprpanel.service &>/dev/null
-                systemctl --user restart waybar.service &>/dev/null && rm -rf "$HOME/ultracandyinstall"
+                rm -rf "$HOME/ultracandyinstall" && systemctl --user restart waybar.service &>/dev/null
             else
-                systemctl --user stop waybar.service &>/dev/null
-                systemctl --user restart hyprpanel.service &>/dev/null && rm -rf "$HOME/ultracandyinstall"
+                rm -rf "$HOME/ultracandyinstall" && systemctl --user restart hyprpanel.service &>/dev/null
             fi
             ;;
         *)
