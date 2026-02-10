@@ -13165,20 +13165,20 @@ fi
     print_success "UltraCandy updated completed!"  
 }
 
-# Function to prompt for reboot
-prompt_reboot() {
+# Function to prompt for session restart
+prompt_logout() {
     echo
     print_success "Installation and configuration completed!"
     print_status "All packages have been installed and Hyprcandy configurations have been deployed."
     print_status "The $DISPLAY_MANAGER display manager has been enabled."
     echo
-    print_warning "A reboot is recommended to ensure all changes take effect properly."
+    print_warning "To ensure all changes take effect properly session restart is recommended."
     echo
-    echo -e "${YELLOW}Would you like to reboot now? (n/Y)${NC}"
+    echo -e "${YELLOW}Would you like to logout now? (n/Y)${NC}"
     read -r reboot_choice
     case "$reboot_choice" in
         [nN][oO]|[nN])
-            echo "✅ Starting chosen bar (system reboot advised)..."
+            echo "✅ Starting chosen bar (re-login post update is advised)..."
             sleep 5
             if [ "$PANEL_CHOICE" = "waybar" ]; then
                 systemctl --user stop hyprpanel.service &>/dev/null
@@ -13189,8 +13189,8 @@ prompt_reboot() {
             fi
             ;;
         *)
-            print_status "Rebooting system..."
-            sudo reboot && rm -rf "$HOME/ultracandyinstall"
+            print_status "Logging out..."
+            hyprctl dispatch exit && rm -rf "$HOME/ultracandyinstall"
             ;;
     esac
 }
@@ -13310,7 +13310,7 @@ main() {
     echo -e "${CYAN}════════════════════════════════════════════════════════════════════════════════════════════════════════════${NC}"
     
     # Prompt for reboot
-    prompt_reboot
+    prompt_logout
 }
 
 # Run main function
