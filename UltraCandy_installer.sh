@@ -308,7 +308,7 @@ build_package_list() {
         "wob"
         "wf-recorder"
         "slurp"
-        "swappy"
+        "satty"
         
         # System tools
         "gnome-disk-utility"
@@ -4011,6 +4011,10 @@ windowrule = center on,match:title (hyprviz)
 windowrule = float on,match:class (dotfiles-floating)
 windowrule = size 1000 700,match:class (dotfiles-floating)
 windowrule = center on,match:class (dotfiles-floating)
+# Satty
+windowrule = float on,match:title (satty)
+windowrule = size 1000 565,match:title (satty)
+windowrule = center on,match:title (satty)
 # Float Necessary Windows
 windowrule = float on, match:class ^(org.pulseaudio.pavucontrol)
 windowrule = float on, match:class ^()$,match:title ^(Picture in picture)$
@@ -4786,6 +4790,10 @@ windowrule = center on,match:title (hyprviz)
 windowrule = float on,match:class (dotfiles-floating)
 windowrule = size 1000 700,match:class (dotfiles-floating)
 windowrule = center on,match:class (dotfiles-floating)
+# Satty
+windowrule = float on,match:title (satty)
+windowrule = size 1000 565,match:title (satty)
+windowrule = center on,match:title (satty)
 # Float Necessary Windows
 windowrule = float on, match:class ^(org.pulseaudio.pavucontrol)
 windowrule = float on, match:class ^()$,match:title ^(Picture in picture)$
