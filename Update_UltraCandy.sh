@@ -633,7 +633,7 @@ deleted = "x"
 
 [nodejs]
 symbol = "[](green) 💠 "
-style = "bold green"
+style = "bold grey"
 
 [python]
 symbol = "[](green) 🐍 "
@@ -823,7 +823,7 @@ deleted = "x"
 
 [nodejs]
 symbol = "[](green) 💠 "
-style = "bold green"
+style = "bold grey"
 
 [python]
 symbol = "[](green) 🐍 "
