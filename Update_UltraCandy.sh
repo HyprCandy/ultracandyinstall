@@ -330,7 +330,7 @@ build_package_list() {
         "wob"
         "wf-recorder"
         "slurp"
-        "swappy"
+        "satty"
         
         # System tools
         "gnome-disk-utility"
@@ -942,9 +942,11 @@ setup_ultracandy() {
     # Prevent notification daemon conflicts
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         $AUR_HELPER -R bibata-cursor-theme
+        $AUR_HELPER -R swappy
         $AUR_HELPER -R mako
     else
         $AUR_HELPER -R bibata-cursor-theme
+        $AUR_HELPER -R swappy
         $AUR_HELPER -R swaync
     fi
     
@@ -952,11 +954,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync bibata-cursor-theme-bin quickshell
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync bibata-cursor-theme-bin quickshell satty
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako bibata-cursor-theme-bin quickshell
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako bibata-cursor-theme-bin quickshell satty
     fi
 
     print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
@@ -4047,6 +4049,10 @@ windowrule = center on,match:title (hyprviz)
 windowrule = float on,match:class (dotfiles-floating)
 windowrule = size 1000 700,match:class (dotfiles-floating)
 windowrule = center on,match:class (dotfiles-floating)
+# Satty
+windowrule = float on,match:title (satty)
+windowrule = size 1000 565,match:title (satty)
+windowrule = center on,match:title (satty)
 # Float Necessary Windows
 windowrule = float on, match:class ^(org.pulseaudio.pavucontrol)
 windowrule = float on, match:class ^()$,match:title ^(Picture in picture)$
@@ -4822,6 +4828,10 @@ windowrule = center on,match:title (hyprviz)
 windowrule = float on,match:class (dotfiles-floating)
 windowrule = size 1000 700,match:class (dotfiles-floating)
 windowrule = center on,match:class (dotfiles-floating)
+# Satty
+windowrule = float on,match:title (satty)
+windowrule = size 1000 565,match:title (satty)
+windowrule = center on,match:title (satty)
 # Float Necessary Windows
 windowrule = float on, match:class ^(org.pulseaudio.pavucontrol)
 windowrule = float on, match:class ^()$,match:title ^(Picture in picture)$
