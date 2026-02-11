@@ -623,15 +623,15 @@ behind = "⇣${count}"
 deleted = "x"
 
 [nodejs]
-symbol = "[](green) 💠"
+symbol = "[](green) 💠 "
 style = "bold green"
 
 [python]
-symbol = "[](green) 🐍"
+symbol = "[](green) 🐍 "
 style = "bold yellow"
 
 [rust]
-symbol = "[](green) ⚙️"
+symbol = "[](green) ⚙️ "
 style = "bold red"
 
 [time]
@@ -645,7 +645,7 @@ format = "[](green) ⏱️ [$duration]($style)"
 style = "yellow"
 
 [jobs]
-symbol = "[](green) ⚡"
+symbol = "[](green) ⚡ "
 style = "bold blue"
 EOF
         
@@ -813,15 +813,15 @@ behind = "⇣${count}"
 deleted = "x"
 
 [nodejs]
-symbol = "[](green) 💠"
+symbol = "[](green) 💠 "
 style = "bold green"
 
 [python]
-symbol = "[](green) 🐍"
+symbol = "[](green) 🐍 "
 style = "bold yellow"
 
 [rust]
-symbol = "[](green) ⚙️"
+symbol = "[](green) ⚙️ "
 style = "bold red"
 
 [time]
@@ -835,7 +835,7 @@ format = "[](green) ⏱️ [$duration]($style)"
 style = "yellow"
 
 [jobs]
-symbol = "[](green) ⚡"
+symbol = "[](green) ⚡ "
 style = "bold blue"
 EOF
         
