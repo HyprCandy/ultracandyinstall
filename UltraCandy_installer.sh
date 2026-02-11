@@ -4354,7 +4354,7 @@ misc {
 #bind = , c, hyprexpo:kb_selecti, 23
 #bind = , d, hyprexpo:kb_selecti, 24
 #bind = , e, hyprexpo:kb_selecti, 25
-#bind = , f, hyprexpo:kb_selecti, 26
+#bind = Shift, F, hyprexpo:kb_selecti, 26
 #bind = , g, hyprexpo:kb_selecti, 27
 #bind = , h, hyprexpo:kb_selecti, 28
 #bind = , i, hyprexpo:kb_selecti, 29
@@ -5133,7 +5133,7 @@ misc {
 #bind = , c, hyprexpo:kb_selecti, 23
 #bind = , d, hyprexpo:kb_selecti, 24
 #bind = , e, hyprexpo:kb_selecti, 25
-#bind = , f, hyprexpo:kb_selecti, 26
+#bind = Shift, F, hyprexpo:kb_selecti, 26
 #bind = , g, hyprexpo:kb_selecti, 27
 #bind = , h, hyprexpo:kb_selecti, 28
 #bind = , i, hyprexpo:kb_selecti, 29
@@ -5497,19 +5497,19 @@ bind = , code:236, exec, brightnessctl -d smc::kbd_backlight s +10 && notify-sen
 bind = , code:237, exec, brightnessctl -d smc::kbd_backlight s 10- && notify-send "Keyboard Backlight" "$(brightnessctl -d smc::kbd_backlight | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Screen brightness controls with notifications
-bind = , F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = , F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Volume mute toggle with notification
 bind = Shift, F9, exec, amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob && if amixer sget Master | grep -q '\[off\]'; then notify-send "Volume" "Muted" -t 1000; else notify-send "Volume" "$(amixer sget Master | grep -o '[0-9]*%' | head -1)" -t 1000; fi
 
 # Volume controls with notifications
-bind = , F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = , F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
 
-bind = , F4, exec, playerctl play-pause #Toggle play/pause
-bind = , F6, exec, playerctl next #Play next video/song
-bind = , F5, exec, playerctl previous #Play previous video/song
+bind = Shift, F4, exec, playerctl play-pause #Toggle play/pause
+bind = Shift, F6, exec, playerctl next #Play next video/song
+bind = Shift, F5, exec, playerctl previous #Play previous video/song
 EOF
 
 else
@@ -5721,19 +5721,19 @@ bind = , code:236, exec, brightnessctl -d smc::kbd_backlight s +10 && notify-sen
 bind = , code:237, exec, brightnessctl -d smc::kbd_backlight s 10- && notify-send "Keyboard Backlight" "$(brightnessctl -d smc::kbd_backlight | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Screen brightness controls with notifications
-bind = , F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = , F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F2, exec, brightnessctl -q s +10% && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F1, exec, brightnessctl -q s 10%- && notify-send "Screen Brightness" "$(brightnessctl | grep -o '[0-9]*%' | head -1)" -t 1000
 
 # Volume mute toggle with notification
 bind = Shift, F9, exec, amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob && if amixer sget Master | grep -q '\[off\]'; then notify-send "Volume" "Muted" -t 1000; else notify-send "Volume" "$(amixer sget Master | grep -o '[0-9]*%' | head -1)" -t 1000; fi
 
 # Volume controls with notifications
-bind = , F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
-bind = , F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F8, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
+bind = Shift, F7, exec, pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1)" -t 1000
 
-bind = , F4, exec, playerctl play-pause #Toggle play/pause
-bind = , F6, exec, playerctl next #Play next video/song
-bind = , F5, exec, playerctl previous #Play previous video/song
+bind = Shift, F4, exec, playerctl play-pause #Toggle play/pause
+bind = Shift, F6, exec, playerctl next #Play next video/song
+bind = Shift, F5, exec, playerctl previous #Play previous video/song
 EOF
 fi
 
