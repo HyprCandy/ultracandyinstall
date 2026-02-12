@@ -3704,7 +3704,7 @@ exec-once = qs -c overview &
 # ┃                           Animations                        ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-source = ~/.config/hypr/conf/animations/vertical.conf
+source = ~/.config/hypr/conf/animations/LimeFrenzy.conf
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                        Hypraland-colors                     ┃
@@ -4483,7 +4483,7 @@ exec-once = qs -c overview &
 # ┃                           Animations                        ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-source = ~/.config/hypr/conf/animations/vertical.conf
+source = ~/.config/hypr/conf/animations/LimeFrenzy.conf
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                        Hypraland-colors                     ┃
