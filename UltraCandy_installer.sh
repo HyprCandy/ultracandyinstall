@@ -3616,7 +3616,7 @@ setup_custom_config() {
 
 #[IMPORTANT]#
 # Add custom settings at the very end of the file.
-# To reset, delete the 'hyprcustom' folder (not just the 'custom.conf' file) before rerunning the script to regenerate the default setup.
+# This "hypr" folder is backed up on updates so you can copy you "userprefs" from the hyprviz.conf backup to the new file
 #[IMPORTANT]#
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -4396,7 +4396,7 @@ else
 
 #[IMPORTANT]#
 # Add custom settings at the very end of the file.
-# To reset, delete the 'hyprcustom' folder (not just the 'custom.conf' file) before rerunning the script to regenerate the default setup.
+# This "hypr" folder is backed up on updates so you can copy you "userprefs" from the hyprviz.conf backup to the new file
 #[IMPORTANT]#
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
