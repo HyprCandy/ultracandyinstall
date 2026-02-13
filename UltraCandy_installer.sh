@@ -8550,21 +8550,21 @@ function createCandyUtilsBox() {
     addWaybarBorderSizeRow('Waybar Border');
     
     // --- Waybar Side Margins Control ---
-    function addWaybarLeftSideMarginsRow(label) {
+    function addWaybarSideMarginsRow(label) {
         const row = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 8, halign: Gtk.Align.CENTER, valign: Gtk.Align.CENTER });
         const lbl = new Gtk.Label({ label, halign: Gtk.Align.END, xalign: 1 });
         lbl.set_size_request(110, -1);
 
         const entry = new Gtk.Entry({
-            placeholder_text: '0-260',
+            placeholder_text: '0-200',
             width_chars: 8,
             halign: Gtk.Align.CENTER
         });
 
         // Load current value
-        const waybarLeftSideMarginsStateFile = GLib.build_filenamev([hyprsunsetStateDir, 'waybar_left_side_margin.state']);
+        const waybarSideMarginsStateFile = GLib.build_filenamev([hyprsunsetStateDir, 'waybar_side_margin.state']);
         try {
-            let [ok, contents] = GLib.file_get_contents(waybarLeftSideMarginsStateFile);
+            let [ok, contents] = GLib.file_get_contents(waybarSideMarginsStateFile);
             if (ok && contents) {
                 let value = imports.byteArray.toString(contents).trim();
                 entry.set_text(value);
@@ -8574,33 +8574,34 @@ function createCandyUtilsBox() {
             entry.set_text('4.5');
         }
 
-        function updateWaybarLeftSideMargins(value) {
+        function updateWaybarSideMargins(value) {
             const waybarStyleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'waybar', 'style.css']);
 
             try {
                 let numValue = parseFloat(value);
-                if (isNaN(numValue) || numValue < 0 || numValue > 260) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-260" -t 2000`);
+                if (isNaN(numValue) || numValue < 0 || numValue > 200) {
+                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-200" -t 2000`);
                     return;
                 }
 
                 let valueStr = numValue.toFixed(1);
 
-                // Update CSS file - margin-left
+                // Update CSS file - both left and right margins
                 GLib.spawn_command_line_async(`sed -i '27s/margin-left: [0-9.]*px;/margin-left: ${valueStr}px;/' '${waybarStyleFile}'`);
+                GLib.spawn_command_line_async(`sed -i '28s/margin-right: [0-9.]*px;/margin-right: ${valueStr}px;/' '${waybarStyleFile}'`);
 
                 // Update state file
-                GLib.file_set_contents(waybarLeftSideMarginsStateFile, valueStr);
+                GLib.file_set_contents(waybarSideMarginsStateFile, valueStr);
 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Left Side-margin: ${valueStr}px" -t 2000`);
+                GLib.spawn_command_line_async(`notify-send "Waybar" "Side-margins: ${valueStr}px" -t 2000`);
             } catch (e) {
-                print('Error updating waybar side margin: ' + e.message);
+                print('Error updating waybar side margins: ' + e.message);
             }
         }
 
         entry.connect('activate', () => {
-            updateWaybarLeftSideMargins(entry.get_text());
+            updateWaybarSideMargins(entry.get_text());
         });
 
         row.append(lbl);
@@ -8845,8 +8846,8 @@ function createCandyUtilsBox() {
     }
     
     addWaybarOuterRadiusRow('Waybar Radius');
-    addWaybarLeftSideMarginsRow('Waybar Left');
-    addWaybarRightSideMarginsRow('Waybar Right');
+    addWaybarSideMarginsRow('Waybar Sides');
+    //addWaybarRightSideMarginsRow('Waybar Right');
     addWaybarBottomMarginRow('Waybar Bottom');
     addWaybarTopMarginRow('Waybar Top');
 
@@ -11503,21 +11504,21 @@ function createCandyUtilsBox() {
     //addWaybarBorderSizeRow('Waybar Border');
     
     // --- Waybar Side Margins Control ---
-    function addWaybarLeftSideMarginsRow(label) {
+    function addWaybarSideMarginsRow(label) {
         const row = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 8, halign: Gtk.Align.CENTER, valign: Gtk.Align.CENTER });
         const lbl = new Gtk.Label({ label, halign: Gtk.Align.END, xalign: 1 });
         lbl.set_size_request(110, -1);
 
         const entry = new Gtk.Entry({
-            placeholder_text: '0-260',
+            placeholder_text: '0-200',
             width_chars: 8,
             halign: Gtk.Align.CENTER
         });
 
         // Load current value
-        const waybarLeftSideMarginsStateFile = GLib.build_filenamev([hyprsunsetStateDir, 'waybar_left_side_margin.state']);
+        const waybarSideMarginsStateFile = GLib.build_filenamev([hyprsunsetStateDir, 'waybar_side_margin.state']);
         try {
-            let [ok, contents] = GLib.file_get_contents(waybarLeftSideMarginsStateFile);
+            let [ok, contents] = GLib.file_get_contents(waybarSideMarginsStateFile);
             if (ok && contents) {
                 let value = imports.byteArray.toString(contents).trim();
                 entry.set_text(value);
@@ -11527,33 +11528,34 @@ function createCandyUtilsBox() {
             entry.set_text('4.5');
         }
 
-        function updateWaybarLeftSideMargins(value) {
+        function updateWaybarSideMargins(value) {
             const waybarStyleFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'waybar', 'style.css']);
 
             try {
                 let numValue = parseFloat(value);
-                if (isNaN(numValue) || numValue < 0 || numValue > 260) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-260" -t 2000`);
+                if (isNaN(numValue) || numValue < 0 || numValue > 200) {
+                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-200" -t 2000`);
                     return;
                 }
 
                 let valueStr = numValue.toFixed(1);
 
-                // Update CSS file - margin-left
+                // Update CSS file - both left and right margins
                 GLib.spawn_command_line_async(`sed -i '27s/margin-left: [0-9.]*px;/margin-left: ${valueStr}px;/' '${waybarStyleFile}'`);
+                GLib.spawn_command_line_async(`sed -i '28s/margin-right: [0-9.]*px;/margin-right: ${valueStr}px;/' '${waybarStyleFile}'`);
 
                 // Update state file
-                GLib.file_set_contents(waybarLeftSideMarginsStateFile, valueStr);
+                GLib.file_set_contents(waybarSideMarginsStateFile, valueStr);
 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Left Side-margin: ${valueStr}px" -t 2000`);
+                GLib.spawn_command_line_async(`notify-send "Waybar" "Side-margins: ${valueStr}px" -t 2000`);
             } catch (e) {
-                print('Error updating waybar side margin: ' + e.message);
+                print('Error updating waybar side margins: ' + e.message);
             }
         }
 
         entry.connect('activate', () => {
-            updateWaybarLeftSideMargins(entry.get_text());
+            updateWaybarSideMargins(entry.get_text());
         });
 
         row.append(lbl);
@@ -11798,7 +11800,7 @@ function createCandyUtilsBox() {
     }
     
     //addWaybarOuterRadiusRow('Waybar Radius');
-    //addWaybarLeftSideMarginsRow('Waybar Left');
+    //addWaybarSideMarginsRow('Waybar Sides');
     //addWaybarRightSideMarginsRow('Waybar Right');
     //addWaybarBottomMarginRow('Waybar Bottom');
     //addWaybarTopMarginRow('Waybar Top');
