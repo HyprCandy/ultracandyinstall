@@ -6128,17 +6128,29 @@ function createCandyUtilsBox() {
             /*background: linear-gradient(90deg, @on_primary_fixed_variant 0%, @source_color 100%, @source_color 0%, @background 100%);*/
             background-size: cover;
         }
-        .weather-temp {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: @primary_fixed_dim;
-            text-shadow: 0 0 12px @source_color;
+
+        button {
+            background-color: @inverse_primary;
+            border:0.5px solid @background;
+            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+            color: @primary;
+            transition: all 0.2s ease;
             opacity: 1;
+            min-width: 24px;
+            min-height: 24px;
+            padding: 4px;
         }
-        .neon-highlight, button:hover, button:active {
-            box-shadow: 0 0 8px 2px @background, 0 0 0 2px @background inset;
-            border-color: @source_color;
-            color: @inverse_primary;
+
+        button:hover {
+            background-color: @blur_background;
+            border: 0.5px solid @inverse_primary;
+            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+        }
+
+        .neon-highlight, button:active {
+            background-color: @blur-background;
+            border:0.5px solid @background;
+            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
         }
     `;
     cssProvider.load_from_data(css, css.length);
@@ -9013,17 +9025,29 @@ function createCandyUtilsBox() {
             /*background: linear-gradient(90deg, @on_primary_fixed_variant 0%, @source_color 100%, @source_color 0%, @background 100%);*/
             background-size: cover;
         }
-        .weather-temp {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: @primary_fixed_dim;
-            text-shadow: 0 0 12px @source_color;
+
+        button {
+            background-color: @inverse_primary;
+            border:0.5px solid @background;
+            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+            color: @primary;
+            transition: all 0.2s ease;
             opacity: 1;
+            min-width: 24px;
+            min-height: 24px;
+            padding: 4px;
         }
-        .neon-highlight, button:hover, button:active {
-            box-shadow: 0 0 8px 2px @background, 0 0 0 2px @background inset;
-            border-color: @source_color;
-            color: @inverse_primary;
+
+        button:hover {
+            background-color: @blur_background;
+            border: 0.5px solid @inverse_primary;
+            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+        }
+
+        .neon-highlight, button:active {
+            background-color: @blur-background;
+            border:0.5px solid @background;
+            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
         }
     `;
     cssProvider.load_from_data(css, css.length);
