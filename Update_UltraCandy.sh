@@ -6637,16 +6637,16 @@ function createCandyUtilsBox() {
             // Change to bottom position:
             GLib.spawn_command_line_async(`sed -i '5s/"position": "top",/"position": "bottom",/' '${waybarConfigFile}'`);
             // Update rofi menu positions
-            GLib.spawn_command_line_async(`sed -i 's/location:                 northeast;/location:                 southeast;/' '${RofiFile1}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 northeast;/location:                 southeast;/' '${RofiFile2}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 northeast;/location:                 southeast;/' '${RofiFile3}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 north;/location:                 south;/' '${RofiFile1}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 north;/location:                 south;/' '${RofiFile2}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 north;/location:                 south;/' '${RofiFile3}'`);
         } else {
             // Change to top position:
             GLib.spawn_command_line_async(`sed -i '5s/"position": "bottom",/"position": "top",/' '${waybarConfigFile}'`);
             // Update rofi menu positions
-            GLib.spawn_command_line_async(`sed -i 's/location:                 southeast;/location:                 northeast;/' '${RofiFile1}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 southeast;/location:                 northeast;/' '${RofiFile2}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 southeast;/location:                 northeast;/' '${RofiFile3}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 south;/location:                 north;/' '${RofiFile1}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 south;/location:                 north;/' '${RofiFile2}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 south;/location:                 north;/' '${RofiFile3}'`);
         }
         // Reload waybar
         //GLib.spawn_command_line_async('killall waybar && sleep 1');
@@ -9522,16 +9522,16 @@ function createCandyUtilsBox() {
             // Change to bottom position:
             GLib.spawn_command_line_async(`sed -i '5s/"position": "top",/"position": "bottom",/' '${waybarConfigFile}'`);
             // Update rofi menu positions
-            GLib.spawn_command_line_async(`sed -i 's/location:                 northeast;/location:                 southeast;/' '${RofiFile1}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 northeast;/location:                 southeast;/' '${RofiFile2}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 northeast;/location:                 southeast;/' '${RofiFile3}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 north;/location:                 south;/' '${RofiFile1}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 north;/location:                 south;/' '${RofiFile2}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 north;/location:                 south;/' '${RofiFile3}'`);
         } else {
             // Change to top position:
             GLib.spawn_command_line_async(`sed -i '5s/"position": "bottom",/"position": "top",/' '${waybarConfigFile}'`);
             // Update rofi menu positions
-            GLib.spawn_command_line_async(`sed -i 's/location:                 southeast;/location:                 northeast;/' '${RofiFile1}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 southeast;/location:                 northeast;/' '${RofiFile2}'`);
-            GLib.spawn_command_line_async(`sed -i 's/location:                 southeast;/location:                 northeast;/' '${RofiFile3}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 south;/location:                 north;/' '${RofiFile1}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 south;/location:                 north;/' '${RofiFile2}'`);
+            GLib.spawn_command_line_async(`sed -i 's/location:                 south;/location:                 north;/' '${RofiFile3}'`);
         }
         // Reload waybar
         //GLib.spawn_command_line_async('killall waybar && sleep 1');
