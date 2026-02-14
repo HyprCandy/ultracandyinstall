@@ -3040,7 +3040,7 @@ get_waypaper_background() {
 update_config_background() {
     local bg_path="$1"
     if [ -f "$bg_path" ]; then
-        magick "$bg_path" "$HOME/.config/background" 
+        magick "$bg_path" "$HOME/.config/wallpaper.png"
         echo "✅ Updated ~/.config/background to point to: $bg_path"
         return 0
     else
@@ -3051,7 +3051,8 @@ update_config_background() {
 trigger_matugen() {
     if [ -f "$MATUGEN_CONFIG" ]; then
         echo "🎨 Triggering matugen color generation..."
-        matugen image "$CONFIG_BG" --type scheme-content --contrast 0.65 -m dark -r nearest &
+        matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2 &
+        magick "$bg_path" "$HOME/.config/background" 
         echo "✅ Matugen color generation started"
     else
         echo "⚠️  Matugen config not found at: $MATUGEN_CONFIG"
@@ -6803,7 +6804,7 @@ function createCandyUtilsBox() {
         
         // Handle monochrome vs other schemes for GTK CSS
         if (schemeName === 'Dark') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_primary_fixed_variant/g' '${gtk3File}'`);
@@ -6841,7 +6842,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Light') {
-            GLib.spawn_command_line_async(`sed -i 's/dark/light/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m dark/-m light/g' '${waypaperIntegrationFile}'`);
             /*GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk3File}'`);
@@ -6879,7 +6880,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Content') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6917,7 +6918,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Expressive') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6955,7 +6956,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Fruit-salad') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -6993,7 +6994,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Neutral') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -7031,7 +7032,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Rainbow') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -7069,7 +7070,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Tonal-spot') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -7107,7 +7108,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Vibrant') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9759,7 +9760,7 @@ function createCandyUtilsBox() {
         
         // Handle monochrome vs other schemes for GTK CSS
         if (schemeName === 'Dark') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_primary_fixed_variant/g' '${gtk3File}'`);
@@ -9797,7 +9798,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Light') {
-            GLib.spawn_command_line_async(`sed -i 's/dark/light/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m dark/-m light/g' '${waypaperIntegrationFile}'`);
             /*GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@primary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@primary_fixed_dim/g' '${gtk3File}'`);
@@ -9835,7 +9836,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Content') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9873,7 +9874,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Expressive') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9911,7 +9912,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Fruit-salad') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9949,7 +9950,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Neutral') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -9987,7 +9988,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Rainbow') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -10025,7 +10026,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Tonal-spot') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
@@ -10063,7 +10064,7 @@ function createCandyUtilsBox() {
         }
         
         if (schemeName === 'Vibrant') {
-            GLib.spawn_command_line_async(`sed -i 's/light/dark/g' '${waypaperIntegrationFile}'`);
+            GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
             GLib.spawn_command_line_async(`sed -i 's/@primary_fixed_dim/@on_secondary/g' '${gtk3File}'`);
