@@ -300,6 +300,7 @@ build_package_list() {
         "rofi"
         "rofi-emoji"
         "rofi-nerdy"
+        "nwg-dock-hyprland"
         
         # Wallpaper and screenshot tools
         "swww"
