@@ -401,6 +401,8 @@ build_package_list() {
         "gtksourceview5"
 
         # Fun stuff
+        "asciiquarium"
+        "tty-clock"
         "cmatrix"
         "pipes.sh"
         
