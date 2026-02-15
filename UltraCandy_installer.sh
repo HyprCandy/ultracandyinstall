@@ -475,7 +475,12 @@ build_package_list() {
 # Function to install packages
 install_packages() {
     print_status "Handling conflicting packages first..."
-    $AUR_HELPER -Rdd --noconfirm jack
+    if pacman -Qi jack &>/dev/null; then
+        print_status "Removing jack package..."
+        $AUR_HELPER -Rdd --noconfirm jack
+    else
+        echo ""
+    fi
     
     print_status "Starting installation of ${#packages[@]} packages using $AUR_HELPER..."
     
