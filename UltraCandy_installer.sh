@@ -260,7 +260,6 @@ build_package_list() {
         "hyprpicker"
         "hyprpolkitagent"
         "hyprsunset"
-        "hyprsysteminfo"
         "hyprutils"
         "hyprwayland-scanner"
         
@@ -487,7 +486,7 @@ install_packages() {
         local batch=("${packages[@]:i:batch_size}")
         print_status "Installing batch $((i/batch_size + 1)): ${batch[*]}"
         
-        if $AUR_HELPER -S --needed "${batch[@]}"; then
+        if $AUR_HELPER -S --noconfirm --needed "${batch[@]}"; then
             installed=$((installed + ${#batch[@]}))
             print_success "Batch $((i/batch_size + 1)) installed successfully"
         else
