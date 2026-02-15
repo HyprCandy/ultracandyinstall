@@ -329,6 +329,7 @@ build_package_list() {
         "htop"
         
         # Customization and theming
+        "adw-gtk-theme"
         "matugen-bin"
         
         # Editors
