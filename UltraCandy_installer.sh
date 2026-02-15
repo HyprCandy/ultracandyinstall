@@ -274,10 +274,12 @@ build_package_list() {
         "cmake"
         
         # GNOME components (always include gnome-control-center and gnome-tweaks)
-        "gnome-control-center"
-        "gnome-tweaks"
+        #"gnome-control-center"
+        #"gnome-tweaks"
         "gnome-software"
-        "mutter"
+        "gnome-weather"
+        "gnome-calendar"
+        "gnome-system-monitor"
         
         # Terminals and file manager
         "kitty"
