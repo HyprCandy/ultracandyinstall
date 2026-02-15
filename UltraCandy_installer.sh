@@ -525,14 +525,21 @@ install_packages() {
         echo "$AUR_HELPER -S ${failed[*]}"
     fi
 
-    print_status "Setting up UltraCandy configuration..."
     # Prevent notification daemon conflicts
     if [ "$PANEL_CHOICE" = "waybar" ]; then
-        print_status "Attempting to remove mako since you chose waybar to avoid conflicts with swaync incase mako was installed before..."
-        $AUR_HELPER -R mako
+        if pacman -Qi mako &>/dev/null; then
+            print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
+            $AUR_HELPER -R --noconfirm mako
+        else
+            echo ""
+        fi
     else
-        print_status "Attempting to remove swaync since you chose hyprpanel to avoid conflicts with mako incase swaync was installed before..."
-        $AUR_HELPER -R swaync
+        if pacman -Qi swaync &>/dev/null; then
+            print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
+            $AUR_HELPER -R --noconfirm swaync
+        else
+            echo ""
+        fi
     fi
 }
 
