@@ -4299,7 +4299,7 @@ else
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
+exec-once = dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
 exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh #Restore wallaper
 exec-once = systemctl --user start hyprpanel #Launch bar/panel
