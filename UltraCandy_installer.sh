@@ -5761,10 +5761,6 @@ fi
     print_status "Note the plugins' setup will request your permission a few times here..."
     
     hyprpm update
-    hyprpm add https://github.com/hyprwm/hyprland-plugins
-    hyprpm add https://github.com/sandwichfarm/hyprexpo-plus
-    hyprpm disable hyprbars
-    hyprpm disable hyprexpo-plus
     hyprpm reload
 }
 
