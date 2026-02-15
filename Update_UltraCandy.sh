@@ -968,12 +968,6 @@ setup_ultracandy() {
         $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako
     fi
 
-    print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
-    print_status "Note the plugins' setup will request your permission a few times here..."
-    
-    hyprpm update
-    hyprpm reload
-
     print_status "Setting up UltraCandy configuration..."
     
     # Check if stow is available
@@ -3669,7 +3663,6 @@ setup_custom_config() {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
-exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
 exec-once = ~/.config/hyprcandy/hooks/restart_waybar.sh #Launch bar/panel
 exec-once = systemctl --user start waybar-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
@@ -4449,7 +4442,6 @@ else
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
-exec-once = hyprpm reload && hyprctl dismissnotify #Reload plugin
 exec-once = systemctl --user start hyprpanel #Launch bar/panel
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
 exec-once = systemctl --user start hyprpanel-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
