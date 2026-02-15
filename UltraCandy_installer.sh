@@ -3771,7 +3771,7 @@ group {
         font_size = 14
         font_weight_active = heavy
         font_weight_inactive = heavy
-        text_color = $surface_variant
+        text_color = $surface_tint
         col.active =  $primary_fixed_dim
         col.inactive = $background
         col.locked_active =  $primary_fixed_dim
@@ -4550,7 +4550,7 @@ group {
         font_size = 14
         font_weight_active = heavy
         font_weight_inactive = heavy
-        text_color = $surface_variant
+        text_color = $surface_tint
         col.active =  $primary_fixed_dim
         col.inactive = $background
         col.locked_active =  $primary_fixed_dim
