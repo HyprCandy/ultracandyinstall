@@ -4308,17 +4308,17 @@ exec-once = systemctl --user start hyprpanel-idle-monitor #Watches bar/panel run
 exec-once = systemctl --user start rofi-font-watcher #Watches for system font changes to update rofi-font.rasi
 exec-once = systemctl --user start cursor-theme-watcher #Watches for cursor theme changes
 # Start swww
-#exec-once = swww-daemon &
+#exec-once = swww-daemon
 # Start mako
-#exec-once = mako &
+#exec-once = mako
 # Startup
-exec-once = ~/.config/hyprcandy/hooks/startup_services.sh &
+exec-once = ~/.config/hyprcandy/hooks/startup_services.sh
 # Start polkit agent
-exec-once = systemctl --user start hyprpolkitagent &
+exec-once = systemctl --user start hyprpolkitagent
 # Dock
-exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login &
+exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login
 # Using hypridle to start hyprlock
-exec-once = hypridle &
+exec-once = hypridle
 # Load cliphist history
 exec-once = wl-paste --watch cliphist store
 # Restart xdg
@@ -4326,10 +4326,10 @@ exec-once = ~/.config/hpr/scripts/xdg.sh
 # Start wallaper service
 exec-once = systemctl --user start background-watcher
 # Pyprland
-exec-once = /usr/bin/pypr &
+exec-once = /usr/bin/pypr
 # Overview env rule and startup
 env = QS_NO_RELOAD_POPUP,1
-exec-once = qs -c overview &
+exec-once = qs -c overview
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Animations                        ┃
