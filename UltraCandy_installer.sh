@@ -274,12 +274,18 @@ build_package_list() {
         "cmake"
         
         # GNOME components (always include gnome-control-center and gnome-tweaks)
+        #"mutter"
         #"gnome-control-center"
         #"gnome-tweaks"
+        "gvfs"
+        "gnome-disk-utility"
+        "gnome-color-manager"
         "gnome-software"
         "gnome-weather"
         "gnome-calendar"
         "gnome-system-monitor"
+        "gnome-calculator"
+        "evince"
         
         # Terminals and file manager
         "kitty"
@@ -313,7 +319,6 @@ build_package_list() {
         "satty"
         
         # System tools
-        "gnome-disk-utility"
         "brightnessctl"
         "playerctl"
         "power-profiles-daemon"
