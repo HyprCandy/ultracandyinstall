@@ -5756,12 +5756,6 @@ fi
         echo "⚠️  File not found: $HYPRLAND_CUSTOM"
     fi
         fi
-
-    print_status "Setting up hyprexpo-plus and hyprbars plugins with configs in hyprviz.conf" 
-    print_status "Note the plugins' setup will request your permission a few times here..."
-    
-    hyprpm update
-    hyprpm reload
 }
 
 update_keybinds() {
