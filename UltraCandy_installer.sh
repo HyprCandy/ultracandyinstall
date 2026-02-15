@@ -331,6 +331,7 @@ build_package_list() {
         # Customization and theming
         "adw-gtk-theme"
         "matugen-bin"
+        "hyprviz-bin"
         
         # Editors
         "gedit"
