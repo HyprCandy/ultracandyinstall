@@ -474,6 +474,9 @@ build_package_list() {
 
 # Function to install packages
 install_packages() {
+    print_status "Handling conflicting packages first..."
+    $AUR_HELPER -R --noconfirm jack
+    
     print_status "Starting installation of ${#packages[@]} packages using $AUR_HELPER..."
     
     # Install packages in batches to avoid potential issues
