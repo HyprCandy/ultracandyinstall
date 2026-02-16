@@ -3655,23 +3655,24 @@ exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
 exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh #Restore wallaper
 exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
 exec-once = ~/.config/hyprcandy/hooks/restart_waybar.sh #Launch bar/panel
+exec-once = blueman-applet #Start bluetooth
 exec-once = systemctl --user start waybar-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
 exec-once = systemctl --user start hyprlock-watcher.service #Hyprlock watcher to re-initialize waybar on session resume
 exec-once = systemctl --user start waypaper-watcher #Watches for system waypaper changes to trigger color generation
 exec-once = systemctl --user start rofi-font-watcher #Watches for system font changes to update rofi-font.rasi
 exec-once = systemctl --user start cursor-theme-watcher #Watches for cursor theme changes
 # Start swww
-exec-once = swww-daemon &
+exec-once = swww-daemon
 # Start swaync
-exec-once = swaync &
+exec-once = swaync
 # Startup
-exec-once = ~/.config/hyprcandy/hooks/startup_services.sh &
+exec-once = ~/.config/hyprcandy/hooks/startup_services.sh
 # Start Polkit
-exec-once = systemctl --user start hyprpolkitagent &
+exec-once = systemctl --user start hyprpolkitagent
 # Dock
-exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login &
+exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login
 # Using hypridle to start hyprlock
-exec-once = hypridle &
+exec-once = hypridle
 # Load cliphist history
 exec-once = wl-paste --watch cliphist store
 # Restart xdg
@@ -3679,10 +3680,10 @@ exec-once = ~/.config/hpr/scripts/xdg.sh
 # Restart wallaper service
 exec-once = systemctl --user restart background-watcher
 # Pyprland
-exec-once = /usr/bin/pypr &
+exec-once = /usr/bin/pypr
 # Overview env rule and startup
 env = QS_NO_RELOAD_POPUP,1
-exec-once = qs -c overview &
+exec-once = qs -c overview
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                           Animations                        ┃
