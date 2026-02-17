@@ -2034,8 +2034,123 @@ chmod +x "$HOME/.ultracandy/GJS/toggle-weather-widget.sh"
 echo "✅ Widget toggle scripts made executable!"
 
 # ═══════════════════════════════════════════════════════════════
-#                 SERVICES BASED ON CHOSEN BAR
+#             SERVICES & SCRIPTS BASED ON CHOSEN BAR
 # ═══════════════════════════════════════════════════════════════
+
+if [ "$PANEL_CHOICE" = "waybar" ]; then
+
+# ═══════════════════════════════════════════════════════════════
+#                      Waybar XDG Script
+# ═══════════════════════════════════════════════════════════════
+
+cat > "$HOME/.config/hypr/scripts/xdg.sh" << 'EOF'
+#!/bin/bash
+# __  ______   ____
+# \ \/ /  _ \ / ___|
+#  \  /| | | | |  _
+#  /  \| |_| | |_| |
+# /_/\_\____/ \____|
+
+# Kill any stale portal processes not managed by systemd
+killall -e xdg-desktop-portal-hyprland 2>/dev/null
+killall -e xdg-desktop-portal-gnome    2>/dev/null
+killall -e xdg-desktop-portal-gtk      2>/dev/null
+killall -e xdg-desktop-portal          2>/dev/null
+
+sleep 1
+
+# Stop all managed services cleanly
+systemctl --user stop \
+    pipewire \
+    wireplumber \
+    background-watcher \
+    waybar-idle-monitor \
+    waypaper-watcher \
+    xdg-desktop-portal \
+    xdg-desktop-portal-hyprland \
+    xdg-desktop-portal-gtk \
+    xdg-desktop-portal-gnome
+
+sleep 1
+
+# Start portals in the correct order:
+# hyprland portal first (screen capture, toplevel), then gtk/gnome for file pickers
+systemctl --user start xdg-desktop-portal-hyprland
+sleep 1
+systemctl --user start xdg-desktop-portal-gtk
+systemctl --user start xdg-desktop-portal-gnome
+systemctl --user start xdg-desktop-portal
+
+sleep 1
+
+# Restart audio and other services
+systemctl --user start \
+    pipewire \
+    wireplumber \
+    background-watcher \
+    waybar-idle-monitor \
+    waypaper-watcher
+EOF
+
+chmod +x "$HOME/.config/hypr/scripts/xdg.sh"
+
+else
+
+# ═══════════════════════════════════════════════════════════════
+#                      Hyprpanel XDG Script
+# ═══════════════════════════════════════════════════════════════
+
+cat > "$HOME/.config/hypr/scripts/xdg.sh" << 'EOF'
+#!/bin/bash
+# __  ______   ____
+# \ \/ /  _ \ / ___|
+#  \  /| | | | |  _
+#  /  \| |_| | |_| |
+# /_/\_\____/ \____|
+
+# Kill any stale portal processes not managed by systemd
+killall -e xdg-desktop-portal-hyprland 2>/dev/null
+killall -e xdg-desktop-portal-gnome    2>/dev/null
+killall -e xdg-desktop-portal-gtk      2>/dev/null
+killall -e xdg-desktop-portal          2>/dev/null
+
+sleep 1
+
+# Stop all managed services cleanly
+systemctl --user stop \
+    pipewire \
+    wireplumber \
+    background-watcher \
+    hyprpanel \
+    hyprpanel-idle-monitor \
+    xdg-desktop-portal \
+    xdg-desktop-portal-hyprland \
+    xdg-desktop-portal-gtk \
+    xdg-desktop-portal-gnome
+
+sleep 1
+
+# Start portals in the correct order:
+# hyprland portal first (screen capture, toplevel), then gtk/gnome for file pickers
+systemctl --user start xdg-desktop-portal-hyprland
+sleep 1
+systemctl --user start xdg-desktop-portal-gtk
+systemctl --user start xdg-desktop-portal-gnome
+systemctl --user start xdg-desktop-portal
+
+sleep 1
+
+# Restart audio and other services
+systemctl --user start \
+    pipewire \
+    wireplumber \
+    background-watcher \
+    hyprnael \
+    hyprpanel-idle-monitor
+EOF
+
+chmod +x "$HOME/.config/hypr/scripts/xdg.sh"
+fi
 
 if [ "$PANEL_CHOICE" = "waybar" ]; then
 
@@ -3661,38 +3776,41 @@ setup_custom_config() {
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
-exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
-exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh #Restore wallaper
-exec-once = systemctl --user start background-watcher #Watches for system background changes to update background.png
-exec-once = ~/.config/hyprcandy/hooks/restart_waybar.sh #Launch bar/panel
-exec-once = blueman-applet #Start bluetooth
-exec-once = systemctl --user start waybar-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
-exec-once = systemctl --user start hyprlock-watcher.service #Hyprlock watcher to re-initialize waybar on session resume
-exec-once = systemctl --user start waypaper-watcher #Watches for system waypaper changes to trigger color generation
-exec-once = systemctl --user start rofi-font-watcher #Watches for system font changes to update rofi-font.rasi
-exec-once = systemctl --user start cursor-theme-watcher #Watches for cursor theme changes
-# Start swww
-exec-once = swww-daemon
-# Start swaync
-exec-once = swaync
-# Startup
-exec-once = ~/.config/hyprcandy/hooks/startup_services.sh
-# Start Polkit
+# Environment must be first — everything else depends on these
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
+# Portals next — before any app or service that might need them
+exec-once = bash ~/.config/hypr/scripts/xdg.sh
+
+# System services
 exec-once = systemctl --user start hyprpolkitagent
-# Dock
-exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login
-# Using hypridle to start hyprlock
+exec-once = systemctl --user start hyprlock-watcher.service
+exec-once = systemctl --user start waybar-idle-monitor
+exec-once = systemctl --user start waypaper-watcher
+exec-once = systemctl --user start rofi-font-watcher
+exec-once = systemctl --user start cursor-theme-watcher
+
+# Daemons
+exec-once = swww-daemon
 exec-once = hypridle
-# Load cliphist history
-exec-once = wl-paste --watch cliphist store
-# Restart xdg
-exec-once = ~/.config/hpr/scripts/xdg.sh
-# Restart wallaper service
-exec-once = systemctl --user restart background-watcher
-# Pyprland
 exec-once = /usr/bin/pypr
-# Overview env rule and startup
+
+# UI — after daemons are up
+exec-once = swaync
+exec-once = blueman-applet
+exec-once = bash ~/.config/hyprcandy/hooks/restart_waybar.sh
+exec-once = bash ~/.config/hyprcandy/hooks/startup_services.sh
+exec-once = bash ~/.config/hyprcandy/scripts/toggle-dock.sh --login
+
+# Wallpaper — after swww-daemon is running
+#exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh
+exec-once = systemctl --user start background-watcher
+
+# Clipboard
+exec-once = wl-paste --watch cliphist store
+
+# Overview
 env = QS_NO_RELOAD_POPUP,1
 exec-once = qs -c overview
 
@@ -4311,35 +4429,37 @@ else
 # ┃                           Autostart                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-exec-once = dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
-exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
-exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh #Restore wallaper
-exec-once = systemctl --user start hyprpanel #Launch bar/panel
-exec-once = systemctl --user start hyprpanel-idle-monitor #Watches bar/panel running status to enable/disable idle-inhibitor
-#exec-once = systemctl --user start waypaper-watcher #Watches for system waypaper changes to trigger color generation
-exec-once = systemctl --user start rofi-font-watcher #Watches for system font changes to update rofi-font.rasi
-exec-once = systemctl --user start cursor-theme-watcher #Watches for cursor theme changes
-# Start swww
-#exec-once = swww-daemon
-# Start mako
-#exec-once = mako
-# Startup
-exec-once = ~/.config/hyprcandy/hooks/startup_services.sh
-# Start polkit agent
+# Environment must be first — everything else depends on these
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
+# Portals next — before any app or service that might need them
+exec-once = bash ~/.config/hypr/scripts/xdg.sh
+
+# System services
 exec-once = systemctl --user start hyprpolkitagent
-# Dock
-exec-once = ~/.config/hyprcandy/scripts/toggle-dock.sh --login
-# Using hypridle to start hyprlock
+exec-once = systemctl --user start hyprlock-watcher.service
+exec-once = systemctl --user start hyprpanel-idle-monitor
+exec-once = systemctl --user start rofi-font-watcher
+exec-once = systemctl --user start cursor-theme-watcher
+
+# Daemons
 exec-once = hypridle
-# Load cliphist history
-exec-once = wl-paste --watch cliphist store
-# Restart xdg
-exec-once = ~/.config/hpr/scripts/xdg.sh
-# Start wallaper service
-exec-once = systemctl --user start background-watcher
-# Pyprland
 exec-once = /usr/bin/pypr
-# Overview env rule and startup
+
+# UI — after daemons are up
+exec-once = systemctl --user start hyprpanel
+exec-once = bash ~/.config/hyprcandy/hooks/startup_services.sh
+exec-once = bash ~/.config/hyprcandy/scripts/toggle-dock.sh --login
+
+# Wallpaper
+exec-once = bash ~/.config/hypr/scripts/wallpaper-restore.sh
+exec-once = systemctl --user start background-watcher
+
+# Clipboard
+exec-once = wl-paste --watch cliphist store
+
+# Overview
 env = QS_NO_RELOAD_POPUP,1
 exec-once = qs -c overview
 
