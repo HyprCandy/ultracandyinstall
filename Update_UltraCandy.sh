@@ -984,11 +984,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-desktop-portal-gnome
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-desktop-portal-gnome
     fi
 
     print_status "Setting up UltraCandy configuration..."
