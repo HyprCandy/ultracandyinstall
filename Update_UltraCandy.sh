@@ -2875,6 +2875,9 @@ execute_hooks() {
                 pkill -x gnome-software
                 pkill -x nautilus
                 pkill -f nwg-dock-hyprland
+                gsettings set org.gnome.desktop.interface gtk-theme "''"
+                sleep 0.2
+                gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
                 sleep 0.5
                 nohup bash -c "$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch" >/dev/null 2>&1 &
                 mkdir -p "$(dirname "$COLORS_FILE")"
