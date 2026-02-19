@@ -265,7 +265,6 @@ build_package_list() {
         "xdg-desktop-portal"
         "xdg-desktop-portal-hyprland"
         "xdg-desktop-portal-gtk"
-        "xdg-desktop-portal-gnome"
         
         # Packages
         "pacman-contrib"
@@ -2046,7 +2045,6 @@ cat > "$HOME/.config/hypr/scripts/xdg.sh" << 'EOF'
 
 # Kill any stale portal processes not managed by systemd
 killall -e xdg-desktop-portal-hyprland 2>/dev/null
-killall -e xdg-desktop-portal-gnome    2>/dev/null
 killall -e xdg-desktop-portal-gtk      2>/dev/null
 killall -e xdg-desktop-portal          2>/dev/null
 
@@ -2061,8 +2059,7 @@ systemctl --user stop \
     waypaper-watcher \
     xdg-desktop-portal \
     xdg-desktop-portal-hyprland \
-    xdg-desktop-portal-gtk \
-    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
 
 sleep 1
 
@@ -2071,7 +2068,6 @@ sleep 1
 systemctl --user start xdg-desktop-portal-hyprland
 sleep 1
 systemctl --user start xdg-desktop-portal-gtk
-systemctl --user start xdg-desktop-portal-gnome
 systemctl --user start xdg-desktop-portal
 
 sleep 1
@@ -2102,7 +2098,6 @@ cat > "$HOME/.config/hypr/scripts/xdg.sh" << 'EOF'
 
 # Kill any stale portal processes not managed by systemd
 killall -e xdg-desktop-portal-hyprland 2>/dev/null
-killall -e xdg-desktop-portal-gnome    2>/dev/null
 killall -e xdg-desktop-portal-gtk      2>/dev/null
 killall -e xdg-desktop-portal          2>/dev/null
 
@@ -2117,8 +2112,7 @@ systemctl --user stop \
     hyprpanel-idle-monitor \
     xdg-desktop-portal \
     xdg-desktop-portal-hyprland \
-    xdg-desktop-portal-gtk \
-    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
 
 sleep 1
 
@@ -2127,7 +2121,6 @@ sleep 1
 systemctl --user start xdg-desktop-portal-hyprland
 sleep 1
 systemctl --user start xdg-desktop-portal-gtk
-systemctl --user start xdg-desktop-portal-gnome
 systemctl --user start xdg-desktop-portal
 
 sleep 1
