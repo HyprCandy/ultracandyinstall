@@ -3704,7 +3704,7 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         echo "⚠️  wlogout style.css not found at $WLOGOUT_STYLE"
     fi
     # Symlink GTK3 and GTK4 settings files
-    ln -sf ~/.config/gtk-3.0/settings.ini ~/.config/gtk-4.0/settings.ini
+    #ln -sf ~/.config/gtk-3.0/settings.ini ~/.config/gtk-4.0/settings.ini
 }
 
 # Function to enable display manager and prompt for reboot
