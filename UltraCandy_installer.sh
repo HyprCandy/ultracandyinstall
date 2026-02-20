@@ -6194,7 +6194,7 @@ function createCandyUtilsBox() {
                         let newValueStr = newValue.toFixed(2);
                         GLib.spawn_command_line_async(`sed -i 's/active_opacity = .*/active_opacity = ${newValueStr}/' "${configFile}"`);
                         GLib.spawn_command_line_async('hyprctl reload');
-                        GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
                     }
                 }
             } catch (e) {}
@@ -6240,7 +6240,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i '/blur {/,/}/{s/size = ${currentValue}/size = ${newValue}/}' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -6288,7 +6288,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i 's/passes = ${currentValue}/passes = ${newValue}/' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -6331,7 +6331,7 @@ function createCandyUtilsBox() {
                         let currentValue = parseInt(borderMatch[1]);
                         let newValue = Math.max(0, currentValue + increment);
                         GLib.spawn_command_line_async(`sed -i 's/border-width: ${currentValue}px/border-width: ${newValue}px/' '${rofiBorderFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -6373,7 +6373,7 @@ function createCandyUtilsBox() {
                         let newValue = Math.max(0, Math.min(5, currentValue + increment));
                         let newValueStr = newValue.toFixed(1);
                         GLib.spawn_command_line_async(`sed -i 's/border-radius: ${radiusMatch[1]}em/border-radius: ${newValueStr}em/' '${rofiRadiusFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -7099,7 +7099,7 @@ function createCandyUtilsBox() {
                         let newValueStr = newValue.toFixed(2);
                         GLib.spawn_command_line_async(`sed -i 's/active_opacity = .*/active_opacity = ${newValueStr}/' "${configFile}"`);
                         GLib.spawn_command_line_async('hyprctl reload');
-                        GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
                     }
                 }
             } catch (e) {}
@@ -7144,7 +7144,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i '/blur {/,/}/{s/size = ${currentValue}/size = ${newValue}/}' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -7192,7 +7192,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i 's/passes = ${currentValue}/passes = ${newValue}/' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -7234,7 +7234,7 @@ function createCandyUtilsBox() {
                         let currentValue = parseInt(borderMatch[1]);
                         let newValue = Math.max(0, currentValue + increment);
                         GLib.spawn_command_line_async(`sed -i 's/border-width: ${currentValue}px/border-width: ${newValue}px/' '${rofiBorderFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -7276,7 +7276,7 @@ function createCandyUtilsBox() {
                         let newValue = Math.max(0, Math.min(5, currentValue + increment));
                         let newValueStr = newValue.toFixed(1);
                         GLib.spawn_command_line_async(`sed -i 's/border-radius: ${radiusMatch[1]}em/border-radius: ${newValueStr}em/' '${rofiRadiusFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -7352,7 +7352,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newSize);
                 if (isNaN(numValue) || numValue < 16 || numValue > 64) {
-                    GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newSize}. Use 16-64" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newSize}. Use 16-64" -t 2000`);
                     return;
                 }
                 
@@ -7371,7 +7371,7 @@ function createCandyUtilsBox() {
                     bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
-                GLib.spawn_command_line_async(`notify-send "Dock" "Icon Size: ${numValue}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Dock" "Icon Size: ${numValue}px" -t 2000`);
             } catch (e) {
                 print('Error updating dock icon size: ' + e.message);
             }
@@ -7442,7 +7442,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newRadius);
                 if (isNaN(numValue) || numValue < 0 || numValue > 50) {
-                    GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newRadius}. Use 0-50" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newRadius}. Use 0-50" -t 2000`);
                     return;
                 }
                 
@@ -7473,7 +7473,7 @@ function createCandyUtilsBox() {
                     bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
-                GLib.spawn_command_line_async(`notify-send "Dock" "Border Radius: ${numValue}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Dock" "Border Radius: ${numValue}px" -t 2000`);
             } catch (e) {
                 print('Error updating dock radius: ' + e.message);
             }
@@ -7544,7 +7544,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newWidth);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newWidth}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newWidth}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -7575,7 +7575,7 @@ function createCandyUtilsBox() {
                     bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
-                GLib.spawn_command_line_async(`notify-send "Dock" "Border Width: ${numValue}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Dock" "Border Width: ${numValue}px" -t 2000`);
             } catch (e) {
                 print('Error updating dock width: ' + e.message);
             }
@@ -7633,7 +7633,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newRounding);
                 if (isNaN(numValue) || numValue < 0 || numValue > 50) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newRounding}. Use 0-50" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newRounding}. Use 0-50" -t 2000`);
                     return;
                 }
                 
@@ -7644,7 +7644,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword decoration:rounding ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Rounding: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Rounding: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating rounding: ' + e.message);
             }
@@ -7702,7 +7702,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newGapsOut);
                 if (isNaN(numValue) || numValue < 0 || numValue > 100) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsOut}. Use 0-100" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsOut}. Use 0-100" -t 2000`);
                     return;
                 }
                 
@@ -7713,7 +7713,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword general:gaps_out ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps OUT: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps OUT: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating gaps out: ' + e.message);
             }
@@ -7768,7 +7768,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newGapsIn);
                 if (isNaN(numValue) || numValue < 0 || numValue > 50) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsIn}. Use 0-50" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsIn}. Use 0-50" -t 2000`);
                     return;
                 }
                 
@@ -7779,7 +7779,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword general:gaps_in ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps IN: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps IN: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating gaps in: ' + e.message);
             }
@@ -7838,7 +7838,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newBorder);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -7849,7 +7849,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword general:border_size ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Border: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Border: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating border: ' + e.message);
             }
@@ -7910,7 +7910,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newSize);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newSize}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newSize}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -7926,7 +7926,7 @@ function createCandyUtilsBox() {
                             // Use the exact sed command from existing logic
                             GLib.spawn_command_line_async(`sed -i '/blur {/,/}/{s/size = ${currentValue}/size = ${numValue}/}' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur" "Size: ${numValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur" "Size: ${numValue}" -t 2000`);
                         }
                     }
                 }
@@ -7990,7 +7990,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newPass);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newPass}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newPass}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -8006,7 +8006,7 @@ function createCandyUtilsBox() {
                             // Use the exact sed command from existing logic
                             GLib.spawn_command_line_async(`sed -i 's/passes = ${currentValue}/passes = ${numValue}/' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur" "Passes: ${numValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur" "Passes: ${numValue}" -t 2000`);
                         }
                     }
                 }
@@ -8066,7 +8066,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newBorder);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -8079,7 +8079,7 @@ function createCandyUtilsBox() {
                         let currentValue = parseInt(borderMatch[1]);
                         // Use the exact sed command from existing logic
                         GLib.spawn_command_line_async(`sed -i 's/border-width: ${currentValue}px/border-width: ${numValue}px/' '${rofiBorderFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi" "Border: ${numValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi" "Border: ${numValue}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -8138,7 +8138,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(newRadius);
                 if (isNaN(numValue) || numValue < 0 || numValue > 5.0) {
-                    GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newRadius}. Use 0.0-5.0" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newRadius}. Use 0.0-5.0" -t 2000`);
                     return;
                 }
                 
@@ -8151,7 +8151,7 @@ function createCandyUtilsBox() {
                         let newValueStr = numValue.toFixed(1);
                         // Use the exact sed command from existing logic
                         GLib.spawn_command_line_async(`sed -i 's/border-radius: ${radiusMatch[1]}em/border-radius: ${newValueStr}em/' '${rofiRadiusFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi" "Radius: ${newValueStr}em" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi" "Radius: ${newValueStr}em" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -8210,7 +8210,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(newOpacity);
                 if (isNaN(numValue) || numValue < 0.0 || numValue > 1.0) {
-                    GLib.spawn_command_line_async(`notify-send "Opacity" "Invalid value: ${newOpacity}. Use 0.0-1.0" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Opacity" "Invalid value: ${newOpacity}. Use 0.0-1.0" -t 2000`);
                     return;
                 }
                 
@@ -8218,7 +8218,7 @@ function createCandyUtilsBox() {
                 let newValueStr = numValue.toFixed(2);
                 GLib.spawn_command_line_async(`sed -i 's/active_opacity = .*/active_opacity = ${newValueStr}/' "${configFile}"`);
                 GLib.spawn_command_line_async('hyprctl reload');
-                GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
             } catch (e) {
                 print('Error updating opacity scale: ' + e.message);
             }
@@ -8286,7 +8286,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(newPadding);
                 if (isNaN(numValue) || numValue < 0.0 || numValue > 10.0) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newPadding}. Use 0.0-10.0" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newPadding}. Use 0.0-10.0" -t 2000`);
                     return;
                 }
                 
@@ -8305,7 +8305,7 @@ function createCandyUtilsBox() {
                         GLib.file_set_contents(waybarPaddingStateFile, newValueStr);
                         
                         // Send notification
-                        GLib.spawn_command_line_async(`notify-send "Waybar" "Padding: ${newValueStr}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Waybar" "Padding: ${newValueStr}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -8375,7 +8375,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newBorderSize);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newBorderSize}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newBorderSize}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -8402,7 +8402,7 @@ function createCandyUtilsBox() {
                         GLib.file_set_contents(waybarBorderSizeStateFile, numValue.toString());
                         
                         // Send notification
-                        GLib.spawn_command_line_async(`notify-send "Waybar" "Border Size: ${numValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Waybar" "Border Size: ${numValue}px" -t 2000`);
                     } else {
                         print('Could not find border pattern in CSS file');
                     }
@@ -8454,7 +8454,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 200) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-200" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-200" -t 2000`);
                     return;
                 }
 
@@ -8468,7 +8468,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarSideMarginsStateFile, valueStr);
 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Side-margins: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Side-margins: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar side margins: ' + e.message);
             }
@@ -8513,7 +8513,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 260) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-260" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-260" -t 2000`);
                     return;
                 }
 
@@ -8526,7 +8526,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarRightSideMarginsStateFile, valueStr);
 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Right Side-margin: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Right Side-margin: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar side margin: ' + e.message);
             }
@@ -8572,7 +8572,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -8585,7 +8585,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarTopMarginStateFile, valueStr);
                 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Top-margin: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Top-margin: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar top margin: ' + e.message);
             }
@@ -8631,7 +8631,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -8645,7 +8645,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarOuterRadiusStateFile, valueStr);
                 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Radius: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Radius: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar outer radius: ' + e.message);
             }
@@ -8691,7 +8691,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -8704,7 +8704,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarBottomMarginStateFile, valueStr);
                 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Bottom-margin: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Bottom-margin: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar bottom margin: ' + e.message);
             }
@@ -8776,7 +8776,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newBorderSize);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Swaync" "Invalid value: ${newBorderSize}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Swaync" "Invalid value: ${newBorderSize}. Use 0-10" -t 2000`);
                     return;
                 }
 
@@ -8804,7 +8804,7 @@ function createCandyUtilsBox() {
 
                         // Send notification and refresh
                         GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
-                        GLib.spawn_command_line_async(`notify-send "Swaync" "Border Size: ${numValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Swaync" "Border Size: ${numValue}px" -t 2000`);
                     } else {
                         print('Could not find border pattern in CSS file');
                     }
@@ -8856,7 +8856,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Swaync" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Swaync" "Invalid value: ${value}. Use 0-20" -t 2000`);
                     return;
                 }
 
@@ -8871,7 +8871,7 @@ function createCandyUtilsBox() {
 
                 // Send notification and refresh
                 GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
-                GLib.spawn_command_line_async(`notify-send "Swaync" "Radius: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Swaync" "Radius: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating swaync outer radius: ' + e.message);
             }
@@ -9150,7 +9150,7 @@ function createCandyUtilsBox() {
                         let newValueStr = newValue.toFixed(2);
                         GLib.spawn_command_line_async(`sed -i 's/active_opacity = .*/active_opacity = ${newValueStr}/' "${configFile}"`);
                         GLib.spawn_command_line_async('hyprctl reload');
-                        GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
                     }
                 }
             } catch (e) {}
@@ -9196,7 +9196,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i '/blur {/,/}/{s/size = ${currentValue}/size = ${newValue}/}' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -9244,7 +9244,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i 's/passes = ${currentValue}/passes = ${newValue}/' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -9287,7 +9287,7 @@ function createCandyUtilsBox() {
                         let currentValue = parseInt(borderMatch[1]);
                         let newValue = Math.max(0, currentValue + increment);
                         GLib.spawn_command_line_async(`sed -i 's/border-width: ${currentValue}px/border-width: ${newValue}px/' '${rofiBorderFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -9329,7 +9329,7 @@ function createCandyUtilsBox() {
                         let newValue = Math.max(0, Math.min(5, currentValue + increment));
                         let newValueStr = newValue.toFixed(1);
                         GLib.spawn_command_line_async(`sed -i 's/border-radius: ${radiusMatch[1]}em/border-radius: ${newValueStr}em/' '${rofiRadiusFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -10053,7 +10053,7 @@ function createCandyUtilsBox() {
                         let newValueStr = newValue.toFixed(2);
                         GLib.spawn_command_line_async(`sed -i 's/active_opacity = .*/active_opacity = ${newValueStr}/' "${configFile}"`);
                         GLib.spawn_command_line_async('hyprctl reload');
-                        GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
                     }
                 }
             } catch (e) {}
@@ -10098,7 +10098,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i '/blur {/,/}/{s/size = ${currentValue}/size = ${newValue}/}' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Size" "Size: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -10146,7 +10146,7 @@ function createCandyUtilsBox() {
                             // Use a simpler sed command that targets the specific line
                             GLib.spawn_command_line_async(`sed -i 's/passes = ${currentValue}/passes = ${newValue}/' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur Pass" "Passes: ${newValue}" -t 2000`);
                         }
                     }
                 }
@@ -10188,7 +10188,7 @@ function createCandyUtilsBox() {
                         let currentValue = parseInt(borderMatch[1]);
                         let newValue = Math.max(0, currentValue + increment);
                         GLib.spawn_command_line_async(`sed -i 's/border-width: ${currentValue}px/border-width: ${newValue}px/' '${rofiBorderFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Border" "Border: ${newValue}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -10230,7 +10230,7 @@ function createCandyUtilsBox() {
                         let newValue = Math.max(0, Math.min(5, currentValue + increment));
                         let newValueStr = newValue.toFixed(1);
                         GLib.spawn_command_line_async(`sed -i 's/border-radius: ${radiusMatch[1]}em/border-radius: ${newValueStr}em/' '${rofiRadiusFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi Radius" "Radius: ${newValueStr}em" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -10306,7 +10306,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newSize);
                 if (isNaN(numValue) || numValue < 16 || numValue > 64) {
-                    GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newSize}. Use 16-64" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newSize}. Use 16-64" -t 2000`);
                     return;
                 }
                 
@@ -10325,7 +10325,7 @@ function createCandyUtilsBox() {
                     bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
-                GLib.spawn_command_line_async(`notify-send "Dock" "Icon Size: ${numValue}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Dock" "Icon Size: ${numValue}px" -t 2000`);
             } catch (e) {
                 print('Error updating dock icon size: ' + e.message);
             }
@@ -10396,7 +10396,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newRadius);
                 if (isNaN(numValue) || numValue < 0 || numValue > 50) {
-                    GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newRadius}. Use 0-50" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newRadius}. Use 0-50" -t 2000`);
                     return;
                 }
                 
@@ -10427,7 +10427,7 @@ function createCandyUtilsBox() {
                     bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
-                GLib.spawn_command_line_async(`notify-send "Dock" "Border Radius: ${numValue}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Dock" "Border Radius: ${numValue}px" -t 2000`);
             } catch (e) {
                 print('Error updating dock radius: ' + e.message);
             }
@@ -10498,7 +10498,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newWidth);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newWidth}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Dock" "Invalid value: ${newWidth}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -10529,7 +10529,7 @@ function createCandyUtilsBox() {
                     bash -c "${toggleScript} --relaunch" > /dev/null 2>&1 &
                 '`);
                 
-                GLib.spawn_command_line_async(`notify-send "Dock" "Border Width: ${numValue}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Dock" "Border Width: ${numValue}px" -t 2000`);
             } catch (e) {
                 print('Error updating dock width: ' + e.message);
             }
@@ -10587,7 +10587,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newRounding);
                 if (isNaN(numValue) || numValue < 0 || numValue > 50) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newRounding}. Use 0-50" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newRounding}. Use 0-50" -t 2000`);
                     return;
                 }
                 
@@ -10598,7 +10598,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword decoration:rounding ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Rounding: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Rounding: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating rounding: ' + e.message);
             }
@@ -10656,7 +10656,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newGapsOut);
                 if (isNaN(numValue) || numValue < 0 || numValue > 100) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsOut}. Use 0-100" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsOut}. Use 0-100" -t 2000`);
                     return;
                 }
                 
@@ -10667,7 +10667,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword general:gaps_out ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps OUT: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps OUT: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating gaps out: ' + e.message);
             }
@@ -10722,7 +10722,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newGapsIn);
                 if (isNaN(numValue) || numValue < 0 || numValue > 50) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsIn}. Use 0-50" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newGapsIn}. Use 0-50" -t 2000`);
                     return;
                 }
                 
@@ -10733,7 +10733,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword general:gaps_in ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps IN: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Gaps IN: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating gaps in: ' + e.message);
             }
@@ -10792,7 +10792,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newBorder);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Hyprland" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -10803,7 +10803,7 @@ function createCandyUtilsBox() {
                 GLib.spawn_command_line_async(`hyprctl keyword general:border_size ${numValue}`);
                 GLib.spawn_command_line_async('hyprctl reload');
                 
-                GLib.spawn_command_line_async(`notify-send "Hyprland" "Border: ${numValue}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Hyprland" "Border: ${numValue}" -t 2000`);
             } catch (e) {
                 print('Error updating border: ' + e.message);
             }
@@ -10864,7 +10864,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newSize);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newSize}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newSize}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -10880,7 +10880,7 @@ function createCandyUtilsBox() {
                             // Use the exact sed command from existing logic
                             GLib.spawn_command_line_async(`sed -i '/blur {/,/}/{s/size = ${currentValue}/size = ${numValue}/}' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur" "Size: ${numValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur" "Size: ${numValue}" -t 2000`);
                         }
                     }
                 }
@@ -10944,7 +10944,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newPass);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newPass}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Blur" "Invalid value: ${newPass}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -10960,7 +10960,7 @@ function createCandyUtilsBox() {
                             // Use the exact sed command from existing logic
                             GLib.spawn_command_line_async(`sed -i 's/passes = ${currentValue}/passes = ${numValue}/' '${configFile}'`);
                             GLib.spawn_command_line_async('hyprctl reload');
-                            GLib.spawn_command_line_async(`notify-send "Blur" "Passes: ${numValue}" -t 2000`);
+                            //GLib.spawn_command_line_async(`notify-send "Blur" "Passes: ${numValue}" -t 2000`);
                         }
                     }
                 }
@@ -11020,7 +11020,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newBorder);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newBorder}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -11033,7 +11033,7 @@ function createCandyUtilsBox() {
                         let currentValue = parseInt(borderMatch[1]);
                         // Use the exact sed command from existing logic
                         GLib.spawn_command_line_async(`sed -i 's/border-width: ${currentValue}px/border-width: ${numValue}px/' '${rofiBorderFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi" "Border: ${numValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi" "Border: ${numValue}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -11092,7 +11092,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(newRadius);
                 if (isNaN(numValue) || numValue < 0 || numValue > 5.0) {
-                    GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newRadius}. Use 0.0-5.0" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Rofi" "Invalid value: ${newRadius}. Use 0.0-5.0" -t 2000`);
                     return;
                 }
                 
@@ -11105,7 +11105,7 @@ function createCandyUtilsBox() {
                         let newValueStr = numValue.toFixed(1);
                         // Use the exact sed command from existing logic
                         GLib.spawn_command_line_async(`sed -i 's/border-radius: ${radiusMatch[1]}em/border-radius: ${newValueStr}em/' '${rofiRadiusFile}'`);
-                        GLib.spawn_command_line_async(`notify-send "Rofi" "Radius: ${newValueStr}em" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Rofi" "Radius: ${newValueStr}em" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -11164,7 +11164,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(newOpacity);
                 if (isNaN(numValue) || numValue < 0.0 || numValue > 1.0) {
-                    GLib.spawn_command_line_async(`notify-send "Opacity" "Invalid value: ${newOpacity}. Use 0.0-1.0" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Opacity" "Invalid value: ${newOpacity}. Use 0.0-1.0" -t 2000`);
                     return;
                 }
                 
@@ -11172,7 +11172,7 @@ function createCandyUtilsBox() {
                 let newValueStr = numValue.toFixed(2);
                 GLib.spawn_command_line_async(`sed -i 's/active_opacity = .*/active_opacity = ${newValueStr}/' "${configFile}"`);
                 GLib.spawn_command_line_async('hyprctl reload');
-                GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Opacity" "Scale: ${newValueStr}" -t 2000`);
             } catch (e) {
                 print('Error updating opacity scale: ' + e.message);
             }
@@ -11240,7 +11240,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(newPadding);
                 if (isNaN(numValue) || numValue < 0.0 || numValue > 10.0) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newPadding}. Use 0.0-10.0" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newPadding}. Use 0.0-10.0" -t 2000`);
                     return;
                 }
                 
@@ -11259,7 +11259,7 @@ function createCandyUtilsBox() {
                         GLib.file_set_contents(waybarPaddingStateFile, newValueStr);
                         
                         // Send notification
-                        GLib.spawn_command_line_async(`notify-send "Waybar" "Padding: ${newValueStr}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Waybar" "Padding: ${newValueStr}px" -t 2000`);
                     }
                 }
             } catch (e) {
@@ -11329,7 +11329,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseInt(newBorderSize);
                 if (isNaN(numValue) || numValue < 0 || numValue > 10) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newBorderSize}. Use 0-10" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${newBorderSize}. Use 0-10" -t 2000`);
                     return;
                 }
                 
@@ -11356,7 +11356,7 @@ function createCandyUtilsBox() {
                         GLib.file_set_contents(waybarBorderSizeStateFile, numValue.toString());
                         
                         // Send notification
-                        GLib.spawn_command_line_async(`notify-send "Waybar" "Border Size: ${numValue}px" -t 2000`);
+                        //GLib.spawn_command_line_async(`notify-send "Waybar" "Border Size: ${numValue}px" -t 2000`);
                     } else {
                         print('Could not find border pattern in CSS file');
                     }
@@ -11408,7 +11408,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 200) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-200" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-200" -t 2000`);
                     return;
                 }
 
@@ -11422,7 +11422,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarSideMarginsStateFile, valueStr);
 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Side-margins: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Side-margins: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar side margins: ' + e.message);
             }
@@ -11467,7 +11467,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 260) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-260" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-260" -t 2000`);
                     return;
                 }
 
@@ -11480,7 +11480,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarRightSideMarginsStateFile, valueStr);
 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Right Side-margin: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Right Side-margin: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar side margin: ' + e.message);
             }
@@ -11526,7 +11526,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -11539,7 +11539,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarTopMarginStateFile, valueStr);
                 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Top-margin: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Top-margin: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar top margin: ' + e.message);
             }
@@ -11585,7 +11585,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -11599,7 +11599,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarOuterRadiusStateFile, valueStr);
                 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Radius: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Radius: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar outer radius: ' + e.message);
             }
@@ -11645,7 +11645,7 @@ function createCandyUtilsBox() {
             try {
                 let numValue = parseFloat(value);
                 if (isNaN(numValue) || numValue < 0 || numValue > 20) {
-                    GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
+                    //GLib.spawn_command_line_async(`notify-send "Waybar" "Invalid value: ${value}. Use 0-20" -t 2000`);
                     return;
                 }
                 
@@ -11658,7 +11658,7 @@ function createCandyUtilsBox() {
                 GLib.file_set_contents(waybarBottomMarginStateFile, valueStr);
                 
                 // Send notification
-                GLib.spawn_command_line_async(`notify-send "Waybar" "Bottom-margin: ${valueStr}px" -t 2000`);
+                //GLib.spawn_command_line_async(`notify-send "Waybar" "Bottom-margin: ${valueStr}px" -t 2000`);
             } catch (e) {
                 print('Error updating waybar bottom margin: ' + e.message);
             }
