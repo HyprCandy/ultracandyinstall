@@ -2371,6 +2371,10 @@ update_hypr_cursor_env() {
     sed -i "s|^env = XCURSOR_SIZE,.*|env = XCURSOR_SIZE,$size|" "$HYPRCONF"
     sed -i "s|^env = HYPRCURSOR_THEME,.*|env = HYPRCURSOR_THEME,$theme|" "$HYPRCONF"
     sed -i "s|^env = HYPRCURSOR_SIZE,.*|env = HYPRCURSOR_SIZE,$size|" "$HYPRCONF"
+    
+    # Sync GTK4 with GTK3
+    sed -i "s|^gtk-cursor-theme-name=.*|gtk-cursor-theme-name=$theme|" "$GTK4_FILE"
+    sed -i "s|^gtk-cursor-theme-size=.*|gtk-cursor-theme-size=$size|" "$GTK4_FILE" 
 
     # Apply changes immediately
     apply_cursor_changes "$theme" "$size"
@@ -2424,7 +2428,6 @@ done
 
 # Start watchers in background
 watch_gtk_file "$GTK3_FILE" &
-watch_gtk_file "$GTK4_FILE" &
 wait
 EOF
 
