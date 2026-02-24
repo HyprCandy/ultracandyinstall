@@ -4431,9 +4431,8 @@ fi
 
 chmod +x "$HOME/.config/hyprcandy/hooks/update_background.sh"
 
-
 # ═══════════════════════════════════════════════════════════════
-#                          Hyprlock Script
+#                             Overview
 # ═══════════════════════════════════════════════════════════════
 
 cat > "$HOME/.config/hyprcandy/scripts/overview.sh" << 'EOF'
