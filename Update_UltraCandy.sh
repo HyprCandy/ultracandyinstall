@@ -4441,6 +4441,27 @@ fi
 chmod +x "$HOME/.config/hyprcandy/hooks/update_background.sh"
 
 # ═══════════════════════════════════════════════════════════════
+#                             Overview
+# ═══════════════════════════════════════════════════════════════
+
+cat > "$HOME/.config/hyprcandy/scripts/overview.sh" << 'EOF'
+#!/bin/bash
+
+# Check if the process is running
+if pgrep - f "qs -c overview" > /dev/null; then
+    # If running, just toggle the overview
+    qs ipc -c overview call overview toggle
+else
+    # If not running, start it then toggle the overview
+    qs -c overview &
+    sleep 0.5
+    qs ipc -c overview call overview toggle
+fi
+EOF
+
+chmod +x "$HOME/.config/hyprcandy/scripts/overview.sh"
+
+# ═══════════════════════════════════════════════════════════════
 #              Background File & Matugen Watcher
 # ═══════════════════════════════════════════════════════════════
 
@@ -6900,7 +6921,7 @@ bind = $mainMod, L, exec, ~/.config/hypr/scripts/power.sh lock 				  #Lock
 
 #### Workspaces ####
 
-bind = SHIFT, TAB, exec, qs ipc -c overview call overview toggle #Workspace overview
+bind = SHIFT, TAB, exec, $SCRIPTS/overview.sh #Workspace overview
 
 bind = $mainMod, 1, workspace, 1  #Open workspace 1
 bind = $mainMod, 2, workspace, 2  #Open workspace 2
@@ -7124,7 +7145,7 @@ bind = $mainMod, L, exec, ~/.config/hypr/scripts/power.sh lock 				  #Lock
 
 #### Workspaces ####
 
-bind = SHIFT, TAB, exec, qs ipc -c overview call overview toggle #Workspace overview
+bind = SHIFT, TAB, exec, $SCRIPTS/overview.sh #Workspace overview
 
 bind = $mainMod, 1, workspace, 1  #Open workspace 1
 bind = $mainMod, 2, workspace, 2  #Open workspace 2
