@@ -6047,6 +6047,10 @@ misc {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 # [NOTE!!] Add you personal settings from here and incase of an update copy them to the new file once this is changed to a backup
 
+debug {
+    suppress_errors = true
+}
+
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                            Plugins                          ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -6695,6 +6699,10 @@ misc {
 # ┃                           Userprefs                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 # [NOTE!!] Add you personal settings from here and incase of an update copy them to the new file once this is changed to a backup
+
+debug {
+    suppress_errors = true
+}
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                            Plugins                          ┃
