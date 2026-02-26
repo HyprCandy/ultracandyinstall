@@ -2140,10 +2140,10 @@ fi
 if [ "$PANEL_CHOICE" = "waybar" ]; then
 
 # ═══════════════════════════════════════════════════════════════
-#                          Wallaper Script
+#                          Wallpaper Script
 # ═══════════════════════════════════════════════════════════════
 
-cat > "$HOME/.config/waypaper/wallaper-cycle.sh" << 'EOF'
+cat > "$HOME/.config/waypaper/wallpaper-cycle.sh" << 'EOF'
 #!/usr/bin/env bash
 # wallpaper-cycle.sh
 # Cycles through wallpapers in the waypaper folder using swww (or configured backend)
@@ -2268,7 +2268,7 @@ systemctl --user restart waypaper-watcher.service
 echo "Config updated → wallpaper = $NEXT_STORED"
 EOF
 
-chmod +x "$HOME/.config/waypaper/wallaper-cycle.sh"
+chmod +x "$HOME/.config/waypaper/wallpaper-cycle.sh"
 
 # ═══════════════════════════════════════════════════════════════
 #                          Hyprlock Script
@@ -6993,7 +6993,7 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 #### Applications ####
 
 bind = $mainMod, W, exec, waypaper #Waypaper
-bind = ALT, W, exec, ~/.config/waypaper/wallpaper-cycle.sh  #Alternate wallapers
+bind = ALT, W, exec, ~/.config/waypaper/wallpaper-cycle.sh  #Alternate wallpapers
 bind = $mainMod, S, exec, spotify #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
@@ -15102,7 +15102,7 @@ main() {
     echo
     echo -e "${PURPLE}🖼️ Wallpaper Setup (Hyprpanel):${NC}"
     print_status "• Through Hyprpanel's configuration interface in the ${CYAN}Theming${NC} section do the following:"
-    print_status "• Under ${YELLOW}General Settings${NC} choose a wallaper to apply where it says None"
+    print_status "• Under ${YELLOW}General Settings${NC} choose a wallpaper to apply where it says None"
     print_status "• Find default wallpapers check the ${CYAN}~/Pictures/Candy${NC} or ${CYAN}Candy${NC} folder"
     print_status "• Under ${YELLOW}Matugen Settings${NC} toggle the button to enable matugen color application"
     print_status "• If the wallpaper doesn't apply through the configuration interface, then toggle the button to apply wallpapers"
