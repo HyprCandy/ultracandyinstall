@@ -7218,7 +7218,6 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 #### Applications ####
 
 bind = $mainMod, W, exec, waypaper #Waypaper
-bind = ALT, W, exec, ~/.config/waypaper/wallpaper-cycle.sh  #Alternate wallapers
 bind = $mainMod, S, exec, spotify #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
