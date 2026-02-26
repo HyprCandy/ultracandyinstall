@@ -8282,8 +8282,8 @@ function createCandyUtilsBox() {
     
     function updateMatugenScheme(schemeName) {
         const waypaperIntegrationFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'hooks', 'waypaper_integration.sh']);
-        const gtk3File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'gtk-3.0', 'gtk.css']);
-        const gtk4File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'gtk-4.0', 'gtk.css']);
+        const gtk3File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'matugen', 'templates', 'gtk3.css']);
+        const gtk4File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'matugen', 'templates', 'gtk4.css']);
         const hyprFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hypr', 'hyprviz.conf']);
         const utilsFile = GLib.build_filenamev([GLib.get_home_dir(), '.ultracandy', 'GJS', 'src', 'candy-utils.js']);
         const waybarFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'waybar', 'style.css']);
@@ -11238,8 +11238,8 @@ function createCandyUtilsBox() {
     
     function updateMatugenScheme(schemeName) {
         const waypaperIntegrationFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy', 'hooks', 'waypaper_integration.sh']);
-        const gtk3File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'gtk-3.0', 'gtk.css']);
-        const gtk4File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'gtk-4.0', 'gtk.css']);
+        const gtk3File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'matugen', 'templates', 'gtk3.css']);
+        const gtk4File = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'matugen', 'templates', 'gtk4.css']);
         const hyprFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hypr', 'hyprviz.conf']);
         const utilsFile = GLib.build_filenamev([GLib.get_home_dir(), '.ultracandy', 'GJS', 'src', 'candy-utils.js']);
         const waybarFile = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'waybar', 'style.css']);
