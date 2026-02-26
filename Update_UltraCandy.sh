@@ -5489,6 +5489,7 @@ env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 # GTK
 env = GTK_USE_PORTAL,1
+env = GTK_THEME,adw-gtk3-dark
 # QT
 env = QT_QPA_PLATFORM,wayland
 env = QT_QPA_PLATFORMTHEME,gtk3
@@ -6142,6 +6143,7 @@ env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 # GTK
 env = GTK_USE_PORTAL,1
+env = GTK_THEME,adw-gtk3-dark
 # QT
 env = QT_QPA_PLATFORM,wayland
 env = QT_QPA_PLATFORMTHEME,gtk3
