@@ -5479,7 +5479,6 @@ env = XDG_CURRENT_DESKTOP,Hyprland
 env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 # GTK
-env = GTK_USE_PORTAL,1
 env = GTK_THEME,adw-gtk3-dark
 # QT
 env = QT_QPA_PLATFORM,wayland
@@ -5499,7 +5498,6 @@ env = OZONE_PLATFORM,wayland
 env = ELECTRON_OZONE_PLATFORM_HINT,wayland
 # Extra
 env = WINIT_UNIX_BACKEND,wayland
-env = GTK_THEME,adw-gtk3-dark
 env = WLR_DRM_NO_ATOMIC,1
 env = WLR_NO_HARDWARE_CURSORS,1
 # Virtual machine display scaling
@@ -6133,7 +6131,6 @@ env = XDG_CURRENT_DESKTOP,Hyprland
 env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 # GTK
-env = GTK_USE_PORTAL,1
 env = GTK_THEME,adw-gtk3-dark
 # QT
 env = QT_QPA_PLATFORM,wayland
@@ -6153,7 +6150,6 @@ env = OZONE_PLATFORM,wayland
 env = ELECTRON_OZONE_PLATFORM_HINT,wayland
 # Extra
 env = WINIT_UNIX_BACKEND,wayland
-env = GTK_THEME,adw-gtk3-dark
 env = WLR_DRM_NO_ATOMIC,1
 env = WLR_NO_HARDWARE_CURSORS,1
 # Virtual machine display scaling
