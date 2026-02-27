@@ -4990,13 +4990,15 @@ update_hypr_group_text() {
     # A vivid wallpaper color will have high saturation and should always
     # use $surface_tint regardless of its luminance value.
     if (( LUMINANCE_INT > 150 && SATURATION >= 40 )); then
-        local TEXT_COLOR="\$on_primary_fixed_variant"  # bright + vivid source → dark text
-    elif (( LUMINANCE_INT > 150 && SATURATION < 40 )); then
-        local TEXT_COLOR="\$surface_tint"              # bright + muted source → light text
-    elif (( LUMINANCE_INT <= 150 )); then
+        local TEXT_COLOR="\$inverse_primary"  # bright + vivid source → dark text
+    elif (( LUMINANCE_INT <= 150 && SATURATION <= 20)); then
         local TEXT_COLOR="\$surface_tint"              # dark source → light text
+    elif (( LUMINANCE_INT <= 150 && SATURATION > 20)); then
+        local TEXT_COLOR="\$surface_tint"  # bright + high saturation (>20) → alt-dark text
+    elif (( LUMINANCE_INT > 150 && SATURATION >= 20 && SATURATION < 40 )); then
+        local TEXT_COLOR="\$secondary_container"              # bright + mid saturation → alt-light text
     else
-        local TEXT_COLOR="\$on_primary_fixed_variant"  # fallback
+        local TEXT_COLOR="\$on_primary_fixed_variant"  # bright + low saturation (≤20) → alt-2-dark text
     fi
 
     sed -i "s|^\(\s*text_color\s*=\).*|\1 $TEXT_COLOR|" "$HYPRVIZ_CONF"
