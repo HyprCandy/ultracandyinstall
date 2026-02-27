@@ -6929,7 +6929,7 @@ input-field {
     dots_spacing = 0.2 # Scale of dots' absolute size, 0.0 - 1.0
     dots_center = true
     dots_rounding = -1 # -1 default circle, -2 follow input-field rounding
-    outer_color = $primary_fixed_dim $source_color 90deg
+    outer_color = $primary_fixed_dim $secondary_container 90deg
     inner_color = $inverse_primary
     font_color = $primary_fixed_dim
     font_family = C059 Bold Italic
@@ -6943,7 +6943,7 @@ input-field {
     fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i> # can be set to empty
     fail_transition = 300 # transition time in ms between normal outer_color and fail_color
     capslock_color = $primary_fixed_dim
-    numlock_color = $primary_fixed_dim $source_color 90deg
+    numlock_color = $primary_fixed_dim $secondary_container 90deg
     #bothlock_color = -1 # when both locks are active. -1 means don't change outer color (same for above)
     invert_numlock = false # change color if numlock is off
     swap_font_color = false # see below
@@ -6972,7 +6972,7 @@ label {
     monitor =
     #clock
     text = cmd[update:1000] echo "$TIME"
-    color = $inverse_primary
+    color = $secondary_container
     font_size = 55
     font_family = C059 Bold Italic
     position = 0, -150
@@ -7001,7 +7001,7 @@ image {
     size = 160  lesser side if not 1:1 ratio
     rounding = -1 # negative values mean circle
     border_size = 4
-    border_color = $primary_fixed_dim $source_color 90deg
+    border_color = $primary_fixed_dim $secondary_container 90deg
     rotate = 0 # degrees, counter-clockwise
     reload_time = -1 # seconds between reloading, 0 to reload with SIGUSR2
 #    reload_cmd =  # command to get new path. if empty, old path will be used. don't run "follow" commands like tail -F
