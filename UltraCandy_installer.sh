@@ -283,7 +283,6 @@ build_package_list() {
         "gvfs"
         "gnome-disk-utility"
         "gnome-color-manager"
-        "gnome-software"
         "gnome-weather"
         "gnome-calendar"
         "gnome-system-monitor"
@@ -305,6 +304,8 @@ build_package_list() {
         "wlogout"
         "uwsm"
         "quickshell"
+        "flatpak"
+        "warehouse-git"
         
         # Application launchers and menus
         "rofi"
@@ -557,6 +558,9 @@ install_packages() {
             echo ""
         fi
     fi
+    
+    # Add flathub repo
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 }
 
 # Function to setup Fish shell configuration
