@@ -968,6 +968,7 @@ setup_ultracandy() {
         if pacman -Qi mako &>/dev/null; then
             print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
             $AUR_HELPER -R --noconfirm mako
+            $AUR_HELPER -R --noconfirm gnome-software
         else
             echo ""
         fi
@@ -975,6 +976,7 @@ setup_ultracandy() {
         if pacman -Qi swaync &>/dev/null; then
             print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
             $AUR_HELPER -R --noconfirm swaync
+            $AUR_HELPER -R --noconfirm gnome-software
         else
             echo ""
         fi
@@ -984,12 +986,15 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk warehouse-git flatpak
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk warehouse-git flatpak
     fi
+
+    # Add flathub repo
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
     print_status "Setting up UltraCandy configuration..."
     
@@ -4622,7 +4627,6 @@ execute_hooks() {
             stored_colors=$(get_stored_colors)
             
             if [ "$current_colors" != "$stored_colors" ]; then
-                pkill -x gnome-software
                 pkill -f nwg-dock-hyprland
                 gsettings set org.gnome.desktop.interface gtk-theme "''"
                 sleep 0.2
