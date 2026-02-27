@@ -4982,11 +4982,11 @@ update_hypr_group_text() {
     elif (( LUMINANCE_INT <= 150 && SATURATION <= 20)); then
         local TEXT_COLOR="\$surface_tint"              # dark source → light text
     elif (( LUMINANCE_INT <= 150 && SATURATION > 20)); then
-        local TEXT_COLOR="\$tertiary_container"              # bright + mid saturation → alt-light text
+        local TEXT_COLOR="\$surface_tint"  # bright + high saturation (>20) → alt-dark text
     elif (( LUMINANCE_INT > 150 && SATURATION >= 20 && SATURATION < 40 )); then
-        local TEXT_COLOR="\$secondary_container"              # bright + mid saturation → alt-2-light text
+        local TEXT_COLOR="\$secondary_container"              # bright + mid saturation → alt-light text
     else
-        local TEXT_COLOR="\$on_primary_fixed_variant"  # bright + low saturation (≤20) → alt-dark text
+        local TEXT_COLOR="\$on_primary_fixed_variant"  # bright + low saturation (≤20) → alt-2-dark text
     fi
 
     sed -i "s|^\(\s*text_color\s*=\).*|\1 $TEXT_COLOR|" "$HYPRVIZ_CONF"
