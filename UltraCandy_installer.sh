@@ -4913,10 +4913,83 @@ trigger_matugen() {
     if [ -f "$MATUGEN_CONFIG" ]; then
         echo "🎨 Triggering matugen color generation..."
         matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.25 &
+        sleep 3
+        update_hypr_group_text
         echo "✅ Matugen color generation started"
     else
         echo "⚠️  Matugen config not found at: $MATUGEN_CONFIG"
     fi
+}
+update_hypr_group_text() {
+    local COLORS_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/colors.conf"
+    local HYPRVIZ_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprviz.conf"
+
+    if [[ ! -f "$COLORS_CONF" ]]; then
+        echo "update_hypr_group_text: colors.conf not found at $COLORS_CONF"
+        return 1
+    fi
+
+    if [[ ! -f "$HYPRVIZ_CONF" ]]; then
+        echo "update_hypr_group_text: hyprviz.conf not found at $HYPRVIZ_CONF"
+        return 1
+    fi
+
+    # Extract the hex RGB value from $source_color = rgba(rrggbbaa)
+    local BG_LINE
+    local PAT='(?<=rgba\()[0-9a-fA-F]{6}'
+    BG_LINE=$(grep -E '^\$source_color\s*=' "$COLORS_CONF" | head -n1)
+    BG_HEX=$(echo "$BG_LINE" | grep -oP "$PAT")
+
+    if [[ -z "$BG_HEX" ]]; then
+        echo "update_hypr_group_text: could not parse \$source_color from $COLORS_CONF"
+        return 1
+    fi
+
+    # Convert hex RGB to decimal channels
+    local R G B
+    R=$((16#${BG_HEX:0:2}))
+    G=$((16#${BG_HEX:2:2}))
+    B=$((16#${BG_HEX:4:2}))
+
+    # Perceived luminance (ITU-R BT.709)
+    # luminance = 0.2126R + 0.7152G + 0.0722B
+    local LUMINANCE
+    LUMINANCE=$(echo "scale=2; 0.2126 * $R + 0.7152 * $G + 0.0722 * $B" | bc)
+    local LUMINANCE_INT=${LUMINANCE%.*}
+
+    # HSL saturation check — prevents bright saturated source colors
+    # (vivid pinks, yellows, etc.) from being misclassified as light
+    local MAX MIN SATURATION
+    MAX=$(echo -e "$R\n$G\n$B" | sort -n | tail -1)
+    MIN=$(echo -e "$R\n$G\n$B" | sort -n | head -1)
+
+    if (( MAX == MIN )); then
+        SATURATION=0
+    else
+        local LIGHTNESS_RAW=$(( (MAX + MIN) / 2 ))
+        if (( LIGHTNESS_RAW <= 127 )); then
+            SATURATION=$(( (MAX - MIN) * 100 / (MAX + MIN) ))
+        else
+            SATURATION=$(( (MAX - MIN) * 100 / (510 - MAX - MIN) ))
+        fi
+    fi
+
+    # Only classify as light if luminance is high AND saturation is low.
+    # A vivid wallpaper color will have high saturation and should always
+    # use $surface_tint regardless of its luminance value.
+    if (( LUMINANCE_INT > 150 && SATURATION >= 40 )); then
+        local TEXT_COLOR="\$on_primary_fixed_variant"  # bright + vivid source → dark text
+    elif (( LUMINANCE_INT > 150 && SATURATION < 40 )); then
+        local TEXT_COLOR="\$surface_tint"              # bright + muted source → light text
+    elif (( LUMINANCE_INT <= 150 )); then
+        local TEXT_COLOR="\$surface_tint"              # dark source → light text
+    else
+        local TEXT_COLOR="\$on_primary_fixed_variant"  # fallback
+    fi
+
+    sed -i "s|^\(\s*text_color\s*=\).*|\1 $TEXT_COLOR|" "$HYPRVIZ_CONF"
+
+    echo "update_hypr_group_text: source_color luminance=${LUMINANCE_INT}/255 saturation=${SATURATION}% → text_color = $TEXT_COLOR"
 }
 execute_color_generation() {
     echo "🚀 Starting color generation for new background..."
