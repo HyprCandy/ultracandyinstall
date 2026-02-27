@@ -4617,7 +4617,6 @@ execute_hooks() {
             stored_colors=$(get_stored_colors)
             
             if [ "$current_colors" != "$stored_colors" ]; then
-                pkill -x gnome-software
                 pkill -f nwg-dock-hyprland
                 gsettings set org.gnome.desktop.interface gtk-theme "''"
                 sleep 0.2
