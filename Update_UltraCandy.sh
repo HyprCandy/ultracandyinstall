@@ -409,7 +409,7 @@ build_package_list() {
         "stow"
         
         # Extra
-        "spotify"
+        "spotify-launcher"
         "equibop-bin"
     )
     
@@ -969,6 +969,7 @@ setup_ultracandy() {
             print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
             $AUR_HELPER -R --noconfirm mako
             $AUR_HELPER -R --noconfirm gnome-software
+            $AUR_HELPER -R --noconfirm spotify
         else
             echo ""
         fi
@@ -977,6 +978,7 @@ setup_ultracandy() {
             print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
             $AUR_HELPER -R --noconfirm swaync
             $AUR_HELPER -R --noconfirm gnome-software
+            $AUR_HELPER -R --noconfirm spotify
         else
             echo ""
         fi
@@ -986,11 +988,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk warehouse-git flatpak
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk warehouse-git flatpak
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak
     fi
 
     # Add flathub repo
@@ -6984,7 +6986,7 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 
 bind = $mainMod, W, exec, waypaper #Waypaper
 bind = ALT, W, exec, ~/.config/waypaper/wallpaper-cycle.sh  #Alternate wallpapers
-bind = $mainMod, S, exec, spotify #Spotify
+bind = $mainMod, S, exec, spotify-launcher #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
 bind = $mainMod, B, exec, DRI_PRIME=1 xdg-open "http://" #Launch your default browser
@@ -7208,7 +7210,7 @@ bind = $mainMod CTRL, G, exec, ~/.config/hyprcandy/settings/glyphpicker.sh 		  #
 #### Applications ####
 
 bind = $mainMod, W, exec, waypaper #Waypaper
-bind = $mainMod, S, exec, spotify #Spotify
+bind = $mainMod, S, exec, spotify-launcher #Spotify
 bind = $mainMod, D, exec, $DISCORD #Discord
 bind = $mainMod, C, exec, DRI_PRIME=1 $EDITOR #Editor
 bind = $mainMod, B, exec, DRI_PRIME=1 xdg-open "http://" #Launch your default browser
