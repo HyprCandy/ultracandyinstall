@@ -503,12 +503,12 @@ install_packages() {
         if [ "$PANEL_CHOICE" = "waybar" ]; then
             if pacman -Qi mako >/dev/null 2>&1; then
                 print_status "Removing mako (using SwayNC with Waybar)..."
-                $AUR_HELPER -R --noconfirm mako 2>/dev/null || true 
+                $AUR_HELPER --noconfirm -R mako 2>/dev/null || true 
             fi
         else
             if pacman -Qi swaync >/dev/null 2>&1; then
                 print_status "Removing swaync (using mako with Hyprpanel)..."
-                $AUR_HELPER -R --noconfirm swaync 2>/dev/null || true
+                $AUR_HELPER --noconfirm -R swaync 2>/dev/null || true
             fi
         fi
     
@@ -958,16 +958,16 @@ setup_ultracandy() {
     # Install display manager packages
     if [ "$DISPLAY_MANAGER" = "sddm" ]; then
         if pacman -Qi sddm &>/dev/null; then
-            $AUR_HELPER -R --noconfirm gdm gdm-settings
-            $AUR_HELPER -S --noconfirm sddm sddm-sugar-candy-git
+            $AUR_HELPER --noconfirm -R gdm gdm-settings
+            $AUR_HELPER --noconfirm -S sddm sddm-sugar-candy-git
             print_status "Installed SDDM packages"
         else
             echo ""
         fi
     elif [ "$DISPLAY_MANAGER" = "gdm" ]; then
         if pacman -Qi gdm &>/dev/null; then
-            $AUR_HELPER -R --noconfirm sddm sddm-sugar-candy-git
-            $AUR_HELPER -S --noconfirm gdm gdm-settings
+            $AUR_HELPER --noconfirm -R sddm sddm-sugar-candy-git
+            $AUR_HELPER --noconfirm -S gdm gdm-settings
             print_status "Installed GDM packages"
         else
             echo ""
@@ -978,18 +978,18 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         if pacman -Qi mako &>/dev/null; then
             print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
-            $AUR_HELPER -R --noconfirm mako
-            $AUR_HELPER -R --noconfirm gnome-software
-            $AUR_HELPER -R --noconfirm spotify
+            $AUR_HELPER --noconfirm -R mako
+            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R spotify
         else
             echo ""
         fi
     else
         if pacman -Qi swaync &>/dev/null; then
             print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
-            $AUR_HELPER -R --noconfirm swaync
-            $AUR_HELPER -R --noconfirm gnome-software
-            $AUR_HELPER -R --noconfirm spotify
+            $AUR_HELPER --noconfirm -R swaync
+            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R spotify
         else
             echo ""
         fi
