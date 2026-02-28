@@ -8534,7 +8534,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -8572,7 +8572,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @scrim/@inverse_primary, @primary_fixed_dim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@background;/@buttoncolor;/g; 68s/@bordercolor;/@background;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @secondary_container;/color: @primary_fixed_dim;/g; 184s/color: @secondary_container;/color: @primary_fixed_dim;/g; 292s/color: @secondary_container;/color: @primary_fixed_dim;/g; 667s/color: @secondary_container;/color: @primary_fixed_dim;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -8610,7 +8610,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -8648,7 +8648,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -8686,7 +8686,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -8724,7 +8724,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -8762,7 +8762,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -8800,7 +8800,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
         
@@ -8838,7 +8838,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/hooks/restart_waybar.sh'`);
@@ -11490,7 +11490,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -11528,7 +11528,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @scrim/@inverse_primary, @primary_fixed_dim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@background;/@buttoncolor;/g; 68s/@bordercolor;/@background;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @secondary_container;/color: @primary_fixed_dim;/g; 184s/color: @secondary_container;/color: @primary_fixed_dim;/g; 292s/color: @secondary_container;/color: @primary_fixed_dim;/g; 667s/color: @secondary_container;/color: @primary_fixed_dim;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -11566,7 +11566,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -11604,7 +11604,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -11642,7 +11642,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -11680,7 +11680,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -11718,7 +11718,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         
@@ -11756,7 +11756,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`); 
         }
         
@@ -11794,7 +11794,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '7s/@primary_fixed_dim;/@inverse_primary;/g; 60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
-            //GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/scripts/toggle-dock.sh --relaunch'`);
+            GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
         // Save the new state
