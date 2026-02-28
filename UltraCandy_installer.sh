@@ -393,6 +393,7 @@ build_package_list() {
         
         # Cursor themes
         "bibata-cursor-theme-bin"
+        "qogir-cursor-theme"
         
         # Entertainment
         "spotify-launcher"
