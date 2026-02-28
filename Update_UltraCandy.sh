@@ -999,11 +999,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     fi
 
     # Add flathub repo
