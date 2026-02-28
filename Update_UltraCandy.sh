@@ -999,11 +999,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     fi
 
     # Add flathub repo
@@ -5421,7 +5421,10 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/magick * /usr/share/sddm/themes/sugar-candy/Backgrounds/*"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^Background=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^BackgroundColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/sddm.conf.d/sugar-candy.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/sugar-candy/theme.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s/^(\\s*)Image {/\\1AnimatedImage {/ /usr/share/sddm/themes/sugar-candy/Main.qml"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i /id: backgroundImage/a\\            playing: true /usr/share/sddm/themes/sugar-candy/Main.qml"
     )
 
     # Add all entries to sudoers safely using visudo
@@ -5537,10 +5540,18 @@ TranslateReboot=""
 TranslateShutdown=""
 TranslateVirtualKeyboardButton=""
 EOF
-            #sudo chown $USER:$USER /etc/sddm.conf.d/sugar-candy.conf
-            #sudo chmod 644 /etc/sddm.conf.d/sugar-candy.conf
-            #sudo chown $USER:$USER /usr/share/sddm/themes/sugar-candy/theme.conf
-            #sudo chmod 644 /usr/share/sddm/themes/sugar-candy/theme.conf
+            # ── Patch sugar-candy Main.qml for AnimatedImage gif support (once) ──────────
+            MAIN_QML="/usr/share/sddm/themes/sugar-candy/Main.qml"
+
+            if [[ -f "$MAIN_QML" ]]; then
+                if grep -q "^\s*Image {" "$MAIN_QML"; then
+                    sudo sed -i 's/^\(\s*\)Image {/\1AnimatedImage {/' "$MAIN_QML"
+                    sudo sed -i '/id: backgroundImage/a\            playing: true' "$MAIN_QML"
+                    echo "🎬 Patched Main.qml with AnimatedImage support"
+                else
+                    echo "✅ Main.qml already patched"
+                fi
+            fi
 
             print_success "SDDM configured to use Sugar Candy theme with custom auto-updating background"
         else
@@ -5548,7 +5559,6 @@ EOF
         fi
     fi
 }
-
 # Function to setup default "custom.conf" file
 setup_custom_config() {
 # Create the custom settings directory and files if it doesn't already exist
