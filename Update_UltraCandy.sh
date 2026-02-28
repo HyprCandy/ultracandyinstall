@@ -70,41 +70,33 @@ print_error() {
 
 # Function to choose display manager
 choose_display_manager() {
-    if [ "$DISTRO_FAMILY" = "arch" ]; then
-        print_status "For old users: remove rofi-wayland through 'sudo pacman -Rnsd rofi-wayland' then clear cache through 'sudo pacman -Scc'"
-        echo -e "${CYAN}Choose your display manager:${NC}"
-        echo "1) SDDM with Sugar Candy theme (HyprCandy automatic background set according to applied wallpaper)"
-        echo "2) GDM with GDM settings app (GNOME Display Manager and customization app)"
-        echo
-        
-        while true; do
-            echo -e "${YELLOW}Enter your choice (1 for SDDM, 2 for GDM):${NC}"
-            read -r dm_choice
-            case $dm_choice in
-                1)
-                    DISPLAY_MANAGER="sddm"
-                    DISPLAY_MANAGER_SERVICE="sddm"
-                    print_status "Selected SDDM with Sugar Candy theme and HyprCandy automatic background setting"
-                    break
-                    ;;
-                2)
-                    DISPLAY_MANAGER="gdm"
-                    DISPLAY_MANAGER_SERVICE="gdm"
-                    print_status "Selected GDM with GDM settings app"
-                    break
-                    ;;
-                *)
-                    print_error "Invalid choice. Please enter 1 or 2."
-                    ;;
-            esac
-        done
-    else
-        # Non-Arch distributions use GDM by default
-        DISPLAY_MANAGER="gdm"
-        DISPLAY_MANAGER_SERVICE="gdm"
-        print_status "Using GDM (GNOME Display Manager) - default for $DISTRO_FAMILY"
-        print_status "GDM settings app will be installed for customization"
-    fi
+    print_status "For old users remove rofi-wayland through 'sudo pacman -Rnsd rofi-wayland' then clear cache through 'sudo pacman -Scc'"
+    echo -e "${CYAN}Choose your display manager:${NC}"
+    echo "1) SDDM with Sugar Candy theme (HyprCandy automatic background set according to applied wallpaper)"
+    echo "2) GDM with GDM settings app (GNOME Display Manager and customization app)"
+    echo
+    
+    while true; do
+        echo -e "${YELLOW}Enter your choice (1 for SDDM, 2 for GDM):${NC}"
+        read -r dm_choice
+        case $dm_choice in
+            1)
+                DISPLAY_MANAGER="sddm"
+                DISPLAY_MANAGER_SERVICE="sddm"
+                print_status "Selected SDDM with Sugar Candy theme and HyprCandy automatic background setting"
+                break
+                ;;
+            2)
+                DISPLAY_MANAGER="gdm"
+                DISPLAY_MANAGER_SERVICE="gdm"
+                print_status "Selected GDM with GDM settings app"
+                break
+                ;;
+            *)
+                print_error "Invalid choice. Please enter 1 or 2."
+                ;;
+        esac
+    done
 }
 
 choose_panel() {
@@ -962,6 +954,25 @@ setup_ultracandy() {
         echo -e "${GREEN}Previous custom config folder backup created${NC}"
     fi
     sleep 1
+
+    # Install display manager packages
+    if [ "$DISPLAY_MANAGER" = "sddm" ]; then
+        if pacman -Qi sddm &>/dev/null; then
+            $AUR_HELPER -R --noconfirm gdm gdm-settings
+            $AUR_HELPER -S --noconfirm sddm sddm-sugar-candy-git
+            print_status "Installed SDDM packages"
+        else
+            echo ""
+        fi
+    elif [ "$DISPLAY_MANAGER" = "gdm" ]; then
+        if pacman -Qi gdm &>/dev/null; then
+            $AUR_HELPER -R --noconfirm sddm sddm-sugar-candy-git
+            $AUR_HELPER -S --noconfirm gdm gdm-settings
+            print_status "Installed GDM packages"
+        else
+            echo ""
+        fi
+    fi
     
     # Prevent notification daemon conflicts
     if [ "$PANEL_CHOICE" = "waybar" ]; then
