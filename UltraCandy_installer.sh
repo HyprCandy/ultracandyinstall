@@ -4901,7 +4901,7 @@ get_waypaper_background() {
 update_config_background() {
     local bg_path="$1"
     if [ -f "$bg_path" ]; then
-        magick "$bg_path" "$HOME/.config/background" && magick "$HOME/.config/background" "$HOME/.config/wallpaper.png"
+        magick "$bg_path" "$HOME/.config/background" && magick "$HOME/.config/background[0]" "$HOME/.config/wallpaper.png"
         echo "✅ Updated ~/.config/background to point to: $bg_path"
         return 0
     else
