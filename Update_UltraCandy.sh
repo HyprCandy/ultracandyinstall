@@ -5404,6 +5404,10 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     printf '%s\n' "${SUDOERS_ENTRIES[@]}" | sudo EDITOR='tee -a' visudo -f /etc/sudoers.d/hyprcandy-background
     
     # Set proper permissions on the sudoers file
+    sudo chown "$USERNAME:$USERNAME" /etc/sddm.conf.d/sugar-candy.conf
+    sudo chmod 644 /etc/sddm.conf.d/sugar-candy.conf
+    sudo chown "$USERNAME:$USERNAME" /usr/share/sddm/themes/sugar-candy/theme.conf
+    sudo chmod 644 /usr/share/sddm/themes/sugar-candy/theme.conf
     sudo chmod 440 /etc/sudoers.d/hyprcandy-background
 
     echo "✅ Added sddm background auto-update settings successfully"
