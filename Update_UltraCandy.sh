@@ -4321,10 +4321,10 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
     # ── BackgroundColor from inverse_primary in colors.css ───────────────────
     if [[ -f "$COLORS_CSS" ]]; then
         # Extract full 6-char hex from: @define-color inverse_primary #rrggbb;
-        local PAT='(?<=#)[0-9a-fA-F]{6}'
+        # Extract full 6-char hex from: @define-color inverse_primary #rrggbb;
         FULL_HEX=$(grep -E '@define-color\s+inverse_primary\s+#' "$COLORS_CSS" \
             | head -n1 \
-            | grep -oP "$PAT")
+            | grep -oP '(?<=#)[0-9a-fA-F]{6}')
 
         if [[ -n "$FULL_HEX" ]]; then
             sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
@@ -4390,10 +4390,10 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
     # ── BackgroundColor from inverse_primary in colors.css ───────────────────
     if [[ -f "$COLORS_CSS" ]]; then
         # Extract full 6-char hex from: @define-color inverse_primary #rrggbb;
-        local PAT='(?<=#)[0-9a-fA-F]{6}'
+        # Extract full 6-char hex from: @define-color inverse_primary #rrggbb;
         FULL_HEX=$(grep -E '@define-color\s+inverse_primary\s+#' "$COLORS_CSS" \
             | head -n1 \
-            | grep -oP "$PAT")
+            | grep -oP '(?<=#)[0-9a-fA-F]{6}')
 
         if [[ -n "$FULL_HEX" ]]; then
             sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
@@ -5404,8 +5404,10 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
 
     # Add all entries to sudoers safely using visudo
     printf '%s\n' "${SUDOERS_ENTRIES[@]}" | sudo EDITOR='tee -a' visudo -f /etc/sudoers.d/hyprcandy-background
-
+    
     # Set proper permissions on the sudoers file
+    sudo chown $USER:$USER /etc/sddm.conf.d/sugar-candy.conf
+    sudo chmod 644 /etc/sddm.conf.d/sugar-candy.conf
     sudo chmod 440 /etc/sudoers.d/hyprcandy-background
 
     echo "✅ Added sddm background auto-update settings successfully"
@@ -5454,6 +5456,8 @@ enable_display_manager() {
     if [ "$DISPLAY_MANAGER" = "sddm" ]; then
         print_status "Configuring SDDM with Sugar Candy theme..."
         
+        sudo rm -rf /etc/sddm.conf.d/
+        sleep 1
         # Create SDDM config directory if it doesn't exist
         sudo mkdir -p /etc/sddm.conf.d/
         
