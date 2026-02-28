@@ -4124,7 +4124,11 @@ update_hypr_cursor_env() {
     
     # Sync GTK4 with GTK3
     sed -i "s|^gtk-cursor-theme-name=.*|gtk-cursor-theme-name=$theme|" "$GTK4_FILE"
-    sed -i "s|^gtk-cursor-theme-size=.*|gtk-cursor-theme-size=$size|" "$GTK4_FILE" 
+    sed -i "s|^gtk-cursor-theme-size=.*|gtk-cursor-theme-size=$size|" "$GTK4_FILE"
+
+    # SDDM cursor update
+    sudo sed -i "s|^CursorTheme=.*|CursorTheme=$theme|" "/etc/sddm.conf.d/sugar-candy.conf"
+    sudo sed -i "s|^CursorSize=.*|CursorSize=$size|" "/etc/sddm.conf.d/sugar-candy.conf"
 
     # Apply changes immediately
     apply_cursor_changes "$theme" "$size"
@@ -5425,6 +5429,8 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^BackgroundColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^AccentColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/sugar-candy/theme.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^CursorTheme=*|* /etc/sddm.conf.d/sugar-candy.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^CursorSize=*|* /etc/sddm.conf.d/sugar-candy.conf"
     )
 
     # Add all entries to sudoers safely using visudo
@@ -5489,6 +5495,8 @@ enable_display_manager() {
             sudo tee /etc/sddm.conf.d/sugar-candy.conf > /dev/null << EOF
 [Theme]
 Current=sugar-candy
+CursorTheme=Bibata-Modern-Classic
+CursorSize=18
 EOF
             # Write full theme config to the sugar-candy theme directory
             sudo tee /usr/share/sddm/themes/sugar-candy/theme.conf > /dev/null << EOF
@@ -5559,6 +5567,7 @@ EOF
         fi
     fi
 }
+
 # Function to setup default "custom.conf" file
 setup_custom_config() {
 # Create the custom settings directory and files if it doesn't already exist
