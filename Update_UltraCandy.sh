@@ -4337,6 +4337,7 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
 
         if [[ -n "$FULL_HEX" ]]; then
             sudo sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
+            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
             echo "🎨 SDDM BackgroundColor updated → #$FULL_HEX (from inverse_primary)"
         else
             echo "⚠️  Could not parse inverse_primary from $COLORS_CSS"
@@ -4415,6 +4416,7 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
 
         if [[ -n "$FULL_HEX" ]]; then
             sudo sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
+            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
             echo "🎨 SDDM BackgroundColor updated → #$FULL_HEX (from inverse_primary)"
         else
             echo "⚠️  Could not parse inverse_primary from $COLORS_CSS"
@@ -5421,6 +5423,7 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/magick * /usr/share/sddm/themes/sugar-candy/Backgrounds/*"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^Background=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^BackgroundColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^AccentColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/sugar-candy/theme.conf"
     )
 
