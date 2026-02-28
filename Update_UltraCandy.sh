@@ -15064,8 +15064,8 @@ main() {
     print_status "This script will backup the current hypr, hyprcustom, and hyprcandy folders then update your dotfiles"
     
     # Choose display manager first
-    #choose_display_manager
-    #echo
+    choose_display_manager
+    echo
 
     #detect distro
     #detect_distro
