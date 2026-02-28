@@ -4278,6 +4278,7 @@ fi
 # ── Update SDDM background path and BackgroundColor from waypaper/colors.css ──
 WAYPAPER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/waypaper/config.ini"
 SDDM_CONF="/usr/share/sddm/themes/sugar-candy/theme.conf"
+SDDM_BG_DIR="/usr/share/sddm/themes/sugar-candy/Backgrounds"
 COLORS_CSS="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-4.0/colors.css"
 
 if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
@@ -4289,15 +4290,20 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
         | xargs)
 
     if [[ -n "$CURRENT_WP" && -f "$CURRENT_WP" ]]; then
-        sudo sed -i "s|^Background=.*|Background=\"$CURRENT_WP\"|" "$SDDM_CONF"
-        echo "🖥️  SDDM background updated → $CURRENT_WP"
+        WP_FILENAME=$(basename "$CURRENT_WP")
+
+        # Copy wallpaper into sugar-candy Backgrounds folder (preserves gif/png/webp as-is)
+        sudo magick "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
+
+        # Update theme.conf with relative Backgrounds/ path
+        sudo sed -i "s|^Background=.*|Background=\"Backgrounds/$WP_FILENAME\"|" "$SDDM_CONF"
+        echo "🖥️  SDDM background updated → Backgrounds/$WP_FILENAME"
     else
         echo "⚠️  Could not resolve wallpaper path from waypaper config"
     fi
 
     # ── BackgroundColor from inverse_primary in colors.css ───────────────────
     if [[ -f "$COLORS_CSS" ]]; then
-        # Extract full 6-char hex from: @define-color inverse_primary #rrggbb;
         FULL_HEX=$(grep -E '@define-color\s+inverse_primary\s+#' "$COLORS_CSS" \
             | head -n1 \
             | grep -oP '(?<=#)[0-9a-fA-F]{6}')
@@ -4346,6 +4352,7 @@ fi
 # ── Update SDDM background path and BackgroundColor from waypaper/colors.css ──
 WAYPAPER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/waypaper/config.ini"
 SDDM_CONF="/usr/share/sddm/themes/sugar-candy/theme.conf"
+SDDM_BG_DIR="/usr/share/sddm/themes/sugar-candy/Backgrounds"
 COLORS_CSS="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-4.0/colors.css"
 
 if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
@@ -4357,15 +4364,20 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
         | xargs)
 
     if [[ -n "$CURRENT_WP" && -f "$CURRENT_WP" ]]; then
-        sudo sed -i "s|^Background=.*|Background=\"$CURRENT_WP\"|" "$SDDM_CONF"
-        echo "🖥️  SDDM background updated → $CURRENT_WP"
+        WP_FILENAME=$(basename "$CURRENT_WP")
+
+        # Copy wallpaper into sugar-candy Backgrounds folder (preserves gif/png/webp as-is)
+        sudo magick "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
+
+        # Update theme.conf with relative Backgrounds/ path
+        sudo sed -i "s|^Background=.*|Background=\"Backgrounds/$WP_FILENAME\"|" "$SDDM_CONF"
+        echo "🖥️  SDDM background updated → Backgrounds/$WP_FILENAME"
     else
         echo "⚠️  Could not resolve wallpaper path from waypaper config"
     fi
 
     # ── BackgroundColor from inverse_primary in colors.css ───────────────────
     if [[ -f "$COLORS_CSS" ]]; then
-        # Extract full 6-char hex from: @define-color inverse_primary #rrggbb;
         FULL_HEX=$(grep -E '@define-color\s+inverse_primary\s+#' "$COLORS_CSS" \
             | head -n1 \
             | grep -oP '(?<=#)[0-9a-fA-F]{6}')
@@ -5370,11 +5382,15 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     echo "🔄 Adding sddm background auto-update settings..."
     
     # Get the current username
+    sudo rm -f /etc/sudoers.d/hyprcandy-background
     USERNAME=$(whoami)
 
     # Create the sudoers entries for background script and required commands
     SUDOERS_ENTRIES=(
-        "$USERNAME ALL=(ALL) NOPASSWD: $HOME/.config/hyprcandy/hooks/update_background.sh"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/magick * /usr/share/sddm/themes/sugar-candy/Backgrounds/*"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^Background=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^BackgroundColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/sugar-candy/theme.conf"
     )
 
     # Add all entries to sudoers safely using visudo
@@ -5490,10 +5506,10 @@ TranslateReboot=""
 TranslateShutdown=""
 TranslateVirtualKeyboardButton=""
 EOF
-            sudo chown $USER:$USER /etc/sddm.conf.d/sugar-candy.conf
-            sudo chmod 644 /etc/sddm.conf.d/sugar-candy.conf
-            sudo chown $USER:$USER /usr/share/sddm/themes/sugar-candy/theme.conf
-            sudo chmod 644 /usr/share/sddm/themes/sugar-candy/theme.conf
+            #sudo chown $USER:$USER /etc/sddm.conf.d/sugar-candy.conf
+            #sudo chmod 644 /etc/sddm.conf.d/sugar-candy.conf
+            #sudo chown $USER:$USER /usr/share/sddm/themes/sugar-candy/theme.conf
+            #sudo chmod 644 /usr/share/sddm/themes/sugar-candy/theme.conf
 
             print_success "SDDM configured to use Sugar Candy theme with custom auto-updating background"
         else
