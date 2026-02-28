@@ -5422,8 +5422,6 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^Background=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^BackgroundColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/sugar-candy/theme.conf"
-        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s/^(\\s*)Image {/\\1AnimatedImage {/ /usr/share/sddm/themes/sugar-candy/Main.qml"
-        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i /id: backgroundImage/a\\            playing: true /usr/share/sddm/themes/sugar-candy/Main.qml"
     )
 
     # Add all entries to sudoers safely using visudo
