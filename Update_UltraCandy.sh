@@ -15042,6 +15042,9 @@ main() {
     print_status "Proceeding with UltraCandy configuration setup..."
     setup_ultracandy
 
+    # Enable display manager
+    enable_display_manager
+
     # Setup default "custom.conf" file
     setup_custom_config
 
@@ -15056,9 +15059,6 @@ main() {
     
     # Setup keyboard layout
     setup_keyboard_layout
-
-    # Enable display manager
-    enable_display_manager
     
     # Configuration management tips
     echo
