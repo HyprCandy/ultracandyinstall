@@ -4312,17 +4312,19 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
         | sed "s|~|$HOME|g" \
         | xargs)
 
-    if [[ -n "$CURRENT_WP" && -f "$CURRENT_WP" ]]; then
+   if [[ -n "$CURRENT_WP" && -f "$CURRENT_WP" ]]; then
         WP_FILENAME=$(basename "$CURRENT_WP")
         WP_EXT="${WP_FILENAME##*.}"
 
-        # webp is not supported by sugar-candy — convert to jpg first
+        # webp is not supported by sugar-candy — convert to jpg then symlink the jpg
         if [[ "${WP_EXT,,}" == "webp" ]]; then
             WP_FILENAME="${WP_FILENAME%.*}.jpg"
             sudo magick "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
+            sudo ln -sf "$SDDM_BG_DIR/$WP_FILENAME" "$SDDM_BG_DIR/current-wallpaper.jpg"
             echo "🔄 Converted webp → $WP_FILENAME"
         else
-            sudo cp "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
+            # Symlink directly — preserves gif looping and all native formats
+            sudo ln -sf "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
         fi
 
         sudo sed -i "s|^Background=.*|Background=\"Backgrounds/$WP_FILENAME\"|" "$SDDM_CONF"
@@ -4394,13 +4396,15 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
         WP_FILENAME=$(basename "$CURRENT_WP")
         WP_EXT="${WP_FILENAME##*.}"
 
-        # webp is not supported by sugar-candy — convert to jpg first
+        # webp is not supported by sugar-candy — convert to jpg then symlink the jpg
         if [[ "${WP_EXT,,}" == "webp" ]]; then
             WP_FILENAME="${WP_FILENAME%.*}.jpg"
             sudo magick "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
+            sudo ln -sf "$SDDM_BG_DIR/$WP_FILENAME" "$SDDM_BG_DIR/current-wallpaper.jpg"
             echo "🔄 Converted webp → $WP_FILENAME"
         else
-            sudo cp "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
+            # Symlink directly — preserves gif looping and all native formats
+            sudo ln -sf "$CURRENT_WP" "$SDDM_BG_DIR/$WP_FILENAME"
         fi
 
         sudo sed -i "s|^Background=.*|Background=\"Backgrounds/$WP_FILENAME\"|" "$SDDM_CONF"
@@ -5419,7 +5423,7 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     # Create the sudoers entries for background script and required commands
     SUDOERS_ENTRIES=(
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/magick * /usr/share/sddm/themes/sugar-candy/Backgrounds/*"
-        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/cp * /usr/share/sddm/themes/sugar-candy/Backgrounds/*"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/ln -sf * /usr/share/sddm/themes/sugar-candy/Backgrounds/*"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^Background=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^BackgroundColor=*|* /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/sugar-candy/theme.conf"
