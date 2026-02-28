@@ -4287,10 +4287,27 @@ if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
     magick "$HOME/.config/background[0]" "$HOME/.config/background.png"
 fi
 
-# Update SDDM background with sudo and reload the dock
-if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
-    sudo magick "$HOME/.config/background[0]" "/usr/share/sddm/themes/sugar-candy/Backgrounds/Mountain.jpg"
-    sleep 1
+# Update SDDM background with sudo from waypaper config
+WAYPAPER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/waypaper/config.ini"
+SDDM_CONF="/etc/sddm.conf.d/sugar-candy.conf"
+
+if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
+    # Reuse same ini parser as wallpaper-cycle.sh
+    CURRENT_WP=$(grep -E "^\s*wallpaper\s*=" "$WAYPAPER_CONFIG" \
+        | head -n1 \
+        | sed 's/.*=\s*//' \
+        | sed "s|~|$HOME|g" \
+        | xargs)
+
+    if [[ -n "$CURRENT_WP" && -f "$CURRENT_WP" ]]; then
+        sed -i "s|^Background=.*|Background=$CURRENT_WP|" "$SDDM_CONF"
+        echo "🖥️  SDDM background updated → $CURRENT_WP"
+    else
+        echo "⚠️  Could not resolve wallpaper path from waypaper config"
+    fi
+else
+    [[ ! -f "$WAYPAPER_CONFIG" ]] && echo "⚠️  waypaper config not found: $WAYPAPER_CONFIG"
+    [[ ! -f "$SDDM_CONF" ]]      && echo "⚠️  SDDM config not found: $SDDM_CONF"
 fi
 
 # Create lock.png at 661x661 pixels
@@ -4321,10 +4338,33 @@ fi
 
 sleep 1
 
-# Update SDDM background with sudo and reload the dock
+# Update SDDM background with sudo from waypaper config
+WAYPAPER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/waypaper/config.ini"
+SDDM_CONF="/etc/sddm.conf.d/sugar-candy.conf"
+
+if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
+    # Reuse same ini parser as wallpaper-cycle.sh
+    CURRENT_WP=$(grep -E "^\s*wallpaper\s*=" "$WAYPAPER_CONFIG" \
+        | head -n1 \
+        | sed 's/.*=\s*//' \
+        | sed "s|~|$HOME|g" \
+        | xargs)
+
+    if [[ -n "$CURRENT_WP" && -f "$CURRENT_WP" ]]; then
+        sed -i "s|^Background=.*|Background=$CURRENT_WP|" "$SDDM_CONF"
+        echo "🖥️  SDDM background updated → $CURRENT_WP"
+    else
+        echo "⚠️  Could not resolve wallpaper path from waypaper config"
+    fi
+else
+    [[ ! -f "$WAYPAPER_CONFIG" ]] && echo "⚠️  waypaper config not found: $WAYPAPER_CONFIG"
+    [[ ! -f "$SDDM_CONF" ]]      && echo "⚠️  SDDM config not found: $SDDM_CONF"
+fi
+
+# Create lock.png at 661x661 pixels
 if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
-    sudo magick "$HOME/.config/background[0]" "/usr/share/sddm/themes/sugar-candy/Backgrounds/Mountain.jpg"
-    sleep 1
+    magick "$HOME/.config/background[0]" -resize 661x661^ -gravity center -extent 661x661 "$HOME/.config/lock.png"
+    echo "🔒 Created lock.png at 661x661 pixels"
 fi
 
 # Update mako config colors from nwg-dock-hyprland/colors.css
@@ -5307,19 +5347,18 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     
     # Get the current username
     USERNAME=$(whoami)
-    
+
     # Create the sudoers entries for background script and required commands
     SUDOERS_ENTRIES=(
         "$USERNAME ALL=(ALL) NOPASSWD: $HOME/.config/hyprcandy/hooks/update_background.sh"
-        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/magick * /usr/share/sddm/themes/sugar-candy/Backgrounds/Mountain.jpg"
     )
-    
+
     # Add all entries to sudoers safely using visudo
     printf '%s\n' "${SUDOERS_ENTRIES[@]}" | sudo EDITOR='tee -a' visudo -f /etc/sudoers.d/hyprcandy-background
-    
+
     # Set proper permissions on the sudoers file
     sudo chmod 440 /etc/sudoers.d/hyprcandy-background
-    
+
     echo "✅ Added sddm background auto-update settings successfully"
     
     # 🎨 Update wlogout style.css with correct username
@@ -5378,6 +5417,11 @@ Current=sugar-candy
 [General]
 Background=$HOME/.config/background.png
 EOF
+            # Hand ownership to the current user so update_background.sh
+            # can sed it directly without sudo on every wallpaper change
+            sudo chown "$USERNAME:$USERNAME" /etc/sddm.conf.d/sugar-candy.conf
+            # Keep permissions tight — readable by sddm, writable only by owner
+            sudo chmod 644 /etc/sddm.conf.d/sugar-candy.conf
             
             print_success "SDDM configured to use Sugar Candy theme with custom auto-updating background"
         else
@@ -14796,12 +14840,6 @@ else
     systemctl --user restart hyprpanel-idle-monitor.service background-watcher.service rofi-font-watcher.service cursor-theme-watcher.service &>/dev/null # hyprpanel.service
 fi
 echo "✅ Services set..."
-
-# Update SDDM background with sudo
-if command -v magick >/dev/null && [ -f "$HOME/.config/background" ]; then
-    sudo magick "$HOME/.config/background[0]" "/usr/share/sddm/themes/sugar-candy/Backgrounds/Mountain.jpg"
-    sleep 1
-fi
 
     # 🔄 Reload Hyprland
     echo
