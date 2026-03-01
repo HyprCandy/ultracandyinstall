@@ -649,10 +649,10 @@ error_symbol = "[󱞪](grey) [x](red)"
 vimcmd_symbol = "[󱞪](grey) [](green)"
 
 [git_branch]
-symbol = "[](blue) 🌱 "
+symbol = "[](green) 🌱 "
 truncation_length = 4
 truncation_symbol = ""
-style = "bold green"
+style = "blue"
 
 [git_status]
 ahead = "⇡${count}"
@@ -839,10 +839,10 @@ error_symbol = "[󱞪](grey) [x](red)"
 vimcmd_symbol = "[󱞪](grey) [](green)"
 
 [git_branch]
-symbol = "[](blue) 🌱 "
+symbol = "[](green) 🌱 "
 truncation_length = 4
 truncation_symbol = ""
-style = "bold green"
+style = "blue"
 
 [git_status]
 ahead = "⇡${count}"
