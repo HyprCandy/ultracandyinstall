@@ -5806,6 +5806,12 @@ master {
     drop_at_cursor = true
 }
 
+scrolling {
+    direction = right
+    focus_fit_method = 0
+    column_width = 0.7000000000000002
+}
+
 gesture = 3, horizontal, workspace
 gesture = 4, swipe, move,
 gesture = 2, pinch, float
@@ -6457,6 +6463,12 @@ master {
     new_on_active = after
     smart_resizing = true
     drop_at_cursor = true
+}
+
+scrolling {
+    direction = right
+    focus_fit_method = 0
+    column_width = 0.7000000000000002
 }
 
 gesture = 3, horizontal, workspace
