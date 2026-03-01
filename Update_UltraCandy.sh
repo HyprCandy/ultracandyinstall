@@ -5761,7 +5761,7 @@ general {
     border_size = 3
     col.active_border = $source_color
     col.inactive_border = $background
-    layout = dwindle
+    layout = scrolling
     resize_on_border = true
     allow_tearing = true
 }
@@ -6420,7 +6420,7 @@ general {
     border_size = 3
     col.active_border = $source_color
     col.inactive_border = $background
-    layout = dwindle
+    layout = scrolling
     resize_on_border = true
     allow_tearing = true
 }
