@@ -4871,7 +4871,7 @@ update_config_background() {
 trigger_matugen() {
     if [ -f "$MATUGEN_CONFIG" ]; then
         echo "🎨 Triggering matugen color generation..."
-        matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.25 &
+        matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.15 &
         sleep 3
         update_hypr_group_text
         echo "✅ Matugen color generation started"
