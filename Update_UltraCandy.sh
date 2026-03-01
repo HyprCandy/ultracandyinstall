@@ -4343,10 +4343,25 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
 
         if [[ -n "$FULL_HEX" ]]; then
             sudo sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
-            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
             echo "🎨 SDDM BackgroundColor updated → #$FULL_HEX (from inverse_primary)"
         else
             echo "⚠️  Could not parse inverse_primary from $COLORS_CSS"
+        fi
+    else
+        echo "⚠️  colors.css not found at $COLORS_CSS"
+    fi
+
+    # ── AccentColor from primary_container in colors.css ───────────────────
+    if [[ -f "$COLORS_CSS" ]]; then
+        FULL_HEX=$(grep -E '@define-color\s+primary_container\s+#' "$COLORS_CSS" \
+            | head -n1 \
+            | grep -oP '(?<=#)[0-9a-fA-F]{6}')
+
+        if [[ -n "$FULL_HEX" ]]; then
+            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
+            echo "🎨 SDDM AccentColor updated → #$FULL_HEX (from primary_container)"
+        else
+            echo "⚠️  Could not parse primary_container from $COLORS_CSS"
         fi
     else
         echo "⚠️  colors.css not found at $COLORS_CSS"
@@ -4422,10 +4437,25 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
 
         if [[ -n "$FULL_HEX" ]]; then
             sudo sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
-            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
             echo "🎨 SDDM BackgroundColor updated → #$FULL_HEX (from inverse_primary)"
         else
             echo "⚠️  Could not parse inverse_primary from $COLORS_CSS"
+        fi
+    else
+        echo "⚠️  colors.css not found at $COLORS_CSS"
+    fi
+
+    # ── AccentColor from primary_container in colors.css ───────────────────
+    if [[ -f "$COLORS_CSS" ]]; then
+        FULL_HEX=$(grep -E '@define-color\s+primary_container\s+#' "$COLORS_CSS" \
+            | head -n1 \
+            | grep -oP '(?<=#)[0-9a-fA-F]{6}')
+
+        if [[ -n "$FULL_HEX" ]]; then
+            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
+            echo "🎨 SDDM AccentColor updated → #$FULL_HEX (from primary_container)"
+        else
+            echo "⚠️  Could not parse primary_container from $COLORS_CSS"
         fi
     else
         echo "⚠️  colors.css not found at $COLORS_CSS"
