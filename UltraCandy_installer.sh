@@ -2821,19 +2821,19 @@ class CSSColorUpdater:
             
             # Define the patterns for cava-left and cava-right blocks
             if make_transparent:
-                # Change @secondary_container to transparent in cava blocks
-                pattern_left = r'(#custom-cava-left\s*\{[^}]*?color:\s*)@secondary_container(\s*;)'
+                # Change @primary_container to transparent in cava blocks
+                pattern_left = r'(#custom-cava-left\s*\{[^}]*?color:\s*)@primary_container(\s*;)'
                 content = re.sub(pattern_left, r'\1transparent\2', content)
                 
-                pattern_right = r'(#custom-cava-right\s*\{[^}]*?color:\s*)@secondary_container(\s*;)'
+                pattern_right = r'(#custom-cava-right\s*\{[^}]*?color:\s*)@primary_container(\s*;)'
                 content = re.sub(pattern_right, r'\1transparent\2', content)
             else:
-                # Restore transparent back to @secondary_container in cava blocks
+                # Restore transparent back to @primary_container in cava blocks
                 pattern_left = r'(#custom-cava-left\s*\{[^}]*?color:\s*)transparent(\s*;)'
-                content = re.sub(pattern_left, r'\1@secondary_container\2', content)
+                content = re.sub(pattern_left, r'\1@primary_container\2', content)
                 
                 pattern_right = r'(#custom-cava-right\s*\{[^}]*?color:\s*)transparent(\s*;)'
-                content = re.sub(pattern_right, r'\1@secondary_container\2', content)
+                content = re.sub(pattern_right, r'\1@primary_container\2', content)
             
             # Check if any changes were actually made
             if content == original_content:
@@ -2921,7 +2921,7 @@ class CSSColorUpdater:
     def cleanup(self):
         """Cleanup: restore original colors when script exits"""
         try:
-            # Restore to @secondary_container on exit
+            # Restore to @primary_container on exit
             self._update_css_color(make_transparent=False)
             print("CSS colors restored on cleanup", file=sys.stderr)
         except Exception as e:
