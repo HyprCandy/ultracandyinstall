@@ -5417,7 +5417,7 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     
     # Add all custom cursors from ~/.icons to system icons
     print_status "Adding custom cursors"
-    sudo cp -r $HOME/.icons/*/ /usr/share/icons
+    sudo cp -r "$HOME/.icons/*/" /usr/share/icons
     print_status "Custom sursors added"
     
     # 📂 Step 3: Copy new grid.svg from custom SVG folder
