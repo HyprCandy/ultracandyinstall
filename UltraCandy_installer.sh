@@ -5415,6 +5415,12 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     # 🏠 Step 2: Return to home
     cd "$HOME"
 
+    # Add cutom cursors
+    print_status "Adding custom cursors"
+    sudo cp -r "$HOME/.icons/miku-cursor-linux" /usr/share/icons
+    print_status "Custom sursors added"
+    
+
     # 📂 Step 3: Copy new grid.svg from custom SVG folder
     SVG_SOURCE="$HOME/Pictures/Candy/Dock-SVGs/grid.svg"
     SVG_DEST="/usr/share/nwg-dock-hyprland/images"
