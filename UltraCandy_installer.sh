@@ -649,7 +649,7 @@ error_symbol = "[󱞪](grey) [x](red)"
 vimcmd_symbol = "[󱞪](grey) [](green)"
 
 [git_branch]
-symbol = "[](green) 🌱 "
+symbol = "[](blue) 🌱 "
 truncation_length = 4
 truncation_symbol = ""
 style = "bold green"
@@ -839,7 +839,7 @@ error_symbol = "[󱞪](grey) [x](red)"
 vimcmd_symbol = "[󱞪](grey) [](green)"
 
 [git_branch]
-symbol = "[](green) 🌱 "
+symbol = "[](blue) 🌱 "
 truncation_length = 4
 truncation_symbol = ""
 style = "bold green"
