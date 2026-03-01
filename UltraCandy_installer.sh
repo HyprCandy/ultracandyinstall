@@ -1060,10 +1060,10 @@ setup_ultracandy() {
     cd "$ultracandy_dir" || { echo "❌ Error: Could not find UltraCandy directory"; exit 1; }
 
     # Define only the configs to be stowed
-    config_dirs=(".face.icon" ".config" ".icons" ".ultracandy-zsh.zsh")
+    config_dirs=(".config" ".icons" ".ultracandy-zsh.zsh")
 
     # Add files/folders to exclude from deletion
-    preserve_items=("GJS" "Candy" ".git")
+    preserve_items=("GJS" "Candy" ".face.icon" ".git")
 
     if [ ${#config_dirs[@]} -eq 0 ]; then
         echo "❌ No configuration directories specified."
@@ -1094,11 +1094,11 @@ setup_ultracandy() {
     done
 
 # Stow all configurations at once, ignoring Candy folder
-if stow -v -t "$HOME" --ignore='Candy' --ignore='GJS' --ignore='candy-system-monitor.js' . 2>/dev/null; then
+if stow -v -t "$HOME" --ignore='Candy' --ignore='GJS' --ignore='.face.icons' --ignore='candy-system-monitor.js' . 2>/dev/null; then
     echo "✅ Successfully stowed all configurations"
 else
     echo "⚠️  Stow operation failed — attempting restow..."
-    if stow -R -v -t "$HOME" --ignore='Candy' --ignore='GJS' --ignore='candy-system-monitor.js' . 2>/dev/null; then
+    if stow -R -v -t "$HOME" --ignore='Candy' --ignore='GJS' --ignore='.face.icons' --ignore='candy-system-monitor.js' . 2>/dev/null; then
         echo "✅ Successfully restowed all configurations"
     else
         echo "❌ Failed to stow configurations"
@@ -5414,13 +5414,20 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
 
     # 🏠 Step 2: Return to home
     cd "$HOME"
-
-    # Add cutom cursors
-    print_status "Adding custom cursors"
-    sudo cp -r "$HOME/.icons/miku-cursor-linux" /usr/share/icons
-    print_status "Custom sursors added"
     
-
+    # Add all custom cursors from ~/.icons to system icons
+    print_status "Adding extra cursors..."
+    if [ -d "$HOME/.icons" ]; then
+        for cursor_dir in "$HOME/.icons/*/"; do
+            if [ -d "$cursor_dir" ]; then
+                sudo cp -r "$cursor_dir" /usr/share/icons/
+                print_success "Copied extra cursors → /usr/share/icons/"
+            fi
+        done
+    else
+        print_warning "No ~/.icons directory found — skipping custom cursors"
+    fi
+    
     # 📂 Step 3: Copy new grid.svg from custom SVG folder
     SVG_SOURCE="$HOME/Pictures/Candy/Dock-SVGs/grid.svg"
     SVG_DEST="/usr/share/nwg-dock-hyprland/images"
