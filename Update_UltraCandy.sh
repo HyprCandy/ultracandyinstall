@@ -5904,7 +5904,7 @@ decoration {
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-windowrule = group barred, float off, match:class .*
+windowrule = group barred, match:class .*
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
@@ -6557,7 +6557,7 @@ decoration {
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-windowrule = group barred, float off, match:class .*
+windowrule = group barred, match:class .*
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
@@ -7882,7 +7882,7 @@ function createCandyUtilsBox() {
         button {
             background-color: @inverse_primary;
             border:0.5px solid @background;
-            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+            box-shadow: 0 0 0 0 @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
             color: @primary;
             transition: all 0.2s ease;
             opacity: 1;
@@ -7894,13 +7894,13 @@ function createCandyUtilsBox() {
         button:hover {
             background-color: @blur_background;
             border: 0.5px solid @inverse_primary;
-            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+            box-shadow: 0 0 0 0 @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
         }
 
         .neon-highlight, button:active {
             background-color: @blur-background;
             border:0.5px solid @background;
-            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
+            box-shadow: 0 0 0 0 @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
         }
     `;
     cssProvider.load_from_data(css, css.length);
@@ -10837,7 +10837,7 @@ function createCandyUtilsBox() {
         button {
             background-color: @inverse_primary;
             border:0.5px solid @background;
-            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+            box-shadow: 0 0 0 0 @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
             color: @primary;
             transition: all 0.2s ease;
             opacity: 1;
@@ -10849,13 +10849,13 @@ function createCandyUtilsBox() {
         button:hover {
             background-color: @blur_background;
             border: 0.5px solid @inverse_primary;
-            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
+            box-shadow: 0 0 0 0 @primary_fixed_dim, 0 0 0 2px @on_secondary inset;
         }
 
         .neon-highlight, button:active {
             background-color: @blur-background;
             border:0.5px solid @background;
-            box-shadow: 0 0 2px 2px @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
+            box-shadow: 0 0 0 0 @primary_fixed_dim, 0 0 0 2px @primary_fixed_dim inset;
         }
     `;
     cssProvider.load_from_data(css, css.length);
