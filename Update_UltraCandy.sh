@@ -8308,11 +8308,11 @@ function createCandyUtilsBox() {
         if (isIslands) {
             // Change to islands mode: no background, no border
             GLib.spawn_command_line_async(`sed -i '25s/background: @blur_background;/background: none;/' '${waybarStyleFile}'`);
-            GLib.spawn_command_line_async(`sed -i '32s/border: ${currentBorderSize}px solid @inverse_primary;/border: 0px solid @inverse_primary;/' '${waybarStyleFile}'`);
+            GLib.spawn_command_line_async(`sed -i '32s/border: ${currentBorderSize}px solid @on_primary_fixed_variant;/border: 0px solid @on_primary_fixed_variant;/' '${waybarStyleFile}'`);
         } else {
             // Change to bar mode: restore background and border
             GLib.spawn_command_line_async(`sed -i '25s/background: none;/background: @blur_background;/' '${waybarStyleFile}'`);
-            GLib.spawn_command_line_async(`sed -i '32s/border: 0px solid @inverse_primary;/border: ${currentBorderSize}px solid @inverse_primary;/' '${waybarStyleFile}'`);
+            GLib.spawn_command_line_async(`sed -i '32s/border: 0px solid @on_primary_fixed_variant;/border: ${currentBorderSize}px solid @on_primary_fixed_variant;/' '${waybarStyleFile}'`);
         }
         // Reload waybar
         //GLib.spawn_command_line_async('killall waybar');
@@ -10225,8 +10225,8 @@ function createCandyUtilsBox() {
                 let [cssOk, cssContents] = GLib.file_get_contents(waybarStyleFile);
                 if (cssOk && cssContents) {
                     let content = imports.byteArray.toString(cssContents);
-                    // Look for border with @inverse_primary (exact logic from existing function)
-                    let borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@inverse_primary;/);
+                    // Look for border with @on_primary_fixed_variant (exact logic from existing function)
+                    let borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@on_primary_fixed_variant;/);
                     if (borderMatch) {
                         return borderMatch[1];
                     }
@@ -10254,18 +10254,18 @@ function createCandyUtilsBox() {
                     let content = imports.byteArray.toString(contents);
                     
                     // Look specifically for the border in the window#waybar > box section (exact logic)
-                    let borderMatch = content.match(/window#waybar > box\s*\{[\s\S]*?border:\s*([0-9]+)px\s*solid\s*@inverse_primary;[\s\S]*?\}/);
+                    let borderMatch = content.match(/window#waybar > box\s*\{[\s\S]*?border:\s*([0-9]+)px\s*solid\s*@on_primary_fixed_variant;[\s\S]*?\}/);
                     
                     if (!borderMatch) {
-                        // Fallback: try to find any border with @inverse_primary
-                        borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@inverse_primary;/);
+                        // Fallback: try to find any border with @on_primary_fixed_variant
+                        borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@on_primary_fixed_variant;/);
                     }
                     
                     if (borderMatch) {
                         let currentValue = parseInt(borderMatch[1]);
                         
                         // Update CSS file using the exact current value (exact sed command from existing logic)
-                        GLib.spawn_command_line_async(`sed -i '32s/border: ${currentValue}px solid @inverse_primary;/border: ${numValue}px solid @inverse_primary;/' '${waybarStyleFile}'`);
+                        GLib.spawn_command_line_async(`sed -i '32s/border: ${currentValue}px solid @on_primary_fixed_variant;/border: ${numValue}px solid @on_primary_fixed_variant;/' '${waybarStyleFile}'`);
                         
                         // Update state file
                         GLib.file_set_contents(waybarBorderSizeStateFile, numValue.toString());
@@ -11264,11 +11264,11 @@ function createCandyUtilsBox() {
         if (isIslands) {
             // Change to islands mode: no background, no border
             GLib.spawn_command_line_async(`sed -i '25s/background: @blur_background;/background: none;/' '${waybarStyleFile}'`);
-            GLib.spawn_command_line_async(`sed -i '32s/border: ${currentBorderSize}px solid @inverse_primary;/border: 0px solid @inverse_primary;/' '${waybarStyleFile}'`);
+            GLib.spawn_command_line_async(`sed -i '32s/border: ${currentBorderSize}px solid @on_primary_fixed_variant;/border: 0px solid @on_primary_fixed_variant;/' '${waybarStyleFile}'`);
         } else {
             // Change to bar mode: restore background and border
             GLib.spawn_command_line_async(`sed -i '25s/background: none;/background: @blur_background;/' '${waybarStyleFile}'`);
-            GLib.spawn_command_line_async(`sed -i '32s/border: 0px solid @inverse_primary;/border: ${currentBorderSize}px solid @inverse_primary;/' '${waybarStyleFile}'`);
+            GLib.spawn_command_line_async(`sed -i '32s/border: 0px solid @on_primary_fixed_variant;/border: ${currentBorderSize}px solid @on_primary_fixed_variant;/' '${waybarStyleFile}'`);
         }
         // Reload waybar
         //GLib.spawn_command_line_async('killall waybar');
@@ -13179,8 +13179,8 @@ function createCandyUtilsBox() {
                 let [cssOk, cssContents] = GLib.file_get_contents(waybarStyleFile);
                 if (cssOk && cssContents) {
                     let content = imports.byteArray.toString(cssContents);
-                    // Look for border with @inverse_primary (exact logic from existing function)
-                    let borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@inverse_primary;/);
+                    // Look for border with @on_primary_fixed_variant (exact logic from existing function)
+                    let borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@on_primary_fixed_variant;/);
                     if (borderMatch) {
                         return borderMatch[1];
                     }
@@ -13208,18 +13208,18 @@ function createCandyUtilsBox() {
                     let content = imports.byteArray.toString(contents);
                     
                     // Look specifically for the border in the window#waybar > box section (exact logic)
-                    let borderMatch = content.match(/window#waybar > box\s*\{[\s\S]*?border:\s*([0-9]+)px\s*solid\s*@inverse_primary;[\s\S]*?\}/);
+                    let borderMatch = content.match(/window#waybar > box\s*\{[\s\S]*?border:\s*([0-9]+)px\s*solid\s*@on_primary_fixed_variant;[\s\S]*?\}/);
                     
                     if (!borderMatch) {
-                        // Fallback: try to find any border with @inverse_primary
-                        borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@inverse_primary;/);
+                        // Fallback: try to find any border with @on_primary_fixed_variant
+                        borderMatch = content.match(/border:\s*([0-9]+)px\s*solid\s*@on_primary_fixed_variant;/);
                     }
                     
                     if (borderMatch) {
                         let currentValue = parseInt(borderMatch[1]);
                         
                         // Update CSS file using the exact current value (exact sed command from existing logic)
-                        GLib.spawn_command_line_async(`sed -i '32s/border: ${currentValue}px solid @inverse_primary;/border: ${numValue}px solid @inverse_primary;/' '${waybarStyleFile}'`);
+                        GLib.spawn_command_line_async(`sed -i '32s/border: ${currentValue}px solid @on_primary_fixed_variant;/border: ${numValue}px solid @on_primary_fixed_variant;/' '${waybarStyleFile}'`);
                         
                         // Update state file
                         GLib.file_set_contents(waybarBorderSizeStateFile, numValue.toString());
