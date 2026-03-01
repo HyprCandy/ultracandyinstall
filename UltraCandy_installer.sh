@@ -7116,7 +7116,7 @@ bind = Alt, H, exec, hyprctl hyprsunset gamma -10 #Reduce gamma by 10%
 
 #### Actions ####
 
-bind = CTRL, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
+bind = ALT, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
 #bind = $mainMod, M, exec, ~/.config/hypr/scripts/power.sh exit 				  #Logout
 #bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
 bind = $mainMod SHIFT, R, exec, $HYPRSCRIPTS/loadconfig.sh                                 #Reload Hyprland configuration
@@ -7340,7 +7340,7 @@ bind = Alt, H, exec, hyprctl hyprsunset gamma -10 #Reduce gamma by 10%
 
 #### Actions ####
 
-bind = CTRL, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
+bind = ALT, G, exec, $HYPRSCRIPTS/gamemode.sh						  #Toggle game-mode
 #bind = $mainMod, M, exec, ~/.config/hypr/scripts/power.sh exit 				  #Logout
 #bind = $mainMod,SPACE, hyprexpo:expo, toggle						  #Hyprexpo-plus workspaces overview
 bind = $mainMod SHIFT, R, exec, $HYPRSCRIPTS/loadconfig.sh                                 #Reload Hyprland configuration
