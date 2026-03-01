@@ -4324,7 +4324,6 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
 
         if [[ -n "$FULL_HEX" ]]; then
             sudo sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
-            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
             echo "🎨 SDDM BackgroundColor updated → #$FULL_HEX (from inverse_primary)"
         else
             echo "⚠️  Could not parse inverse_primary from $COLORS_CSS"
@@ -4419,7 +4418,6 @@ if [[ -f "$WAYPAPER_CONFIG" && -f "$SDDM_CONF" ]]; then
 
         if [[ -n "$FULL_HEX" ]]; then
             sudo sed -i "s|^BackgroundColor=.*|BackgroundColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
-            sudo sed -i "s|^AccentColor=.*|AccentColor=\"#$FULL_HEX\"|" "$SDDM_CONF"
             echo "🎨 SDDM BackgroundColor updated → #$FULL_HEX (from inverse_primary)"
         else
             echo "⚠️  Could not parse inverse_primary from $COLORS_CSS"
