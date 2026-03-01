@@ -5886,6 +5886,7 @@ decoration {
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+windowrule = group barred, float off, match:class .*
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
@@ -6538,6 +6539,7 @@ decoration {
 # ┃                      Window & layer rules                   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+windowrule = group barred, float off, match:class .*
 windowrule = move 73% 75,match:class (Candy.SystemMonitor)
 windowrule = move 32% 75,match:class (Candy.Media)
 windowrule = move 1% 75,match:class (Candy.Weather)
@@ -8843,8 +8845,7 @@ function createCandyUtilsBox() {
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
             GLib.spawn_command_line_async(`bash -c 'swaync-client -rs'`);
         }
-        GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/hooks/restart_waybar.sh'`);
-        GLib.spawn_command_line_async(`systemctl --user restart waypaper-watcher.service`);
+        GLib.spawn_command_line_async(`bash -c '$HOME/.config/hyprcandy/hooks/waypaper_integration.sh'`);
         // Save the new state
         saveMatugenState(matugenScheme);
         currentMatugenScheme = matugenScheme;
