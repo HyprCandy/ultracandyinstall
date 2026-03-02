@@ -4877,15 +4877,11 @@ ensure_gtk3_reload() {
 #include <signal.h>
 
 static void reload_handler(int sig) {
-    /* Reset styles on all screens */
-    GdkDisplay *display = gdk_display_get_default();
-    if (!display) return;
+    /* Use modern single-screen API — gdk_display_get_n_screens is deprecated */
+    GdkScreen *screen = gdk_screen_get_default();
+    if (!screen) return;
 
-    int n = gdk_display_get_n_screens(display);
-    for (int i = 0; i < n; i++) {
-        GdkScreen *screen = gdk_display_get_screen(display, i);
-        gtk_style_context_reset_widgets(screen);
-    }
+    gtk_style_context_reset_widgets(screen);
 
     /* Force redraw on all toplevel windows */
     GList *windows = gtk_window_list_toplevels();
@@ -4902,7 +4898,7 @@ static void install_handler(void) {
     struct sigaction sa = { .sa_handler = reload_handler };
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
-    sigaction(SIGRTMIN+10, &sa, NULL);
+    sigaction(SIGRTMIN+8, &sa, NULL);  /* changed from +10 to +8 */
 }
 CEOF
 
@@ -4926,7 +4922,7 @@ reload_gtk3_apps() {
     local count=0
     for pid in $(pgrep -f ""); do
         if grep -q "libgtk-3" /proc/$pid/maps 2>/dev/null; then
-            kill -42 $pid 2>/dev/null && (( count++ )) || true
+            kill -40 $pid 2>/dev/null && (( count++ )) || true
         fi
     done
     echo "🔄 Sent GTK3 reload signal to $count processes"
