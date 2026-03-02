@@ -4869,7 +4869,7 @@ ensure_gtk3_reload() {
 
     # Write source if not present
     sudo mkdir -p /usr/local/share/gtk3-reload
-    sudo tee "$RELOAD_SRC" > /dev/null << 'EOF'
+    sudo tee "$RELOAD_SRC" > /dev/null << 'CEOF'
 #define _GNU_SOURCE
 #include <gtk/gtk.h>
 #include <signal.h>
@@ -4888,7 +4888,7 @@ static void install_handler(void) {
     sa.sa_flags = 0;
     sigaction(SIGRTMIN+10, &sa, NULL);
 }
-EOF
+CEOF
 
     sudo gcc -shared -fPIC -o "$RELOAD_SO" "$RELOAD_SRC" \
         $(pkg-config --cflags --libs gtk+-3.0) 2>/dev/null
