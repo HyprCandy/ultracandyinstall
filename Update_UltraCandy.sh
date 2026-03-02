@@ -4839,6 +4839,8 @@ chmod +x "$HOME/.config/hyprcandy/hooks/kill_waybar_safe.sh"
 # ═══════════════════════════════════════════════════════════════
 #               Waypaper Integration Scripts
 # ═══════════════════════════════════════════════════════════════
+sudo rm -f /usr/local/share/gtk3-reload/.gtk3-version
+
     cat > "$HOME/.config/hyprcandy/hooks/waypaper_integration.sh" << 'EOF'
 #!/bin/bash
 CONFIG_BG="$HOME/.config/background"
@@ -4875,10 +4877,24 @@ ensure_gtk3_reload() {
 #include <signal.h>
 
 static void reload_handler(int sig) {
+    /* Reset styles on all screens */
     GdkDisplay *display = gdk_display_get_default();
-    if (display) {
-        gtk_style_context_reset_widgets(gdk_display_get_default_screen(display));
+    if (!display) return;
+
+    int n = gdk_display_get_n_screens(display);
+    for (int i = 0; i < n; i++) {
+        GdkScreen *screen = gdk_display_get_screen(display, i);
+        gtk_style_context_reset_widgets(screen);
     }
+
+    /* Force redraw on all toplevel windows */
+    GList *windows = gtk_window_list_toplevels();
+    for (GList *w = windows; w != NULL; w = w->next) {
+        GtkWidget *win = GTK_WIDGET(w->data);
+        gtk_widget_reset_style(win);
+        gtk_widget_queue_draw(win);
+    }
+    g_list_free(windows);
 }
 
 __attribute__((constructor))
@@ -5555,6 +5571,7 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/local/share/gtk3-reload/gtk3-reload.c"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/local/share/gtk3-reload/.gtk3-version"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/gcc * /usr/local/lib/gtk3-reload.so"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/gcc -shared -fPIC -o /usr/local/lib/gtk3-reload.so /usr/local/share/gtk3-reload/gtk3-reload.c *"
     )
 
     # Add all entries to sudoers safely using visudo
