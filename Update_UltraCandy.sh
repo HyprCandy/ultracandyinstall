@@ -4844,12 +4844,82 @@ chmod +x "$HOME/.config/hyprcandy/hooks/kill_waybar_safe.sh"
 CONFIG_BG="$HOME/.config/background"
 WAYPAPER_CONFIG="$HOME/.config/waypaper/config.ini"
 MATUGEN_CONFIG="$HOME/.config/matugen/config.toml"
+RELOAD_SO="/usr/local/lib/gtk3-reload.so"
+RELOAD_SRC="/usr/local/share/gtk3-reload/gtk3-reload.c"
+
+# ── Build gtk3-reload.so if missing or GTK3 was updated ──────────────────────
+ensure_gtk3_reload() {
+    local gtk3_version
+    gtk3_version=$(pkg-config --modversion gtk+-3.0 2>/dev/null)
+
+    if [[ -z "$gtk3_version" ]]; then
+        echo "⚠️  GTK3 not found via pkg-config, skipping gtk3-reload build"
+        return 1
+    fi
+
+    local version_file="/usr/local/share/gtk3-reload/.gtk3-version"
+    local stored_version
+    stored_version=$(cat "$version_file" 2>/dev/null)
+
+    if [[ -f "$RELOAD_SO" && "$stored_version" == "$gtk3_version" ]]; then
+        return 0  # already up to date
+    fi
+
+    echo "🔧 Building gtk3-reload.so for GTK3 $gtk3_version..."
+
+    # Write source if not present
+    sudo mkdir -p /usr/local/share/gtk3-reload
+    sudo tee "$RELOAD_SRC" > /dev/null << 'EOF'
+#define _GNU_SOURCE
+#include <gtk/gtk.h>
+#include <signal.h>
+
+static void reload_handler(int sig) {
+    GdkDisplay *display = gdk_display_get_default();
+    if (display) {
+        gtk_style_context_reset_widgets(gdk_display_get_default_screen(display));
+    }
+}
+
+__attribute__((constructor))
+static void install_handler(void) {
+    struct sigaction sa = { .sa_handler = reload_handler };
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(SIGRTMIN+10, &sa, NULL);
+}
+EOF
+
+    sudo gcc -shared -fPIC -o "$RELOAD_SO" "$RELOAD_SRC" \
+        $(pkg-config --cflags --libs gtk+-3.0) 2>/dev/null
+
+    if [[ $? -eq 0 ]]; then
+        echo "$gtk3_version" | sudo tee "$version_file" > /dev/null
+        echo "✅ gtk3-reload.so built successfully"
+    else
+        echo "⚠️  gtk3-reload.so build failed — GTK3 hot reload unavailable"
+        return 1
+    fi
+}
+
+# ── Reload GTK3 apps via SIGRTMIN+10 ─────────────────────────────────────────
+reload_gtk3_apps() {
+    if [[ ! -f "$RELOAD_SO" ]]; then
+        return 0
+    fi
+    local count=0
+    for pid in $(pgrep -f ""); do
+        if grep -q "libgtk-3" /proc/$pid/maps 2>/dev/null; then
+            kill -42 $pid 2>/dev/null && (( count++ )) || true
+        fi
+    done
+    echo "🔄 Sent GTK3 reload signal to $count processes"
+}
+
 get_waypaper_background() {
     if [ -f "$WAYPAPER_CONFIG" ]; then
-        # Parse INI format: look for "wallpaper = " line in the config file
         current_bg=$(grep "^wallpaper = " "$WAYPAPER_CONFIG" | cut -d'=' -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         if [ -n "$current_bg" ]; then
-            # Expand tilde to actual home directory path
             current_bg=$(echo "$current_bg" | sed "s|^~|$HOME|")
             echo "$current_bg"
             return 0
@@ -4857,6 +4927,7 @@ get_waypaper_background() {
     fi
     return 1
 }
+
 update_config_background() {
     local bg_path="$1"
     if [ -f "$bg_path" ]; then
@@ -4868,17 +4939,35 @@ update_config_background() {
         return 1
     fi
 }
+
 trigger_matugen() {
     if [ -f "$MATUGEN_CONFIG" ]; then
         echo "🎨 Triggering matugen color generation..."
-        matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2 &
-        sleep 3
+        matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2
+        sleep 0.5
+        reload_gtk_colors
+        reload_gtk3_apps
         update_hypr_group_text
-        echo "✅ Matugen color generation started"
+        echo "✅ Matugen color generation complete"
     else
         echo "⚠️  Matugen config not found at: $MATUGEN_CONFIG"
     fi
 }
+
+# ── Hot reload GTK4/libadwaita colors ────────────────────────────────────────
+reload_gtk_colors() {
+    local current_theme current_scheme
+    current_theme=$(gsettings get org.gnome.desktop.interface gtk-theme)
+    current_scheme=$(gsettings get org.gnome.desktop.interface color-scheme)
+    gsettings set org.gnome.desktop.interface gtk-theme 'Default'
+    sleep 0.1
+    gsettings set org.gnome.desktop.interface gtk-theme "$current_theme"
+    sleep 0.1
+    gsettings set org.gnome.desktop.interface color-scheme 'default'
+    sleep 0.1
+    gsettings set org.gnome.desktop.interface color-scheme "$current_scheme"
+}
+
 update_hypr_group_text() {
     local COLORS_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/colors.conf"
     local HYPRVIZ_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprviz.conf"
@@ -4893,7 +4982,6 @@ update_hypr_group_text() {
         return 1
     fi
 
-    # Extract the hex RGB value from $source_color = rgba(rrggbbaa)
     local BG_LINE
     local PAT='(?<=rgba\()[0-9a-fA-F]{6}'
     BG_LINE=$(grep -E '^\$source_color\s*=' "$COLORS_CONF" | head -n1)
@@ -4904,20 +4992,15 @@ update_hypr_group_text() {
         return 1
     fi
 
-    # Convert hex RGB to decimal channels
     local R G B
     R=$((16#${BG_HEX:0:2}))
     G=$((16#${BG_HEX:2:2}))
     B=$((16#${BG_HEX:4:2}))
 
-    # Perceived luminance (ITU-R BT.709)
-    # luminance = 0.2126R + 0.7152G + 0.0722B
     local LUMINANCE
     LUMINANCE=$(echo "scale=2; 0.2126 * $R + 0.7152 * $G + 0.0722 * $B" | bc)
     local LUMINANCE_INT=${LUMINANCE%.*}
 
-    # HSL saturation check — prevents bright saturated source colors
-    # (vivid pinks, yellows, etc.) from being misclassified as light
     local MAX MIN SATURATION
     MAX=$(echo -e "$R\n$G\n$B" | sort -n | tail -1)
     MIN=$(echo -e "$R\n$G\n$B" | sort -n | head -1)
@@ -4933,32 +5016,31 @@ update_hypr_group_text() {
         fi
     fi
 
-    # Only classify as light if luminance is high AND saturation is low.
-    # A vivid wallpaper color will have high saturation and should always
-    # use $surface_tint regardless of its luminance value.
     if (( LUMINANCE_INT > 150 && SATURATION >= 40 )); then
-        local TEXT_COLOR="\$inverse_primary"  # bright + vivid source → dark text
-    elif (( LUMINANCE_INT <= 150 && SATURATION <= 20)); then
-        local TEXT_COLOR="\$surface_tint"              # dark source → light text
-    elif (( LUMINANCE_INT <= 150 && SATURATION > 20)); then
-        local TEXT_COLOR="\$surface_tint"  # bright + high saturation (>20) → alt-dark text
+        local TEXT_COLOR="\$inverse_primary"
+    elif (( LUMINANCE_INT <= 150 && SATURATION <= 20 )); then
+        local TEXT_COLOR="\$surface_tint"
+    elif (( LUMINANCE_INT <= 150 && SATURATION > 20 )); then
+        local TEXT_COLOR="\$surface_tint"
     elif (( LUMINANCE_INT > 150 && SATURATION >= 20 && SATURATION < 40 )); then
-        local TEXT_COLOR="\$secondary_container"              # bright + mid saturation → alt-light text
+        local TEXT_COLOR="\$secondary_container"
     else
-        local TEXT_COLOR="\$on_primary_fixed_variant"  # bright + low saturation (≤20) → alt-2-dark text
+        local TEXT_COLOR="\$on_primary_fixed_variant"
     fi
 
     sed -i "s|^\(\s*text_color\s*=\).*|\1 $TEXT_COLOR|" "$HYPRVIZ_CONF"
-
     echo "update_hypr_group_text: source_color luminance=${LUMINANCE_INT}/255 saturation=${SATURATION}% → text_color = $TEXT_COLOR"
 }
+
 execute_color_generation() {
     echo "🚀 Starting color generation for new background..."
     trigger_matugen
     sleep 1
     echo "✅ Color generation processes initiated"
 }
+
 main() {
+    ensure_gtk3_reload
     echo "🎯 Waypaper integration triggered"
     current_bg=$(get_waypaper_background)
     if [ $? -eq 0 ]; then
@@ -4970,6 +5052,7 @@ main() {
         echo "⚠️  Could not determine current Waypaper background"
     fi
 }
+
 main
 EOF
     chmod +x "$HOME/.config/hyprcandy/hooks/waypaper_integration.sh"
@@ -5468,6 +5551,10 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/sugar-candy/theme.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^CursorTheme=*|* /etc/sddm.conf.d/sugar-candy.conf"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/sed -i s|^CursorSize=*|* /etc/sddm.conf.d/sugar-candy.conf"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/mkdir -p /usr/local/share/gtk3-reload"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/local/share/gtk3-reload/gtk3-reload.c"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/local/share/gtk3-reload/.gtk3-version"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/gcc * /usr/local/lib/gtk3-reload.so"
     )
 
     # Add all entries to sudoers safely using visudo
