@@ -978,7 +978,9 @@ setup_ultracandy() {
             print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
             $AUR_HELPER --noconfirm -R mako
             $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R qt6ct qt5ct spotify
+            $AUR_HELPER --noconfirm -R qt6ct
+            $AUR_HELPER --noconfirm -R qt5ct
+            $AUR_HELPER --noconfirm -R spotify
         else
             echo ""
         fi
@@ -987,7 +989,9 @@ setup_ultracandy() {
             print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
             $AUR_HELPER --noconfirm -R swaync
             $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R qt6ct qt5ct spotify
+            $AUR_HELPER --noconfirm -R qt6ct
+            $AUR_HELPER --noconfirm -R qt5ct
+            $AUR_HELPER --noconfirm -R spotify
         else
             echo ""
         fi
