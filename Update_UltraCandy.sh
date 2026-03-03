@@ -5320,6 +5320,57 @@ EOF
 chmod +x "$HOME/.config/hyprcandy/hooks/update_rofi_font.sh"
 
 # ═══════════════════════════════════════════════════════════════
+#                  Sync GTK and QT Icon Theme
+# ═══════════════════════════════════════════════════════════════
+
+cat > "$HOME/.config/hyprcandy/hooks/update_icon_theme.sh" << 'EOF'
+#!/bin/bash
+
+GTK_FILE="$HOME/.config/gtk-3.0/settings.ini"
+QT6CT_CONF="$HOME/.config/qt6ct/qt6ct.conf"
+QT5CT_CONF="$HOME/.config/qt5ct/qt5ct.conf"
+KDEGLOBALS="$HOME/.config/kdeglobals"
+UC_COLORS="$HOME/.local/share/color-schemes/UltraCandy.colors"
+
+ICON_THEME=$(grep "^gtk-icon-theme-name=" "$GTK_FILE" | cut -d'=' -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+if [ -z "$ICON_THEME" ]; then
+    echo "⚠️  Could not read icon theme from $GTK_FILE"
+    exit 1
+fi
+
+echo "🎨 Syncing icon theme: $ICON_THEME"
+
+for CONF in "$QT6CT_CONF" "$QT5CT_CONF"; do
+    [ -f "$CONF" ] || continue
+    if grep -q "^icon_theme=" "$CONF"; then
+        sed -i "s|^icon_theme=.*|icon_theme=$ICON_THEME|" "$CONF"
+    else
+        sed -i "/^\[Appearance\]/a icon_theme=$ICON_THEME" "$CONF"
+    fi
+    echo "✅ $(basename $CONF) icon theme → $ICON_THEME"
+done
+
+for FILE in "$KDEGLOBALS" "$UC_COLORS"; do
+    [ -f "$FILE" ] || continue
+    if grep -q "^Theme=" "$FILE"; then
+        sed -i "s|^Theme=.*|Theme=$ICON_THEME|" "$FILE"
+    else
+        sed -i "/^\[Icons\]/a Theme=$ICON_THEME" "$FILE"
+    fi
+    echo "✅ $(basename $FILE) icon theme → $ICON_THEME"
+done
+
+dbus-send --session --type=signal /kdeglobals \
+    org.kde.kconfig.notify.ConfigChanged \
+    'array:dict:string,variant:{"Icons":{"Theme":"'"$ICON_THEME"'"}}' 2>/dev/null || true
+
+echo "✅ Icon theme synced to: $ICON_THEME"
+EOF
+
+chmod +x "$HOME/.config/hyprcandy/hooks/update_icon_theme.sh"
+
+# ═══════════════════════════════════════════════════════════════
 #      Watcher: React to GTK Font Changes via nwg-look
 # ═══════════════════════════════════════════════════════════════
 
@@ -5327,20 +5378,30 @@ cat > "$HOME/.config/hyprcandy/hooks/watch_gtk_font.sh" << 'EOF'
 #!/bin/bash
 
 GTK_FILE="$HOME/.config/gtk-3.0/settings.ini"
-HOOK_SCRIPT="$HOME/.config/hyprcandy/hooks/update_rofi_font.sh"
+FONT_HOOK="$HOME/.config/hyprcandy/hooks/update_rofi_font.sh"
+ICON_HOOK="$HOME/.config/hyprcandy/hooks/update_icon_theme.sh"
 
-# Wait until the GTK file exists
-while [ ! -f "$GTK_FILE" ]; do
-    sleep 1
-done
+while [ ! -f "$GTK_FILE" ]; do sleep 1; done
 
-# Initial update
-"$HOOK_SCRIPT"
+"$FONT_HOOK"
+"$ICON_HOOK"
 
-# Watch for font name changes
+# Track previous values to avoid redundant hook calls
+PREV_FONT=$(grep "^gtk-font-name=" "$GTK_FILE" | cut -d'=' -f2-)
+PREV_ICON=$(grep "^gtk-icon-theme-name=" "$GTK_FILE" | cut -d'=' -f2-)
+
 inotifywait -m -e modify "$GTK_FILE" | while read -r path event file; do
-    if grep -q "^gtk-font-name=" "$GTK_FILE"; then
-        "$HOOK_SCRIPT"
+    CUR_FONT=$(grep "^gtk-font-name=" "$GTK_FILE" | cut -d'=' -f2-)
+    CUR_ICON=$(grep "^gtk-icon-theme-name=" "$GTK_FILE" | cut -d'=' -f2-)
+
+    if [ "$CUR_FONT" != "$PREV_FONT" ]; then
+        "$FONT_HOOK"
+        PREV_FONT="$CUR_FONT"
+    fi
+
+    if [ "$CUR_ICON" != "$PREV_ICON" ]; then
+        "$ICON_HOOK"
+        PREV_ICON="$CUR_ICON"
     fi
 done
 EOF
