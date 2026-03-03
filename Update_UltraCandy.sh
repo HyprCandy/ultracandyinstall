@@ -5491,6 +5491,7 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/local/share/gtk3-reload/.gtk3-version"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/gcc * /usr/local/lib/gtk3-reload.so"
         "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/gcc -shared -fPIC -o /usr/local/lib/gtk3-reload.so /usr/local/share/gtk3-reload/gtk3-reload.c *"
+        "$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/dconf update"
     )
 
     # Add all entries to sudoers safely using visudo
