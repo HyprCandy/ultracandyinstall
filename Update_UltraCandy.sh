@@ -4849,85 +4849,6 @@ MATUGEN_CONFIG="$HOME/.config/matugen/config.toml"
 RELOAD_SO="/usr/local/lib/gtk3-reload.so"
 RELOAD_SRC="/usr/local/share/gtk3-reload/gtk3-reload.c"
 
-# ── Build gtk3-reload.so if missing or GTK3 was updated ──────────────────────
-ensure_gtk3_reload() {
-    local gtk3_version
-    gtk3_version=$(pkg-config --modversion gtk+-3.0 2>/dev/null)
-
-    if [[ -z "$gtk3_version" ]]; then
-        echo "⚠️  GTK3 not found via pkg-config, skipping gtk3-reload build"
-        return 1
-    fi
-
-    local version_file="/usr/local/share/gtk3-reload/.gtk3-version"
-    local stored_version
-    stored_version=$(cat "$version_file" 2>/dev/null)
-
-    if [[ -f "$RELOAD_SO" && "$stored_version" == "$gtk3_version" ]]; then
-        return 0  # already up to date
-    fi
-
-    echo "🔧 Building gtk3-reload.so for GTK3 $gtk3_version..."
-
-    # Write source if not present
-    sudo mkdir -p /usr/local/share/gtk3-reload
-    sudo tee "$RELOAD_SRC" > /dev/null << 'CEOF'
-#define _GNU_SOURCE
-#include <gtk/gtk.h>
-#include <signal.h>
-
-static void reload_handler(int sig) {
-    /* Use modern single-screen API — gdk_display_get_n_screens is deprecated */
-    GdkScreen *screen = gdk_screen_get_default();
-    if (!screen) return;
-
-    gtk_style_context_reset_widgets(screen);
-
-    /* Force redraw on all toplevel windows */
-    GList *windows = gtk_window_list_toplevels();
-    for (GList *w = windows; w != NULL; w = w->next) {
-        GtkWidget *win = GTK_WIDGET(w->data);
-        gtk_widget_reset_style(win);
-        gtk_widget_queue_draw(win);
-    }
-    g_list_free(windows);
-}
-
-__attribute__((constructor))
-static void install_handler(void) {
-    struct sigaction sa = { .sa_handler = reload_handler };
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = 0;
-    sigaction(SIGRTMIN+8, &sa, NULL);  /* changed from +10 to +8 */
-}
-CEOF
-
-    sudo gcc -shared -fPIC -o "$RELOAD_SO" "$RELOAD_SRC" \
-        $(pkg-config --cflags --libs gtk+-3.0) 2>/dev/null
-
-    if [[ $? -eq 0 ]]; then
-        echo "$gtk3_version" | sudo tee "$version_file" > /dev/null
-        echo "✅ gtk3-reload.so built successfully"
-    else
-        echo "⚠️  gtk3-reload.so build failed — GTK3 hot reload unavailable"
-        return 1
-    fi
-}
-
-# ── Reload GTK3 apps via SIGRTMIN+10 ─────────────────────────────────────────
-reload_gtk3_apps() {
-    if [[ ! -f "$RELOAD_SO" ]]; then
-        return 0
-    fi
-    local count=0
-    for pid in $(pgrep -f ""); do
-        if grep -q "libgtk-3" /proc/$pid/maps 2>/dev/null; then
-            kill -40 $pid 2>/dev/null && (( count++ )) || true
-        fi
-    done
-    echo "🔄 Sent GTK3 reload signal to $count processes"
-}
-
 get_waypaper_background() {
     if [ -f "$WAYPAPER_CONFIG" ]; then
         current_bg=$(grep "^wallpaper = " "$WAYPAPER_CONFIG" | cut -d'=' -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
@@ -4958,7 +4879,6 @@ trigger_matugen() {
         matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2
         sleep 0.5
         reload_gtk_colors
-        reload_gtk3_apps
         update_hypr_group_text
         echo "✅ Matugen color generation complete"
     else
@@ -4969,14 +4889,19 @@ trigger_matugen() {
 # ── Hot reload GTK4/libadwaita colors ────────────────────────────────────────
 reload_gtk_colors() {
     local current_theme current_scheme
-    current_theme=$(gsettings get org.gnome.desktop.interface gtk-theme)
-    current_scheme=$(gsettings get org.gnome.desktop.interface color-scheme)
+    current_theme=$(gsettings get org.gnome.desktop.interface gtk-theme | tr -d "'")
+    current_scheme=$(gsettings get org.gnome.desktop.interface color-scheme | tr -d "'")
+
+    touch "$HOME/.config/gtk-3.0/colors.css"
+    touch "$HOME/.config/gtk-3.0/gtk.css"
+    touch "$HOME/.config/gtk-4.0/colors.css"
+    touch "$HOME/.config/gtk-4.0/gtk.css"
+    sync
+
     gsettings set org.gnome.desktop.interface gtk-theme 'Default'
-    sleep 0.1
-    gsettings set org.gnome.desktop.interface gtk-theme "$current_theme"
-    sleep 0.1
     gsettings set org.gnome.desktop.interface color-scheme 'default'
-    sleep 0.1
+    sleep 0.3
+    gsettings set org.gnome.desktop.interface gtk-theme "$current_theme"
     gsettings set org.gnome.desktop.interface color-scheme "$current_scheme"
 }
 
