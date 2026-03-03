@@ -4876,19 +4876,17 @@ trigger_matugen() {
 
 # ── Hot reload GTK4/libadwaita colors ────────────────────────────────────────
 reload_gtk_colors() {
-    local current_theme current_scheme
-    current_theme=$(gsettings get org.gnome.desktop.interface gtk-theme | tr -d "'")
-    current_scheme=$(gsettings get org.gnome.desktop.interface color-scheme | tr -d "'")
-
     touch "$HOME/.config/gtk-3.0/colors.css"
     touch "$HOME/.config/gtk-3.0/gtk.css"
     touch "$HOME/.config/gtk-4.0/colors.css"
     touch "$HOME/.config/gtk-4.0/gtk.css"
     sync
-
+    
+    gsettings set org.gnome.desktop.interface gtk-theme 'Default'
     gsettings set org.gnome.desktop.interface color-scheme 'default'
-    sleep 0.3
-    gsettings set org.gnome.desktop.interface color-scheme "$current_scheme"
+    sleep 0.5
+    gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
+    gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 }
 
 update_hypr_group_text() {
