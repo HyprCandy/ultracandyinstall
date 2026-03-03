@@ -278,17 +278,17 @@ build_package_list() {
         "cmake"
         
         # GNOME components
-        "mutter"
-        "gnome-session"
-        "gnome-control-center"
+        #"mutter"
+        #"gnome-session"
+        #"gnome-control-center"
         "gnome-system-monitor"
         "gnome-calendar"
-        "gnome-tweaks"
+        #"gnome-tweaks"
         "gnome-weather"
-        "gnome-software"
+        #"gnome-software"
         "gnome-calculator"
-        "gnome-terminal"
-        "extension-manager"
+        #"gnome-terminal"
+        #"extension-manager"
         "evince"
         "flatpak"
         
@@ -297,8 +297,8 @@ build_package_list() {
         "nautilus"
         
         # Qt and GTK theming
-        "qt5ct"
-        "qt6ct"
+        "qt5ct-kde"
+        "qt6ct-kde"
         "nwg-look"
         
         # System utilities
@@ -377,8 +377,6 @@ build_package_list() {
         
         # Theming
         "adw-gtk-theme"
-        "adwaita-qt6"
-        "adwaita-qt-git"
         "tela-circle-icon-theme-all"
         "bibata-cursor-theme-bin"
         
@@ -980,7 +978,7 @@ setup_ultracandy() {
             print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
             $AUR_HELPER --noconfirm -R mako
             $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R spotify
+            $AUR_HELPER --noconfirm -R qt6ct qt5ct spotify
         else
             echo ""
         fi
@@ -989,7 +987,7 @@ setup_ultracandy() {
             print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
             $AUR_HELPER --noconfirm -R swaync
             $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R spotify
+            $AUR_HELPER --noconfirm -R qt6ct qt5ct spotify
         else
             echo ""
         fi
@@ -999,11 +997,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     fi
 
     # Add flathub repo
@@ -4878,7 +4876,7 @@ trigger_matugen() {
         echo "🎨 Triggering matugen color generation..."
         matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2
         sleep 0.5
-        reload_gtk_colors
+        reload_colors
         update_hypr_group_text
         echo "✅ Matugen color generation complete"
     else
@@ -4886,12 +4884,14 @@ trigger_matugen() {
     fi
 }
 
-# ── Hot reload GTK4/libadwaita colors ────────────────────────────────────────
-reload_gtk_colors() {
+# ── Hot reload GTK4/libadwaita/QT colors ────────────────────────────────────────
+reload_colors() {
     touch "$HOME/.config/gtk-3.0/colors.css"
     touch "$HOME/.config/gtk-3.0/gtk.css"
     touch "$HOME/.config/gtk-4.0/colors.css"
     touch "$HOME/.config/gtk-4.0/gtk.css"
+    touch "$HOME/.config/qt5ct/qt5ct.conf"
+    touch "$HOME/.config/qt6ct/qt6ct.conf"
     sync
     
     gsettings set org.gnome.desktop.interface gtk-theme 'Default'
@@ -4899,6 +4899,8 @@ reload_gtk_colors() {
     sleep 0.5
     gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+    
+    dconf update
 }
 
 update_hypr_group_text() {
