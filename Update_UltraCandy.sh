@@ -5834,7 +5834,7 @@ master {
 scrolling {
     direction = right
     focus_fit_method = 0
-    column_width = 0.7000000000000002
+    column_width = 0.5
 }
 
 gesture = 3, horizontal, workspace
@@ -6493,7 +6493,7 @@ master {
 scrolling {
     direction = right
     focus_fit_method = 0
-    column_width = 0.7000000000000002
+    column_width = 0.5
 }
 
 gesture = 3, horizontal, workspace
