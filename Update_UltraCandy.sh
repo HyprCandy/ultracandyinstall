@@ -1006,6 +1006,7 @@ setup_ultracandy() {
 
     # Add flathub repo
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    XDG_MENU_PREFIX=arch- kbuildsycoca6 --noincremental
 
     print_status "Setting up UltraCandy configuration..."
     
