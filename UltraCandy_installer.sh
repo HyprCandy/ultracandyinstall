@@ -294,11 +294,19 @@ build_package_list() {
         "nautilus"
         
         # Qt and GTK theming
+        "adw-gtk-theme"
         "qt5ct"
+        "qt5ct-wayland"
         "qt5-imageformats"
         "qt5-graphicaleffects"
         "qt5-quickcontrols2"
         "qt6ct"
+        "qt6ct-wayland"
+        "attica" 
+        "frameworkintegration" 
+        "knewstuff" 
+        "syndication" 
+        "darkly-bin"
         "nwg-look"
         
         # System utilities
@@ -341,8 +349,7 @@ build_package_list() {
         "nvtop"
         "htop"
         
-        # Customization and theming
-        "adw-gtk-theme"
+        # Customization
         "matugen-bin"
         "hyprviz-bin"
         
@@ -5709,7 +5716,7 @@ env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 # QT
 env = QT_QPA_PLATFORM,wayland
-env = QT_QPA_PLATFORMTHEME,gtk3
+env = QT_QPA_PLATFORMTHEME,qt6ct
 env = QT_WAYLAND_DISABLE_WINDOWDECORATION,0
 env = QT_AUTO_SCREEN_SCALE_FACTOR,1
 # GDK
@@ -6370,7 +6377,7 @@ env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
 # QT
 env = QT_QPA_PLATFORM,wayland
-env = QT_QPA_PLATFORMTHEME,gtk3
+env = QT_QPA_PLATFORMTHEME,qt6ct
 env = QT_WAYLAND_DISABLE_WINDOWDECORATION,0
 env = QT_AUTO_SCREEN_SCALE_FACTOR,1
 # GDK
