@@ -957,6 +957,10 @@ setup_ultracandy() {
     if [ "$DISPLAY_MANAGER" = "sddm" ]; then
         if pacman -Qi sddm &>/dev/null; then
             $AUR_HELPER --noconfirm -R gdm gdm-settings
+            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R qt6ct
+            $AUR_HELPER --noconfirm -R qt5ct
+            $AUR_HELPER --noconfirm -R spotify
             $AUR_HELPER --noconfirm -S sddm sddm-sugar-candy-git
             print_status "Installed SDDM packages"
         else
@@ -965,6 +969,10 @@ setup_ultracandy() {
     elif [ "$DISPLAY_MANAGER" = "gdm" ]; then
         if pacman -Qi gdm &>/dev/null; then
             $AUR_HELPER --noconfirm -R sddm sddm-sugar-candy-git
+            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R qt6ct
+            $AUR_HELPER --noconfirm -R qt5ct
+            $AUR_HELPER --noconfirm -R spotify
             $AUR_HELPER --noconfirm -S gdm gdm-settings
             print_status "Installed GDM packages"
         else
@@ -974,27 +982,11 @@ setup_ultracandy() {
     
     # Prevent notification daemon conflicts
     if [ "$PANEL_CHOICE" = "waybar" ]; then
-        if pacman -Qi mako &>/dev/null; then
-            print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
-            $AUR_HELPER --noconfirm -R mako
-            $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R qt6ct
-            $AUR_HELPER --noconfirm -R qt5ct
-            $AUR_HELPER --noconfirm -R spotify
-        else
-            echo ""
-        fi
+        print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
+        $AUR_HELPER --noconfirm -R mako
     else
-        if pacman -Qi swaync &>/dev/null; then
-            print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
-            $AUR_HELPER --noconfirm -R swaync
-            $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R qt6ct
-            $AUR_HELPER --noconfirm -R qt5ct
-            $AUR_HELPER --noconfirm -R spotify
-        else
-            echo ""
-        fi
+        print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
+        $AUR_HELPER --noconfirm -R swaync
     fi
     
     #Add panel censtric apps
