@@ -4886,10 +4886,8 @@ reload_gtk_colors() {
     touch "$HOME/.config/gtk-4.0/gtk.css"
     sync
 
-    gsettings set org.gnome.desktop.interface gtk-theme 'Default'
     gsettings set org.gnome.desktop.interface color-scheme 'default'
     sleep 0.3
-    gsettings set org.gnome.desktop.interface gtk-theme "$current_theme"
     gsettings set org.gnome.desktop.interface color-scheme "$current_scheme"
 }
 
