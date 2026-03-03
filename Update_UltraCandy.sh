@@ -5662,6 +5662,10 @@ exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CUR
 # Portals next — before any app or service that might need them
 exec-once = bash ~/.config/hypr/scripts/xdg.sh
 
+# Theme
+exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+exec-once = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
 # System services
 exec-once = systemctl --user start hyprpolkitagent
 exec-once = systemctl --user start hyprlock-watcher.service
@@ -5722,8 +5726,6 @@ env = HYPRCURSOR_SIZE,18
 env = XDG_CURRENT_DESKTOP,Hyprland
 env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
-# GTK
-env = GTK_THEME,adw-gtk3-dark
 # QT
 env = QT_QPA_PLATFORM,wayland
 env = QT_QPA_PLATFORMTHEME,gtk3
@@ -6325,6 +6327,10 @@ exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CUR
 # Portals next — before any app or service that might need them
 exec-once = bash ~/.config/hypr/scripts/xdg.sh
 
+# Theme
+exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+exec-once = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
 # System services
 exec-once = systemctl --user start hyprpolkitagent
 exec-once = systemctl --user start hyprlock-watcher.service
@@ -6381,8 +6387,6 @@ env = HYPRCURSOR_SIZE,18
 env = XDG_CURRENT_DESKTOP,Hyprland
 env = XDG_SESSION_TYPE,wayland
 env = XDG_SESSION_DESKTOP,Hyprland
-# GTK
-env = GTK_THEME,adw-gtk3-dark
 # QT
 env = QT_QPA_PLATFORM,wayland
 env = QT_QPA_PLATFORMTHEME,gtk3
