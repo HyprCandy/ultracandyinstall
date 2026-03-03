@@ -295,18 +295,20 @@ build_package_list() {
         
         # Qt and GTK theming
         "adw-gtk-theme"
-        "qt5ct"
+        "qt5ct-kde"
         "qt5ct-wayland"
         "qt5-imageformats"
         "qt5-graphicaleffects"
         "qt5-quickcontrols2"
-        "qt6ct"
+        "qt6ct-kde"
         "qt6ct-wayland"
-        "attica" 
+        "attica"
         "frameworkintegration" 
         "knewstuff" 
         "syndication" 
         "darkly-bin"
+        "archlinux-xdg-menu" 
+        "kservice"
         "nwg-look"
         
         # System utilities
@@ -4866,7 +4868,7 @@ trigger_matugen() {
         echo "🎨 Triggering matugen color generation..."
         matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2
         sleep 0.5
-        reload_gtk_colors
+        reload_colors
         update_hypr_group_text
         echo "✅ Matugen color generation complete"
     else
@@ -4874,12 +4876,14 @@ trigger_matugen() {
     fi
 }
 
-# ── Hot reload GTK4/libadwaita colors ────────────────────────────────────────
-reload_gtk_colors() {
+# ── Hot reload GTK4/libadwaita/QT colors ────────────────────────────────────────
+reload_colors() {
     touch "$HOME/.config/gtk-3.0/colors.css"
     touch "$HOME/.config/gtk-3.0/gtk.css"
     touch "$HOME/.config/gtk-4.0/colors.css"
     touch "$HOME/.config/gtk-4.0/gtk.css"
+    touch "$HOME/.config/qt5ct/qt5ct.conf"
+    touch "$HOME/.config/qt6ct/qt6ct.conf"
     sync
     
     gsettings set org.gnome.desktop.interface gtk-theme 'Default'
@@ -4887,6 +4891,8 @@ reload_gtk_colors() {
     sleep 0.5
     gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+    
+    dconf update
 }
 
 update_hypr_group_text() {
