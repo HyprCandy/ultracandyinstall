@@ -531,14 +531,19 @@ install_packages() {
 setup_fish() {
     print_status "Setting up Fish shell configuration..."
     
+    cd "$HOME/.config/fish"
+    rm -rf functions
+    cd "$HOME"
+    
     # Set Fish as default shell
     if command -v fish &> /dev/null; then
-        print_status "Setting Fish as default shell..."
+        print_status "Reinstalling and setting Fish as default shell..."
+         $AUR_HELPER --noconfirm -S fish fisher starship
         chsh -s $(which fish)
         print_success "Fish set as default shell"
     else
-        print_error "Fish not found. Please install Fish first."
-        return 1
+        print_error "Installing Fish"
+        $AUR_HELPER --noconfirm -S fish fisher starship
     fi
     
    # Ensure Fisher function exists
