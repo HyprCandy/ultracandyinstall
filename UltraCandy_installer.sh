@@ -4892,7 +4892,7 @@ reload_colors() {
     gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
     
-    dconf update
+    sudo dconf update
 }
 
 update_hypr_group_text() {
