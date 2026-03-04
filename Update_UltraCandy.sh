@@ -4891,10 +4891,10 @@ reload_colors() {
     touch "$HOME/.config/qt6ct/qt6ct.conf"
     sync
     
-    gsettings set org.gnome.desktop.interface gtk-theme 'Default'
+    #gsettings set org.gnome.desktop.interface gtk-theme 'Default'
     gsettings set org.gnome.desktop.interface color-scheme 'default'
     sleep 0.5
-    gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
+    #gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
     
     sudo dconf update
