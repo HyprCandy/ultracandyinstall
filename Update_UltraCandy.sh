@@ -7063,7 +7063,7 @@ input-field {
     dots_center = true
     dots_rounding = -1 # -1 default circle, -2 follow input-field rounding
     outer_color = $primary_fixed_dim $on_secondary 90deg
-    inner_color = $inverse_primary
+    inner_color = $on_primary_fixed_variant
     font_color = $primary_fixed_dim
     font_family = C059 Bold Italic
     fade_on_empty = false
@@ -7105,7 +7105,7 @@ label {
     monitor =
     #clock
     text = cmd[update:1000] echo "$TIME"
-    color = $primary_container
+    color = $on_primary_fixed_variant
     font_size = 55
     font_family = C059 Bold Italic
     position = 0, -150
