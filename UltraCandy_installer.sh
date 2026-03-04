@@ -4886,10 +4886,10 @@ reload_colors() {
     touch "$HOME/.config/qt6ct/qt6ct.conf"
     sync
     
-    gsettings set org.gnome.desktop.interface gtk-theme 'Default'
+    #gsettings set org.gnome.desktop.interface gtk-theme 'Default'
     gsettings set org.gnome.desktop.interface color-scheme 'default'
     sleep 0.5
-    gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
+    #gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
     
     sudo dconf update
@@ -7712,6 +7712,162 @@ if [ ! -d "$HOME/.ultracandy/GJS/src" ]; then
     mkdir -p "$HOME/.ultracandy/GJS/src"
     echo "📁 Created the GJS directory"
 fi
+
+cd "$HOME/.ultracandy/GJS/" || exit 1
+rm -rf toggle-control-center.sh toggle-media-player.sh toggle-system-monitor.sh setup-custom-icon.sh
+# Go to the home directory
+cd "$HOME"
+
+# Add GJS files
+cat > "$HOME/.ultracandy/GJS/toggle-control-center.sh" << 'EOF'
+#!/bin/bash
+
+# Toggle Candy Utils via daemon
+
+DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+PID_DIR="$HOME/.cache/hyprcandy/pids"
+PID_FILE="$PID_DIR/candy-daemon.pid"
+TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
+
+mkdir -p "$PID_DIR" "$TOGGLE_DIR"
+
+# Check if daemon is running
+is_daemon_running() {
+    if [ -f "$PID_FILE" ]; then
+        PID=$(cat "$PID_FILE")
+        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
+            return 0
+        fi
+    fi
+    return 1
+}
+
+# Start daemon if not running
+if ! is_daemon_running; then
+    echo "🚀 Starting Candy Daemon..."
+    gjs "$DAEMON_SCRIPT" &
+    sleep 2
+fi
+
+# Toggle via file interface
+touch "$TOGGLE_DIR/toggle-utils"
+EOF
+
+chmod +x "$HOME/.ultracandy/GJS/toggle-control-center.sh"
+
+cat > "$HOME/.ultracandy/GJS/toggle-media-player.sh" << 'EOF'
+#!/bin/bash
+
+# Toggle Media Player via daemon
+
+DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+PID_DIR="$HOME/.cache/hyprcandy/pids"
+PID_FILE="$PID_DIR/candy-daemon.pid"
+TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
+
+mkdir -p "$PID_DIR" "$TOGGLE_DIR"
+
+# Check if daemon is running
+is_daemon_running() {
+    if [ -f "$PID_FILE" ]; then
+        PID=$(cat "$PID_FILE")
+        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
+            return 0
+        fi
+    fi
+    return 1
+}
+
+# Start daemon if not running
+if ! is_daemon_running; then
+    echo "🚀 Starting Candy Daemon..."
+    gjs "$DAEMON_SCRIPT" &
+    sleep 2
+fi
+
+# Toggle via file interface
+touch "$TOGGLE_DIR/toggle-media"
+EOF
+
+chmod +x "$HOME/.ultracandy/GJS/toggle-media-player.sh"
+
+cat > "$HOME/.ultracandy/GJS/toggle-system-monitor.sh" << 'EOF'
+#!/bin/bash
+
+# Toggle System Monitor via daemon
+
+DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+PID_DIR="$HOME/.cache/hyprcandy/pids"
+PID_FILE="$PID_DIR/candy-daemon.pid"
+TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
+
+mkdir -p "$PID_DIR" "$TOGGLE_DIR"
+
+# Check if daemon is running
+is_daemon_running() {
+    if [ -f "$PID_FILE" ]; then
+        PID=$(cat "$PID_FILE")
+        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
+            return 0
+        fi
+    fi
+    return 1
+}
+
+# Start daemon if not running
+if ! is_daemon_running; then
+    echo "🚀 Starting Candy Daemon..."
+    gjs "$DAEMON_SCRIPT" &
+    sleep 2
+fi
+
+# Toggle via file interface
+touch "$TOGGLE_DIR/toggle-system"
+EOF
+
+chmod +x "$HOME/.ultracandy/GJS/toggle-system-monitor.sh"
+
+cat > "$HOME/.ultracandy/GJS/setup-custom-icon.sh" << 'EOF'
+#!/bin/bash
+
+# Script to set up custom HyprCandy icon for GJS applications
+
+ICON_PATH="$HOME/.local/share/icons/HyprCandy.png"
+MEDIA_DESKTOP="$HOME/.local/share/applications/gjs-media-player.desktop"
+TOGGLE_DESKTOP="$HOME/.local/share/applications/gjs-toggle-controls.desktop"
+
+echo "Setting up custom HyprCandy icon for GJS applications..."
+
+# Check if icon exists
+if [ ! -f "$ICON_PATH" ]; then
+    echo "❌ Icon file not found at: $ICON_PATH"
+    echo "Please place your HyprCandy.png file at that location and run this script again."
+    exit 1
+fi
+
+echo "✅ Found icon at: $ICON_PATH"
+
+# Update media player desktop entry
+if [ -f "$MEDIA_DESKTOP" ]; then
+    sed -i "s|Icon=.*|Icon=HyprCandy|" "$MEDIA_DESKTOP"
+    echo "✅ Updated media player desktop entry"
+else
+    echo "❌ Media player desktop entry not found"
+fi
+
+# Update toggle controls desktop entry
+if [ -f "$TOGGLE_DESKTOP" ]; then
+    sed -i "s|Icon=.*|Icon=HyprCandy|" "$TOGGLE_DESKTOP"
+    echo "✅ Updated toggle controls desktop entry"
+else
+    echo "❌ Toggle controls desktop entry not found"
+fi
+
+echo "🎉 Custom icon setup complete!"
+echo "You may need to restart nwg-dock-hyprland or your desktop environment to see the changes." 
+EOF
+
+chmod +x "$HOME/.ultracandy/GJS/setup-custom-icon.sh"
 
 cat > "$HOME/.ultracandy/GJS/candy-main.js" << 'EOF'
 #!/usr/bin/env gjs
