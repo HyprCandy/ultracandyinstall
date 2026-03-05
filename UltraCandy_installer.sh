@@ -7714,7 +7714,7 @@ if [ ! -d "$HOME/.ultracandy/GJS/src" ]; then
 fi
 
 cd "$HOME/.ultracandy/GJS/" || exit 1
-rm -rf toggle-control-center.sh toggle-media-player.sh toggle-system-monitor.sh setup-custom-icon.sh
+rm -rf toggle-control-center.sh toggle-media-player.sh toggle-system-monitor.sh setup-custom-icon.sh candy-launcher.sh
 # Go to the home directory
 cd "$HOME"
 
@@ -7722,34 +7722,22 @@ cd "$HOME"
 cat > "$HOME/.ultracandy/GJS/toggle-control-center.sh" << 'EOF'
 #!/bin/bash
 
-# Toggle Candy Utils via daemon
+# Toggle Candy Utils - Fast launch (daemon stays running)
+# No killing - daemon persists for instant widget launches
 
+PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
 DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
-PID_DIR="$HOME/.cache/hyprcandy/pids"
-PID_FILE="$PID_DIR/candy-daemon.pid"
 TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
 
-mkdir -p "$PID_DIR" "$TOGGLE_DIR"
+mkdir -p "$TOGGLE_DIR"
 
-# Check if daemon is running
-is_daemon_running() {
-    if [ -f "$PID_FILE" ]; then
-        PID=$(cat "$PID_FILE")
-        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
-            return 0
-        fi
-    fi
-    return 1
-}
-
-# Start daemon if not running
-if ! is_daemon_running; then
-    echo "🚀 Starting Candy Daemon..."
+# Start daemon if not running (0.3s sleep for faster launch)
+if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
     gjs "$DAEMON_SCRIPT" &
-    sleep 2
+    sleep 0.3
 fi
 
-# Toggle via file interface
+# Toggle widget
 touch "$TOGGLE_DIR/toggle-utils"
 EOF
 
@@ -7758,34 +7746,19 @@ chmod +x "$HOME/.ultracandy/GJS/toggle-control-center.sh"
 cat > "$HOME/.ultracandy/GJS/toggle-media-player.sh" << 'EOF'
 #!/bin/bash
 
-# Toggle Media Player via daemon
+# Toggle Media Player - Fast launch (daemon stays running)
 
+PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
 DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
-PID_DIR="$HOME/.cache/hyprcandy/pids"
-PID_FILE="$PID_DIR/candy-daemon.pid"
 TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
 
-mkdir -p "$PID_DIR" "$TOGGLE_DIR"
+mkdir -p "$TOGGLE_DIR"
 
-# Check if daemon is running
-is_daemon_running() {
-    if [ -f "$PID_FILE" ]; then
-        PID=$(cat "$PID_FILE")
-        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
-            return 0
-        fi
-    fi
-    return 1
-}
-
-# Start daemon if not running
-if ! is_daemon_running; then
-    echo "🚀 Starting Candy Daemon..."
+if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
     gjs "$DAEMON_SCRIPT" &
-    sleep 2
+    sleep 0.3
 fi
 
-# Toggle via file interface
 touch "$TOGGLE_DIR/toggle-media"
 EOF
 
@@ -7794,34 +7767,19 @@ chmod +x "$HOME/.ultracandy/GJS/toggle-media-player.sh"
 cat > "$HOME/.ultracandy/GJS/toggle-system-monitor.sh" << 'EOF'
 #!/bin/bash
 
-# Toggle System Monitor via daemon
+# Toggle System Monitor - Fast launch (daemon stays running)
 
+PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
 DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
-PID_DIR="$HOME/.cache/hyprcandy/pids"
-PID_FILE="$PID_DIR/candy-daemon.pid"
 TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
 
-mkdir -p "$PID_DIR" "$TOGGLE_DIR"
+mkdir -p "$TOGGLE_DIR"
 
-# Check if daemon is running
-is_daemon_running() {
-    if [ -f "$PID_FILE" ]; then
-        PID=$(cat "$PID_FILE")
-        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
-            return 0
-        fi
-    fi
-    return 1
-}
-
-# Start daemon if not running
-if ! is_daemon_running; then
-    echo "🚀 Starting Candy Daemon..."
+if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
     gjs "$DAEMON_SCRIPT" &
-    sleep 2
+    sleep 0.3
 fi
 
-# Toggle via file interface
 touch "$TOGGLE_DIR/toggle-system"
 EOF
 
@@ -7864,10 +7822,69 @@ else
 fi
 
 echo "🎉 Custom icon setup complete!"
-echo "You may need to restart nwg-dock-hyprland or your desktop environment to see the changes." 
+echo "You may need to restart nwg-dock-hyprland or your desktop environment to see the changes."
 EOF
 
 chmod +x "$HOME/.ultracandy/GJS/setup-custom-icon.sh"
+
+cat > "$HOME/.ultracandy/GJS/candy-launcher.sh" << 'EOF'
+#!/usr/bin/env bash
+
+# Candy Widgets Launcher
+# Cycles through widgets on each launch: Utils → System → Media → Utils...
+
+TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
+PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
+DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+
+# Ensure daemon is running
+start_daemon() {
+    if [ -f "$PID_FILE" ]; then
+        PID=$(cat "$PID_FILE")
+        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
+            return 0
+        fi
+    fi
+    gjs "$DAEMON_SCRIPT" &
+    sleep 2
+}
+
+# Check which widgets are open by checking hyprctl
+get_open_count() {
+    hyprctl clients -j 2>/dev/null | jq "[.[] | select(.class == \"com.candy.widgets\")] | length" 2>/dev/null || echo "0"
+}
+
+# Main logic
+start_daemon
+mkdir -p "$TOGGLE_DIR"
+
+# Get number of open widgets
+OPEN_COUNT=$(get_open_count)
+
+case $OPEN_COUNT in
+    0)
+        # None open - open Utils first
+        touch "$TOGGLE_DIR/toggle-utils"
+        notify-send "Candy Widgets" "  Opening Utilities" -t 2000 2>/dev/null || true
+        ;;
+    1)
+        # One open - open System Monitor
+        touch "$TOGGLE_DIR/toggle-system"
+        notify-send "Candy Widgets" "  Opening System Monitor" -t 2000 2>/dev/null || true
+        ;;
+    2)
+        # Two open - open Media Player
+        touch "$TOGGLE_DIR/toggle-media"
+        notify-send "Candy Widgets" "󰲸  Opening Media Player" -t 2000 2>/dev/null || true
+        ;;
+    3)
+        # All open - show info
+        notify-send "Candy Widgets" "  All widgets open!\nClick to cycle or use toggle scripts." -t 3000 2>/dev/null || true
+        ;;
+esac
+EOF
+
+chmod +x "$HOME/.ultracandy/GJS/candy-launcher.sh"
 
 cat > "$HOME/.ultracandy/GJS/candy-main.js" << 'EOF'
 #!/usr/bin/env gjs
