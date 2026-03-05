@@ -5990,9 +5990,7 @@ decoration {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 windowrule = group barred, match:class .*
-windowrule = move 73% 75,match:class (Candy.SystemMonitor)
-windowrule = move 32% 75,match:class (Candy.Media)
-windowrule = move 1% 75,match:class (Candy.Weather)
+windowrule = pin on,match:class (com.candy.widgets)
 windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
@@ -6651,9 +6649,7 @@ decoration {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 windowrule = group barred, match:class .*
-windowrule = move 73% 75,match:class (Candy.SystemMonitor)
-windowrule = move 32% 75,match:class (Candy.Media)
-windowrule = move 1% 75,match:class (Candy.Weather)
+windowrule = pin on,match:class (com.candy.widgets)
 windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
