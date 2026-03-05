@@ -8790,96 +8790,160 @@ function createCandyUtilsBox() {
         // Handle monochrome vs other schemes for GTK CSS
         if (schemeName === 'Dark') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_primary_fixed_variant;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_primary_fixed_variant;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Light') {
             GLib.spawn_command_line_async(`sed -i 's/-m dark/-m light/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @primary_fixed_dim;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @inverse_primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @primary_fixed_dim;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @inverse_primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/color: @primary_fixed_dim;/color: @primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @scrim/@inverse_primary, @primary_fixed_dim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@background;/@buttoncolor;/g; 68s/@bordercolor;/@background;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @secondary_container;/color: @primary_fixed_dim;/g; 184s/color: @secondary_container;/color: @primary_fixed_dim;/g; 292s/color: @secondary_container;/color: @primary_fixed_dim;/g; 667s/color: @secondary_container;/color: @primary_fixed_dim;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Content') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Expressive') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Fruit-salad') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Neutral') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Rainbow') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Tonal-spot') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Vibrant') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
@@ -11501,96 +11565,160 @@ function createCandyUtilsBox() {
         // Handle monochrome vs other schemes for GTK CSS
         if (schemeName === 'Dark') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_primary_fixed_variant;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_secondary/@on_primary_fixed_variant/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_primary_fixed_variant;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Light') {
             GLib.spawn_command_line_async(`sed -i 's/-m dark/-m light/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @primary_fixed_dim;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @inverse_primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @primary_fixed_dim;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @inverse_primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/color: @primary_fixed_dim;/color: @primary;/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @scrim/@inverse_primary, @primary_fixed_dim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@background;/@buttoncolor;/g; 68s/@bordercolor;/@background;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @secondary_container;/color: @primary_fixed_dim;/g; 184s/color: @secondary_container;/color: @primary_fixed_dim;/g; 292s/color: @secondary_container;/color: @primary_fixed_dim;/g; 667s/color: @secondary_container;/color: @primary_fixed_dim;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Content') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Expressive') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Fruit-salad') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Neutral') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Rainbow') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Tonal-spot') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
             GLib.spawn_command_line_async(`sed -i '127s/color: @primary_fixed_dim;/color: @secondary_container;/g; 184s/color: @primary_fixed_dim;/color: @secondary_container;/g; 292s/color: @primary_fixed_dim;/color: @secondary_container;/g; 667s/color: @primary_fixed_dim;/color: @secondary_container;/g;' '${waybarFile}'`);
         }
-        
+
         if (schemeName === 'Vibrant') {
             GLib.spawn_command_line_async(`sed -i 's/-m light/-m dark/g' '${waypaperIntegrationFile}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'`);
-            GLib.spawn_command_line_async(`sed -i 's/color: @primary;/color: @primary_fixed_dim;/g' '${waybarFile}'`);
+            GLib.file_set_contents('/tmp/hyprcandy-gtk.sh',
+                `#!/bin/sh\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk3File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk3File}'\n` +
+                `sed -i 's/@on_primary_fixed_variant/@on_secondary/g' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_bg_color .*;/@define-color dialog_bg_color @on_secondary;/' '${gtk4File}'\n` +
+                `sed -i 's/@define-color dialog_fg_color .*;/@define-color dialog_fg_color @primary;/' '${gtk4File}'\n`
+            );
+            GLib.spawn_command_line_async('sh /tmp/hyprcandy-gtk.sh');
             GLib.spawn_command_line_async(`sed -i 's/@inverse_primary, @primary_fixed_dim/@inverse_primary, @scrim/g' '${waybarFile}'`);
             GLib.spawn_command_line_async(`sed -i '8s/@primary_fixed_dim;/@inverse_primary;/g' '${dockFile}'`);
             GLib.spawn_command_line_async(`sed -i '60s/@buttoncolor;/@background;/g; 68s/@background;/@bordercolor;/g'  '${swayncFile}'`);
