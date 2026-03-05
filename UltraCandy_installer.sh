@@ -4274,13 +4274,6 @@ cat > "$HOME/.config/hyprcandy/hooks/update_background.sh" << 'EOF'
 #!/bin/bash
 set +e
 
-restart_swaync() {
-    swaync &
-    sleep 1
-    swaync-client -rs
-}
-restart_swaync
-
 # Update ROFI background 
 ROFI_RASI="$HOME/.config/rofi/colors.rasi"
 
@@ -4829,7 +4822,6 @@ chmod +x "$HOME/.config/hyprcandy/hooks/kill_waybar_safe.sh"
 # ═══════════════════════════════════════════════════════════════
 #               Waypaper Integration Scripts
 # ═══════════════════════════════════════════════════════════════
-sudo rm -f /usr/local/share/gtk3-reload/.gtk3-version
 
     cat > "$HOME/.config/hyprcandy/hooks/waypaper_integration.sh" << 'EOF'
 #!/bin/bash
@@ -4869,6 +4861,7 @@ trigger_matugen() {
         matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2
         sleep 0.5
         reload_colors
+        restart_swaync
         update_hypr_group_text
         echo "✅ Matugen color generation complete"
     else
@@ -4893,6 +4886,12 @@ reload_colors() {
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
     
     sudo dconf update
+}
+
+restart_swaync() {
+    swaync &
+    sleep 1
+    swaync-client -rs
 }
 
 update_hypr_group_text() {
