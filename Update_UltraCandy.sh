@@ -719,8 +719,9 @@ alias gc="git commit -m"
 function gp
     # Ensure .config/hypr and wlogout are gitignored before every push
     if not grep -qF ".config/hypr" .gitignore 2>/dev/null
-        echo ".config/hypr/" >> .gitignore
-        echo "wlogout/" >> .gitignore
+        echo ".config/hypr/hyprviz.conf" >> .gitignore
+	    echo ".config/hypr/monitors.conf" >> .gitignore
+	    echo ".config/wlogout/style.css" >> .gitignore
         git add .gitignore
         git commit -m "chore: ignore personal config dirs"
     end
@@ -940,8 +941,9 @@ alias gc="git commit -m"
 gp() {
     # Ensure .config/hypr and wlogout are gitignored before every push
     if ! grep -qF ".config/hypr" .gitignore 2>/dev/null; then
-        echo ".config/hypr/" >> .gitignore
-        echo "wlogout/" >> .gitignore
+        echo ".config/hypr/hyprviz.conf" >> .gitignore
+	    echo ".config/hypr/monitors.conf" >> .gitignore
+	    echo ".config/wlogout/style.css" >> .gitignore
         git add .gitignore
         git commit -m "chore: ignore personal config dirs"
     fi
