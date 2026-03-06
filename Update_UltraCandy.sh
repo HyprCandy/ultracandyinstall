@@ -531,18 +531,13 @@ install_packages() {
 setup_fish() {
     print_status "Setting up Fish shell configuration..."
     
-    cd "$HOME/.config/fish"
+cd "$HOME/.config/fish"
 rm -rf functions
 cd "$HOME"
 
-# Set Fish as default shell
-if command -v fish &> /dev/null; then
-    print_status "Reinstalling and setting Fish as default shell..."
-    $AUR_HELPER -S --noconfirm fish fisher starship
-else
-    print_status "Installing Fish..."
-    $AUR_HELPER -S --noconfirm fish fisher starship
-fi
+# Install/reinstall Fish (functions folder already removed above)
+print_status "Installing/reinstalling Fish, Fisher and Starship..."
+$AUR_HELPER -S --noconfirm fish fisher starship
 
 FISH_PATH="$(command -v fish)"
 if [[ -z "$FISH_PATH" ]]; then
