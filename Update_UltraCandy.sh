@@ -962,7 +962,7 @@ setup_ultracandy() {
     if [ "$DISPLAY_MANAGER" = "sddm" ]; then
         if pacman -Qi sddm &>/dev/null; then
             $AUR_HELPER --noconfirm -R gdm gdm-settings
-            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R gnome-software gnome-weather
             $AUR_HELPER --noconfirm -R qt6ct
             $AUR_HELPER --noconfirm -R qt5ct
             $AUR_HELPER --noconfirm -R spotify
@@ -974,7 +974,7 @@ setup_ultracandy() {
     elif [ "$DISPLAY_MANAGER" = "gdm" ]; then
         if pacman -Qi gdm &>/dev/null; then
             $AUR_HELPER --noconfirm -R sddm sddm-sugar-candy-git
-            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R gnome-software gnome-weather
             $AUR_HELPER --noconfirm -R qt6ct
             $AUR_HELPER --noconfirm -R qt5ct
             $AUR_HELPER --noconfirm -R spotify
@@ -998,11 +998,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync equibop-bin qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako equibop-bin qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     fi
 
     # Add flathub repo
@@ -6002,8 +6002,9 @@ decoration {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 windowrule = group barred, match:class .*
-windowrule = pin on,move 1000 340,match:title (candy.systemmonitor)
-windowrule = pin on,move 60 520,match:title (candy.media)
+windowrule = pin on,border_size 0,move 960 45,match:title (candy.systemmonitor)
+windowrule = pin on,border_size 0,move 450 45,match:title (candy.media)
+windowrule = pin on,border_size 0,move 10 45,match:title (candy.weather)
 windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
@@ -6662,8 +6663,9 @@ decoration {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 windowrule = group barred, match:class .*
-windowrule = pin on,move 1000 340,match:title (candy.systemmonitor)
-windowrule = pin on,move 60 520,match:title (candy.media)
+windowrule = pin on,border_size 0,move 960 45,match:title (candy.systemmonitor)
+windowrule = pin on,border_size 0,move 450 45,match:title (candy.media)
+windowrule = pin on,border_size 0,move 10 45,match:title (candy.weather)
 windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
 windowrule = suppress_event maximize, match:class .* #nofocus,match:class ^$,match:title ^$,xwayland:1,floating:1,fullscreen:0,pinned:0
