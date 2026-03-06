@@ -660,11 +660,6 @@ EOF
     cat > "$HOME/.config/fish/config.fish" << 'EOF'
 # UltraCandy Fish Configuration
 
-# Initialize Starship prompt
-if type -q starship
-    starship init fish | source
-end
-
 # Set environment variables
 set -gx HYPRLAND_LOG_WS 1
 set -x EDITOR micro
@@ -723,6 +718,11 @@ alias sea="asciiquarium"
 
 # Start UltraCandy fastfetch
 fastfetch
+
+# Initialize Starship prompt
+if type -q starship
+    starship init fish | source
+end
 
 # Welcome message
 function fish_greeting
