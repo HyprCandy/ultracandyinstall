@@ -532,20 +532,31 @@ setup_fish() {
     print_status "Setting up Fish shell configuration..."
     
     cd "$HOME/.config/fish"
-    rm -rf functions
-    cd "$HOME"
-    
-    # Set Fish as default shell
-    if command -v fish &> /dev/null; then
-        print_status "Reinstalling and setting Fish as default shell..."
-         $AUR_HELPER -S --noconfirm fish fisher starship
-    else
-        print_error "Installing Fish"
-        $AUR_HELPER -S --noconfirm fish fisher starship
-    fi
+rm -rf functions
+cd "$HOME"
 
-    chsh -s $(which fish)
-    print_success "Fish set as default shell"
+# Set Fish as default shell
+if command -v fish &> /dev/null; then
+    print_status "Reinstalling and setting Fish as default shell..."
+    $AUR_HELPER -S --noconfirm fish fisher starship
+else
+    print_status "Installing Fish..."
+    $AUR_HELPER -S --noconfirm fish fisher starship
+fi
+
+FISH_PATH="$(command -v fish)"
+if [[ -z "$FISH_PATH" ]]; then
+    print_error "Fish not found after install, cannot set default shell"
+    exit 1
+fi
+
+# Ensure fish is in /etc/shells before chsh
+if ! grep -qF "$FISH_PATH" /etc/shells; then
+    echo "$FISH_PATH" | sudo tee -a /etc/shells
+fi
+
+chsh -s "$FISH_PATH"
+print_success "Fish set as default shell"
     
    # Ensure Fisher function exists
 mkdir -p ~/.config/fish/functions
@@ -739,15 +750,21 @@ setup_zsh() {
     print_status "Setting up Zsh shell configuration..."
     
     # Set Zsh as default shell
-    if command -v zsh &> /dev/null; then
-        print_status "Setting Zsh as default shell..."
-    else
-        print_error "Installing Zsh"
-        $AUR_HELPER -S --noconfirm zsh zsh-completions zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
-    fi
+if command -v zsh &> /dev/null; then
+    print_status "Setting Zsh as default shell..."
+else
+    print_error "Installing Zsh"
+    $AUR_HELPER -S --noconfirm zsh zsh-completions zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
+fi
 
-    chsh -s $(which zsh)
-    print_success "Zsh set as default shell"
+ZSH_PATH="$(command -v zsh)"
+if [[ -z "$ZSH_PATH" ]]; then
+    print_error "Zsh not found after install, cannot set default shell"
+    exit 1
+fi
+
+chsh -s "$ZSH_PATH"
+print_success "Zsh set as default shell"
     
     # Install Oh My Zsh if not already installed
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
