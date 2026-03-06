@@ -7894,97 +7894,10 @@ update_custom() {
 
 setup_gjs() {
 # Create the GJS directory and files if they don't already exist
-if [ ! -d "$HOME/.hyprcandy/GJS/src" ]; then
-    mkdir -p "$HOME/.hyprcandy/GJS/src"
+if [ ! -d "$HOME/.hyprcandycandy/GJS/src" ]; then
+    mkdir -p "$HOME/.hyprcandycandy/GJS/src"
     echo "📁 Created the GJS directory"
 fi
-
-cd "$HOME/.hyprcandy/GJS"
-rm -f toggle-control-center.sh toggle-media-player.sh toggle-system-monitor.sh toggle-weather-widget.sh
-cd "$HOME"
-
-cat > "$HOME/.hyprcandy/GJS/toggle-control-center.sh" << 'EOF'
-#!/bin/bash
-
-# Toggle Candy Utils - Fast launch (daemon stays running)
-# No killing - daemon persists for instant widget launches
-
-PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
-TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
-
-mkdir -p "$TOGGLE_DIR"
-
-# Start daemon if not running (0.3s sleep for faster launch)
-if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
-    gjs "$DAEMON_SCRIPT" &
-    sleep 0.3
-fi
-
-# Toggle widget
-touch "$TOGGLE_DIR/toggle-utils"
-EOF
-chmod +x "$HOME/.hyprcandy/GJS/toggle-control-center.sh"
-
-cat > "$HOME/.hyprcandy/GJS/toggle-system-monitor.sh" << 'EOF'
-#!/bin/bash
-
-# Toggle System Monitor - Fast launch (daemon stays running)
-
-PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
-TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
-
-mkdir -p "$TOGGLE_DIR"
-
-if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
-    gjs "$DAEMON_SCRIPT" &
-    sleep 0.3
-fi
-
-touch "$TOGGLE_DIR/toggle-system"
-EOF
-chmod +x "$HOME/.hyprcandy/GJS/toggle-system-monitor.sh"
-
-cat > "$HOME/.hyprcandy/GJS/toggle-media-player.sh" << 'EOF'
-#!/bin/bash
-
-# Toggle Media Player - Fast launch (daemon stays running)
-
-PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
-TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
-
-mkdir -p "$TOGGLE_DIR"
-
-if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
-    gjs "$DAEMON_SCRIPT" &
-    sleep 0.3
-fi
-
-touch "$TOGGLE_DIR/toggle-media"
-EOF
-chmod +x "$HOME/.hyprcandy/GJS/toggle-media-player.sh"
-
-cat > "$HOME/.hyprcandy/GJS/toggle-weather-widget.sh" << 'EOF'
-#!/bin/bash
-
-# Toggle Weather Widget - Fast launch (daemon stays running)
-
-PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
-TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
-
-mkdir -p "$TOGGLE_DIR"
-
-if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
-    gjs "$DAEMON_SCRIPT" &
-    sleep 0.3
-fi
-
-touch "$TOGGLE_DIR/toggle-weather"
-EOF
-chmod +x "$HOME/.hyprcandy/GJS/toggle-weather-widget.sh"
 
 find "$HOME/.hyprcandy/GJS" -name "*.sh" -exec chmod +x {} \;
 chmod +x "$HOME/.hyprcandy/GJS/candy-daemon.js"
