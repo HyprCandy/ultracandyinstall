@@ -7842,6 +7842,70 @@ EOF
 
 chmod +x "$HOME/.ultracandy/GJS/toggle-weather-widget.sh"
 
+cat > "$HOME/.ultracandy/GJS/candy-launcher.sh" << 'EOF'
+#!/usr/bin/env bash
+
+# Candy Widgets Launcher
+# Cycles through widgets on each launch: Utils → System → Media → Utils...
+
+TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
+PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
+DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+
+# Ensure daemon is running
+start_daemon() {
+    if [ -f "$PID_FILE" ]; then
+        PID=$(cat "$PID_FILE")
+        if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
+            return 0
+        fi
+    fi
+    gjs "$DAEMON_SCRIPT" &
+    sleep 2
+}
+
+# Check which widgets are open by checking hyprctl
+get_open_count() {
+    hyprctl clients -j 2>/dev/null | jq "[.[] | select(.class == \"com.candy.widgets\")] | length" 2>/dev/null || echo "0"
+}
+
+# Main logic
+start_daemon
+mkdir -p "$TOGGLE_DIR"
+
+# Get number of open widgets
+OPEN_COUNT=$(get_open_count)
+
+case $OPEN_COUNT in
+    0)
+        # None open - open Utils first
+        touch "$TOGGLE_DIR/toggle-utils"
+        notify-send "Candy Widgets" "  Opening Utilities" -t 2000 2>/dev/null || true
+        ;;
+    1)
+        # One open - open System Monitor
+        touch "$TOGGLE_DIR/toggle-system"
+        notify-send "Candy Widgets" "  Opening System Monitor" -t 2000 2>/dev/null || true
+        ;;
+    2)
+        # Two open - open Media Player
+        touch "$TOGGLE_DIR/toggle-media"
+        notify-send "Candy Widgets" "󰲸  Opening Media Player" -t 2000 2>/dev/null || true
+        ;;
+    3)
+        # Three open - open Weather
+        touch "$TOGGLE_DIR/toggle-weather"
+        notify-send "Candy Widgets" "󰖐  Opening Weather" -t 2000 2>/dev/null || true
+        ;;
+    4)
+        # All open - show info
+        notify-send "Candy Widgets" "  All widgets open!\nClick to cycle or use toggle scripts." -t 3000 2>/dev/null || true
+        ;;
+esac
+EOF
+
+chmod +x "$HOME/.ultracandy/GJS/candy-launcher.sh"
+
 cat > "$HOME/.ultracandy/GJS/setup-custom-icon.sh" << 'EOF'
 #!/bin/bash
 
@@ -14523,51 +14587,6 @@ imports.gi.versions.GLib = '2.0';
 imports.gi.versions.Gdk = '4.0';
 imports.gi.versions.Soup = '3.0';
 const { Gtk, Gio, GLib, Gdk, Soup } = imports.gi;
-
-const scriptDir = GLib.path_get_dirname(imports.system.programInvocationName);
-imports.searchPath.unshift(scriptDir);
-
-function createWeatherBox() {
-    // Load user's GTK color theme
-    const userColorsProvider = new Gtk.CssProvider();
-    userColorsProvider.load_from_path(GLib.build_filenamev([GLib.get_home_dir(), '.config', 'gtk-3.0', 'colors.css']));
-    Gtk.StyleContext.add_provider_for_display(
-        Gdk.Display.get_default(),
-        userColorsProvider,
-        Gtk.STYLE_PROVIDER_PRIORITY_USER
-    );
-
-    // Load our custom gradient CSS after user theme
-    const cssProvider = new Gtk.CssProvider();
-    let css = `
-        .media-player-frame, .weather-frame, .tray-frame {
-            border-radius: 22px;
-            min-width: 244px;
-            min-height: 118px;
-            padding: 0px 0px;
-            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.22);
-            background: linear-gradient(45deg, @source_color 0%, @background 100%, #9558e1 0%, #16121a 100%);
-            background-size: cover;
-        }
-        .weather-bg-overlay {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: rgba(0, 0, 0, 0.12);
-            opacity: 0.95;
-            border-radius: 22px;
-        }
-        .weather-blurred-bg {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: rgba(0,0,0,0.4);
-            opacitimports.gi.versions.Gtk = '4.0';
-imports.gi.versions.Gio = '2.0';
-imports.gi.versions.GLib = '2.0';
-imports.gi.versions.Gdk = '4.0';
-imports.gi.versions.Soup = '3.0';
-const { Gtk, Gio, GLib, Gdk, Soup } = imports.gi;
 const scriptDir = GLib.path_get_dirname(imports.system.programInvocationName);
 imports.searchPath.unshift(scriptDir);
 
@@ -14584,8 +14603,8 @@ function weatherInfo(code, isDay, hum) {
     if (code===0) return {t:'Clear Sky', i:isDay?'󰖙':'󰖔'};
     if (code===1) return {t:'Mainly Clear', i:isDay?'󰖕':'󰼱'};
     if (code===2) return {t:'Partly Cloudy', i:isDay?'󰖕':'󰼱'};
-    if (code===3) return hum>=85?{t:'Overcast (Rainy)',i:'󰖖'}:{t:'Overcast',i:'󰼰'};
-    if (code===45||code===48) return {t:'Fog',i:'󰖑'};
+    if (code===3) return hum>=85?{t:'Overcast (Rainy)',i:isDay?'':''}:{t:'Overcast',i:isDay?'󰼰':'󰖑'};
+    if (code===45||code===48) return {t:'Fog',i:isDay?'':''};
     if (code>=51&&code<=55) return {t:'Drizzle',i:'󰖗'};
     if (code===56||code===57) return {t:'Freezing Drizzle',i:'󰖒'};
     if (code===61) return {t:'Slight Rain',i:'󰖗'};
