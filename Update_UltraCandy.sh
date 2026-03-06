@@ -501,12 +501,12 @@ install_packages() {
         if [ "$PANEL_CHOICE" = "waybar" ]; then
             if pacman -Qi mako >/dev/null 2>&1; then
                 print_status "Removing mako (using SwayNC with Waybar)..."
-                $AUR_HELPER --noconfirm -R mako 2>/dev/null || true 
+                $AUR_HELPER -R --noconfirm mako 2>/dev/null || true 
             fi
         else
             if pacman -Qi swaync >/dev/null 2>&1; then
                 print_status "Removing swaync (using mako with Hyprpanel)..."
-                $AUR_HELPER --noconfirm -R swaync 2>/dev/null || true
+                $AUR_HELPER -R --noconfirm swaync 2>/dev/null || true
             fi
         fi
     
@@ -538,12 +538,12 @@ setup_fish() {
     # Set Fish as default shell
     if command -v fish &> /dev/null; then
         print_status "Reinstalling and setting Fish as default shell..."
-         $AUR_HELPER --noconfirm -S fish fisher starship
+         $AUR_HELPER -S --noconfirm fish fisher starship
         chsh -s $(which fish)
         print_success "Fish set as default shell"
     else
         print_error "Installing Fish"
-        $AUR_HELPER --noconfirm -S fish fisher starship
+        $AUR_HELPER -S --noconfirm fish fisher starship
         chsh -s $(which fish)
         print_success "Fish set as default shell"
     fi
@@ -746,7 +746,7 @@ setup_zsh() {
         print_success "Zsh set as default shell"
     else
         print_error "Installing Zsh"
-        $AUR_HELPER --noconfirm -S zsh zsh-completions zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
+        $AUR_HELPER -S --noconfirm zsh zsh-completions zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
         chsh -s $(which zsh)
         print_success "Zsh set as default shell"
     fi
@@ -965,28 +965,28 @@ setup_ultracandy() {
     # Install display manager packages
     if [ "$DISPLAY_MANAGER" = "sddm" ]; then
         if pacman -Qi sddm &>/dev/null; then
-            $AUR_HELPER --noconfirm -R gdm gdm-settings
-            $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R gnome-weather
-            $AUR_HELPER --noconfirm -R waypaper-git
-            $AUR_HELPER --noconfirm -R qt6ct
-            $AUR_HELPER --noconfirm -R qt5ct
-            $AUR_HELPER --noconfirm -R spotify
-            $AUR_HELPER --noconfirm -S sddm sddm-sugar-candy-git
+            $AUR_HELPER -R --noconfirm gdm gdm-settings
+            $AUR_HELPER -R --noconfirm gnome-software
+            $AUR_HELPER -R --noconfirm gnome-weather
+            $AUR_HELPER -R --noconfirm waypaper-git
+            $AUR_HELPER -R --noconfirm qt6ct
+            $AUR_HELPER -R --noconfirm qt5ct
+            $AUR_HELPER -R --noconfirm spotify
+            $AUR_HELPER -S --noconfirm sddm sddm-sugar-candy-git
             print_status "Installed SDDM packages"
         else
             echo ""
         fi
     elif [ "$DISPLAY_MANAGER" = "gdm" ]; then
         if pacman -Qi gdm &>/dev/null; then
-            $AUR_HELPER --noconfirm -R sddm sddm-sugar-candy-git
-            $AUR_HELPER --noconfirm -R gnome-software
-            $AUR_HELPER --noconfirm -R gnome-weather
-            $AUR_HELPER --noconfirm -R waypaper-git
-            $AUR_HELPER --noconfirm -R qt6ct
-            $AUR_HELPER --noconfirm -R qt5ct
-            $AUR_HELPER --noconfirm -R spotify
-            $AUR_HELPER --noconfirm -S gdm gdm-settings
+            $AUR_HELPER -R --noconfirm sddm sddm-sugar-candy-git
+            $AUR_HELPER -R --noconfirm gnome-software
+            $AUR_HELPER -R --noconfirm gnome-weather
+            $AUR_HELPER -R --noconfirm waypaper-git
+            $AUR_HELPER -R --noconfirm qt6ct
+            $AUR_HELPER -R --noconfirm qt5ct
+            $AUR_HELPER -R --noconfirm spotify
+            $AUR_HELPER -S --noconfirm gdm gdm-settings
             print_status "Installed GDM packages"
         else
             echo ""
@@ -996,21 +996,21 @@ setup_ultracandy() {
     # Prevent notification daemon conflicts
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Removing mako since you chose waybar to avoid conflicts with swaync..."
-        $AUR_HELPER --noconfirm -R mako
+        $AUR_HELPER -R --noconfirm mako
     else
         print_status "Removing swaync since you chose hyprpanel to avoid conflicts with mako..."
-        $AUR_HELPER --noconfirm -R swaync
+        $AUR_HELPER -R --noconfirm swaync
     fi
     
     #Add panel censtric apps
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync equibop-bin waypaper qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER -S --noconfirm waybar waypaper-git swaync equibop-bin waypaper qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako equibop-bin waypaper qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER -S --noconfirm ags-hyprpanel-git mako equibop-bin waypaper qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     fi
 
     # Add flathub repo
