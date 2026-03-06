@@ -14721,6 +14721,9 @@ function createWeatherBox() {
 var exports = { createWeatherBox };
 EOF
 
+find "$HOME/.ultracandy/GJS" -name "*.sh" -exec chmod +x {} \;
+chmod +x "$HOME/.ultracandy/GJS/candy-daemon.js"
+
 echo "✅ Files and Apps setup complete"
 }
 
