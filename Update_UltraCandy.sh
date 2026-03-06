@@ -716,7 +716,16 @@ alias wget="wget -c"
 alias g="git clone --depth 1"
 alias ga="git add ."
 alias gc="git commit -m"
-alias gp="git push"
+function gp
+    # Ensure .config/hypr and wlogout are gitignored before every push
+    if not grep -qF ".config/hypr" .gitignore 2>/dev/null
+        echo ".config/hypr/" >> .gitignore
+        echo "wlogout/" >> .gitignore
+        git add .gitignore
+        git commit -m "chore: ignore personal config dirs"
+    end
+    git push
+end
 alias gl="git pull"
 alias gs="git status"
 alias gd="git diff"
@@ -928,7 +937,16 @@ alias wget="wget -c"
 alias g="git clone --depth 1"
 alias ga="git add ."
 alias gc="git commit -m"
-alias gp="git push"
+gp() {
+    # Ensure .config/hypr and wlogout are gitignored before every push
+    if ! grep -qF ".config/hypr" .gitignore 2>/dev/null; then
+        echo ".config/hypr/" >> .gitignore
+        echo "wlogout/" >> .gitignore
+        git add .gitignore
+        git commit -m "chore: ignore personal config dirs"
+    fi
+    git push
+}
 alias gl="git pull"
 alias gs="git status"
 alias gd="git diff"
