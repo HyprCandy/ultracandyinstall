@@ -284,7 +284,7 @@ build_package_list() {
         "gvfs"
         "gnome-disk-utility"
         "gnome-color-manager"
-        "gnome-weather"
+        #"gnome-weather"
         "gnome-calendar"
         "gnome-system-monitor"
         "gnome-calculator"
