@@ -1093,7 +1093,7 @@ setup_hyprcandy() {
     config_dirs=(".config" ".icons" ".hyprcandy-zsh.zsh")
 
     # Add files/folders to exclude from deletion
-    preserve_items=("GJS" "Candy" "LICENSE" "README.md" ".git")
+    preserve_items=("GJS" "Candy" "LICENSE" "README.md" ".git" ".gitignore")
 
     if [ ${#config_dirs[@]} -eq 0 ]; then
         echo "❌ No configuration directories specified."
