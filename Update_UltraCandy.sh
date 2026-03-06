@@ -531,14 +531,17 @@ install_packages() {
 setup_fish() {
     print_status "Setting up Fish shell configuration..."
     
-cd "$HOME/.config/fish"
-rm -rf functions
-cd "$HOME"
+if ! command -v zsh &> /dev/null; then
+    # Install Fish (functions folder already removed above)
+    print_status "Installing/reinstalling Fish, Fisher and Starship..."
+    $AUR_HELPER -S --noconfirm fish fisher starship
+else
+    print_status "Updating fisher (Remeber to periodically run `fisher update`)..."
+fi
 
-# Install/reinstall Fish (functions folder already removed above)
-print_status "Installing/reinstalling Fish, Fisher and Starship..."
-$AUR_HELPER -S --noconfirm fish fisher starship
 fisher update
+
+echo "✅ Fisher is up to date..."
 
 FISH_PATH="$(command -v fish)"
 if [[ -z "$FISH_PATH" ]]; then
