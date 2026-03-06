@@ -6128,6 +6128,7 @@ decoration {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 windowrule = group barred, match:class .*
+windowrule = pin on,border_size 0,match:title (candy.utils)
 windowrule = pin on,border_size 0,move 960 45,match:title (candy.systemmonitor)
 windowrule = pin on,border_size 0,move 450 45,match:title (candy.media)
 windowrule = pin on,border_size 0,move 10 45,match:title (candy.weather)
@@ -6789,6 +6790,7 @@ decoration {
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 windowrule = group barred, match:class .*
+windowrule = pin on,border_size 0,match:title (candy.utils)
 windowrule = pin on,border_size 0,move 960 45,match:title (candy.systemmonitor)
 windowrule = pin on,border_size 0,move 450 45,match:title (candy.media)
 windowrule = pin on,border_size 0,move 10 45,match:title (candy.weather)
