@@ -962,7 +962,9 @@ setup_ultracandy() {
     if [ "$DISPLAY_MANAGER" = "sddm" ]; then
         if pacman -Qi sddm &>/dev/null; then
             $AUR_HELPER --noconfirm -R gdm gdm-settings
-            $AUR_HELPER --noconfirm -R gnome-software gnome-weather waypaper-git
+            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R gnome-weather
+            $AUR_HELPER --noconfirm -R waypaper-git
             $AUR_HELPER --noconfirm -R qt6ct
             $AUR_HELPER --noconfirm -R qt5ct
             $AUR_HELPER --noconfirm -R spotify
@@ -974,7 +976,9 @@ setup_ultracandy() {
     elif [ "$DISPLAY_MANAGER" = "gdm" ]; then
         if pacman -Qi gdm &>/dev/null; then
             $AUR_HELPER --noconfirm -R sddm sddm-sugar-candy-git
-            $AUR_HELPER --noconfirm -R gnome-software gnome-weather waypaper-git
+            $AUR_HELPER --noconfirm -R gnome-software
+            $AUR_HELPER --noconfirm -R gnome-weather
+            $AUR_HELPER --noconfirm -R waypaper-git
             $AUR_HELPER --noconfirm -R qt6ct
             $AUR_HELPER --noconfirm -R qt5ct
             $AUR_HELPER --noconfirm -R spotify
