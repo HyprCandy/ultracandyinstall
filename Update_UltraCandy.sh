@@ -1148,11 +1148,11 @@ setup_ultracandy() {
     done
 
 # Stow all configurations at once, ignoring Candy folder
-if stow -v -t "$HOME" --ignore='Candy' --ignore='GJS' --ignore='.face.icon' --ignore='candy-system-monitor.js' . 2>/dev/null; then
+if stow -v -t "$HOME" --ignore='Candy' --ignore='GJS' . 2>/dev/null; then
     echo "✅ Successfully stowed all configurations"
 else
     echo "⚠️  Stow operation failed — attempting restow..."
-    if stow -R -v -t "$HOME" --ignore='Candy' --ignore='GJS' --ignore='.face.icon' --ignore='candy-system-monitor.js' . 2>/dev/null; then
+    if stow -R -v -t "$HOME" --ignore='Candy' --ignore='GJS' . 2>/dev/null; then
         echo "✅ Successfully restowed all configurations"
     else
         echo "❌ Failed to stow configurations"
