@@ -531,7 +531,7 @@ install_packages() {
 setup_fish() {
     print_status "Setting up Fish shell configuration..."
     
-if ! command -v zsh &> /dev/null; then
+if ! command -v fish &> /dev/null; then
     # Install Fish (functions folder already removed above)
     print_status "Installing/reinstalling Fish, Fisher and Starship..."
     $AUR_HELPER -S --noconfirm fish fisher starship
