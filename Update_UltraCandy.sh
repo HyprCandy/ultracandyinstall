@@ -539,14 +539,13 @@ setup_fish() {
     if command -v fish &> /dev/null; then
         print_status "Reinstalling and setting Fish as default shell..."
          $AUR_HELPER -S --noconfirm fish fisher starship
-        chsh -s $(which fish)
-        print_success "Fish set as default shell"
     else
         print_error "Installing Fish"
         $AUR_HELPER -S --noconfirm fish fisher starship
-        chsh -s $(which fish)
-        print_success "Fish set as default shell"
     fi
+
+    chsh -s $(which fish)
+    print_success "Fish set as default shell"
     
    # Ensure Fisher function exists
 mkdir -p ~/.config/fish/functions
@@ -742,14 +741,13 @@ setup_zsh() {
     # Set Zsh as default shell
     if command -v zsh &> /dev/null; then
         print_status "Setting Zsh as default shell..."
-        chsh -s $(which zsh)
-        print_success "Zsh set as default shell"
     else
         print_error "Installing Zsh"
         $AUR_HELPER -S --noconfirm zsh zsh-completions zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
-        chsh -s $(which zsh)
-        print_success "Zsh set as default shell"
     fi
+
+    chsh -s $(which zsh)
+    print_success "Zsh set as default shell"
     
     # Install Oh My Zsh if not already installed
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
