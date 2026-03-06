@@ -581,7 +581,7 @@ setup_fish() {
     print_status "Setting up Fish shell configuration..."
 
     print_status "Verying latest fisher packages are installed..."
-    fisher update
+    fish -c "fisher update"
     echo "✅ Fisher is up to date..."
     
     # Set Fish as default shell
