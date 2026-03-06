@@ -1117,7 +1117,7 @@ setup_ultracandy() {
     config_dirs=(".config" ".icons" ".ultracandy-zsh.zsh")
 
     # Add files/folders to exclude from deletion
-    preserve_items=("GJS" "Candy")
+    preserve_items=("GJS" "Candy" ".git")
 
     if [ ${#config_dirs[@]} -eq 0 ]; then
         echo "❌ No configuration directories specified."
