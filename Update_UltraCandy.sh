@@ -531,46 +531,53 @@ install_packages() {
 setup_fish() {
     print_status "Setting up Fish shell configuration..."
     
+# Install Fish and Starship if not present
 if ! command -v fish &> /dev/null; then
-    # Install Fish (functions folder already removed above)
-    print_status "Installing/reinstalling Fish, Fisher and Starship..."
-    $AUR_HELPER -S --noconfirm fish fisher starship
+    print_status "Installing Fish and Starship..."
+    $AUR_HELPER -S --noconfirm fish starship
+    print_success "Fish and Starship installed"
 else
-    print_status "Updating fisher (Remeber to periodically run `fisher update`)..."
+    print_status "Fish already installed, skipping..."
 fi
 
-fish -c "fisher update"
-
-echo "✅ Fisher is up to date..."
-
+# Set fish as default shell
+# Done after install to ensure fish is available regardless of prior state
 FISH_PATH="$(command -v fish)"
 if [[ -z "$FISH_PATH" ]]; then
     print_error "Fish not found after install, cannot set default shell"
     exit 1
 fi
 
-# Ensure fish is in /etc/shells before chsh
 if ! grep -qF "$FISH_PATH" /etc/shells; then
     echo "$FISH_PATH" | sudo tee -a /etc/shells
 fi
 
 chsh -s "$FISH_PATH"
 print_success "Fish set as default shell"
-    
-   # Ensure Fisher function exists
-mkdir -p ~/.config/fish/functions
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o ~/.config/fish/functions/fisher.fish
 
-# Now install plugins using fisher (must be in a proper Fish shell)
-fish -c '
-    fisher install jorgebucaran/fisher
-    fisher install \
-        jorgebucaran/nvm.fish \
-        jorgebucaran/autopair.fish \
-        jethrokuan/z \
-        patrickf1/fzf.fish \
-        franciscolourenco/done
-'
+# Fisher setup — install plugins fresh or just update if already configured
+if ! fish -c "type fisher" &> /dev/null; then
+    print_status "Installing Fisher and plugins..."
+    mkdir -p ~/.config/fish/functions
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish \
+        -o ~/.config/fish/functions/fisher.fish
+
+    fish -c "
+        fisher install jorgebucaran/fisher
+        fisher install \
+            jorgebucaran/nvm.fish \
+            jorgebucaran/autopair.fish \
+            jethrokuan/z \
+            patrickf1/fzf.fish \
+            franciscolourenco/done
+        fisher update
+    "
+    print_success "Fisher and plugins installed"
+else
+    print_status "Fisher already installed, updating..."
+    fish -c "fisher update"
+    print_success "Fisher is up to date"
+fi
     
     # Configure Starship prompt
     if command -v starship &> /dev/null; then
