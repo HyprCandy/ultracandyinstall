@@ -6178,7 +6178,7 @@ decoration {
 windowrule = group barred, match:class .*
 windowrule = pin on,border_size 0,match:title (candy.utils)
 windowrule = pin on,border_size 0,move 960 45,match:title (candy.systemmonitor)
-windowrule = pin on,border_size 0,move 450 45,match:title (candy.media)
+windowrule = pin on,border_size 0,move 420 45,match:title (candy.media)
 windowrule = pin on,border_size 0,move 10 45,match:title (candy.weather)
 windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
@@ -6840,7 +6840,7 @@ decoration {
 windowrule = group barred, match:class .*
 windowrule = pin on,border_size 0,match:title (candy.utils)
 windowrule = pin on,border_size 0,move 960 45,match:title (candy.systemmonitor)
-windowrule = pin on,border_size 0,move 450 45,match:title (candy.media)
+windowrule = pin on,border_size 0,move 420 45,match:title (candy.media)
 windowrule = pin on,border_size 0,move 10 45,match:title (candy.weather)
 windowrule = opacity 0.85 0.85,match:class ^(kitty|kitty-scratchpad|Alacritty|floating-installer|clock)$
 windowrule = float on, center on,size 800 500,match:class (kitty-scratchpad)
