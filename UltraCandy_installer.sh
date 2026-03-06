@@ -579,10 +579,6 @@ install_packages() {
 # Function to setup Fish shell configuration
 setup_fish() {
     print_status "Setting up Fish shell configuration..."
-
-    print_status "Verying latest fisher packages are installed..."
-    fish -c "fisher update"
-    echo "✅ Fisher is up to date..."
     
     # Set Fish as default shell
     if command -v fish &> /dev/null; then
