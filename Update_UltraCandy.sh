@@ -15045,6 +15045,9 @@ main() {
     # Choose shell
     choose_shell
     echo
+
+    # Check for AUR helper or install one
+    check_or_install_package_manager
     
     print_status "Setting up shell configuration..."
     if [ "$SHELL_CHOICE" = "fish" ]; then
@@ -15052,9 +15055,6 @@ main() {
     elif [ "$SHELL_CHOICE" = "zsh" ]; then
         setup_zsh
     fi
-    
-    # Check for AUR helper or install one
-    check_or_install_package_manager
     
     # Automatically setup UltraCandy configuration
     print_status "Proceeding with UltraCandy configuration setup..."
