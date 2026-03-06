@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# UltraCandy Installer Script
+# HyprCandy Installer Script
 # This script installs Hyprland and related packages across multiple distributions
 
 #set -e  # Exit on any error
@@ -46,7 +46,7 @@ show_ascii_art() {
     echo -e "${CYAN}╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝${NC}"
     echo
     echo -e "${PURPLE}════════════════════${MAGENTA}════════════════════${CYAN}════════════════════${YELLOW}═════════${NC}"
-    echo -e "${WHITE}                    Welcome to the UltraCandy Installer!${NC}"
+    echo -e "${WHITE}                    Welcome to the HyprCandy Installer!${NC}"
     echo -e "${PURPLE}════════════════════${MAGENTA}════════════════════${CYAN}════════════════════${YELLOW}═════════${NC}"
     echo
 }
@@ -100,7 +100,7 @@ choose_display_manager() {
 }
 
 choose_panel() {
-    echo -e "${CYAN}Choose your panel: you can also rerun the script to switch from either or regenerate UltraCandy's default panel setup:${NC}"
+    echo -e "${CYAN}Choose your panel: you can also rerun the script to switch from either or regenerate HyprCandy's default panel setup:${NC}"
     echo -e "${GREEN}1) Waybar${NC}"
     echo "   • Light with fast startup/reload for a 'taskbar' like experience"
     echo "   • Highly customizable manually"
@@ -130,7 +130,7 @@ choose_panel() {
 
 choose_browser() {
     echo -e "${CYAN}Choose your browser:${NC}"
-        echo "1) Brave (Seamless integration with UltraCandy GTK and Qt theme, fast, secure and privacy-focused)"
+        echo "1) Brave (Seamless integration with HyprCandy GTK and Qt theme, fast, secure and privacy-focused)"
         echo "2) Firefox (Themed through python-pywalfox by running 'pywalfox update', open-source and privacy-focused)"
         echo "3) Zen Browser (Themed through zen mods and python-pywalfox, open-source and privacy-focused)"
         echo "4) Librewolf (Open-source browser with a focus on privacy, highly customizable manually)"
@@ -153,7 +153,7 @@ choose_browser() {
 
 # Function to choose shell
 choose_shell() {
-    echo -e "${CYAN}Choose your shell (you can rerun the script to switch or regenerate UltraCandy's default shell setup):${NC}"
+    echo -e "${CYAN}Choose your shell (you can rerun the script to switch or regenerate HyprCandy's default shell setup):${NC}"
     echo "1) Fish - A modern shell with builtin fzf search, intelligent autosuggestions and syntax highlighting (Fisher plugins + Starship prompt)"
     echo "2) Zsh - Powerful shell with extensive customization (Zsh plugins + Oh My Zsh + Starship prompt)"
     echo
@@ -589,7 +589,7 @@ fi
         # Create Starship config
         mkdir -p "$HOME/.config"
         cat > "$HOME/.config/starship.toml" << 'EOF'
-# Starship Configuration for UltraCandy
+# Starship Configuration for HyprCandy
 format = """
 $username\
 $hostname\
@@ -676,7 +676,7 @@ EOF
     
     # Add useful Fish functions and aliases
     cat > "$HOME/.config/fish/config.fish" << 'EOF'
-# UltraCandy Fish Configuration
+# HyprCandy Fish Configuration
 
 # Set environment variables
 set -gx HYPRLAND_LOG_WS 1
@@ -690,7 +690,7 @@ if test -d ~/.local/bin
 end
 
 # Aliases
-alias ultracandy="cd .ultracandy && git pull && stow --ignore='Candy' --ignore='Candy-Images' --ignore='Dock-SVGs' --ignore='Gifs' --ignore='Logo' --ignore='transparent.png' --ignore='GJS' --ignore='Candy.desktop' --ignore='HyprCandy.png' --ignore='candy-daemon.js' --ignore='candy-launcher.sh' --ignore='toggle-control-center.sh' --ignore='toggle-media-player.sh' --ignore='toggle-system-monitor.sh' --ignore='toggle-weather-widget.sh' --ignore='toggle-hyprland-settings.sh' --ignore='candy-system-monitor.js' --ignore='resources' --ignore='src' --ignore='meson.build' --ignore='README.md' --ignore='run.log' --ignore='test_layout.js' --ignore='test_media_menu.js' --ignore='toggle.js' --ignore='toggle-main.js' --ignore='~' --ignore='candy-main.js' --ignore='gjs-media-player.desktop' --ignore='gjs-toggle-controls.desktop' --ignore='main.js' --ignore='media-main.js' --ignore='SEEK_FEATURE.md' --ignore='setup-custom-icon.sh' --ignore='weather-main.js' */"
+alias hyprcandy="cd .hyprcandy && git pull && stow --ignore='Candy' --ignore='Candy-Images' --ignore='Dock-SVGs' --ignore='Gifs' --ignore='Logo' --ignore='transparent.png' --ignore='GJS' --ignore='Candy.desktop' --ignore='HyprCandy.png' --ignore='candy-daemon.js' --ignore='candy-launcher.sh' --ignore='toggle-control-center.sh' --ignore='toggle-media-player.sh' --ignore='toggle-system-monitor.sh' --ignore='toggle-weather-widget.sh' --ignore='toggle-hyprland-settings.sh' --ignore='candy-system-monitor.js' --ignore='resources' --ignore='src' --ignore='meson.build' --ignore='README.md' --ignore='run.log' --ignore='test_layout.js' --ignore='test_media_menu.js' --ignore='toggle.js' --ignore='toggle-main.js' --ignore='~' --ignore='candy-main.js' --ignore='gjs-media-player.desktop' --ignore='gjs-toggle-controls.desktop' --ignore='main.js' --ignore='media-main.js' --ignore='SEEK_FEATURE.md' --ignore='setup-custom-icon.sh' --ignore='weather-main.js' */"
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
@@ -744,7 +744,7 @@ alias pipes="pipes.sh"
 alias clock="tty-clock -s -c"
 alias sea="asciiquarium"
 
-# Start UltraCandy fastfetch
+# Start HyprCandy fastfetch
 fastfetch
 
 # Initialize Starship prompt
@@ -802,7 +802,7 @@ print_success "Zsh set as default shell"
         # Create Starship config (same as Fish setup)
         mkdir -p "$HOME/.config"
         cat > "$HOME/.config/starship.toml" << 'EOF'
-# Starship Configuration for UltraCandy
+# Starship Configuration for HyprCandy
 format = """
 $username\
 $hostname\
@@ -886,7 +886,7 @@ EOF
         
         # Create .zshrc with Starship configuration
         cat > "$HOME/.zshrc" << 'EOF'
-# UltraCandy Zsh Configuration with Oh My Zsh and Starship
+# HyprCandy Zsh Configuration with Oh My Zsh and Starship
 
 # Oh My Zsh configuration
 export ZSH="$HOME/.oh-my-zsh"
@@ -912,7 +912,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 
-alias ultracandy="cd .ultracandy && git pull && stow --ignore='Candy' --ignore='Candy-Images' --ignore='Dock-SVGs' --ignore='Gifs' --ignore='Logo' --ignore='transparent.png' --ignore='GJS' --ignore='Candy.desktop' --ignore='HyprCandy.png' --ignore='candy-daemon.js' --ignore='candy-launcher.sh' --ignore='toggle-control-center.sh' --ignore='toggle-media-player.sh' --ignore='toggle-system-monitor.sh' --ignore='toggle-weather-widget.sh' --ignore='candy-system-monitor.js' --ignore='toggle-hyprland-settings.sh' --ignore='resources' --ignore='src' --ignore='meson.build' --ignore='README.md' --ignore='run.log' --ignore='test_layout.js' --ignore='test_media_menu.js' --ignore='toggle.js' --ignore='toggle-main.js' --ignore='~' --ignore='candy-main.js' --ignore='gjs-media-player.desktop' --ignore='gjs-toggle-controls.desktop' --ignore='main.js' --ignore='media-main.js' --ignore='SEEK_FEATURE.md' --ignore='setup-custom-icon.sh' --ignore='weather-main.js' */"
+alias hyprcandy="cd .hyprcandy && git pull && stow --ignore='Candy' --ignore='Candy-Images' --ignore='Dock-SVGs' --ignore='Gifs' --ignore='Logo' --ignore='transparent.png' --ignore='GJS' --ignore='Candy.desktop' --ignore='HyprCandy.png' --ignore='candy-daemon.js' --ignore='candy-launcher.sh' --ignore='toggle-control-center.sh' --ignore='toggle-media-player.sh' --ignore='toggle-system-monitor.sh' --ignore='toggle-weather-widget.sh' --ignore='candy-system-monitor.js' --ignore='toggle-hyprland-settings.sh' --ignore='resources' --ignore='src' --ignore='meson.build' --ignore='README.md' --ignore='run.log' --ignore='test_layout.js' --ignore='test_media_menu.js' --ignore='toggle.js' --ignore='toggle-main.js' --ignore='~' --ignore='candy-main.js' --ignore='gjs-media-player.desktop' --ignore='gjs-toggle-controls.desktop' --ignore='main.js' --ignore='media-main.js' --ignore='SEEK_FEATURE.md' --ignore='setup-custom-icon.sh' --ignore='weather-main.js' */"
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
@@ -966,12 +966,12 @@ alias pipes="pipes.sh"
 alias clock="tty-clock -s -c"
 alias sea="asciiquarium"
 
-# Start UltraCandy fastfetch
+# Start HyprCandy fastfetch
 fastfetch
 
-# Source UltraCandy Zsh setup if it exists
-if [ -f ~/.ultracandy-zsh.zsh ]; then
-    source ~/.ultracandy-zsh.zsh
+# Source HyprCandy Zsh setup if it exists
+if [ -f ~/.hyprcandy-zsh.zsh ]; then
+    source ~/.hyprcandy-zsh.zsh
 fi
 EOF
         
@@ -982,9 +982,9 @@ EOF
 }
     
 # Function to automatically setup Hyprcandy configuration
-setup_ultracandy() {
+setup_hyprcandy() {
 
-    print_status "Setting up UltraCandy configuration..."
+    print_status "Setting up HyprCandy configuration..."
     # Backup previous default config folder if it exists
     PREVIOUS_CONFIG_FOLDER="$HOME/.config/hypr"
     
@@ -1064,7 +1064,7 @@ setup_ultracandy() {
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     XDG_MENU_PREFIX=arch- kbuildsycoca6 --noincremental
 
-    print_status "Setting up UltraCandy configuration..."
+    print_status "Setting up HyprCandy configuration..."
     
     # Check if stow is available
     if ! command -v stow &> /dev/null; then
@@ -1080,23 +1080,23 @@ setup_ultracandy() {
     # Go to the home directory
     cd "$HOME"
 
-    # Remove existing .ultracandy folder
-    if [ -d "$HOME/.ultracandy" ]; then
-        echo "🗑️  Removing existing .ultracandy folder..."
-        rm -rf "$HOME/.ultracandy"
+    # Remove existing .hyprcandy folder
+    if [ -d "$HOME/.hyprcandy" ]; then
+        echo "🗑️  Removing existing .hyprcandy folder..."
+        rm -rf "$HOME/.hyprcandy"
         rm -rf "$HOME/.hyprcandy"
         sleep 2
     else
-        echo "✅ .ultracandy dotfiles folder doesn't exist — seems to be a fresh install."
+        echo "✅ .hyprcandy dotfiles folder doesn't exist — seems to be a fresh install."
         rm -rf "$HOME/.hyprcandy"
-        rm -rf "$HOME/.ultracandy"
+        rm -rf "$HOME/.hyprcandy"
         sleep 2
     fi
 
-    # Clone UltraCandy repository
-    ultracandy_dir="$HOME/.ultracandy"
-    echo "🌐 Cloning UltraCandy repository ..." #into $ultracandy_dir
-    git clone --depth 1 https://github.com/HyprCandy/UltraCandy.git "$ultracandy_dir"
+    # Clone HyprCandy repository
+    hyprcandy_dir="$HOME/.hyprcandy"
+    echo "🌐 Cloning HyprCandy repository ..." #into $hyprcandy_dir
+    git clone --depth 1 https://github.com/HyprCandy/HyprCandy.git "$hyprcandy_dir"
     echo "✅ Cloning complete"
     
     # Clone overview repository
@@ -1111,13 +1111,13 @@ setup_ultracandy() {
     cd "$HOME"
 
     # Remove present .zshrc file 
-    rm -rf .face.icon .ultracandy-zsh.zsh .icons Candy GJS
+    rm -rf .face.icon .hyprcandy-zsh.zsh .icons Candy GJS
     rm -rf "$HOME/Pictures/HyprCandy"
 
-    # Safely remove existing .zshrc, .ultracandy-zsh.zsh and .icons files (only if they exist)
+    # Safely remove existing .zshrc, .hyprcandy-zsh.zsh and .icons files (only if they exist)
     # [ -f "$HOME/.zshrc" ] && rm -f "$HOME/.zshrc"
     [ -f "$HOME/.face.icon" ] && rm -f "$HOME/.face.icon"
-    [ -f "$HOME/.ultracandy-zsh.zsh" ] && rm -f "$HOME/.ultracandy-zsh.zsh"
+    [ -f "$HOME/.hyprcandy-zsh.zsh" ] && rm -f "$HOME/.hyprcandy-zsh.zsh"
     [ -f "$HOME/.icons" ] && rm -f "$HOME/.icons"
     [ -f "$HOME/Candy" ] && rm -f "$HOME/Candy"
     [ -f "$HOME/GJS" ] && rm -f "$HOME/GJS"
@@ -1130,14 +1130,14 @@ setup_ultracandy() {
     # Return to the home directory
     cd "$HOME"
     
-    # Change to the UltraCandy dotfiles directory
-    cd "$ultracandy_dir" || { echo "❌ Error: Could not find UltraCandy directory"; exit 1; }
+    # Change to the HyprCandy dotfiles directory
+    cd "$hyprcandy_dir" || { echo "❌ Error: Could not find HyprCandy directory"; exit 1; }
 
     # Define only the configs to be stowed
-    config_dirs=(".config" ".icons" ".ultracandy-zsh.zsh")
+    config_dirs=(".config" ".icons" ".hyprcandy-zsh.zsh")
 
     # Add files/folders to exclude from deletion
-    preserve_items=("GJS" "Candy" ".git")
+    preserve_items=("GJS" "Candy" "LISCENSE" "README.md" ".git")
 
     if [ ${#config_dirs[@]} -eq 0 ]; then
         echo "❌ No configuration directories specified."
@@ -2048,62 +2048,62 @@ chmod +x "$HOME/.config/swaync/recorder.sh"
 #                           GJS SCRIPTS
 # ═══════════════════════════════════════════════════════════════
 
-cat > "$HOME/.ultracandy/GJS/toggle-control-center.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-control-center.sh" << 'EOF'
 #!/bin/bash
 
 # Check if the process is running
 if pgrep -f "candy-main.js" > /dev/null; then
     # If running, kill it
-    killall gjs ~/.ultracandy/GJS/candy-main.js
+    killall gjs ~/.hyprcandy/GJS/candy-main.js
 else
     # If not running, start it
-    gjs ~/.ultracandy/GJS/candy-main.js &
+    gjs ~/.hyprcandy/GJS/candy-main.js &
 fi
 EOF
 
-cat > "$HOME/.ultracandy/GJS/toggle-media-player.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-media-player.sh" << 'EOF'
 #!/bin/bash
 
 # Check if the process is running
 if pgrep -f "media-main.js" > /dev/null; then
     # If running, kill it
-    killall gjs ~/.ultracandy/GJS/media-main.js
+    killall gjs ~/.hyprcandy/GJS/media-main.js
 else
     # If not running, start it
-    gjs ~/.ultracandy/GJS/media-main.js &
+    gjs ~/.hyprcandy/GJS/media-main.js &
 fi
 EOF
 
-cat > "$HOME/.ultracandy/GJS/toggle-system-monitor.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-system-monitor.sh" << 'EOF'
 #!/bin/bash
 
 # Check if the process is running
 if pgrep -f "candy-system-monitor.js" > /dev/null; then
     # If running, kill it
-    killall gjs ~/.ultracandy/GJS/candy-system-monitor.js
+    killall gjs ~/.hyprcandy/GJS/candy-system-monitor.js
 else
     # If not running, start it
-    gjs ~/.ultracandy/GJS/candy-system-monitor.js &
+    gjs ~/.hyprcandy/GJS/candy-system-monitor.js &
 fi
 EOF
 
-cat > "$HOME/.ultracandy/GJS/toggle-weather-widget.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-weather-widget.sh" << 'EOF'
 #!/bin/bash
 
 # Check if the process is running
 if pgrep -f "weather-main.js" > /dev/null; then
     # If running, kill it
-    killall gjs ~/.ultracandy/GJS/weather-main.js
+    killall gjs ~/.hyprcandy/GJS/weather-main.js
 else
     # If not running, start it
-    gjs ~/.ultracandy/GJS/weather-main.js &
+    gjs ~/.hyprcandy/GJS/weather-main.js &
 fi
 EOF
 
-chmod +x "$HOME/.ultracandy/GJS/toggle-control-center.sh"
-chmod +x "$HOME/.ultracandy/GJS/toggle-media-player.sh"
-chmod +x "$HOME/.ultracandy/GJS/toggle-system-monitor.sh"
-chmod +x "$HOME/.ultracandy/GJS/toggle-weather-widget.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-control-center.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-media-player.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-system-monitor.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-weather-widget.sh"
 
 echo "✅ Widget toggle scripts made executable!"
 
@@ -5392,7 +5392,7 @@ GTK_FILE="$HOME/.config/gtk-3.0/settings.ini"
 QT6CT_CONF="$HOME/.config/qt6ct/qt6ct.conf"
 QT5CT_CONF="$HOME/.config/qt5ct/qt5ct.conf"
 KDEGLOBALS="$HOME/.config/kdeglobals"
-UC_COLORS="$HOME/.local/share/color-schemes/UltraCandy.colors"
+UC_COLORS="$HOME/.local/share/color-schemes/HyprCandy.colors"
 
 ICON_THEME=$(grep "^gtk-icon-theme-name=" "$GTK_FILE" | cut -d'=' -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
@@ -5547,15 +5547,15 @@ chmod +x "$HOME/.config/waybar/scripts/toggle-weather-format.sh"
     # 📁 Copy Candy folder to ~/Pictures
     echo
     echo "📁 Attempting to copy 'Candy' images folder to ~/Pictures..."
-    if [ -d "$ultracandy_dir/Candy" ]; then
+    if [ -d "$hyprcandy_dir/Candy" ]; then
         if [ -d "$HOME/Pictures" ]; then
-            cp -r "$ultracandy_dir/Candy" "$HOME/Pictures/"
+            cp -r "$hyprcandy_dir/Candy" "$HOME/Pictures/"
             echo "✅ 'Candy' copied successfully to ~/Pictures"
         else
             echo "⚠️  Skipped copy: '$HOME/Pictures' directory does not exist."
         fi
     else
-        echo "⚠️  'Candy' folder not found in $ultracandy_dir"
+        echo "⚠️  'Candy' folder not found in $hyprcandy_dir"
     fi
 
     # Change Start Button Icon
@@ -7891,8 +7891,8 @@ update_custom() {
 }
 
 setup_gjs() {
-find "$HOME/.ultracandy/GJS" -name "*.sh" -exec chmod +x {} \;
-chmod +x "$HOME/.ultracandy/GJS/candy-daemon.js"
+find "$HOME/.hyprcandy/GJS" -name "*.sh" -exec chmod +x {} \;
+chmod +x "$HOME/.hyprcandy/GJS/candy-daemon.js"
 
 echo "✅ Files and Apps setup complete"
 }
@@ -8079,7 +8079,7 @@ hyprctl reload
 
 pgrep -x swww-daemon > /dev/null 2>&1 || swww-daemon &
 sleep 1
-swww img "$HOME/.ultracandy/.config/background"
+swww img "$HOME/.hyprcandy/.config/background"
 
 # Start the correct services
 
@@ -8106,7 +8106,7 @@ echo "✅ Services set..."
         echo "⚠️  'hyprctl' not found. Skipping Hyprland reload. Run 'hyprctl reload' on next start and Hyprland login."
     fi
 
-    print_success "UltraCandy updated completed!"  
+    print_success "HyprCandy updated completed!"  
 }
 
 # Function to prompt for session restart
@@ -8125,14 +8125,14 @@ prompt_logout() {
             echo "✅ Starting chosen bar (re-login post update is advised)..."
             sleep 5
             if [ "$PANEL_CHOICE" = "waybar" ]; then
-                rm -rf "$HOME/ultracandyinstall" && systemctl --user stop hyprpanel.service &>/dev/null && systemctl --user restart waybar.service &>/dev/null
+                rm -rf "$HOME/hyprcandyinstall" && systemctl --user stop hyprpanel.service &>/dev/null && systemctl --user restart waybar.service &>/dev/null
             else
-                rm -rf "$HOME/ultracandyinstall" && systemctl --user stop waybar.service &>/dev/null && systemctl --user restart hyprpanel.service &>/dev/null
+                rm -rf "$HOME/hyprcandyinstall" && systemctl --user stop waybar.service &>/dev/null && systemctl --user restart hyprpanel.service &>/dev/null
             fi
             ;;
         *)
             print_status "Logging out..."
-            rm -rf "$HOME/ultracandyinstall" && hyprctl dispatch exit
+            rm -rf "$HOME/hyprcandyinstall" && hyprctl dispatch exit
             ;;
     esac
 }
@@ -8170,9 +8170,9 @@ main() {
         setup_zsh
     fi
     
-    # Automatically setup UltraCandy configuration
-    print_status "Proceeding with UltraCandy configuration setup..."
-    setup_ultracandy
+    # Automatically setup HyprCandy configuration
+    print_status "Proceeding with HyprCandy configuration setup..."
+    setup_hyprcandy
 
     # Enable display manager
     enable_display_manager
@@ -8195,11 +8195,11 @@ main() {
     # Configuration management tips
     echo
     print_status "Configuration management tips:"
-    print_status "• Your UltraCandy configs are in: ~/.ultracandy/"
-    print_status "• Minor updates: cd ~/.ultracandy && git pull && stow */"
+    print_status "• Your HyprCandy configs are in: ~/.hyprcandy/"
+    print_status "• Minor updates: cd ~/.hyprcandy && git pull && stow */"
     print_status "• Major updates: rerun the install script for updated apps and configs"
-    print_status "• To remove a config: cd ~/.ultracandy && stow -D <config_name> -t $HOME"
-    print_status "• To reinstall a config: cd ~/.ultracandy && stow -R <config_name> -t $HOME"
+    print_status "• To remove a config: cd ~/.hyprcandy && stow -D <config_name> -t $HOME"
+    print_status "• To reinstall a config: cd ~/.hyprcandy && stow -R <config_name> -t $HOME"
     
     # Display and wallpaper configuration notes
     echo
@@ -8216,9 +8216,9 @@ main() {
     echo
     echo -e "${PURPLE}🐚 Zsh Configuration:${NC}"
     print_status "• IMPORTANT: If you chose Zsh-shell then use ${CYAN}SUPER + Q${NC} to toggle Kitty and go through the Zsh setup"
-    print_status "• IMPORTANT: (Remember to type ${YELLOW}n${NC}o at the end when asked to Apply changes to .zshrc since UltraCandy already has them applied)"
-    print_status "• To configure Zsh, in the ${CYAN}Home${NC} directory edit ${CYAN}.ultracandy-zsh.zsh${NC} or ${CYAN}.zshrc${NC}"
-    print_status "• You can also rerun the script to switch from either one or regenerate UltraCandy's default Zsh shell setup"
+    print_status "• IMPORTANT: (Remember to type ${YELLOW}n${NC}o at the end when asked to Apply changes to .zshrc since HyprCandy already has them applied)"
+    print_status "• To configure Zsh, in the ${CYAN}Home${NC} directory edit ${CYAN}.hyprcandy-zsh.zsh${NC} or ${CYAN}.zshrc${NC}"
+    print_status "• You can also rerun the script to switch from either one or regenerate HyprCandy's default Zsh shell setup"
     print_status "• You can also rerun the script to install Fish shell"
     print_status "• When both are installed switch at anytime by running ${CYAN}chsh -s /usr/bin/<name of shell>${NC} then reboot"
     echo
@@ -8239,7 +8239,7 @@ main() {
     echo
     echo -e "${PURPLE}🐟 Fish Configuration:${NC}"
     print_status "• To configure Fish edit, in the ${YELLOW}~/.config/fish${NC} directory edit the ${YELLOW}config.fish${NC} file"
-    print_status "• You can also rerun the script to switch from either one or regenerate UltraCandy's default Fish shell setup"
+    print_status "• You can also rerun the script to switch from either one or regenerate HyprCandy's default Fish shell setup"
     print_status "• You can also rerun the script to install Zsh shell"
     print_status "• When both are installed switch by running ${CYAN}chsh -s /usr/bin/<name of shell>${NC} then reboot"
     echo
