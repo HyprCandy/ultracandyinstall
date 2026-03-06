@@ -23,7 +23,7 @@ NC='\033[0m' # No Color
 DISPLAY_MANAGER=""
 DISPLAY_MANAGER_SERVICE=""
 SHELL_CHOICE=""
-PANEL_CHOICE=waybar
+PANEL_CHOICE="waybar"
 BROWSER_CHOICE=""
 AUR_HELPER=""
 
@@ -1087,11 +1087,11 @@ setup_hyprcandy() {
     if [ -d "$HOME/.hyprcandy" ]; then
         echo "🗑️  Removing existing .hyprcandy folder..."
         rm -rf "$HOME/.hyprcandy"
-        rm -rf "$HOME/.ultracandy"
+        rm -rf "$HOME/.hyprcandy"
         sleep 2
     else
         echo "✅ .hyprcandy dotfiles folder doesn't exist — seems to be a fresh install."
-        rm -rf "$HOME/.ultracandy"
+        rm -rf "$HOME/.hyprcandy"
         rm -rf "$HOME/.hyprcandy"
         sleep 2
     fi
@@ -1099,7 +1099,7 @@ setup_hyprcandy() {
     # Clone HyprCandy repository
     hyprcandy_dir="$HOME/.hyprcandy"
     echo "🌐 Cloning HyprCandy repository ..." #into $hyprcandy_dir
-    git clone --depth 1 https://github.com/HyprCandy/UltraCandy.git "$hyprcandy_dir"
+    git clone --depth 1 https://github.com/HyprCandy/HyprCandy.git "$hyprcandy_dir"
     echo "✅ Cloning complete"
     
     # Clone overview repository
@@ -7895,23 +7895,23 @@ update_custom() {
 
 setup_gjs() {
 # Create the GJS directory and files if they don't already exist
-if [ ! -d "$HOME/.ultracandy/GJS/src" ]; then
-    mkdir -p "$HOME/.ultracandy/GJS/src"
+if [ ! -d "$HOME/.hyprcandy/GJS/src" ]; then
+    mkdir -p "$HOME/.hyprcandy/GJS/src"
     echo "📁 Created the GJS directory"
 fi
 
-cd "$HOME/.ultracandy/GJS"
+cd "$HOME/.hyprcandy/GJS"
 rm -f toggle-control-center.sh toggle-media-player.sh toggle-system-monitor.sh toggle-weather-widget.sh
 cd "$HOME"
 
-cat > "$HOME/.ultracandy/GJS/toggle-control-center.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-control-center.sh" << 'EOF'
 #!/bin/bash
 
 # Toggle Candy Utils - Fast launch (daemon stays running)
 # No killing - daemon persists for instant widget launches
 
 PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
 TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
 
 mkdir -p "$TOGGLE_DIR"
@@ -7925,15 +7925,15 @@ fi
 # Toggle widget
 touch "$TOGGLE_DIR/toggle-utils"
 EOF
-chmod +x "$HOME/.ultracandy/GJS/toggle-control-center.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-control-center.sh"
 
-cat > "$HOME/.ultracandy/GJS/toggle-system-monitor.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-system-monitor.sh" << 'EOF'
 #!/bin/bash
 
 # Toggle System Monitor - Fast launch (daemon stays running)
 
 PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
 TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
 
 mkdir -p "$TOGGLE_DIR"
@@ -7945,15 +7945,15 @@ fi
 
 touch "$TOGGLE_DIR/toggle-system"
 EOF
-chmod +x "$HOME/.ultracandy/GJS/toggle-system-monitor.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-system-monitor.sh"
 
-cat > "$HOME/.ultracandy/GJS/toggle-media-player.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-media-player.sh" << 'EOF'
 #!/bin/bash
 
 # Toggle Media Player - Fast launch (daemon stays running)
 
 PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
 TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
 
 mkdir -p "$TOGGLE_DIR"
@@ -7965,15 +7965,15 @@ fi
 
 touch "$TOGGLE_DIR/toggle-media"
 EOF
-chmod +x "$HOME/.ultracandy/GJS/toggle-media-player.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-media-player.sh"
 
-cat > "$HOME/.ultracandy/GJS/toggle-weather-widget.sh" << 'EOF'
+cat > "$HOME/.hyprcandy/GJS/toggle-weather-widget.sh" << 'EOF'
 #!/bin/bash
 
 # Toggle Weather Widget - Fast launch (daemon stays running)
 
 PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
-DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+DAEMON_SCRIPT="$HOME/.hyprcandy/GJS/candy-daemon.js"
 TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
 
 mkdir -p "$TOGGLE_DIR"
@@ -7985,7 +7985,7 @@ fi
 
 touch "$TOGGLE_DIR/toggle-weather"
 EOF
-chmod +x "$HOME/.ultracandy/GJS/toggle-weather-widget.sh"
+chmod +x "$HOME/.hyprcandy/GJS/toggle-weather-widget.sh"
 
 find "$HOME/.hyprcandy/GJS" -name "*.sh" -exec chmod +x {} \;
 chmod +x "$HOME/.hyprcandy/GJS/candy-daemon.js"
