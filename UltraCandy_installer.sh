@@ -7725,7 +7725,6 @@ cat > "$HOME/.ultracandy/GJS/toggle-control-center.sh" << 'EOF'
 #!/bin/bash
 
 # Toggle Candy Utils - Fast launch (daemon stays running)
-# No killing - daemon persists for instant widget launches
 
 PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
 DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
@@ -7786,6 +7785,27 @@ touch "$TOGGLE_DIR/toggle-system"
 EOF
 
 chmod +x "$HOME/.ultracandy/GJS/toggle-system-monitor.sh"
+
+cat > "$HOME/.ultracandy/GJS/toggle-weather-widget.sh" << 'EOF'
+#!/bin/bash
+
+# Toggle Weather Widget - Fast launch (daemon stays running)
+
+PID_FILE="$HOME/.cache/hyprcandy/pids/candy-daemon.pid"
+DAEMON_SCRIPT="$HOME/.ultracandy/GJS/candy-daemon.js"
+TOGGLE_DIR="$HOME/.cache/hyprcandy/toggle"
+
+mkdir -p "$TOGGLE_DIR"
+
+if ! [ -f "$PID_FILE" ] || ! kill -0 "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null; then
+    gjs "$DAEMON_SCRIPT" &
+    sleep 0.3
+fi
+
+touch "$TOGGLE_DIR/toggle-weather"
+EOF
+
+chmod +x "$HOME/.ultracandy/GJS/toggle-weather-widget.sh"
 
 cat > "$HOME/.ultracandy/GJS/setup-custom-icon.sh" << 'EOF'
 #!/bin/bash
