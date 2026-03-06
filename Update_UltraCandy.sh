@@ -962,7 +962,7 @@ setup_ultracandy() {
     if [ "$DISPLAY_MANAGER" = "sddm" ]; then
         if pacman -Qi sddm &>/dev/null; then
             $AUR_HELPER --noconfirm -R gdm gdm-settings
-            $AUR_HELPER --noconfirm -R gnome-software gnome-weather
+            $AUR_HELPER --noconfirm -R gnome-software gnome-weather waypaper-git
             $AUR_HELPER --noconfirm -R qt6ct
             $AUR_HELPER --noconfirm -R qt5ct
             $AUR_HELPER --noconfirm -R spotify
@@ -974,7 +974,7 @@ setup_ultracandy() {
     elif [ "$DISPLAY_MANAGER" = "gdm" ]; then
         if pacman -Qi gdm &>/dev/null; then
             $AUR_HELPER --noconfirm -R sddm sddm-sugar-candy-git
-            $AUR_HELPER --noconfirm -R gnome-software gnome-weather
+            $AUR_HELPER --noconfirm -R gnome-software gnome-weather waypaper-git
             $AUR_HELPER --noconfirm -R qt6ct
             $AUR_HELPER --noconfirm -R qt5ct
             $AUR_HELPER --noconfirm -R spotify
@@ -998,11 +998,11 @@ setup_ultracandy() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync equibop-bin qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S waybar waypaper-git swaync equibop-bin waypaper qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     else
         print_status "Ensuring necessary packages are installed"
         echo
-        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako equibop-bin qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
+        $AUR_HELPER --noconfirm -S ags-hyprpanel-git mako equibop-bin waypaper qt6ct-kde qt5ct-kde archlinux-xdg-menu kservice attica frameworkintegration knewstuff syndication darkly-bin qogir-cursor-theme xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk spotify-launcher warehouse-git flatpak qt5-imageformats qt5-graphicaleffects qt5-quickcontrols2
     fi
 
     # Add flathub repo
