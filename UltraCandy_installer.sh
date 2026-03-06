@@ -10873,8 +10873,6 @@ const { Gtk, Gio, GLib, Gdk } = imports.gi;
 const scriptDir = GLib.path_get_dirname(imports.system.programInvocationName);
 imports.searchPath.unshift(scriptDir);
 
-const Weather = imports.weather;
-
 function createCandyUtilsBox() {
     // --- Hyprsunset state persistence setup ---
     const hyprsunsetStateDir = GLib.build_filenamev([GLib.get_home_dir(), '.config', 'hyprcandy']);
