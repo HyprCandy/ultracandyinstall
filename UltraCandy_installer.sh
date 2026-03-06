@@ -462,7 +462,7 @@ build_package_list() {
     if [ "$PANEL_CHOICE" = "waybar" ]; then
         packages+=(
         "waybar"
-        "waypaper-git"
+        "waypaper"
         "swaync"
         )
         print_status "Added Waybar to package list"
