@@ -750,17 +750,23 @@ setup_zsh() {
     print_status "Setting up Zsh shell configuration..."
     
     # Set Zsh as default shell
-if command -v zsh &> /dev/null; then
-    print_status "Setting Zsh as default shell..."
+if ! command -v zsh &> /dev/null; then
+    print_status "Zsh not found, installing..."
+    $AUR_HELPER -S --noconfirm zsh zsh-completions zsh-autosuggestions \
+        zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
 else
-    print_error "Installing Zsh"
-    $AUR_HELPER -S --noconfirm zsh zsh-completions zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
+    print_status "Zsh already installed, setting as default shell..."
 fi
 
 ZSH_PATH="$(command -v zsh)"
 if [[ -z "$ZSH_PATH" ]]; then
     print_error "Zsh not found after install, cannot set default shell"
     exit 1
+fi
+
+# Ensure zsh is in /etc/shells before chsh
+if ! grep -qF "$ZSH_PATH" /etc/shells; then
+    echo "$ZSH_PATH" | sudo tee -a /etc/shells
 fi
 
 chsh -s "$ZSH_PATH"
