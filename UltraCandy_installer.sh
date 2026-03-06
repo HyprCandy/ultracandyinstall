@@ -319,7 +319,6 @@ build_package_list() {
         "uwsm"
         "quickshell"
         "flatpak"
-        "warehouse-git"
         
         # Application launchers and menus
         "rofi"
