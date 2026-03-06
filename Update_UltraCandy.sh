@@ -1069,6 +1069,7 @@ setup_ultracandy() {
     else
         echo "✅ .ultracandy dotfiles folder doesn't exist — seems to be a fresh install."
         rm -rf "$HOME/.hyprcandy"
+        rm -rf "$HOME/.ultracandy"
         sleep 2
     fi
 
