@@ -544,6 +544,8 @@ setup_fish() {
     else
         print_error "Installing Fish"
         $AUR_HELPER --noconfirm -S fish fisher starship
+        chsh -s $(which fish)
+        print_success "Fish set as default shell"
     fi
     
    # Ensure Fisher function exists
@@ -743,8 +745,10 @@ setup_zsh() {
         chsh -s $(which zsh)
         print_success "Zsh set as default shell"
     else
-        print_error "Zsh not found. Please install Zsh first."
-        return 1
+        print_error "Installing Zsh"
+        $AUR_HELPER --noconfirm -S zsh zsh-completions zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting starship oh-my-zsh-git
+        chsh -s $(which zsh)
+        print_success "Zsh set as default shell"
     fi
     
     # Install Oh My Zsh if not already installed
