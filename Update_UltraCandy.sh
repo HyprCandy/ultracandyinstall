@@ -1087,19 +1087,18 @@ setup_hyprcandy() {
     if [ -d "$HOME/.hyprcandy" ]; then
         echo "🗑️  Removing existing .hyprcandy folder..."
         rm -rf "$HOME/.hyprcandy"
-        rm -rf "$HOME/.hyprcandy"
+        rm -rf "$HOME/.ultrcandy"
         sleep 2
     else
         echo "✅ .hyprcandy dotfiles folder doesn't exist — seems to be a fresh install."
-        rm -rf "$HOME/.hyprcandy"
-        rm -rf "$HOME/.hyprcandy"
+        rm -rf "$HOME/.ultracandy"
         sleep 2
     fi
 
     # Clone HyprCandy repository
     hyprcandy_dir="$HOME/.hyprcandy"
     echo "🌐 Cloning HyprCandy repository ..." #into $hyprcandy_dir
-    git clone --depth 1 https://github.com/HyprCandy/HyprCandy.git "$hyprcandy_dir"
+    git clone --depth 1 https://github.com/HyprCandy/HyprCandyPlus.git "$hyprcandy_dir"
     echo "✅ Cloning complete"
     
     # Clone overview repository
