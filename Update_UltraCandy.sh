@@ -539,7 +539,7 @@ else
     print_status "Updating fisher (Remeber to periodically run `fisher update`)..."
 fi
 
-fisher update
+fish -c "fisher update"
 
 echo "✅ Fisher is up to date..."
 
