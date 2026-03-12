@@ -4890,7 +4890,7 @@ trigger_matugen() {
         echo "🎨 Triggering matugen color generation..."
         matugen image "$HOME/.config/wallpaper.png" --type scheme-content -m dark --base16-backend wal --lightness-dark -0.1 --source-color-index 0 -r nearest --contrast 0.2
         sleep 0.5
-        reload_colors
+        #reload_colors
         update_hypr_group_text
         echo "✅ Matugen color generation complete"
     else
@@ -5580,10 +5580,10 @@ SUDOERS_ENTRIES=(
 )
 
 # Add all entries to sudoers safely using visudo
-printf '%s\n' "${SUDOERS_ENTRIES[@]}" | sudo EDITOR='tee -a' visudo -f /etc/sudoers.d/hyprcandy-background
+printf '%s\n' "${SUDOERS_ENTRIES[@]}" | sudo EDITOR='tee -a' visudo -f /etc/sudoers.d/hyprcandy-background > /dev/null 2>&1
 
 # Set proper permissions on the sudoers file
-sudo chmod 440 /etc/sudoers.d/hyprcandy-background
+sudo chmod 440 /etc/sudoers.d/hyprcandy-background > /dev/null 2>&1
 
     echo "✅ Added sddm background auto-update settings successfully"
     
